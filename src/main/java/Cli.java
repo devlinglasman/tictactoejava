@@ -6,21 +6,21 @@ import java.util.Scanner;
 class Cli {
 
     private final Scanner scanner;
-    private Game b = new Game();
+    private Game game = new Game();
     private final PrintStream out;
     private String userInput = "";
 
-    Cli(InputStream in, PrintStream out, Game b) {
+    Cli(InputStream in, PrintStream out, Game game) {
         this.scanner = new Scanner(in);
         this.out = out;
-        this.b = b;
+        this.game = game;
     }
 
     public void displayBoard() {
         ArrayList<String> boardConglomerator = new ArrayList<>();
-        for (String point : b.getVars()) {
+        for (BoardSquare square : game.getSquares()) {
             boardConglomerator.add("[");
-            boardConglomerator.add(point);
+            boardConglomerator.add(square.retrieveState());
             boardConglomerator.add("]");
         }
         boardConglomerator.add(9,"\n");

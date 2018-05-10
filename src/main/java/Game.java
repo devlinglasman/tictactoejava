@@ -1,18 +1,41 @@
 public class Game {
 
-    private String var1 = " ";
-    private String var2 = " ";
-    private String var3 = " ";
-    private String var4 = " ";
-    private String var5 = " ";
-    private String var6 = " ";
-    private String var7 = " ";
-    private String var8 = " ";
-    private String var9 = " ";
 
-    private String[] vars = {var1,var2,var3,var4,var5,var6,var7,var8,var9};
+    private BoardSquare square1;
+    private BoardSquare square2;
+    private BoardSquare square3;
+    private BoardSquare square4;
+    private BoardSquare square5;
+    private BoardSquare square6;
+    private BoardSquare square7;
+    private BoardSquare square8;
+    private BoardSquare square9;
 
-    public String[] getVars() {
-        return vars;
+    private BoardSquare[] squares;
+
+    public Game() {
+        square1 = new BoardSquare();
+        square2 = new BoardSquare();
+        square3 = new BoardSquare();
+        square4 = new BoardSquare();
+        square5 = new BoardSquare();
+        square6 = new BoardSquare();
+        square7 = new BoardSquare();
+        square8 = new BoardSquare();
+        square9 = new BoardSquare();
+
+        squares = new BoardSquare[]{square1, square2, square3, square4, square5, square6, square7, square8, square9};
     }
+
+    public BoardSquare getSquare1() {
+        return square1;
+    }
+
+    public BoardSquare[] getSquares() {
+        return squares;
+    }
+
+//    public BoardSquare retrieveSquare() {
+//        return selectedSquare;
+//    }
 }
