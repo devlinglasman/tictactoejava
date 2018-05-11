@@ -40,11 +40,16 @@ public class Game {
        userInput = Integer.parseInt(input);
     }
 
-    public BoardSquare selectInputSquare(int input) {
+    public BoardSquare getSelectedSquare(int input) {
         return squares[input - 1];
     }
 
     public int getUserInput() {
         return userInput;
     }
+
+    public void setSquareStatus(BoardSquare square){
+        square.setStatus(2);
+    }
+
 }

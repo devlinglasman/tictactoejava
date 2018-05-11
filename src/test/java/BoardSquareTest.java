@@ -10,4 +10,11 @@ public class BoardSquareTest {
 
         assertEquals(1,square.getStatus());
     }
+
+    @Test
+    public void setSquareStatusTest() {
+        BoardSquare square = new BoardSquare();
+        square.setStatus(2);
+        assertEquals(2,square.getStatus());
+    }
 }

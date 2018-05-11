@@ -6,7 +6,8 @@ public class BoardSquare {
         status = 1;
     }
 
-    public String retrieveStatus() {
+
+    public String retrieveStatusOutput() {
         String any = null;
         if (getStatus() == 1) any = " ";
         return any;
@@ -15,4 +16,9 @@ public class BoardSquare {
     public int getStatus() {
         return status;
     }
+
+    public void setStatus(int statusSetter) {
+       status = statusSetter;
+    }
+
 }

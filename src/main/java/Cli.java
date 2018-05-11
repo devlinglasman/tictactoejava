@@ -19,7 +19,7 @@ class Cli {
         ArrayList<String> boardConglomerator = new ArrayList<>();
         for (BoardSquare square : game.getSquares()) {
             boardConglomerator.add("[");
-            boardConglomerator.add(square.retrieveStatus());
+            boardConglomerator.add(square.retrieveStatusOutput());
             boardConglomerator.add("]");
         }
         boardConglomerator.add(9,"\n");
