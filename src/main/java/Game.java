@@ -1,6 +1,5 @@
 public class Game {
 
-
     private BoardSquare square1;
     private BoardSquare square2;
     private BoardSquare square3;
@@ -35,7 +34,8 @@ public class Game {
         return squares;
     }
 
-//    public BoardSquare retrieveSquare() {
-//        return selectedSquare;
-//    }
+    public BoardSquare selectInputSquare(int input) {
+        return squares[input - 1];
+    }
+
 }

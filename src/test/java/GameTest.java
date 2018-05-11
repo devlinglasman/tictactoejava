@@ -4,11 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 public class GameTest {
 
-//    @Test
-//    public void testmarkbox() {
-//        game game = new game();
-//        game.retrievesquare();
-//        assertequals(game.getsquare1(), );
-//    }
+    @Test
+    public void selectInputSquareTest() {
+        Game game = new Game();
+        assertEquals(game.getSquare1(),game.selectInputSquare(1));
+    }
 }
 
