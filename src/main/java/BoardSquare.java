@@ -8,8 +8,9 @@ public class BoardSquare {
 
 
     public String retrieveStatusOutput() {
-        String any = null;
+        String any;
         if (getStatus() == 1) any = " ";
+        else any = "X";
         return any;
     }
 
