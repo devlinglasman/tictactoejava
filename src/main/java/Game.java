@@ -1,5 +1,7 @@
 public class Game {
 
+    private int userInput;
+
     private BoardSquare square1;
     private BoardSquare square2;
     private BoardSquare square3;
@@ -34,8 +36,15 @@ public class Game {
         return squares;
     }
 
+    public void convertInput(String input) {
+       userInput = Integer.parseInt(input);
+    }
+
     public BoardSquare selectInputSquare(int input) {
         return squares[input - 1];
     }
 
+    public int getUserInput() {
+        return userInput;
+    }
 }

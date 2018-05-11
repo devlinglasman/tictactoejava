@@ -8,7 +8,6 @@ class Cli {
     private final Scanner scanner;
     private Game game = new Game();
     private final PrintStream out;
-    private String userInput = "";
 
     Cli(InputStream in, PrintStream out, Game game) {
         this.scanner = new Scanner(in);
@@ -35,12 +34,11 @@ class Cli {
     }
 
     public void askInput() {
-        out.print("\nHi! Please select a square from 1-9");
+        out.print("\nHi! Please select a square from 1-9\n");
     }
 
-    public void takeInput() {
-        String input = scanner.next();
-        this.userInput = input;
+    public String takeInput() {
+        return scanner.next();
     }
 }
 
