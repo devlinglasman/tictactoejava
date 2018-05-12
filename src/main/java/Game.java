@@ -14,7 +14,10 @@ public class Game {
         squares[input] = "X";
     }
 
-//    public boolean isBoardFull() {
-//        return false;
-//    }
+    public boolean isBoardFull() {
+        for (String square : squares) {
+            if (square == " ") return false;
+        }
+        return true;
+    }
 }

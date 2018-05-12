@@ -20,15 +20,22 @@ public class GameTest {
         assertEquals("X",game.getSquares()[0]);
     }
 
-//    @Test
-//    public void isBoardFullTest() {
-//        game game = new game();
-//
-//        for (string square : game.getsquares()) {
-//           square
-//        }
-//
-//        assertequals(true, game.isboardfull());
-//    }
+    @Test
+    public void isBoardFullYesTest() {
+        Game game = new Game();
+
+        for (int i = 0; i < game.getSquares().length; i++) {
+           game.setSquareToX(i);
+        }
+
+        assertEquals(true, game.isBoardFull());
+    }
+
+    @Test
+    public void isBoardFullNoTest() {
+        Game game = new Game();
+
+        assertEquals(false, game.isBoardFull());
+    }
 }
 
