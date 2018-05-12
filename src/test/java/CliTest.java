@@ -20,7 +20,7 @@ public class CliTest {
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
 
-        game.setSquareStatus(game.getSelectedSquare(1));
+        game.setSquareToX(0);
         cli.displayBoard();
 
         assertEquals("[X][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]", ioHelper.output());
@@ -33,7 +33,7 @@ public class CliTest {
         Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
 
         cli.askInput();
-        assertEquals("\nHi! Please select a square from 1-9", ioHelper.output());
+        assertEquals("\nHi! Please select a square from 1-9\n", ioHelper.output());
     }
 
 }

@@ -1,55 +1,26 @@
 public class Game {
 
-    private int userInput;
+    private String square1 = " ";
+    private String square2 = " ";
+    private String square3 = " ";
+    private String square4 = " ";
+    private String square5 = " ";
+    private String square6 = " ";
+    private String square7 = " ";
+    private String square8 = " ";
+    private String square9 = " ";
 
-    private BoardSquare square1;
-    private BoardSquare square2;
-    private BoardSquare square3;
-    private BoardSquare square4;
-    private BoardSquare square5;
-    private BoardSquare square6;
-    private BoardSquare square7;
-    private BoardSquare square8;
-    private BoardSquare square9;
+    private String[] squares = new String[]{square1, square2, square3, square4, square5, square6, square7, square8, square9};
 
-    private BoardSquare[] squares;
-
-    public Game() {
-        square1 = new BoardSquare();
-        square2 = new BoardSquare();
-        square3 = new BoardSquare();
-        square4 = new BoardSquare();
-        square5 = new BoardSquare();
-        square6 = new BoardSquare();
-        square7 = new BoardSquare();
-        square8 = new BoardSquare();
-        square9 = new BoardSquare();
-
-        squares = new BoardSquare[]{square1, square2, square3, square4, square5, square6, square7, square8, square9};
-    }
-
-    public BoardSquare getSquare1() {
-        return square1;
-    }
-
-    public BoardSquare[] getSquares() {
+    public String[] getSquares() {
         return squares;
     }
 
-    public void convertInput(String input) {
-       userInput = Integer.parseInt(input);
+    public int convertInputToSquareNumber(String input) {
+       return Integer.parseInt(input) - 1;
     }
 
-    public BoardSquare getSelectedSquare(int input) {
-        return squares[input - 1];
+    public void setSquareToX(int input) {
+        squares[input] = "X";
     }
-
-    public int getUserInput() {
-        return userInput;
-    }
-
-    public void setSquareStatus(BoardSquare square){
-        square.setStatus(2);
-    }
-
 }

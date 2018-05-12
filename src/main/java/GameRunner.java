@@ -7,8 +7,8 @@ public class GameRunner {
         cli.displayBoard();
         cli.askInput();
         String input = cli.takeInput();
-        game.convertInput(input);
-        game.setSquareStatus(game.getSelectedSquare(game.getUserInput()));
+        int convertedInput = game.convertInputToSquareNumber(input);
+        game.setSquareToX(convertedInput);
         cli.displayBoard();
     }
 }
