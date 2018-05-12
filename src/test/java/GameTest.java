@@ -19,5 +19,16 @@ public class GameTest {
 
         assertEquals("X",game.getSquares()[0]);
     }
+
+//    @Test
+//    public void isBoardFullTest() {
+//        game game = new game();
+//
+//        for (string square : game.getsquares()) {
+//           square
+//        }
+//
+//        assertequals(true, game.isboardfull());
+//    }
 }
 
