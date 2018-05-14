@@ -40,6 +40,11 @@ class Cli {
     public String takeInput() {
         return scanner.next();
     }
+
+    public void askGameType() {
+        out.print("\nHi! please enter '1' to " +
+                "play human-vs-human or '2' to play against the computer.\n");
+    }
 }
 
 

@@ -4,14 +4,21 @@ public class GameRunner {
     private Cli cli = new Cli(System.in, System.out, game);
 
     public void runGame() {
-        while (!game.isBoardFull()) {
+        cli.askGameType();
+        String choice = cli.takeInput();
+
+        if (choice.equals("1")) {
+            System.out.println("Human");
+        } else {
+            while (!game.isBoardFull()) {
+                cli.displayBoard();
+                cli.askInput();
+                String input = cli.takeInput();
+                int squareNumber = game.convertInputToSquareNumber(input);
+                game.setSquareToX(squareNumber);
+                if (squareNumber + 1 < game.getSquares().length) game.setSquareToO(squareNumber + 1);
+            }
             cli.displayBoard();
-            cli.askInput();
-            String input = cli.takeInput();
-            int squareNumber = game.convertInputToSquareNumber(input);
-            game.setSquareToX(squareNumber);
-            if (squareNumber + 1 < game.getSquares().length) game.setSquareToO(squareNumber + 1);
         }
-        cli.displayBoard();
     }
 }
