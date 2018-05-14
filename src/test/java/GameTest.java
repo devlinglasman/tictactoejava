@@ -21,6 +21,15 @@ public class GameTest {
     }
 
     @Test
+    public void setSquareToOTest() {
+        Game game = new Game();
+
+        game.setSquareToO(0);
+
+        assertEquals("O",game.getSquares()[0]);
+    }
+
+    @Test
     public void isBoardFullYesTest() {
         Game game = new Game();
 

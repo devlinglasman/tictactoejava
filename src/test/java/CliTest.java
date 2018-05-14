@@ -11,7 +11,7 @@ public class CliTest {
         Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
 
         cli.displayBoard();
-        assertEquals("[ ][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]", ioHelper.output());
+        assertEquals("[ ][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
     }
 
     @Test
@@ -23,7 +23,7 @@ public class CliTest {
         game.setSquareToX(0);
         cli.displayBoard();
 
-        assertEquals("[X][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]", ioHelper.output());
+        assertEquals("[X][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
     }
 
     @Test

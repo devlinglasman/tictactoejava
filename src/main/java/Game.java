@@ -14,10 +14,15 @@ public class Game {
         squares[input] = "X";
     }
 
+    public void setSquareToO(int input) {
+        squares[input] = "O";
+    }
+
     public boolean isBoardFull() {
         for (String square : squares) {
-            if (square == " ") return false;
+            if (square.equals(" ")) return false;
         }
         return true;
     }
+
 }

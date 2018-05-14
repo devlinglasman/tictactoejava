@@ -30,7 +30,7 @@ class Cli {
         for (String s: boardConglomerator) {
             boardFinal.append(s);
         }
-        out.print(boardFinal);
+        out.print(boardFinal + "\n");
     }
 
     public void askInput() {
