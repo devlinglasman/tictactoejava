@@ -33,19 +33,19 @@ public class GameTest {
     }
 
     @Test
-    public void setSquareToX() {
+    public void setSquareMarkX() {
         Game game = new Game();
 
-        game.setSquareToXMark(0);
+        game.setSquareMark(0,"X");
 
         assertEquals("X",game.getSquares()[0]);
     }
 
     @Test
-    public void setSquareToO() {
+    public void setSquareMarkO() {
         Game game = new Game();
 
-        game.setSquareToO(0);
+        game.setSquareMark(0,"O");
 
         assertEquals("O",game.getSquares()[0]);
     }
@@ -55,7 +55,7 @@ public class GameTest {
         Game game = new Game();
 
         for (int i = 0; i < game.getSquares().length; i++) {
-           game.setSquareToXMark(i);
+           game.setSquareMark(i,"X");
         }
 
         assertEquals(true, game.isBoardFull());

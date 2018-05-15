@@ -23,8 +23,8 @@ public class GameRunner {
                 cli.askInput(1);
                 String input = cli.takeInput();
                 int squareNumber = game.convertInputToSquareNumber(input);
-                game.setSquareToXMark(squareNumber);
-                if (squareNumber + 1 < game.getSquares().length) game.setSquareToO(squareNumber + 1);
+                game.setSquareMark(squareNumber,"X");
+                if (squareNumber + 1 < game.getSquares().length) game.setSquareMark(squareNumber + 1,"O");
             }
             cli.displayBoard(game.getSquares());
         }

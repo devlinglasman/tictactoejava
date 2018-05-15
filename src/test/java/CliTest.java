@@ -20,7 +20,7 @@ public class CliTest {
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
-        game.setSquareToX(0);
+        game.setSquareMark(0,"X");
         cli.displayBoard(game.getSquares());
 
         assertEquals("[X][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());

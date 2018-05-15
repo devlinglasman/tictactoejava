@@ -32,18 +32,14 @@ public class Game {
 
     public void markSquare(int activePlayer, int squareNumber) {
         if (activePlayer == 1) {
-            setSquareToX(squareNumber);
+            setSquareMark(squareNumber,"X");
         } else {
-            setSquareToO(squareNumber);
+            setSquareMark(squareNumber,"O");
         }
     }
 
-    public void setSquareToX(int input) {
-        squares[input] = "X";
-    }
-
-    public void setSquareToO(int input) {
-        squares[input] = "O";
+    public void setSquareMark(int input, String mark) {
+        squares[input] = mark;
     }
 
     public boolean isBoardFull() {

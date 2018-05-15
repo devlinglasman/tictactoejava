@@ -49,9 +49,9 @@ public class GameRunnerTest {
         Game game = new Game();
         GameRunner gameRunner = new GameRunner(game);
 
-        game.setSquareToX(0);
-        game.setSquareToX(1);
-        game.setSquareToX(2);
+        game.setSquareMark(0,"X");
+        game.setSquareMark(1,"X");
+        game.setSquareMark(2,"X");
 
         assertEquals(false, gameRunner.gameOngoing());
     }
