@@ -37,7 +37,7 @@ public class GameRunner {
     }
 
     public boolean gameOngoing() {
-        return !game.isBoardFull() && !game.isGameWon(game.getLines());
+        return !game.isBoardFull() && !game.isGameWon(game.getPossibleWinLines());
     }
 
     public int findActivePlayer(int counter) {
@@ -59,7 +59,7 @@ public class GameRunner {
     }
 
     public void runGameWonIfWon(int activePlayer) {
-        if (game.isGameWon(game.getLines())) {
+        if (game.isGameWon(game.getPossibleWinLines())) {
             cli.gameWon(activePlayer);
             cli.displayBoard(game.getSquares());
         }

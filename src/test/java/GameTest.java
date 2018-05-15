@@ -98,7 +98,7 @@ public class GameTest {
     public void isGameWonYes2() {
         Game game = new Game();
         String[] row2 = {"O","O","O"};
-        List<String[]> lines = Arrays.asList(game.getLines().get(0),row2);
+        List<String[]> lines = Arrays.asList(game.getPossibleWinLines().get(0),row2);
 
         assertEquals(true, game.isGameWon(lines));
     }

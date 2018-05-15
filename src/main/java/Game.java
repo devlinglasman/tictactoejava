@@ -5,40 +5,21 @@ public class Game {
 
     private String[] squares = new String[]{" ", " ", " ", " ", " ", " ", " ", " ", " "};
 
-    private String[] row1() {
-        return new String[]{squares[0], squares[1], squares[2]};
+    private String[] group3Squares(int a, int b, int c) {
+       return new String[] {squares[a], squares[b], squares[c]};
     }
 
-    private String[] row2() {
-        return new String[]{squares[3], squares[4], squares[5]};
-    }
-
-    private String[] row3() {
-        return new String[]{squares[6], squares[7], squares[8]};
-    }
-
-    private String[] col1() {
-        return new String[]{squares[0], squares[3], squares[6]};
-    }
-
-    private String[] col2() {
-        return new String[]{squares[1], squares[4], squares[7]};
-    }
-
-    private String[] col3() {
-        return new String[]{squares[2], squares[5], squares[8]};
-    }
-
-    private String[] diag1() {
-        return new String[]{squares[0], squares[4], squares[8]};
-    }
-
-    private String[] diag2() {
-        return new String[]{squares[2], squares[4], squares[6]};
-    }
-
-    private List<String[]> lines() {
-        return Arrays.asList(row1(), row2(), row3(), col1(), col2(), col3(), diag1(), diag2());
+    private List<String[]> possibleWinLines() {
+        return Arrays.asList(
+                group3Squares(0,1,2),
+                group3Squares(3,4,5),
+                group3Squares(6,7,8),
+                group3Squares(0,3,6),
+                group3Squares(1,4,7),
+                group3Squares(2,5,8),
+                group3Squares(0,4,8),
+                group3Squares(2,4,6)
+        );
     }
 
     public String[] getSquares() {
@@ -88,7 +69,7 @@ public class Game {
         return true;
     }
 
-    public List<String[]> getLines() {
-        return lines();
+    public List<String[]> getPossibleWinLines() {
+        return possibleWinLines();
     }
 }
