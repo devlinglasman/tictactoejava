@@ -69,35 +69,19 @@ public class GameTest {
     }
 
     @Test
-    public void allAreXYes() {
+    public void winningLineYes() {
         Game game = new Game();
         String[] row1 = {"X","X","X"};
 
-        assertEquals(true, game.allAreX(row1));
+        assertEquals(true, game.winningLine(row1));
     }
 
     @Test
-    public void allAreXNo() {
+    public void winningLineNo() {
         Game game = new Game();
         String[] row1 = {" ","X","X"};
 
-        assertEquals(false, game.allAreX(row1));
-    }
-
-    @Test
-    public void allAreOYes() {
-        Game game = new Game();
-        String[] row1 = {"O","O","O",};
-
-        assertEquals(true, game.allAreO(row1));
-    }
-
-    @Test
-    public void allAreONo() {
-        Game game = new Game();
-        String[] row1 = {" ","O","O"};
-
-        assertEquals(false, game.allAreO(row1));
+        assertEquals(false, game.winningLine(row1));
     }
 
     @Test
