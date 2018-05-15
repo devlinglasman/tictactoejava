@@ -37,7 +37,7 @@ public class GameRunnerTest {
     }
 
     @Test
-    public void gameOnGoingYes() {
+    public void gameOngoingYes() {
         Game game = new Game();
         GameRunner gameRunner = new GameRunner(game);
 
@@ -45,7 +45,7 @@ public class GameRunnerTest {
     }
 
     @Test
-    public void gameOnGoingNo() {
+    public void gameOngoingNo() {
         Game game = new Game();
         GameRunner gameRunner = new GameRunner(game);
 

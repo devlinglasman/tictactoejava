@@ -55,10 +55,13 @@ public class GameRunner {
         String input = cli.askAndTakeInput(activePlayer);
         int squareNumber = game.convertInputToSquareNumber(input);
         game.markSquare(activePlayer, squareNumber);
+        runGameWonIfWon(activePlayer);
+    }
+
+    public void runGameWonIfWon(int activePlayer) {
         if (game.isGameWon(game.getLines())) {
             cli.gameWon(activePlayer);
             cli.displayBoard(game.getSquares());
         }
     }
-
 }
