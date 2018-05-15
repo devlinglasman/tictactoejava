@@ -5,8 +5,7 @@ public class Main {
 
     public static void main(String[] args) {
         Game game = new Game();
-        Cli cli = new Cli(System.in,System.out);
-        GameRunner gamerunner = new GameRunner(cli, game);
+        GameRunner gamerunner = new GameRunner(game);
         gamerunner.runGame();
     }
 }

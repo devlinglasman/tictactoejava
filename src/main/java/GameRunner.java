@@ -1,10 +1,9 @@
 public class GameRunner {
 
     private Game game;
-    private Cli cli;
+    private Cli cli = new Cli(System.in, System.out);
 
-    public GameRunner(Cli cli, Game game) {
-        this.cli = cli;
+    public GameRunner(Game game) {
         this.game = game;
     }
 
@@ -14,12 +13,10 @@ public class GameRunner {
 
         if (choice.equals("1")) {
             int counter = 1;
-            while (gameOnGoing()) {
+            while (gameOngoing()) {
                 runTurn(findActivePlayer(counter));
-                counter = counter % 2;
-                counter++;
+                counter = nextCounter(counter);
             }
-
         } else {
             while (!game.isBoardFull()) {
                 cli.displayBoard(game.getSquares());
@@ -32,7 +29,14 @@ public class GameRunner {
             cli.displayBoard(game.getSquares());
         }
     }
-    public boolean gameOnGoing() {
+
+    public int nextCounter(int counter) {
+        counter = counter % 2;
+        counter++;
+        return counter;
+    }
+
+    public boolean gameOngoing() {
         return !game.isBoardFull() && !game.isGameWon(game.getLines());
     }
 
@@ -48,17 +52,13 @@ public class GameRunner {
 
     public void runTurn(int activePlayer) {
         cli.displayBoard(game.getSquares());
-        cli.askInput(activePlayer);
-        String input = cli.takeInput();
+        String input = cli.askAndTakeInput(activePlayer);
         int squareNumber = game.convertInputToSquareNumber(input);
-        if (activePlayer == 1) {
-            game.setSquareToX(squareNumber);
-        } else {
-            game.setSquareToO(squareNumber);
-        }
+        game.markSquare(activePlayer, squareNumber);
         if (game.isGameWon(game.getLines())) {
             cli.gameWon(activePlayer);
             cli.displayBoard(game.getSquares());
         }
     }
+
 }

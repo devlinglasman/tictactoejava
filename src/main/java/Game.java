@@ -49,7 +49,15 @@ public class Game {
        return Integer.parseInt(input) - 1;
     }
 
-    public void setSquareToXMark(int input) {
+    public void markSquare(int activePlayer, int squareNumber) {
+        if (activePlayer == 1) {
+            setSquareToX(squareNumber);
+        } else {
+            setSquareToO(squareNumber);
+        }
+    }
+
+    public void setSquareToX(int input) {
         squares[input] = "X";
     }
 

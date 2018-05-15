@@ -31,6 +31,11 @@ class Cli {
         out.print(boardFinal + "\n");
     }
 
+    public String askAndTakeInput(int activePlayer){
+        askInput(activePlayer);
+       return takeInput();
+    }
+
     public void askInput(int activePlayer) {
         out.print("\nHi Player " + activePlayer + "! Please select a square from 1-9\n");
     }

@@ -16,6 +16,24 @@ public class GameTest {
     }
 
     @Test
+    public void markSquareX() {
+        Game game = new Game();
+
+        game.markSquare(1,0);
+
+        assertEquals("X",game.getSquares()[0]);
+    }
+
+    @Test
+    public void markSquareO() {
+        Game game = new Game();
+
+        game.markSquare(2,0);
+
+        assertEquals("O",game.getSquares()[0]);
+    }
+
+    @Test
     public void setSquareToX() {
         Game game = new Game();
 
