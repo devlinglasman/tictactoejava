@@ -6,18 +6,16 @@ import java.util.Scanner;
 class Cli {
 
     private final Scanner scanner;
-    private Game game = new Game();
     private final PrintStream out;
 
-    Cli(InputStream in, PrintStream out, Game game) {
+    Cli(InputStream in, PrintStream out) {
         this.scanner = new Scanner(in);
         this.out = out;
-        this.game = game;
     }
 
-    public void showBoard() {
+    public void displayBoard(String[] squares) {
         ArrayList<String> boardConglomerator = new ArrayList<>();
-        for (String square : game.getSquares()) {
+        for (String square : squares) {
             boardConglomerator.add("[");
             boardConglomerator.add(square);
             boardConglomerator.add("]");

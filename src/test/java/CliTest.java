@@ -8,9 +8,9 @@ public class CliTest {
     public void displayBoard() {
         Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
-        Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
+        Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
-        cli.showBoard();
+        cli.displayBoard(game.getSquares());
         assertEquals("[ ][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
     }
 
@@ -18,10 +18,10 @@ public class CliTest {
     public void displayBoard2() {
         Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
-        Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
+        Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
-        game.setSquareToXMark(0);
-        cli.showBoard();
+        game.setSquareToX(0);
+        cli.displayBoard(game.getSquares());
 
         assertEquals("[X][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
     }
@@ -30,7 +30,7 @@ public class CliTest {
     public void askInputPlayerOne() {
         Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
-        Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
+        Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
         cli.askInput(1);
         assertEquals("\nHi Player 1! Please select a square from 1-9\n", ioHelper.output());
@@ -40,7 +40,7 @@ public class CliTest {
     public void askInputPlayerTwo() {
         Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
-        Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
+        Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
         cli.askInput(2);
         assertEquals("\nHi Player 2! Please select a square from 1-9\n", ioHelper.output());
@@ -50,7 +50,7 @@ public class CliTest {
     public void askGameType() {
         Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
-        Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
+        Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
         cli.askGameType();
         assertEquals("\nHi! please enter '1' to play " +
@@ -61,7 +61,7 @@ public class CliTest {
     public void gameWon1() {
         Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
-        Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
+        Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
         cli.gameWon(1);
 
@@ -72,7 +72,7 @@ public class CliTest {
     public void gameWon2() {
         Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
-        Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
+        Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
         cli.gameWon(2);
 
