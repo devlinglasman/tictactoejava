@@ -33,8 +33,8 @@ class Cli {
         out.print(boardFinal + "\n");
     }
 
-    public void askForInput() {
-        out.print("\nHi! Please select a square from 1-9\n");
+    public void askInput(int activePlayer) {
+        out.print("\nHi Player " + activePlayer + "! Please select a square from 1-9\n");
     }
 
     public String takeInput() {
@@ -44,6 +44,10 @@ class Cli {
     public void askGameType() {
         out.print("\nHi! please enter '1' to " +
                 "play human-vs-human or '2' to play against the computer.\n");
+    }
+
+    public void gameWon(int activePlayer) {
+        out.print("Congratulations Player " + activePlayer + " - You're the winner!");
     }
 }
 

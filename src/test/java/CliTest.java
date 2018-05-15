@@ -27,13 +27,23 @@ public class CliTest {
     }
 
     @Test
-    public void askInput() {
+    public void askInputPlayerOne() {
         Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
 
-        cli.askForInput();
-        assertEquals("\nHi! Please select a square from 1-9\n", ioHelper.output());
+        cli.askInput(1);
+        assertEquals("\nHi Player 1! Please select a square from 1-9\n", ioHelper.output());
+    }
+
+    @Test
+    public void askInputPlayerTwo() {
+        Game game = new Game();
+        IOHelper ioHelper = new IOHelper("");
+        Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
+
+        cli.askInput(2);
+        assertEquals("\nHi Player 2! Please select a square from 1-9\n", ioHelper.output());
     }
 
     @Test
@@ -45,5 +55,16 @@ public class CliTest {
         cli.askGameType();
         assertEquals("\nHi! please enter '1' to play " +
                 "human-vs-human or '2' to play against the computer.\n", ioHelper.output());
+    }
+
+    @Test
+    public void gameWon() {
+        Game game = new Game();
+        IOHelper ioHelper = new IOHelper("");
+        Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
+
+        cli.gameWon(1);
+
+        assertEquals("Congratulations Player 1 - You're the winner!", ioHelper.output());
     }
 }
