@@ -47,7 +47,7 @@ class Cli {
     }
 
     public void gameWon(int activePlayer) {
-        out.print("Congratulations Player " + activePlayer + " - You're the winner!");
+        out.print("Congratulations Player " + activePlayer + " - You're the winner!\n");
     }
 }
 

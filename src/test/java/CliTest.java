@@ -58,13 +58,24 @@ public class CliTest {
     }
 
     @Test
-    public void gameWon() {
+    public void gameWon1() {
         Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
 
         cli.gameWon(1);
 
-        assertEquals("Congratulations Player 1 - You're the winner!", ioHelper.output());
+        assertEquals("Congratulations Player 1 - You're the winner!\n", ioHelper.output());
+    }
+
+    @Test
+    public void gameWon2() {
+        Game game = new Game();
+        IOHelper ioHelper = new IOHelper("");
+        Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
+
+        cli.gameWon(2);
+
+        assertEquals("Congratulations Player 2 - You're the winner!\n", ioHelper.output());
     }
 }
