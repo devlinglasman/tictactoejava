@@ -3,6 +3,9 @@ import java.util.List;
 
 public class Game {
 
+    private Player playerOne = Player.PLAYERONE;
+    private Player playerTwo = Player.PLAYERTWO;
+
     private String[] squares = new String[]{" ", " ", " ", " ", " ", " ", " ", " ", " "};
 
     private String[] group3Squares(int a, int b, int c) {
@@ -30,8 +33,8 @@ public class Game {
         return Integer.parseInt(input) - 1;
     }
 
-    public void markSquare(int activePlayer, int squareNumber) {
-        if (activePlayer == 1) {
+    public void markSquare(Player activePlayer, int squareNumber) {
+        if (activePlayer == playerOne) {
             setSquareMark(squareNumber,"X");
         } else {
             setSquareMark(squareNumber,"O");
@@ -67,5 +70,13 @@ public class Game {
 
     public List<String[]> getPossibleWinLines() {
         return possibleWinLines();
+    }
+
+    public Player getPlayerOne() {
+        return playerOne;
+    }
+
+    public Player getPlayerTwo() {
+        return playerTwo;
     }
 }

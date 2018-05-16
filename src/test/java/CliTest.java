@@ -32,8 +32,8 @@ public class CliTest {
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
-        cli.askInput(1);
-        assertEquals("\nHi Player 1! Please select a square from 1-9\n", ioHelper.output());
+        cli.askInput(game.getPlayerOne());
+        assertEquals("\nHi Player One! Please select a square from 1-9\n", ioHelper.output());
     }
 
     @Test
@@ -42,40 +42,40 @@ public class CliTest {
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
-        cli.askInput(2);
-        assertEquals("\nHi Player 2! Please select a square from 1-9\n", ioHelper.output());
+        cli.askInput(game.getPlayerTwo());
+        assertEquals("\nHi Player Two! Please select a square from 1-9\n", ioHelper.output());
     }
 
     @Test
-    public void askGameType() {
+    public void askGameMode() {
         Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
-        cli.askGameType();
+        cli.askGameMode();
         assertEquals("\nHi! please enter '1' to play " +
                 "human-vs-human or '2' to play against the computer.\n", ioHelper.output());
     }
 
     @Test
-    public void gameWon1() {
+    public void announceWinner1() {
         Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
-        cli.gameWon(1);
+        cli.announceWinner(game.getPlayerOne());
 
-        assertEquals("Congratulations Player 1 - You're the winner!\n", ioHelper.output());
+        assertEquals("Congratulations Player One - You're the winner!\n", ioHelper.output());
     }
 
     @Test
-    public void gameWon2() {
+    public void announceWinner2() {
         Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
-        cli.gameWon(2);
+        cli.announceWinner(game.getPlayerTwo());
 
-        assertEquals("Congratulations Player 2 - You're the winner!\n", ioHelper.output());
+        assertEquals("Congratulations Player Two - You're the winner!\n", ioHelper.output());
     }
 }

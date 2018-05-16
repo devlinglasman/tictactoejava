@@ -18,7 +18,7 @@ public class GameTest {
     public void markSquareX() {
         Game game = new Game();
 
-        game.markSquare(1,0);
+        game.markSquare(game.getPlayerOne(),0);
 
         assertEquals("X",game.getSquares()[0]);
     }
@@ -27,7 +27,7 @@ public class GameTest {
     public void markSquareO() {
         Game game = new Game();
 
-        game.markSquare(2,0);
+        game.markSquare(game.getPlayerTwo(),0);
 
         assertEquals("O",game.getSquares()[0]);
     }

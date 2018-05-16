@@ -31,26 +31,26 @@ class Cli {
         out.print(boardFinal + "\n");
     }
 
-    public String askAndTakeInput(int activePlayer){
+    public String askAndTakeInput(Player activePlayer){
         askInput(activePlayer);
        return takeInput();
     }
 
-    public void askInput(int activePlayer) {
-        out.print("\nHi Player " + activePlayer + "! Please select a square from 1-9\n");
+    public void askInput(Player activePlayer) {
+        out.print("\nHi " + activePlayer.getName() + "! Please select a square from 1-9\n");
     }
 
     public String takeInput() {
         return scanner.next();
     }
 
-    public void askGameType() {
+    public void askGameMode() {
         out.print("\nHi! please enter '1' to " +
                 "play human-vs-human or '2' to play against the computer.\n");
     }
 
-    public void gameWon(int activePlayer) {
-        out.print("Congratulations Player " + activePlayer + " - You're the winner!\n");
+    public void announceWinner(Player activePlayer) {
+        out.print("Congratulations " + activePlayer.getName() + " - You're the winner!\n");
     }
 }
 
