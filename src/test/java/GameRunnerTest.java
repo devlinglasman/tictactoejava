@@ -5,22 +5,6 @@ import static org.junit.Assert.*;
 public class GameRunnerTest {
 
     @Test
-    public void findActivePlayer1() {
-        Game game = new Game();
-        GameRunner gameRunner = new GameRunner(game);
-
-        assertEquals(game.getPlayerOne(), gameRunner.findActivePlayer(true));
-    }
-
-    @Test
-    public void findActivePlayer2() {
-        Game game = new Game();
-        GameRunner gameRunner = new GameRunner(game);
-
-        assertEquals(game.getPlayerTwo(), gameRunner.findActivePlayer(false));
-    }
-
-    @Test
     public void gameOngoingYes() {
         Game game = new Game();
         GameRunner gameRunner = new GameRunner(game);

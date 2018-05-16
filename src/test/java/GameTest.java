@@ -11,43 +11,43 @@ public class GameTest {
     public void convertInputToSquareNumber() {
         Game game = new Game();
 
-        assertEquals(0,game.convertInputToSquareNumber("1"));
+        assertEquals(0, game.convertInputToSquareNumber("1"));
     }
 
     @Test
     public void markSquareX() {
         Game game = new Game();
 
-        game.markSquare(game.getPlayerOne(),0);
+        game.markSquare(game.getPlayerOne(), 0);
 
-        assertEquals("X",game.getSquares()[0]);
+        assertEquals("X", game.getSquares()[0]);
     }
 
     @Test
     public void markSquareO() {
         Game game = new Game();
 
-        game.markSquare(game.getPlayerTwo(),0);
+        game.markSquare(game.getPlayerTwo(), 0);
 
-        assertEquals("O",game.getSquares()[0]);
+        assertEquals("O", game.getSquares()[0]);
     }
 
     @Test
     public void setSquareMarkX() {
         Game game = new Game();
 
-        game.setSquareMark(0,"X");
+        game.setSquareMark(0, "X");
 
-        assertEquals("X",game.getSquares()[0]);
+        assertEquals("X", game.getSquares()[0]);
     }
 
     @Test
     public void setSquareMarkO() {
         Game game = new Game();
 
-        game.setSquareMark(0,"O");
+        game.setSquareMark(0, "O");
 
-        assertEquals("O",game.getSquares()[0]);
+        assertEquals("O", game.getSquares()[0]);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class GameTest {
         Game game = new Game();
 
         for (int i = 0; i < game.getSquares().length; i++) {
-           game.setSquareMark(i,"X");
+            game.setSquareMark(i, "X");
         }
 
         assertEquals(true, game.isBoardFull());
@@ -71,7 +71,7 @@ public class GameTest {
     @Test
     public void winningLineYes() {
         Game game = new Game();
-        String[] row1 = {"X","X","X"};
+        String[] row1 = {"X", "X", "X"};
 
         assertEquals(true, game.winningLine(row1));
     }
@@ -79,7 +79,7 @@ public class GameTest {
     @Test
     public void winningLineNo() {
         Game game = new Game();
-        String[] row1 = {" ","X","X"};
+        String[] row1 = {" ", "X", "X"};
 
         assertEquals(false, game.winningLine(row1));
     }
@@ -87,9 +87,9 @@ public class GameTest {
     @Test
     public void isGameWonYes() {
         Game game = new Game();
-        String[] row1 = {"X","X","X"};
-        String[] row2 = {" "," "," "};
-        List<String[]> lines = Arrays.asList(row1,row2);
+        String[] row1 = {"X", "X", "X"};
+        String[] row2 = {" ", " ", " "};
+        List<String[]> lines = Arrays.asList(row1, row2);
 
         assertEquals(true, game.isGameWon(lines));
     }
@@ -97,8 +97,8 @@ public class GameTest {
     @Test
     public void isGameWonYes2() {
         Game game = new Game();
-        String[] row2 = {"O","O","O"};
-        List<String[]> lines = Arrays.asList(game.getPossibleWinLines().get(0),row2);
+        String[] row2 = {"O", "O", "O"};
+        List<String[]> lines = Arrays.asList(game.getPossibleWinLines().get(0), row2);
 
         assertEquals(true, game.isGameWon(lines));
     }
@@ -106,11 +106,31 @@ public class GameTest {
     @Test
     public void isGameWonNo() {
         Game game = new Game();
-        String[] row1 = {" "," "," "};
-        String[] row2 = {" "," "," "};
-        List<String[]> lines = Arrays.asList(row1,row2);
+        String[] row1 = {" ", " ", " "};
+        String[] row2 = {" ", " ", " "};
+        List<String[]> lines = Arrays.asList(row1, row2);
 
         assertEquals(false, game.isGameWon(lines));
     }
+
+    @Test
+    public void alternatePlayer1() {
+        Game game = new Game();
+
+        game.alternatePlayer();
+        game.alternatePlayer();
+
+        assertEquals(game.getPlayerOne(), game.getActivePlayer());
+    }
+
+    @Test
+    public void alternatePlayer2() {
+        Game game = new Game();
+
+        game.alternatePlayer();
+
+        assertEquals(game.getPlayerTwo(), game.getActivePlayer());
+    }
+
 }
 

@@ -12,10 +12,9 @@ public class GameRunner {
         String choice = cli.takeInput();
 
         if (choice.equals("1")) {
-            boolean isItPlayerOne = true;
             while (gameOngoing()) {
-                runTurn(findActivePlayer(isItPlayerOne));
-                isItPlayerOne = !isItPlayerOne;
+                runTurn(game.getActivePlayer());
+                game.alternatePlayer();
             }
         } else {
             while (!game.isBoardFull()) {
@@ -23,8 +22,8 @@ public class GameRunner {
                 cli.askInput(game.getPlayerOne());
                 String input = cli.takeInput();
                 int squareNumber = game.convertInputToSquareNumber(input);
-                game.setSquareMark(squareNumber,"X");
-                if (squareNumber + 1 < game.getSquares().length) game.setSquareMark(squareNumber + 1,"O");
+                game.setSquareMark(squareNumber, "X");
+                if (squareNumber + 1 < game.getSquares().length) game.setSquareMark(squareNumber + 1, "O");
             }
             cli.displayBoard(game.getSquares());
         }
@@ -32,12 +31,6 @@ public class GameRunner {
 
     public boolean gameOngoing() {
         return !game.isBoardFull() && !game.isGameWon(game.getPossibleWinLines());
-    }
-
-    public Player findActivePlayer(boolean isItPlayerOne) {
-        Player activePlayer = game.getPlayerOne();
-        if (!isItPlayerOne) activePlayer = game.getPlayerTwo();
-        return activePlayer;
     }
 
     public void runTurn(Player activePlayer) {
