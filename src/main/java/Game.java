@@ -6,55 +6,26 @@ public class Game {
     private Player playerOne = Player.PLAYERONE;
     private Player playerTwo = Player.PLAYERTWO;
     private Player activePlayer = getPlayerOne();
-
-    private String[] squares = new String[]{" ", " ", " ", " ", " ", " ", " ", " ", " "};
-
-    private String[] group3Squares(int a, int b, int c) {
-        return new String[]{squares[a], squares[b], squares[c]};
-    }
-
-    private List<String[]> possibleWinLines() {
-        return Arrays.asList(
-                group3Squares(0, 1, 2),
-                group3Squares(3, 4, 5),
-                group3Squares(6, 7, 8),
-                group3Squares(0, 3, 6),
-                group3Squares(1, 4, 7),
-                group3Squares(2, 5, 8),
-                group3Squares(0, 4, 8),
-                group3Squares(2, 4, 6)
-        );
-    }
-
-    public String[] getSquares() {
-        return squares;
-    }
+    private Grid grid = new Grid();
 
     public int convertInputToSquareNumber(String input) {
         return Integer.parseInt(input) - 1;
     }
 
-    public void markSquare(Player activePlayer, int squareNumber) {
+    public void markSquare(Player activePlayer, Grid grid, int squareNumber) {
         if (activePlayer == playerOne) {
-            setSquareMark(squareNumber, "X");
+            grid.markSquare(squareNumber,"X");
         } else {
-            setSquareMark(squareNumber, "O");
+            grid.markSquare(squareNumber,"O");
         }
     }
 
-    public void setSquareMark(int input, String mark) {
-        squares[input] = mark;
+    public boolean isBoardFull(Grid grid) {
+        return grid.isBoardFull();
     }
 
-    public boolean isBoardFull() {
-        for (String square : squares) {
-            if (square.equals(" ")) return false;
-        }
-        return true;
-    }
-
-    public boolean isGameWon(List<String[]> lines) {
-        for (String[] line : lines) {
+    public boolean isGameWon(Grid grid) {
+        for (String[] line : grid.getPossibleWinLines()) {
             if (winningLine(line)) return true;
         }
         return false;
@@ -67,10 +38,6 @@ public class Game {
             if (!s.equals(first)) return false;
         }
         return true;
-    }
-
-    public List<String[]> getPossibleWinLines() {
-        return possibleWinLines();
     }
 
     public Player getPlayerOne() {
@@ -88,5 +55,9 @@ public class Game {
     public void alternatePlayer() {
         if (getActivePlayer() == getPlayerOne()) activePlayer = getPlayerTwo();
         else activePlayer = getPlayerOne();
+    }
+
+    public Grid getGrid() {
+        return grid;
     }
 }

@@ -10,7 +10,7 @@ public class CliTest {
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
-        cli.displayBoard(game.getSquares());
+        cli.displayBoard(game.getGrid().getSquares());
         assertEquals("[ ][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
     }
 
@@ -20,8 +20,8 @@ public class CliTest {
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
-        game.setSquareMark(0,"X");
-        cli.displayBoard(game.getSquares());
+        game.markSquare(game.getPlayerOne(),game.getGrid(),0);
+        cli.displayBoard(game.getGrid().getSquares());
 
         assertEquals("[X][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
     }

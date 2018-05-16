@@ -18,54 +18,36 @@ public class GameTest {
     public void markSquareX() {
         Game game = new Game();
 
-        game.markSquare(game.getPlayerOne(), 0);
+        game.markSquare(game.getPlayerOne(),game.getGrid(),0);
 
-        assertEquals("X", game.getSquares()[0]);
+        assertEquals("X", game.getGrid().getSquares()[0]);
     }
 
     @Test
     public void markSquareO() {
         Game game = new Game();
 
-        game.markSquare(game.getPlayerTwo(), 0);
+        game.markSquare(game.getPlayerTwo(),game.getGrid(),0);
 
-        assertEquals("O", game.getSquares()[0]);
-    }
-
-    @Test
-    public void setSquareMarkX() {
-        Game game = new Game();
-
-        game.setSquareMark(0, "X");
-
-        assertEquals("X", game.getSquares()[0]);
-    }
-
-    @Test
-    public void setSquareMarkO() {
-        Game game = new Game();
-
-        game.setSquareMark(0, "O");
-
-        assertEquals("O", game.getSquares()[0]);
+        assertEquals("O", game.getGrid().getSquares()[0]);
     }
 
     @Test
     public void isBoardFullYes() {
         Game game = new Game();
 
-        for (int i = 0; i < game.getSquares().length; i++) {
-            game.setSquareMark(i, "X");
+        for (int i = 0; i < game.getGrid().getSquares().length; i++) {
+            game.markSquare(game.getPlayerOne(),game.getGrid(),i);
         }
 
-        assertEquals(true, game.isBoardFull());
+        assertEquals(true, game.isBoardFull(game.getGrid()));
     }
 
     @Test
     public void isBoardFullNo() {
         Game game = new Game();
 
-        assertEquals(false, game.isBoardFull());
+        assertEquals(false, game.isBoardFull(game.getGrid()));
     }
 
     @Test
@@ -87,30 +69,19 @@ public class GameTest {
     @Test
     public void isGameWonYes() {
         Game game = new Game();
-        String[] row1 = {"X", "X", "X"};
-        String[] row2 = {" ", " ", " "};
-        List<String[]> lines = Arrays.asList(row1, row2);
 
-        assertEquals(true, game.isGameWon(lines));
-    }
+        for (int i = 0; i < 3; i++) {
+            game.markSquare(game.getPlayerOne(),game.getGrid(),i);
+        }
 
-    @Test
-    public void isGameWonYes2() {
-        Game game = new Game();
-        String[] row2 = {"O", "O", "O"};
-        List<String[]> lines = Arrays.asList(game.getPossibleWinLines().get(0), row2);
-
-        assertEquals(true, game.isGameWon(lines));
+        assertEquals(true, game.isGameWon(game.getGrid()));
     }
 
     @Test
     public void isGameWonNo() {
         Game game = new Game();
-        String[] row1 = {" ", " ", " "};
-        String[] row2 = {" ", " ", " "};
-        List<String[]> lines = Arrays.asList(row1, row2);
 
-        assertEquals(false, game.isGameWon(lines));
+        assertEquals(false, game.isGameWon(game.getGrid()));
     }
 
     @Test

@@ -16,35 +16,36 @@ public class GameRunner {
                 runTurn(game.getActivePlayer());
                 game.alternatePlayer();
             }
-        } else {
-            while (!game.isBoardFull()) {
-                cli.displayBoard(game.getSquares());
-                cli.askInput(game.getPlayerOne());
-                String input = cli.takeInput();
-                int squareNumber = game.convertInputToSquareNumber(input);
-                game.setSquareMark(squareNumber, "X");
-                if (squareNumber + 1 < game.getSquares().length) game.setSquareMark(squareNumber + 1, "O");
-            }
-            cli.displayBoard(game.getSquares());
         }
+//        else {
+//            while (!game.isBoardFull()) {
+//                cli.displayBoard(game.getSquares());
+//                cli.askInput(game.getPlayerOne());
+//                String input = cli.takeInput();
+//                int squareNumber = game.convertInputToSquareNumber(input);
+//                game.setSquareMark(squareNumber, "X");
+//                if (squareNumber + 1 < game.getSquares().length) game.setSquareMark(squareNumber + 1, "O");
+//            }
+//            cli.displayBoard(game.getSquares());
+//        }
     }
 
     public boolean gameOngoing() {
-        return !game.isBoardFull() && !game.isGameWon(game.getPossibleWinLines());
+        return !game.isBoardFull(game.getGrid()) && !game.isGameWon(game.getGrid());
     }
 
     public void runTurn(Player activePlayer) {
-        cli.displayBoard(game.getSquares());
+        cli.displayBoard(game.getGrid().getSquares());
         String input = cli.askAndTakeInput(activePlayer);
         int squareNumber = game.convertInputToSquareNumber(input);
-        game.markSquare(activePlayer, squareNumber);
+        game.markSquare(activePlayer, game.getGrid(), squareNumber);
         runGameWonIfWon(activePlayer);
     }
 
     public void runGameWonIfWon(Player activePlayer) {
-        if (game.isGameWon(game.getPossibleWinLines())) {
+        if (game.isGameWon(game.getGrid())) {
             cli.announceWinner(activePlayer);
-            cli.displayBoard(game.getSquares());
+            cli.displayBoard(game.getGrid().getSquares());
         }
     }
 }

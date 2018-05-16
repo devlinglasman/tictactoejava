@@ -17,9 +17,9 @@ public class GameRunnerTest {
         Game game = new Game();
         GameRunner gameRunner = new GameRunner(game);
 
-        game.setSquareMark(0,"X");
-        game.setSquareMark(1,"X");
-        game.setSquareMark(2,"X");
+        for (int i = 0; i < 3; i++) {
+            game.markSquare(game.getPlayerOne(),game.getGrid(),i);
+        }
 
         assertEquals(false, gameRunner.gameOngoing());
     }
