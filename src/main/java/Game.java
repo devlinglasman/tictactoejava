@@ -10,7 +10,7 @@ public class Game {
        return Integer.parseInt(input) - 1;
     }
 
-    public void setSquareToX(int input) {
+    public void setSquareToXMark(int input) {
         squares[input] = "X";
     }
 

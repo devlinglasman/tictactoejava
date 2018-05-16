@@ -10,7 +10,7 @@ public class CliTest {
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
 
-        cli.displayBoard();
+        cli.showBoard();
         assertEquals("[ ][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
     }
 
@@ -20,8 +20,8 @@ public class CliTest {
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
 
-        game.setSquareToX(0);
-        cli.displayBoard();
+        game.setSquareToXMark(0);
+        cli.showBoard();
 
         assertEquals("[X][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
     }
@@ -32,7 +32,7 @@ public class CliTest {
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print, game);
 
-        cli.askInput();
+        cli.askForInput();
         assertEquals("\nHi! Please select a square from 1-9\n", ioHelper.output());
     }
 

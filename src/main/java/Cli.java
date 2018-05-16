@@ -15,7 +15,7 @@ class Cli {
         this.game = game;
     }
 
-    public void displayBoard() {
+    public void showBoard() {
         ArrayList<String> boardConglomerator = new ArrayList<>();
         for (String square : game.getSquares()) {
             boardConglomerator.add("[");
@@ -33,7 +33,7 @@ class Cli {
         out.print(boardFinal + "\n");
     }
 
-    public void askInput() {
+    public void askForInput() {
         out.print("\nHi! Please select a square from 1-9\n");
     }
 
