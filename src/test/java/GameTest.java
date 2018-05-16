@@ -15,7 +15,7 @@ public class GameTest {
     public void setSquareToXTest() {
         Game game = new Game();
 
-        game.setSquareToX(0);
+        game.setSquareToXMark(0);
 
         assertEquals("X",game.getSquares()[0]);
     }
@@ -34,7 +34,7 @@ public class GameTest {
         Game game = new Game();
 
         for (int i = 0; i < game.getSquares().length; i++) {
-           game.setSquareToX(i);
+           game.setSquareToXMark(i);
         }
 
         assertEquals(true, game.isBoardFull());

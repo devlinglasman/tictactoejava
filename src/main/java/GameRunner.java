@@ -11,14 +11,14 @@ public class GameRunner {
             System.out.println("Human");
         } else {
             while (!game.isBoardFull()) {
-                cli.displayBoard();
-                cli.askInput();
+                cli.showBoard();
+                cli.askForInput();
                 String input = cli.takeInput();
                 int squareNumber = game.convertInputToSquareNumber(input);
-                game.setSquareToX(squareNumber);
+                game.setSquareToXMark(squareNumber);
                 if (squareNumber + 1 < game.getSquares().length) game.setSquareToO(squareNumber + 1);
             }
-            cli.displayBoard();
+            cli.showBoard();
         }
     }
 }
