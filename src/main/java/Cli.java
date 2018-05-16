@@ -16,12 +16,10 @@ class Cli {
     public void displayBoard(String[] squares) {
         ArrayList<String> boardConglomerator = new ArrayList<>();
         for (String square : squares) {
-            boardConglomerator.add("[");
-            boardConglomerator.add(square);
-            boardConglomerator.add("]");
+            boardConglomerator.add("[" + square + "]");
         }
-        boardConglomerator.add(9,"\n");
-        boardConglomerator.add(19,"\n");
+        boardConglomerator.add(3,"\n");
+        boardConglomerator.add(7,"\n");
 
         StringBuilder boardFinal = new StringBuilder();
 

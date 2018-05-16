@@ -12,10 +12,10 @@ public class GameRunner {
         String choice = cli.takeInput();
 
         if (choice.equals("1")) {
-            int counter = 1;
+            boolean isItPlayerOne = true;
             while (gameOngoing()) {
-                runTurn(findActivePlayer(counter));
-                counter = nextCounter(counter);
+                runTurn(findActivePlayer(isItPlayerOne));
+                isItPlayerOne = !isItPlayerOne;
             }
         } else {
             while (!game.isBoardFull()) {
@@ -30,19 +30,13 @@ public class GameRunner {
         }
     }
 
-    public int nextCounter(int counter) {
-        counter = counter % 2;
-        counter++;
-        return counter;
-    }
-
     public boolean gameOngoing() {
         return !game.isBoardFull() && !game.isGameWon(game.getPossibleWinLines());
     }
 
-    public Player findActivePlayer(int counter) {
+    public Player findActivePlayer(boolean isItPlayerOne) {
         Player activePlayer = game.getPlayerOne();
-        if (counter != 1) activePlayer = game.getPlayerTwo();
+        if (!isItPlayerOne) activePlayer = game.getPlayerTwo();
         return activePlayer;
     }
 

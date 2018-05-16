@@ -5,27 +5,11 @@ import static org.junit.Assert.*;
 public class GameRunnerTest {
 
     @Test
-    public void nextCounter1() {
-        Game game = new Game();
-        GameRunner gameRunner = new GameRunner(game);
-
-        assertEquals(2, gameRunner.nextCounter(1));
-    }
-
-    @Test
-    public void nextCounter2() {
-        Game game = new Game();
-        GameRunner gameRunner = new GameRunner(game);
-
-        assertEquals(1, gameRunner.nextCounter(2));
-    }
-
-    @Test
     public void findActivePlayer1() {
         Game game = new Game();
         GameRunner gameRunner = new GameRunner(game);
 
-        assertEquals(game.getPlayerOne(), gameRunner.findActivePlayer(1));
+        assertEquals(game.getPlayerOne(), gameRunner.findActivePlayer(true));
     }
 
     @Test
@@ -33,7 +17,7 @@ public class GameRunnerTest {
         Game game = new Game();
         GameRunner gameRunner = new GameRunner(game);
 
-        assertEquals(game.getPlayerTwo(), gameRunner.findActivePlayer(2));
+        assertEquals(game.getPlayerTwo(), gameRunner.findActivePlayer(false));
     }
 
     @Test
