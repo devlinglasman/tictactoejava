@@ -1,6 +1,7 @@
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 class Cli {
@@ -13,6 +14,41 @@ class Cli {
         this.scanner = new Scanner(in);
         this.out = out;
         this.gameRunner = gameRunner;
+    }
+
+    public void chooseGame() {
+       askGameMode();
+       String choice = takeInput();
+      if (choice.equals("1")) {
+          runComputerGame();
+      } else {
+          runHumanGame();
+      }
+    }
+
+    public void runComputerGame() {
+        while (gameRunner.gameOngoing()) {
+            gameRunner.alternatePlayer();
+            if (gameRunner.getActivePlayer() == Player.PLAYERONE) {
+                displayGrid(gameRunner.getGrid().getSquares());
+                String input = askAndTakeInput(gameRunner.getActivePlayer());
+                int squareNumber = gameRunner.convertInputToSquareNumber(input);
+                gameRunner.getGrid().markSquare(squareNumber, gameRunner.getActivePlayer().getMark());
+                if (gameRunner.isGameWon()) {
+                    announceWinner(gameRunner.getActivePlayer());
+                    displayGrid(gameRunner.getGrid().getSquares());
+                }
+            } else {
+                displayGrid(gameRunner.getGrid().getSquares());
+                Random rand = new Random();
+                int squareNumber = rand.nextInt(8);
+                gameRunner.getGrid().markSquare(squareNumber, gameRunner.getActivePlayer().getMark());
+                if (gameRunner.isGameWon()) {
+                    announceWinner(gameRunner.getActivePlayer());
+                    displayGrid(gameRunner.getGrid().getSquares());
+                }
+            }
+        }
     }
 
     public void runHumanGame() {
@@ -61,7 +97,7 @@ class Cli {
 
     public void askGameMode() {
         out.print("\nHi! please enter '1' to " +
-                "play human-vs-human or '2' to play against the computer.\n");
+                "play against the computer or '2' to play human-vs-human.\n");
     }
 
     public void announceWinner(Player activePlayer) {

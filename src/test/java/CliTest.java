@@ -64,8 +64,8 @@ public class CliTest {
         Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
 
         cli.askGameMode();
-        assertEquals("\nHi! please enter '1' to play " +
-                "human-vs-human or '2' to play against the computer.\n", ioHelper.output());
+        assertEquals("\nHi! please enter '1' to " +
+                "play against the computer or '2' to play human-vs-human.\n", ioHelper.output());
     }
 
     @Test
