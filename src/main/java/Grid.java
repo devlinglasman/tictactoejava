@@ -26,7 +26,7 @@ public class Grid {
         squares[squareNumber] = mark;
     }
 
-    public boolean isBoardFull() {
+    public boolean isGridFull() {
         for (String square : squares) {
             if (square.equals(" ")) return false;
         }

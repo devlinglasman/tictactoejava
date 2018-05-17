@@ -13,20 +13,20 @@ class Cli {
         this.out = out;
     }
 
-    public void displayBoard(String[] squares) {
-        ArrayList<String> boardConglomerator = new ArrayList<>();
+    public void displayGrid(String[] squares) {
+        ArrayList<String> gridConglomerator = new ArrayList<>();
         for (String square : squares) {
-            boardConglomerator.add("[" + square + "]");
+            gridConglomerator.add("[" + square + "]");
         }
-        boardConglomerator.add(3,"\n");
-        boardConglomerator.add(7,"\n");
+        gridConglomerator.add(3,"\n");
+        gridConglomerator.add(7,"\n");
 
-        StringBuilder boardFinal = new StringBuilder();
+        StringBuilder gridFinal = new StringBuilder();
 
-        for (String s: boardConglomerator) {
-            boardFinal.append(s);
+        for (String s: gridConglomerator) {
+            gridFinal.append(s);
         }
-        out.print(boardFinal + "\n");
+        out.print(gridFinal + "\n");
     }
 
     public String askAndTakeInput(Player activePlayer){

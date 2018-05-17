@@ -5,23 +5,23 @@ import static org.junit.Assert.assertEquals;
 public class CliTest {
 
     @Test
-    public void displayBoard() {
+    public void displayGrid() {
         Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
-        cli.displayBoard(game.getGrid().getSquares());
+        cli.displayGrid(game.getGrid().getSquares());
         assertEquals("[ ][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
     }
 
     @Test
-    public void displayBoard2() {
+    public void displayGrid2() {
         Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
         game.markSquare(game.getPlayerOne(),game.getGrid(),0);
-        cli.displayBoard(game.getGrid().getSquares());
+        cli.displayGrid(game.getGrid().getSquares());
 
         assertEquals("[X][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
     }

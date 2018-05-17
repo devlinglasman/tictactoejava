@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.List;
 
 public class Game {
 
@@ -20,8 +19,8 @@ public class Game {
         }
     }
 
-    public boolean isBoardFull(Grid grid) {
-        return grid.isBoardFull();
+    public boolean isGridFull(Grid grid) {
+        return grid.isGridFull();
     }
 
     public boolean isGameWon(Grid grid) {

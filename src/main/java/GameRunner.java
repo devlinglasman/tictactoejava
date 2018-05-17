@@ -18,24 +18,24 @@ public class GameRunner {
             }
         }
 //        else {
-//            while (!game.isBoardFull()) {
-//                cli.displayBoard(game.getSquares());
+//            while (!game.isGridFull()) {
+//                cli.displayGrid(game.getSquares());
 //                cli.askInput(game.getPlayerOne());
 //                String input = cli.takeInput();
 //                int squareNumber = game.convertInputToSquareNumber(input);
 //                game.setSquareMark(squareNumber, "X");
 //                if (squareNumber + 1 < game.getSquares().length) game.setSquareMark(squareNumber + 1, "O");
 //            }
-//            cli.displayBoard(game.getSquares());
+//            cli.displayGrid(game.getSquares());
 //        }
     }
 
     public boolean gameOngoing() {
-        return !game.isBoardFull(game.getGrid()) && !game.isGameWon(game.getGrid());
+        return !game.isGridFull(game.getGrid()) && !game.isGameWon(game.getGrid());
     }
 
     public void runTurn(Player activePlayer) {
-        cli.displayBoard(game.getGrid().getSquares());
+        cli.displayGrid(game.getGrid().getSquares());
         String input = cli.askAndTakeInput(activePlayer);
         int squareNumber = game.convertInputToSquareNumber(input);
         game.markSquare(activePlayer, game.getGrid(), squareNumber);
@@ -45,7 +45,7 @@ public class GameRunner {
     public void runGameWonIfWon(Player activePlayer) {
         if (game.isGameWon(game.getGrid())) {
             cli.announceWinner(activePlayer);
-            cli.displayBoard(game.getGrid().getSquares());
+            cli.displayGrid(game.getGrid().getSquares());
         }
     }
 }

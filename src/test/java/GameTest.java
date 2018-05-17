@@ -1,8 +1,5 @@
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 
 public class GameTest {
@@ -33,21 +30,21 @@ public class GameTest {
     }
 
     @Test
-    public void isBoardFullYes() {
+    public void isGridFullYes() {
         Game game = new Game();
 
         for (int i = 0; i < game.getGrid().getSquares().length; i++) {
             game.markSquare(game.getPlayerOne(),game.getGrid(),i);
         }
 
-        assertEquals(true, game.isBoardFull(game.getGrid()));
+        assertEquals(true, game.isGridFull(game.getGrid()));
     }
 
     @Test
-    public void isBoardFullNo() {
+    public void isGridFullNo() {
         Game game = new Game();
 
-        assertEquals(false, game.isBoardFull(game.getGrid()));
+        assertEquals(false, game.isGridFull(game.getGrid()));
     }
 
     @Test
