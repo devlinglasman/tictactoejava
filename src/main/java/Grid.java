@@ -1,11 +1,20 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Grid {
 
-    private String[] squares = new String[]{" ", " ", " ", " ", " ", " ", " ", " ", " "};
+    private ArrayList<String> squares = createGrid();
 
-    private List<String[]> possibleWinLines() {
+    public ArrayList<String> createGrid() {
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            result.add(Mark.unmarkedSquare.getStringRepresentation());
+        }
+        return (ArrayList<String>) result;
+    }
+
+    private List<ArrayList<String>> possibleWinLines() {
         return Arrays.asList(
                 group3Squares(0, 1, 2),
                 group3Squares(3, 4, 5),
@@ -18,26 +27,30 @@ public class Grid {
         );
     }
 
-    private String[] group3Squares(int a, int b, int c) {
-        return new String[]{squares[a], squares[b], squares[c]};
+    private ArrayList<String> group3Squares(int a, int b, int c) {
+        List<String> result = new ArrayList<>();
+        result.add(squares.get(a));
+        result.add(squares.get(b));
+        result.add(squares.get(c));
+        return (ArrayList<String>) result;
     }
 
-    public void markSquare(int squareNumber, String mark) {
-        squares[squareNumber] = mark;
+    public void markSquare(int squareNumber, Mark mark) {
+        squares.set(squareNumber, mark.getStringRepresentation());
     }
 
     public boolean isGridFull() {
         for (String square : squares) {
-            if (square.equals(" ")) return false;
+            if (square.contains(Mark.unmarkedSquare.getStringRepresentation())) return false;
         }
         return true;
     }
 
-    public List<String[]> getPossibleWinLines() {
+    public List<ArrayList<String>> getPossibleWinLines() {
         return possibleWinLines();
     }
 
-    public String[] getSquares() {
+    public ArrayList<String> getSquares() {
         return squares;
     }
 

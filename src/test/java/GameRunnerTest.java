@@ -5,22 +5,28 @@ import static org.junit.Assert.*;
 public class GameRunnerTest {
 
     @Test
-    public void gameOngoingYes() {
-        Game game = new Game();
-        GameRunner gameRunner = new GameRunner(game);
+    public void convertInputToSquareNumber() {
+        GameRunner gameRunner = new GameRunner();
 
-        assertEquals(true, gameRunner.gameOngoing());
+        assertEquals(0, gameRunner.convertInputToSquareNumber("1"));
     }
 
     @Test
-    public void gameOngoingNo() {
-        Game game = new Game();
-        GameRunner gameRunner = new GameRunner(game);
+    public void alternatePlayer1() {
+        GameRunner gameRunner = new GameRunner();
 
-        for (int i = 0; i < 3; i++) {
-            game.markSquare(game.getPlayerOne(),game.getGrid(),i);
-        }
+        gameRunner.alternatePlayer();
 
-        assertEquals(false, gameRunner.gameOngoing());
+        assertEquals(Player.PLAYERTWO,gameRunner.getActivePlayer());
+    }
+
+    @Test
+    public void alternatePlayer2() {
+        GameRunner gameRunner = new GameRunner();
+
+        gameRunner.alternatePlayer();
+        gameRunner.alternatePlayer();
+
+        assertEquals(Player.PLAYERONE,gameRunner.getActivePlayer());
     }
 }

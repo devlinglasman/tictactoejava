@@ -1,15 +1,21 @@
 public enum Player {
 
-    PLAYERONE("Player One"),
-    PLAYERTWO("Player Two");
+    PLAYERONE("Player One", Mark.playerOneMarkedSquare),
+    PLAYERTWO("Player Two", Mark.playerTwoMarkedSquare);
 
     private final String name;
+    private final Mark mark;
 
-    private Player(String name) {
+    Player(String name, Mark mark) {
         this.name = name;
+        this.mark = mark;
     }
 
     public String getName() {
         return name;
+    }
+
+    public Mark getMark() {
+        return mark;
     }
 }

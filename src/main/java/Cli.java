@@ -13,7 +13,7 @@ class Cli {
         this.out = out;
     }
 
-    public void displayGrid(String[] squares) {
+    public void displayGrid(ArrayList<String> squares) {
         ArrayList<String> gridConglomerator = new ArrayList<>();
         for (String square : squares) {
             gridConglomerator.add("[" + square + "]");

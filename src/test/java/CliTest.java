@@ -1,54 +1,60 @@
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 public class CliTest {
 
     @Test
     public void displayGrid() {
-        Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print);
+        ArrayList<String> squares = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+           squares.add(" ");
+        }
 
-        cli.displayGrid(game.getGrid().getSquares());
+        cli.displayGrid(squares);
         assertEquals("[ ][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
     }
 
     @Test
     public void displayGrid2() {
-        Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print);
+        ArrayList<String> squares = new ArrayList<>();
+        squares.add("X");
+        for (int i = 0; i < 8; i++) {
+            squares.add(" ");
+        }
 
-        game.markSquare(game.getPlayerOne(),game.getGrid(),0);
-        cli.displayGrid(game.getGrid().getSquares());
+        cli.displayGrid(squares);
 
         assertEquals("[X][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
     }
 
     @Test
     public void askInputPlayerOne() {
-        Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
-        cli.askInput(game.getPlayerOne());
+        cli.askInput(Player.PLAYERONE);
         assertEquals("\nHi Player One! Please select a square from 1-9\n", ioHelper.output());
     }
 
     @Test
     public void askInputPlayerTwo() {
-        Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
-        cli.askInput(game.getPlayerTwo());
+        cli.askInput(Player.PLAYERTWO);
         assertEquals("\nHi Player Two! Please select a square from 1-9\n", ioHelper.output());
     }
 
     @Test
     public void askGameMode() {
-        Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
@@ -59,22 +65,20 @@ public class CliTest {
 
     @Test
     public void announceWinner1() {
-        Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
-        cli.announceWinner(game.getPlayerOne());
+        cli.announceWinner(Player.PLAYERONE);
 
         assertEquals("Congratulations Player One - You're the winner!\n", ioHelper.output());
     }
 
     @Test
     public void announceWinner2() {
-        Game game = new Game();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print);
 
-        cli.announceWinner(game.getPlayerTwo());
+        cli.announceWinner(Player.PLAYERTWO);
 
         assertEquals("Congratulations Player Two - You're the winner!\n", ioHelper.output());
     }
