@@ -17,54 +17,54 @@ class Cli {
     }
 
     public void chooseGame() {
-       askGameMode();
-       String choice = takeInput();
-      if (choice.equals("1")) {
-          runComputerGame();
-      } else {
-          runHumanGame();
-      }
+        askGameMode();
+        String choice = takeInput();
+        if (choice.equals("1")) {
+            runComputerGame();
+        } else {
+            runHumanGame();
+        }
     }
 
     public void runComputerGame() {
+        displayGrid(gameRunner.getGrid().getSquares());
         while (gameRunner.gameOngoing()) {
-            gameRunner.alternatePlayer();
             if (gameRunner.getActivePlayer() == Player.PLAYERONE) {
-                displayGrid(gameRunner.getGrid().getSquares());
-                String input = askAndTakeInput(gameRunner.getActivePlayer());
-                int squareNumber = gameRunner.convertInputToSquareNumber(input);
-                gameRunner.getGrid().markSquare(squareNumber, gameRunner.getActivePlayer().getMark());
-                if (gameRunner.isGameWon()) {
-                    announceWinner(gameRunner.getActivePlayer());
-                    displayGrid(gameRunner.getGrid().getSquares());
-                }
+                runHumanTurn();
             } else {
-                displayGrid(gameRunner.getGrid().getSquares());
-                Random rand = new Random();
-                int squareNumber = rand.nextInt(8);
-                gameRunner.getGrid().markSquare(squareNumber, gameRunner.getActivePlayer().getMark());
-                if (gameRunner.isGameWon()) {
-                    announceWinner(gameRunner.getActivePlayer());
-                    displayGrid(gameRunner.getGrid().getSquares());
-                }
+                runComputerTurn();
             }
+            if (gameRunner.isGameWon()) {
+                announceWinner(gameRunner.getActivePlayer());
+            }
+            displayGrid(gameRunner.getGrid().getSquares());
+            gameRunner.alternatePlayer();
         }
+    }
+
+    private void runComputerTurn() {
+        announceComputerTurn();
+        Random rand = new Random();
+        gameRunner.getGrid().markSquare(rand.nextInt(8), gameRunner.getActivePlayer().getMark());
     }
 
     public void runHumanGame() {
+        displayGrid(gameRunner.getGrid().getSquares());
         while (gameRunner.gameOngoing()) {
-            gameRunner.alternatePlayer();
-            displayGrid(gameRunner.getGrid().getSquares());
-            String input = askAndTakeInput(gameRunner.getActivePlayer());
-            int squareNumber = gameRunner.convertInputToSquareNumber(input);
-            gameRunner.getGrid().markSquare(squareNumber,gameRunner.getActivePlayer().getMark());
+            runHumanTurn();
             if (gameRunner.isGameWon()) {
                 announceWinner(gameRunner.getActivePlayer());
-                displayGrid(gameRunner.getGrid().getSquares());
             }
+            displayGrid(gameRunner.getGrid().getSquares());
+            gameRunner.alternatePlayer();
         }
     }
 
+    public void runHumanTurn() {
+        String input = askAndTakeInput(gameRunner.getActivePlayer());
+        int squareNumber = gameRunner.convertInputToSquareNumber(input);
+        gameRunner.getGrid().markSquare(squareNumber, gameRunner.getActivePlayer().getMark());
+    }
 
     public void displayGrid(ArrayList<String> squares) {
         ArrayList<String> gridConglomerator = new ArrayList<>();
@@ -102,6 +102,10 @@ class Cli {
 
     public void announceWinner(Player activePlayer) {
         out.print("Congratulations " + activePlayer.getName() + " - You're the winner!\n");
+    }
+
+    public void announceComputerTurn() {
+        out.print("\nComputer takes turn...\n");
     }
 }
 

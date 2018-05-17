@@ -12,6 +12,24 @@ public class GameRunnerTest {
     }
 
     @Test
+    public void gameOngoingYes() {
+        GameRunner gameRunner = new GameRunner();
+
+        assertTrue(gameRunner.gameOngoing());
+    }
+
+    @Test
+    public void gameOngoingNo() {
+        GameRunner gameRunner = new GameRunner();
+
+        for (int i = 0; i < 3; i++) {
+            gameRunner.getGrid().markSquare(i,Mark.playerOneMarkedSquare);
+        }
+
+        assertFalse(gameRunner.gameOngoing());
+    }
+
+    @Test
     public void alternatePlayer1() {
         GameRunner gameRunner = new GameRunner();
 

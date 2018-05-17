@@ -8,6 +8,26 @@ import static org.junit.Assert.*;
 public class MovesEvaluatorTest {
 
     @Test
+    public void gameIsOverNo() {
+        MovesEvaluator movesEvaluator = new MovesEvaluator();
+        Grid grid = new Grid();
+
+        assertFalse(movesEvaluator.gameIsOver(grid));
+    }
+
+    @Test
+    public void gameIsOverYes() {
+        MovesEvaluator movesEvaluator = new MovesEvaluator();
+        Grid grid = new Grid();
+
+        for (int i = 0; i < grid.getSquares().size(); i++) {
+            grid.markSquare(i, Mark.playerOneMarkedSquare);
+        }
+
+        assertTrue(movesEvaluator.gameIsOver(grid));
+    }
+
+    @Test
     public void isGridFullYes() {
         MovesEvaluator movesEvaluator = new MovesEvaluator();
         Grid grid = new Grid();

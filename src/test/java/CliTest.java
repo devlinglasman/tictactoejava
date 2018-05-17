@@ -1,7 +1,6 @@
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -88,5 +87,16 @@ public class CliTest {
         cli.announceWinner(Player.PLAYERTWO);
 
         assertEquals("Congratulations Player Two - You're the winner!\n", ioHelper.output());
+    }
+
+    @Test
+    public void computerTakesTurn() {
+        GameRunner gamerunner = new GameRunner();
+        IOHelper ioHelper = new IOHelper("");
+        Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
+
+        cli.announceComputerTurn();
+
+        assertEquals("\nComputer takes turn...\n", ioHelper.output());
     }
 }

@@ -1,35 +1,19 @@
 public class GameRunner {
 
-    private Player activePlayer = Player.PLAYERTWO;
+    private Player activePlayer = Player.PLAYERONE;
     private Grid grid = new Grid();
     private MovesEvaluator movesEvaluator = new MovesEvaluator();
-
-    public boolean gameOngoing() {
-        return !movesEvaluator.gameIsOver(grid);
-    }
-//        else {
-//            while (!movesEvaluator.isGridFull()) {
-//                cli.displayGrid(movesEvaluator.getSquares());
-//                cli.askInput(movesEvaluator.getPlayerOne());
-//                String input = cli.takeInput();
-//                int squareNumber = movesEvaluator.convertInputToSquareNumber(input);
-//                movesEvaluator.setSquareMark(squareNumber, "X");
-//                if (squareNumber + 1 < movesEvaluator.getSquares().length) movesEvaluator.setSquareMark(squareNumber + 1, "O");
-//            }
-//            cli.displayGrid(movesEvaluator.getSquares());
-//        }
-
 
     public int convertInputToSquareNumber(String input) {
         return Integer.parseInt(input) - 1;
     }
 
-    public boolean isGameWon() {
-        return movesEvaluator.isGameWon(grid);
+    public boolean gameOngoing() {
+        return !movesEvaluator.gameIsOver(grid);
     }
 
-    public Player getActivePlayer() {
-        return activePlayer;
+    public boolean isGameWon() {
+        return movesEvaluator.isGameWon(grid);
     }
 
     public void alternatePlayer() {
@@ -41,8 +25,8 @@ public class GameRunner {
         return grid;
     }
 
-    public MovesEvaluator getMovesEvaluator() {
-        return movesEvaluator;
+    public Player getActivePlayer() {
+        return activePlayer;
     }
 
 }
