@@ -17,7 +17,7 @@ public class GameRunnerTest {
 
         gameRunner.alternatePlayer();
 
-        assertEquals(Player.PLAYERTWO,gameRunner.getActivePlayer());
+        assertEquals(Player.PLAYERONE,gameRunner.getActivePlayer());
     }
 
     @Test
@@ -27,6 +27,6 @@ public class GameRunnerTest {
         gameRunner.alternatePlayer();
         gameRunner.alternatePlayer();
 
-        assertEquals(Player.PLAYERONE,gameRunner.getActivePlayer());
+        assertEquals(Player.PLAYERTWO,gameRunner.getActivePlayer());
     }
 }

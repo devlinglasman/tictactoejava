@@ -1,20 +1,12 @@
 public class GameRunner {
 
-    private Player activePlayer = Player.PLAYERONE;
+    private Player activePlayer = Player.PLAYERTWO;
     private Grid grid = new Grid();
     private MovesEvaluator movesEvaluator = new MovesEvaluator();
-    private Cli cli = new Cli(System.in, System.out);
 
-    public void runGame() {
-        cli.askGameMode();
-        String choice = cli.takeInput();
-
-        if (choice.equals("1")) {
-            while (!movesEvaluator.gameIsOver(grid)) {
-                runTurn(activePlayer);
-                alternatePlayer();
-            }
-        }
+    public boolean gameOngoing() {
+        return !movesEvaluator.gameIsOver(grid);
+    }
 //        else {
 //            while (!movesEvaluator.isGridFull()) {
 //                cli.displayGrid(movesEvaluator.getSquares());
@@ -26,26 +18,14 @@ public class GameRunner {
 //            }
 //            cli.displayGrid(movesEvaluator.getSquares());
 //        }
-    }
 
-
-    public void runTurn(Player activePlayer) {
-        cli.displayGrid(grid.getSquares());
-        String input = cli.askAndTakeInput(activePlayer);
-        int squareNumber = convertInputToSquareNumber(input);
-        grid.markSquare(squareNumber,activePlayer.getMark());
-        isGameWon(activePlayer);
-    }
 
     public int convertInputToSquareNumber(String input) {
         return Integer.parseInt(input) - 1;
     }
 
-    public void isGameWon(Player activePlayer) {
-        if (movesEvaluator.isGameWon(grid)) {
-            cli.announceWinner(activePlayer);
-            cli.displayGrid(grid.getSquares());
-        }
+    public boolean isGameWon() {
+        return movesEvaluator.isGameWon(grid);
     }
 
     public Player getActivePlayer() {
@@ -55,6 +35,14 @@ public class GameRunner {
     public void alternatePlayer() {
         if (getActivePlayer() == Player.PLAYERONE) activePlayer = Player.PLAYERTWO;
         else activePlayer = Player.PLAYERONE;
+    }
+
+    public Grid getGrid() {
+        return grid;
+    }
+
+    public MovesEvaluator getMovesEvaluator() {
+        return movesEvaluator;
     }
 
 }

@@ -7,31 +7,48 @@ class Cli {
 
     private final Scanner scanner;
     private final PrintStream out;
+    private GameRunner gameRunner;
 
-    Cli(InputStream in, PrintStream out) {
+    Cli(InputStream in, PrintStream out, GameRunner gameRunner) {
         this.scanner = new Scanner(in);
         this.out = out;
+        this.gameRunner = gameRunner;
     }
+
+    public void runHumanGame() {
+        while (gameRunner.gameOngoing()) {
+            gameRunner.alternatePlayer();
+            displayGrid(gameRunner.getGrid().getSquares());
+            String input = askAndTakeInput(gameRunner.getActivePlayer());
+            int squareNumber = gameRunner.convertInputToSquareNumber(input);
+            gameRunner.getGrid().markSquare(squareNumber,gameRunner.getActivePlayer().getMark());
+            if (gameRunner.isGameWon()) {
+                announceWinner(gameRunner.getActivePlayer());
+                displayGrid(gameRunner.getGrid().getSquares());
+            }
+        }
+    }
+
 
     public void displayGrid(ArrayList<String> squares) {
         ArrayList<String> gridConglomerator = new ArrayList<>();
         for (String square : squares) {
             gridConglomerator.add("[" + square + "]");
         }
-        gridConglomerator.add(3,"\n");
-        gridConglomerator.add(7,"\n");
+        gridConglomerator.add(3, "\n");
+        gridConglomerator.add(7, "\n");
 
         StringBuilder gridFinal = new StringBuilder();
 
-        for (String s: gridConglomerator) {
+        for (String s : gridConglomerator) {
             gridFinal.append(s);
         }
         out.print(gridFinal + "\n");
     }
 
-    public String askAndTakeInput(Player activePlayer){
+    public String askAndTakeInput(Player activePlayer) {
         askInput(activePlayer);
-       return takeInput();
+        return takeInput();
     }
 
     public void askInput(Player activePlayer) {
