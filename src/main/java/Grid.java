@@ -6,6 +6,46 @@ public class Grid {
 
     private ArrayList<String> squares = createGrid();
 
+    public boolean isMoveLegal(int squareNumber) {
+        if (getSquares().get(squareNumber).equals(" ")) return true;
+        else return false;
+    }
+
+    public void markSquare(int squareNumber, Mark mark) {
+        squares.set(squareNumber, mark.getStringRepresentation());
+    }
+
+    public boolean isFull() {
+        for (String square : squares) {
+            if (square.contains(Mark.unmarkedSquare.getStringRepresentation())) return false;
+        }
+        return true;
+    }
+
+    public boolean winningLineExistsInGrid() {
+        for (ArrayList<String> line : getPossibleWinLines()) {
+            if (lineIsWinner(line)) return true;
+        }
+        return false;
+    }
+
+    public boolean lineIsWinner(ArrayList<String> line) {
+        if (line.contains(Mark.unmarkedSquare.getStringRepresentation())) return false;
+        String first = line.get(0);
+        for (String s : line) {
+            if (!s.equals(first)) return false;
+        }
+        return true;
+    }
+
+    public List<ArrayList<String>> getPossibleWinLines() {
+        return possibleWinLines();
+    }
+
+    public ArrayList<String> getSquares() {
+        return squares;
+    }
+
     public ArrayList<String> createGrid() {
         List<String> result = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
@@ -33,25 +73,6 @@ public class Grid {
         result.add(squares.get(b));
         result.add(squares.get(c));
         return (ArrayList<String>) result;
-    }
-
-    public void markSquare(int squareNumber, Mark mark) {
-        squares.set(squareNumber, mark.getStringRepresentation());
-    }
-
-    public boolean isGridFull() {
-        for (String square : squares) {
-            if (square.contains(Mark.unmarkedSquare.getStringRepresentation())) return false;
-        }
-        return true;
-    }
-
-    public List<ArrayList<String>> getPossibleWinLines() {
-        return possibleWinLines();
-    }
-
-    public ArrayList<String> getSquares() {
-        return squares;
     }
 
 }

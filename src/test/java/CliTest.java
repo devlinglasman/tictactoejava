@@ -8,7 +8,7 @@ public class CliTest {
 
     @Test
     public void displayGrid() {
-        GameRunner gamerunner = new GameRunner();
+        GameLogic gamerunner = new GameLogic();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
         ArrayList<String> squares = new ArrayList<>();
@@ -22,7 +22,7 @@ public class CliTest {
 
     @Test
     public void displayGrid2() {
-        GameRunner gamerunner = new GameRunner();
+        GameLogic gamerunner = new GameLogic();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
         ArrayList<String> squares = new ArrayList<>();
@@ -38,7 +38,7 @@ public class CliTest {
 
     @Test
     public void askInputPlayerOne() {
-        GameRunner gamerunner = new GameRunner();
+        GameLogic gamerunner = new GameLogic();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
 
@@ -48,7 +48,7 @@ public class CliTest {
 
     @Test
     public void askInputPlayerTwo() {
-        GameRunner gamerunner = new GameRunner();
+        GameLogic gamerunner = new GameLogic();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
 
@@ -58,7 +58,7 @@ public class CliTest {
 
     @Test
     public void askGameMode() {
-        GameRunner gamerunner = new GameRunner();
+        GameLogic gamerunner = new GameLogic();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
 
@@ -69,7 +69,7 @@ public class CliTest {
 
     @Test
     public void announceWinner1() {
-        GameRunner gamerunner = new GameRunner();
+        GameLogic gamerunner = new GameLogic();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
 
@@ -80,7 +80,7 @@ public class CliTest {
 
     @Test
     public void announceWinner2() {
-        GameRunner gamerunner = new GameRunner();
+        GameLogic gamerunner = new GameLogic();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
 
@@ -91,7 +91,7 @@ public class CliTest {
 
     @Test
     public void computerTakesTurn() {
-        GameRunner gamerunner = new GameRunner();
+        GameLogic gamerunner = new GameLogic();
         IOHelper ioHelper = new IOHelper("");
         Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
 

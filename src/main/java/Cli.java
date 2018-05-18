@@ -8,12 +8,12 @@ class Cli {
 
     private final Scanner scanner;
     private final PrintStream out;
-    private GameRunner gameRunner;
+    private GameLogic gameLogic;
 
-    Cli(InputStream in, PrintStream out, GameRunner gameRunner) {
+    Cli(InputStream in, PrintStream out, GameLogic gameLogic) {
         this.scanner = new Scanner(in);
         this.out = out;
-        this.gameRunner = gameRunner;
+        this.gameLogic = gameLogic;
     }
 
     public void chooseGame() {
@@ -27,26 +27,42 @@ class Cli {
     }
 
     public void runComputerGame() {
-        displayGrid(gameRunner.getGrid().getSquares());
-        while (gameRunner.gameOngoing()) {
-            if (gameRunner.getActivePlayer() == Player.PLAYERONE) {
+        displayGrid(gameLogic.getGridSquares());
+        while (gameLogic.gameOngoing()) {
+            if (gameLogic.getActivePlayer() == Player.PLAYERONE) {
                 runHumanTurn();
             } else {
                 runComputerTurn();
             }
-            if (gameRunner.isGameWon()) {
-                announceWinner(gameRunner.getActivePlayer());
+            if (gameLogic.isGameWon()) {
+                announceWinner(gameLogic.getActivePlayer());
             }
-            displayGrid(gameRunner.getGrid().getSquares());
-            gameRunner.alternatePlayer();
+            displayGrid(gameLogic.getGridSquares());
+            gameLogic.alternatePlayer();
         }
     }
 
+    public void runHumanTurn() {
+        int squareNumber = takeLegalInput();
+        gameLogic.markSquare(squareNumber, gameLogic.getActivePlayer().getMark());
+    }
+
+    public int takeLegalInput() {
+        boolean isMoveLegal = false;
+        int potentialInput = 0;
+        while (!isMoveLegal) {
+            potentialInput = inputSelection();
+            isMoveLegal = isMoveLegal(potentialInput);
+        }
+        return potentialInput;
+    }
+
+
     public int inputSelection() {
         int input;
-        if (gameRunner.getActivePlayer() == Player.PLAYERONE) {
-            String inputString = askAndTakeInput(gameRunner.getActivePlayer());
-            input = gameRunner.convertInputToSquareNumber(inputString);
+        if (gameLogic.getActivePlayer() == Player.PLAYERONE) {
+            String inputString = askAndTakeInput(gameLogic.getActivePlayer());
+            input = gameLogic.convertInputToSquareNumber(inputString);
         } else {
             input = computerInputSelection();
         }
@@ -61,41 +77,26 @@ class Cli {
 
 
     private boolean isMoveLegal(int potentialInput) {
-        if (gameRunner.getMovesEvaluator().isLegalMove(gameRunner.getGrid(),potentialInput)) return true;
+        if (gameLogic.isMoveLegal(potentialInput)) return true;
         else return false;
-    }
-
-    public int takeLegalInput() {
-        boolean isMoveLegal = false;
-        int potentialInput = 0;
-        while (!isMoveLegal) {
-           potentialInput = inputSelection();
-           isMoveLegal = isMoveLegal(potentialInput);
-        }
-        return potentialInput;
     }
 
     public void runComputerTurn() {
         int potentialInput = takeLegalInput();
         announceComputerTurn();
-        gameRunner.getGrid().markSquare(potentialInput, gameRunner.getActivePlayer().getMark());
+        gameLogic.markSquare(potentialInput, gameLogic.getActivePlayer().getMark());
     }
 
     public void runHumanGame() {
-        displayGrid(gameRunner.getGrid().getSquares());
-        while (gameRunner.gameOngoing()) {
+        displayGrid(gameLogic.getGridSquares());
+        while (gameLogic.gameOngoing()) {
             runHumanTurn();
-            if (gameRunner.isGameWon()) {
-                announceWinner(gameRunner.getActivePlayer());
+            if (gameLogic.isGameWon()) {
+                announceWinner(gameLogic.getActivePlayer());
             }
-            displayGrid(gameRunner.getGrid().getSquares());
-            gameRunner.alternatePlayer();
+            displayGrid(gameLogic.getGridSquares());
+            gameLogic.alternatePlayer();
         }
-    }
-
-    public void runHumanTurn() {
-        int squareNumber = takeLegalInput();
-        gameRunner.getGrid().markSquare(squareNumber, gameRunner.getActivePlayer().getMark());
     }
 
     public void displayGrid(ArrayList<String> squares) {
