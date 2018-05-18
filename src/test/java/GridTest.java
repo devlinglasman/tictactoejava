@@ -24,6 +24,13 @@ public class GridTest {
     }
 
     @Test
+    public void checkSquareEmptyFirst() {
+        Grid grid = new Grid();
+
+        assertEquals(" ", grid.getSquares().get(0));
+    }
+
+    @Test
     public void markSquareX() {
         Grid grid = new Grid();
 
