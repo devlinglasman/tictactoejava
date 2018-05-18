@@ -42,10 +42,43 @@ class Cli {
         }
     }
 
-    private void runComputerTurn() {
-        announceComputerTurn();
+    public int inputSelection() {
+        int input;
+        if (gameRunner.getActivePlayer() == Player.PLAYERONE) {
+            String inputString = askAndTakeInput(gameRunner.getActivePlayer());
+            input = gameRunner.convertInputToSquareNumber(inputString);
+        } else {
+            input = computerInputSelection();
+        }
+        return input;
+    }
+
+    public int computerInputSelection() {
         Random rand = new Random();
-        gameRunner.getGrid().markSquare(rand.nextInt(8), gameRunner.getActivePlayer().getMark());
+        int potentialInput = rand.nextInt(8);
+        return potentialInput;
+    }
+
+
+    private boolean isMoveLegal(int potentialInput) {
+        if (gameRunner.getMovesEvaluator().isLegalMove(gameRunner.getGrid(),potentialInput)) return true;
+        else return false;
+    }
+
+    public int takeLegalInput() {
+        boolean isMoveLegal = false;
+        int potentialInput = 0;
+        while (!isMoveLegal) {
+           potentialInput = inputSelection();
+           isMoveLegal = isMoveLegal(potentialInput);
+        }
+        return potentialInput;
+    }
+
+    public void runComputerTurn() {
+        int potentialInput = takeLegalInput();
+        announceComputerTurn();
+        gameRunner.getGrid().markSquare(potentialInput, gameRunner.getActivePlayer().getMark());
     }
 
     public void runHumanGame() {
@@ -61,8 +94,7 @@ class Cli {
     }
 
     public void runHumanTurn() {
-        String input = askAndTakeInput(gameRunner.getActivePlayer());
-        int squareNumber = gameRunner.convertInputToSquareNumber(input);
+        int squareNumber = takeLegalInput();
         gameRunner.getGrid().markSquare(squareNumber, gameRunner.getActivePlayer().getMark());
     }
 

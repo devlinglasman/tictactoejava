@@ -7,6 +7,25 @@ import static org.junit.Assert.*;
 
 public class MovesEvaluatorTest {
 
+
+    @Test
+    public void isLegalMoveYes() {
+        MovesEvaluator movesEvaluator = new MovesEvaluator();
+        Grid grid = new Grid();
+
+        assertTrue(movesEvaluator.isLegalMove(grid, 0));
+    }
+
+    @Test
+    public void isLegalMoveNo() {
+        MovesEvaluator movesEvaluator = new MovesEvaluator();
+        Grid grid = new Grid();
+
+        grid.markSquare(0, Mark.playerOneMarkedSquare);
+
+        assertFalse(movesEvaluator.isLegalMove(grid, 0));
+    }
+
     @Test
     public void gameIsOverNo() {
         MovesEvaluator movesEvaluator = new MovesEvaluator();

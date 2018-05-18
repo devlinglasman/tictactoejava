@@ -3,6 +3,11 @@ import java.util.Arrays;
 
 public class MovesEvaluator {
 
+    public boolean isLegalMove(Grid grid, int squareNumber) {
+        if (grid.getSquares().get(squareNumber).equals(" ")) return true;
+        else return false;
+    }
+
     public boolean gameIsOver(Grid grid){
         return isGridFull(grid) || isGameWon(grid);
     }
@@ -26,4 +31,5 @@ public class MovesEvaluator {
         }
         return true;
     }
+
 }

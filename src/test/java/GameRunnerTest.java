@@ -34,6 +34,7 @@ public class GameRunnerTest {
         GameRunner gameRunner = new GameRunner();
 
         gameRunner.alternatePlayer();
+        gameRunner.alternatePlayer();
 
         assertEquals(Player.PLAYERONE,gameRunner.getActivePlayer());
     }
@@ -42,7 +43,6 @@ public class GameRunnerTest {
     public void alternatePlayer2() {
         GameRunner gameRunner = new GameRunner();
 
-        gameRunner.alternatePlayer();
         gameRunner.alternatePlayer();
 
         assertEquals(Player.PLAYERTWO,gameRunner.getActivePlayer());

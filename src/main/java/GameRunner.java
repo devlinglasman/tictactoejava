@@ -29,4 +29,8 @@ public class GameRunner {
         return activePlayer;
     }
 
+    public MovesEvaluator getMovesEvaluator() {
+        return movesEvaluator;
+    }
+
 }
