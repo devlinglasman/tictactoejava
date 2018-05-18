@@ -1,8 +1,27 @@
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 public class GridTest {
+
+    @Test
+    public void isMoveLegalYes() {
+        Grid grid = new Grid();
+
+        assertTrue(grid.isMoveLegal(0));
+    }
+
+    @Test
+    public void isMoveLegalNo() {
+        Grid grid = new Grid();
+
+        grid.markSquare(0, Mark.playerOneMarkedSquare);
+
+        assertFalse(grid.isMoveLegal(0));
+    }
 
     @Test
     public void markSquareX() {
@@ -23,20 +42,57 @@ public class GridTest {
     }
 
     @Test
-    public void isGridFullYes() {
+    public void isFullYes() {
         Grid grid = new Grid();
 
-        for (int i = 0; i < grid.getSquares().size(); i++) {
-           grid.markSquare(i,Mark.playerOneMarkedSquare);
-        }
-
-        assertTrue(grid.isGridFull());
+        assertFalse(grid.isFull());
     }
 
     @Test
-    public void isGridFullNo() {
+    public void isFullNo() {
         Grid grid = new Grid();
 
-        assertFalse(grid.isGridFull());
+        for (int i = 0; i < 9; i++) {
+           grid.markSquare(i,Mark.playerOneMarkedSquare);
+        }
+
+        assertTrue(grid.isFull());
     }
+
+    @Test
+    public void winningLineExistsInGridYes() {
+        Grid grid = new Grid();
+
+        for (int i = 0; i < 3; i++) {
+            grid.markSquare(i, Mark.playerOneMarkedSquare);
+        }
+
+        assertTrue(grid.winningLineExistsInGrid());
+    }
+
+    @Test
+    public void winningLineExistsInGridNo() {
+        Grid grid = new Grid();
+
+        assertFalse(grid.winningLineExistsInGrid());
+    }
+
+    @Test
+    public void lineIsWinnerYes() {
+        Grid grid = new Grid();
+        ArrayList<String> row1 = new ArrayList<String>
+                (Arrays.asList("X", "X", "X"));
+
+        assertTrue(grid.lineIsWinner(row1));
+    }
+
+    @Test
+    public void lineIsWinnerNo() {
+        Grid grid = new Grid();
+        ArrayList<String> row1 = new ArrayList<String>
+                (Arrays.asList(" ", "X", "X"));
+
+        assertFalse(grid.lineIsWinner(row1));
+    }
+
 }

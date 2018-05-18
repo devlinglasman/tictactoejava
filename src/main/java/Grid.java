@@ -7,7 +7,7 @@ public class Grid {
     private ArrayList<String> squares = createGrid();
 
     public boolean isMoveLegal(int squareNumber) {
-        if (getSquares().get(squareNumber).equals(" ")) return true;
+        if (squares.get(squareNumber).equals(" ")) return true;
         else return false;
     }
 
@@ -23,7 +23,7 @@ public class Grid {
     }
 
     public boolean winningLineExistsInGrid() {
-        for (ArrayList<String> line : getPossibleWinLines()) {
+        for (ArrayList<String> line : possibleWinLines()) {
             if (lineIsWinner(line)) return true;
         }
         return false;
@@ -36,10 +36,6 @@ public class Grid {
             if (!s.equals(first)) return false;
         }
         return true;
-    }
-
-    public List<ArrayList<String>> getPossibleWinLines() {
-        return possibleWinLines();
     }
 
     public ArrayList<String> getSquares() {

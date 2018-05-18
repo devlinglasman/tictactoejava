@@ -5,10 +5,35 @@ import static org.junit.Assert.*;
 public class GameLogicTest {
 
     @Test
+    public void markSquareX() {
+        GameLogic gameLogic = new GameLogic();
+
+        gameLogic.markSquare(0, Mark.playerOneMarkedSquare);
+
+        assertEquals("X", gameLogic.getGridSquares().get(0));
+    }
+
+    @Test
     public void convertInputToSquareNumber() {
         GameLogic gameLogic = new GameLogic();
 
         assertEquals(0, gameLogic.convertInputToSquareNumber("1"));
+    }
+
+    @Test
+    public void isMoveLegalYes() {
+        GameLogic gameLogic = new GameLogic();
+
+        assertTrue(gameLogic.isMoveLegal(0));
+    }
+
+    @Test
+    public void isMoveLegalNo() {
+        GameLogic gameLogic = new GameLogic();
+
+        gameLogic.markSquare(0, Mark.playerOneMarkedSquare);
+
+        assertFalse(gameLogic.isMoveLegal(0));
     }
 
     @Test
@@ -23,7 +48,7 @@ public class GameLogicTest {
         GameLogic gameLogic = new GameLogic();
 
         for (int i = 0; i < 3; i++) {
-            gameLogic.getGrid().markSquare(i,Mark.playerOneMarkedSquare);
+            gameLogic.markSquare(i, Mark.playerOneMarkedSquare);
         }
 
         assertFalse(gameLogic.gameOngoing());

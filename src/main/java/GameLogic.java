@@ -5,10 +5,6 @@ public class GameLogic {
     private Player activePlayer = Player.PLAYERONE;
     private Grid grid = new Grid();
 
-    public ArrayList<String> getGridSquares() {
-        return grid.getSquares();
-    }
-
     public void markSquare(int squareNumber, Mark mark) {
         grid.markSquare(squareNumber,mark);
     }
@@ -23,8 +19,8 @@ public class GameLogic {
     }
 
     public boolean gameOngoing() {
-        if (!grid.isFull() || !grid.winningLineExistsInGrid()) return true;
-        else return false;
+        if (grid.isFull() || isGameWon()) return false;
+        else return true;
     }
 
     public boolean isGameWon() {
@@ -38,6 +34,10 @@ public class GameLogic {
 
     public Player getActivePlayer() {
         return activePlayer;
+    }
+
+    public ArrayList<String> getGridSquares() {
+        return grid.getSquares();
     }
 
 }
