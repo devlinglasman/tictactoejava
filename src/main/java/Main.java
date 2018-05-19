@@ -1,8 +1,10 @@
 public class Main {
 
     public static void main(String[] args) {
-//        GameLogic gamerunner = new GameLogic();
-//        ConsoleCommunicator consoleCommunicator = new ConsoleCommunicator(System.in,System.out,gamerunner);
-//        consoleCommunicator.chooseGame();
+        GameLogic gameLogic = new GameLogic();
+        ConsoleDisplay consoleDisplay = new ConsoleDisplay(System.in, System.out);
+        ConsoleCommunicator consoleCommunicator = new ConsoleCommunicator(consoleDisplay,gameLogic);
+
+        consoleCommunicator.run();
     }
 }

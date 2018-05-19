@@ -6,9 +6,8 @@ public class Grid {
 
     private ArrayList<String> squares = createGrid();
 
-    public boolean isMoveLegal(int squareNumber) {
-        if (squares.get(squareNumber).equals(" ")) return true;
-        else return false;
+    public boolean moveIsNotLegal(int squareNumber) {
+        return !squares.get(squareNumber).equals(" ");
     }
 
     public void markSquare(int squareNumber, Mark mark) {

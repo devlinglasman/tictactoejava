@@ -24,7 +24,7 @@ public class GameLogicTest {
     public void isMoveLegalYes() {
         GameLogic gameLogic = new GameLogic();
 
-        assertTrue(gameLogic.isMoveLegal(0));
+        assertTrue(gameLogic.moveIsNotLegal(0));
     }
 
     @Test
@@ -33,7 +33,7 @@ public class GameLogicTest {
 
         gameLogic.markSquare(0, Mark.playerOneMarkedSquare);
 
-        assertFalse(gameLogic.isMoveLegal(0));
+        assertFalse(gameLogic.moveIsNotLegal(0));
     }
 
     @Test

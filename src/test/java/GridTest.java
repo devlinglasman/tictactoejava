@@ -8,19 +8,19 @@ import static org.junit.Assert.*;
 public class GridTest {
 
     @Test
-    public void isMoveLegalYes() {
+    public void moveIsLegalYes() {
         Grid grid = new Grid();
 
-        assertTrue(grid.isMoveLegal(0));
+        assertTrue(grid.moveIsNotLegal(0));
     }
 
     @Test
-    public void isMoveLegalNo() {
+    public void moveIsLegalNo() {
         Grid grid = new Grid();
 
         grid.markSquare(0, Mark.playerOneMarkedSquare);
 
-        assertFalse(grid.isMoveLegal(0));
+        assertFalse(grid.moveIsNotLegal(0));
     }
 
     @Test

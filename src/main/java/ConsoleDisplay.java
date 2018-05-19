@@ -52,6 +52,6 @@ public class ConsoleDisplay {
     }
 
     public void announceComputerTurn() {
-        out.print("Computer chooses...");
+        out.print("Computer chooses...\n");
     }
 }

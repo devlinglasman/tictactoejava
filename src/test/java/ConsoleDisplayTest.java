@@ -75,7 +75,7 @@ public class ConsoleDisplayTest {
 
         consoleDisplay.announceComputerTurn();
 
-        assertEquals("computer chooses...", ioHelper.output());
+        assertEquals("computer chooses...\n", ioHelper.output());
 
     }
 }

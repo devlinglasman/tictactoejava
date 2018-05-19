@@ -1,30 +1,61 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameLogic {
 
     private Player activePlayer = Player.PLAYERONE;
     private Grid grid = new Grid();
+    private Validator validator = new Validator();
+
+    public String findGameMode(String choice) {
+        if (choice.equals("1")) {
+            return "computerGame";
+        } else {
+            return "humanGame";
+        }
+    }
+
+    public boolean itIsHumanTurn() {
+        return activePlayer == Player.PLAYERONE;
+    }
+
+    public boolean inputIsNotValid(String input) {
+        return validator.inputIsNotValid(input);
+    }
+
+    public int convertInputToGridSquare(String input) {
+        int inputConverted = validator.convertInputStrtoInt(input);
+        inputConverted--;
+        return inputConverted;
+    }
+
+    public void makeMove(String input) {
+        int inputConverted = convertInputToGridSquare(input);
+        markSquare(inputConverted, activePlayer.getMark());
+    }
 
     public void markSquare(int squareNumber, Mark mark) {
         grid.markSquare(squareNumber,mark);
     }
 
-    public int convertInputToSquareNumber(String input) {
-        return Integer.parseInt(input) - 1;
+    public boolean gameIsWon() {
+        return grid.winningLineExistsInGrid();
     }
 
-    public boolean isMoveLegal(int squareNumber) {
-        if (grid.isMoveLegal(squareNumber)) return true;
-        else return false;
+    public boolean moveIsNotLegal(String input) {
+        int inputConverted = validator.convertInputToGridSquare(input);
+        return grid.moveIsNotLegal(inputConverted);
     }
 
     public boolean gameOngoing() {
-        if (grid.isFull() || isGameWon()) return false;
+        if (grid.isFull() || gameIsWon()) return false;
         else return true;
     }
 
-    public boolean isGameWon() {
-        return grid.winningLineExistsInGrid();
+    public String generateComputerInput() {
+        Random rand = new Random();
+        int potentialInput = rand.nextInt(9) + 1;
+        return String.valueOf(potentialInput);
     }
 
     public void alternatePlayer() {

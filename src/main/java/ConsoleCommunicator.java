@@ -1,5 +1,3 @@
-import java.util.Random;
-
 class ConsoleCommunicator {
 
     private GameLogic gameLogic;
@@ -10,82 +8,34 @@ class ConsoleCommunicator {
         this.gameLogic = gameLogic;
     }
 
-    public void chooseGame() {
-        askGameMode();
-        String choice = takeInput();
-        if (choice.equals("1")) {
+    public void run() {
+        String gameChoice = chooseGame();
+        if (gameChoice.equals("computerGame")) {
             runComputerGame();
         } else {
             runHumanGame();
         }
     }
 
+    public String chooseGame() {
+        askGameMode();
+        String choice = takeHumanInput();
+        return gameLogic.findGameMode(choice);
+    }
+
+    public String takeHumanInput() {
+        return consoleDisplay.takeInput();
+    }
+
     public void runComputerGame() {
         displayGrid();
-        while (gameLogic.gameOngoing()) {
-            if (gameLogic.getActivePlayer() == Player.PLAYERONE) {
+        while (gameOngoing()) {
+            if (itIsHumanTurn()) {
                 runHumanTurn();
             } else {
                 runComputerTurn();
             }
-            if (gameLogic.isGameWon()) {
-                announceWinner();
-            }
-            displayGrid();
-            gameLogic.alternatePlayer();
-        }
-    }
-
-    public void runHumanTurn() {
-        int squareNumber = takeLegalInput();
-        gameLogic.markSquare(squareNumber, gameLogic.getActivePlayer().getMark());
-    }
-
-    public int takeLegalInput() {
-        boolean isMoveLegal = false;
-        int potentialInput = 0;
-        while (!isMoveLegal) {
-            potentialInput = inputSelection();
-            isMoveLegal = isMoveLegal(potentialInput);
-        }
-        return potentialInput;
-    }
-
-
-    public int inputSelection() {
-        int input;
-        if (gameLogic.getActivePlayer() == Player.PLAYERONE) {
-            String inputString = askAndTakeInput();
-            input = gameLogic.convertInputToSquareNumber(inputString);
-        } else {
-            input = computerInputSelection();
-        }
-        return input;
-    }
-
-    public int computerInputSelection() {
-        Random rand = new Random();
-        int potentialInput = rand.nextInt(8);
-        return potentialInput;
-    }
-
-
-    private boolean isMoveLegal(int potentialInput) {
-        if (gameLogic.isMoveLegal(potentialInput)) return true;
-        else return false;
-    }
-
-    public void runComputerTurn() {
-        int potentialInput = takeLegalInput();
-        announceComputerTurn();
-        gameLogic.markSquare(potentialInput, gameLogic.getActivePlayer().getMark());
-    }
-
-    public void runHumanGame() {
-        displayGrid();
-        while (gameLogic.gameOngoing()) {
-            runHumanTurn();
-            if (gameLogic.isGameWon()) {
+            if (gameIsWon()) {
                 announceWinner();
             }
             displayGrid();
@@ -97,20 +47,66 @@ class ConsoleCommunicator {
         consoleDisplay.displayGrid(gameLogic.getGridSquares());
     }
 
-    public String askAndTakeInput() {
-        return consoleDisplay.askAndTakeInput(gameLogic.getActivePlayer());
+    public boolean gameOngoing() {
+        return gameLogic.gameOngoing();
     }
 
-    public String takeInput() {
-        return consoleDisplay.takeInput();
+    private boolean itIsHumanTurn() {
+        return gameLogic.itIsHumanTurn();
     }
 
-    public void askGameMode() {
-        consoleDisplay.askGameMode();
+    public void runHumanTurn() {
+        String input = "0";
+        while (inputIsNotValid(input)) input = takeHumanInput();
+        while (moveIsNotLegal(input)) input = takeHumanInput();
+        makeMove(input);
+    }
+
+    private boolean inputIsNotValid(String input) {
+        return gameLogic.inputIsNotValid(input);
+    }
+
+    public boolean moveIsNotLegal(String input) {
+        return gameLogic.moveIsNotLegal(input);
+    }
+
+    private void makeMove(String input) {
+        gameLogic.makeMove(input);
+    }
+
+    private boolean gameIsWon() {
+        return gameLogic.gameIsWon();
     }
 
     public void announceWinner() {
         consoleDisplay.announceWinner(gameLogic.getActivePlayer());
+    }
+
+    public void runComputerTurn() {
+        String input = takeComputerInput();
+        while (moveIsNotLegal(input)) input = takeComputerInput();
+        announceComputerTurn();
+        makeMove(input);
+    }
+
+    public String takeComputerInput() {
+        return gameLogic.generateComputerInput();
+    }
+
+    public void runHumanGame() {
+        displayGrid();
+        while (gameLogic.gameOngoing()) {
+            runHumanTurn();
+            if (gameLogic.gameIsWon()) {
+                announceWinner();
+            }
+            displayGrid();
+            gameLogic.alternatePlayer();
+        }
+    }
+
+    public void askGameMode() {
+        consoleDisplay.askGameMode();
     }
 
     public void announceComputerTurn() {
