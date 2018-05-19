@@ -4,19 +4,19 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
-public class CliTest {
+public class ConsoleCommunicatorTest {
 
     @Test
     public void displayGrid() {
         GameLogic gamerunner = new GameLogic();
         IOHelper ioHelper = new IOHelper("");
-        Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
+        ConsoleCommunicator consoleCommunicator = new ConsoleCommunicator(ioHelper.in, ioHelper.print,gamerunner);
         ArrayList<String> squares = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
            squares.add(" ");
         }
 
-        cli.displayGrid(squares);
+        consoleCommunicator.displayGrid(squares);
         assertEquals("[ ][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
     }
 
@@ -24,14 +24,14 @@ public class CliTest {
     public void displayGrid2() {
         GameLogic gamerunner = new GameLogic();
         IOHelper ioHelper = new IOHelper("");
-        Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
+        ConsoleCommunicator consoleCommunicator = new ConsoleCommunicator(ioHelper.in, ioHelper.print,gamerunner);
         ArrayList<String> squares = new ArrayList<>();
         squares.add("X");
         for (int i = 0; i < 8; i++) {
             squares.add(" ");
         }
 
-        cli.displayGrid(squares);
+        consoleCommunicator.displayGrid(squares);
 
         assertEquals("[X][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
     }
@@ -40,9 +40,9 @@ public class CliTest {
     public void askInputPlayerOne() {
         GameLogic gamerunner = new GameLogic();
         IOHelper ioHelper = new IOHelper("");
-        Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
+        ConsoleCommunicator consoleCommunicator = new ConsoleCommunicator(ioHelper.in, ioHelper.print,gamerunner);
 
-        cli.askInput(Player.PLAYERONE);
+        consoleCommunicator.askInput(Player.PLAYERONE);
         assertEquals("\nHi Player One! Please select a square from 1-9\n", ioHelper.output());
     }
 
@@ -50,9 +50,9 @@ public class CliTest {
     public void askInputPlayerTwo() {
         GameLogic gamerunner = new GameLogic();
         IOHelper ioHelper = new IOHelper("");
-        Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
+        ConsoleCommunicator consoleCommunicator = new ConsoleCommunicator(ioHelper.in, ioHelper.print,gamerunner);
 
-        cli.askInput(Player.PLAYERTWO);
+        consoleCommunicator.askInput(Player.PLAYERTWO);
         assertEquals("\nHi Player Two! Please select a square from 1-9\n", ioHelper.output());
     }
 
@@ -60,9 +60,9 @@ public class CliTest {
     public void askGameMode() {
         GameLogic gamerunner = new GameLogic();
         IOHelper ioHelper = new IOHelper("");
-        Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
+        ConsoleCommunicator consoleCommunicator = new ConsoleCommunicator(ioHelper.in, ioHelper.print,gamerunner);
 
-        cli.askGameMode();
+        consoleCommunicator.askGameMode();
         assertEquals("\nHi! please enter '1' to " +
                 "play against the computer or '2' to play human-vs-human.\n", ioHelper.output());
     }
@@ -71,9 +71,9 @@ public class CliTest {
     public void announceWinner1() {
         GameLogic gamerunner = new GameLogic();
         IOHelper ioHelper = new IOHelper("");
-        Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
+        ConsoleCommunicator consoleCommunicator = new ConsoleCommunicator(ioHelper.in, ioHelper.print,gamerunner);
 
-        cli.announceWinner(Player.PLAYERONE);
+        consoleCommunicator.announceWinner(Player.PLAYERONE);
 
         assertEquals("Congratulations Player One - You're the winner!\n", ioHelper.output());
     }
@@ -82,9 +82,9 @@ public class CliTest {
     public void announceWinner2() {
         GameLogic gamerunner = new GameLogic();
         IOHelper ioHelper = new IOHelper("");
-        Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
+        ConsoleCommunicator consoleCommunicator = new ConsoleCommunicator(ioHelper.in, ioHelper.print,gamerunner);
 
-        cli.announceWinner(Player.PLAYERTWO);
+        consoleCommunicator.announceWinner(Player.PLAYERTWO);
 
         assertEquals("Congratulations Player Two - You're the winner!\n", ioHelper.output());
     }
@@ -93,9 +93,9 @@ public class CliTest {
     public void computerTakesTurn() {
         GameLogic gamerunner = new GameLogic();
         IOHelper ioHelper = new IOHelper("");
-        Cli cli = new Cli(ioHelper.in, ioHelper.print,gamerunner);
+        ConsoleCommunicator consoleCommunicator = new ConsoleCommunicator(ioHelper.in, ioHelper.print,gamerunner);
 
-        cli.announceComputerTurn();
+        consoleCommunicator.announceComputerTurn();
 
         assertEquals("\nComputer takes turn...\n", ioHelper.output());
     }

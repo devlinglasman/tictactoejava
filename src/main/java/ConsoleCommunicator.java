@@ -1,18 +1,12 @@
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
-class Cli {
+class ConsoleCommunicator {
 
-    private final Scanner scanner;
-    private final PrintStream out;
     private GameLogic gameLogic;
+    private ConsoleDisplay consoleDisplay;
 
-    Cli(InputStream in, PrintStream out, GameLogic gameLogic) {
-        this.scanner = new Scanner(in);
-        this.out = out;
+    ConsoleCommunicator(ConsoleDisplay consoleDisplay, GameLogic gameLogic) {
+        this.consoleDisplay = consoleDisplay;
         this.gameLogic = gameLogic;
     }
 
@@ -27,7 +21,7 @@ class Cli {
     }
 
     public void runComputerGame() {
-        displayGrid(gameLogic.getGridSquares());
+        displayGrid();
         while (gameLogic.gameOngoing()) {
             if (gameLogic.getActivePlayer() == Player.PLAYERONE) {
                 runHumanTurn();
@@ -35,9 +29,9 @@ class Cli {
                 runComputerTurn();
             }
             if (gameLogic.isGameWon()) {
-                announceWinner(gameLogic.getActivePlayer());
+                announceWinner();
             }
-            displayGrid(gameLogic.getGridSquares());
+            displayGrid();
             gameLogic.alternatePlayer();
         }
     }
@@ -61,7 +55,7 @@ class Cli {
     public int inputSelection() {
         int input;
         if (gameLogic.getActivePlayer() == Player.PLAYERONE) {
-            String inputString = askAndTakeInput(gameLogic.getActivePlayer());
+            String inputString = askAndTakeInput();
             input = gameLogic.convertInputToSquareNumber(inputString);
         } else {
             input = computerInputSelection();
@@ -88,57 +82,39 @@ class Cli {
     }
 
     public void runHumanGame() {
-        displayGrid(gameLogic.getGridSquares());
+        displayGrid();
         while (gameLogic.gameOngoing()) {
             runHumanTurn();
             if (gameLogic.isGameWon()) {
-                announceWinner(gameLogic.getActivePlayer());
+                announceWinner();
             }
-            displayGrid(gameLogic.getGridSquares());
+            displayGrid();
             gameLogic.alternatePlayer();
         }
     }
 
-    public void displayGrid(ArrayList<String> squares) {
-        ArrayList<String> gridConglomerator = new ArrayList<>();
-        for (String square : squares) {
-            gridConglomerator.add("[" + square + "]");
-        }
-        gridConglomerator.add(3, "\n");
-        gridConglomerator.add(7, "\n");
-
-        StringBuilder gridFinal = new StringBuilder();
-
-        for (String s : gridConglomerator) {
-            gridFinal.append(s);
-        }
-        out.print(gridFinal + "\n");
+    public void displayGrid() {
+        consoleDisplay.displayGrid(gameLogic.getGridSquares());
     }
 
-    public String askAndTakeInput(Player activePlayer) {
-        askInput(activePlayer);
-        return takeInput();
-    }
-
-    public void askInput(Player activePlayer) {
-        out.print("\nHi " + activePlayer.getName() + "! Please select a square from 1-9\n");
+    public String askAndTakeInput() {
+        return consoleDisplay.askAndTakeInput(gameLogic.getActivePlayer());
     }
 
     public String takeInput() {
-        return scanner.next();
+        return consoleDisplay.takeInput();
     }
 
     public void askGameMode() {
-        out.print("\nHi! please enter '1' to " +
-                "play against the computer or '2' to play human-vs-human.\n");
+        consoleDisplay.askGameMode();
     }
 
-    public void announceWinner(Player activePlayer) {
-        out.print("Congratulations " + activePlayer.getName() + " - You're the winner!\n");
+    public void announceWinner() {
+        consoleDisplay.announceWinner(gameLogic.getActivePlayer());
     }
 
     public void announceComputerTurn() {
-        out.print("\nComputer takes turn...\n");
+        consoleDisplay.announceComputerTurn();
     }
 }
 
