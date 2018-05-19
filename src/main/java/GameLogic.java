@@ -43,7 +43,7 @@ public class GameLogic {
     }
 
     public boolean moveIsNotLegal(String input) {
-        int inputConverted = validator.convertInputToGridSquare(input);
+        int inputConverted = convertInputToGridSquare(input);
         return grid.moveIsNotLegal(inputConverted);
     }
 
