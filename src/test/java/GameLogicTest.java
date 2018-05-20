@@ -14,17 +14,18 @@ public class GameLogicTest {
     }
 
     @Test
-    public void convertInputToSquareNumber() {
+    public void convertInputToGridSquare() {
         GameLogic gameLogic = new GameLogic();
+        Validator validator = new Validator();
 
-        assertEquals(0, gameLogic.convertInputToSquareNumber("1"));
+        assertEquals(0, gameLogic.convertInputToGridSquare(("1")));
     }
 
     @Test
     public void isMoveLegalYes() {
         GameLogic gameLogic = new GameLogic();
 
-        assertTrue(gameLogic.moveIsNotLegal(0));
+        assertTrue(gameLogic.moveIsNotLegal("1"));
     }
 
     @Test
@@ -33,7 +34,7 @@ public class GameLogicTest {
 
         gameLogic.markSquare(0, Mark.playerOneMarkedSquare);
 
-        assertFalse(gameLogic.moveIsNotLegal(0));
+        assertFalse(gameLogic.moveIsNotLegal("1"));
     }
 
     @Test
