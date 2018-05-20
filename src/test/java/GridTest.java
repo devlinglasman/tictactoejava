@@ -3,6 +3,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static java.util.Arrays.*;
 import static org.junit.Assert.*;
 
 public class GridTest {
@@ -11,7 +12,7 @@ public class GridTest {
     public void moveIsLegalYes() {
         Grid grid = new Grid();
 
-        assertTrue(grid.moveIsNotLegal(0));
+        assertFalse(grid.moveIsNotLegal(0));
     }
 
     @Test
@@ -20,47 +21,47 @@ public class GridTest {
 
         grid.markSquare(0, Mark.playerOneMarkedSquare);
 
-        assertFalse(grid.moveIsNotLegal(0));
+        assertTrue(grid.moveIsNotLegal(0));
     }
 
     @Test
-    public void checkSquareEmptyFirst() {
+    public void checkSquareEmptyBeforeMarkingSquare() {
         Grid grid = new Grid();
 
-        assertEquals(" ", grid.getSquares().get(0));
+        assertEquals(Mark.unmarkedSquare, grid.getSquares().get(0));
     }
 
     @Test
-    public void markSquareX() {
+    public void markSquarePlayerOne() {
         Grid grid = new Grid();
 
         grid.markSquare(0, Mark.playerOneMarkedSquare);
 
-        assertEquals("X", grid.getSquares().get(0));
+        assertEquals(Mark.playerOneMarkedSquare, grid.getSquares().get(0));
     }
 
     @Test
-    public void markSquareO() {
+    public void markSquarePlayerTwo() {
         Grid grid = new Grid();
 
         grid.markSquare(0, Mark.playerTwoMarkedSquare);
 
-        assertEquals("O", grid.getSquares().get(0));
-    }
-
-    @Test
-    public void isFullYes() {
-        Grid grid = new Grid();
-
-        assertFalse(grid.isFull());
+        assertEquals(Mark.playerTwoMarkedSquare, grid.getSquares().get(0));
     }
 
     @Test
     public void isFullNo() {
         Grid grid = new Grid();
 
+        assertFalse(grid.isFull());
+    }
+
+    @Test
+    public void isFullYes() {
+        Grid grid = new Grid();
+
         for (int i = 0; i < 9; i++) {
-           grid.markSquare(i,Mark.playerOneMarkedSquare);
+            grid.markSquare(i, Mark.playerOneMarkedSquare);
         }
 
         assertTrue(grid.isFull());
@@ -85,21 +86,21 @@ public class GridTest {
     }
 
     @Test
-    public void lineIsWinnerYes() {
+    public void lineIsWinnerNo() {
         Grid grid = new Grid();
-        ArrayList<String> row1 = new ArrayList<String>
-                (Arrays.asList("X", "X", "X"));
+        ArrayList<Mark> row1 = new ArrayList<>
+                (asList(Mark.unmarkedSquare, Mark.unmarkedSquare, Mark.unmarkedSquare));
 
-        assertTrue(grid.lineIsWinner(row1));
+        assertFalse(grid.lineIsWinner(row1));
     }
 
     @Test
-    public void lineIsWinnerNo() {
+    public void lineIsWinnerYes() {
         Grid grid = new Grid();
-        ArrayList<String> row1 = new ArrayList<String>
-                (Arrays.asList(" ", "X", "X"));
+        ArrayList<Mark> row1 = new ArrayList<>
+                (asList(Mark.playerOneMarkedSquare, Mark.playerOneMarkedSquare, Mark.playerOneMarkedSquare));
 
-        assertFalse(grid.lineIsWinner(row1));
+        assertTrue(grid.lineIsWinner(row1));
     }
 
 }

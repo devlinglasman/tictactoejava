@@ -5,12 +5,28 @@ import static org.junit.Assert.*;
 public class GameLogicTest {
 
     @Test
-    public void markSquareX() {
+    public void checkSquareEmptyBeforeMarking() {
+        GameLogic gameLogic = new GameLogic();
+
+        assertEquals(Mark.unmarkedSquare, gameLogic.getGridSquares().get(0));
+    }
+
+    @Test
+    public void markSquarePlayerOne() {
         GameLogic gameLogic = new GameLogic();
 
         gameLogic.markSquare(0, Mark.playerOneMarkedSquare);
 
-        assertEquals("X", gameLogic.getGridSquares().get(0));
+        assertEquals(Mark.playerOneMarkedSquare, gameLogic.getGridSquares().get(0));
+    }
+
+    @Test
+    public void markSquarePlayerTwo() {
+        GameLogic gameLogic = new GameLogic();
+
+        gameLogic.markSquare(0, Mark.playerTwoMarkedSquare);
+
+        assertEquals(Mark.playerTwoMarkedSquare, gameLogic.getGridSquares().get(0));
     }
 
     @Test
@@ -22,19 +38,19 @@ public class GameLogicTest {
     }
 
     @Test
-    public void isMoveLegalYes() {
+    public void moveIsNotLegalNo() {
         GameLogic gameLogic = new GameLogic();
 
-        assertTrue(gameLogic.moveIsNotLegal("1"));
+        assertFalse(gameLogic.moveIsNotLegal("1"));
     }
 
     @Test
-    public void isMoveLegalNo() {
+    public void moveIsNotLegalYes() {
         GameLogic gameLogic = new GameLogic();
 
         gameLogic.markSquare(0, Mark.playerOneMarkedSquare);
 
-        assertFalse(gameLogic.moveIsNotLegal("1"));
+        assertTrue(gameLogic.moveIsNotLegal("1"));
     }
 
     @Test

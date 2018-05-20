@@ -13,10 +13,10 @@ public class ConsoleDisplay {
         this.out = out;
     }
 
-    public void displayGrid(ArrayList<String> squares) {
+    public void displayGrid(ArrayList<Mark> squares) {
         ArrayList<String> gridConglomerator = new ArrayList<>();
-        for (String square : squares) {
-            gridConglomerator.add("[" + square + "]");
+        for (Mark squareMark : squares) {
+            gridConglomerator.add("[" + squareMark.getStringRepresentation() + "]");
         }
         gridConglomerator.add(3, "\n");
         gridConglomerator.add(7, "\n");
@@ -27,11 +27,6 @@ public class ConsoleDisplay {
             gridFinal.append(s);
         }
         out.print(gridFinal + "\n");
-    }
-
-    public String askAndTakeInput(Player activePlayer) {
-        askForInput(activePlayer);
-        return takeInput();
     }
 
     public void askForInput(Player activePlayer) {

@@ -67,7 +67,7 @@ public class GameLogic {
         return activePlayer;
     }
 
-    public ArrayList<String> getGridSquares() {
+    public ArrayList<Mark> getGridSquares() {
         return grid.getSquares();
     }
 

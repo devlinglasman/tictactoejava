@@ -11,9 +11,9 @@ public class ConsoleDisplayTest {
         IOHelper ioHelper = new IOHelper("");
         ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
 
-        ArrayList<String> squares = new ArrayList<>();
+        ArrayList<Mark> squares = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
-            squares.add(" ");
+            squares.add(Mark.unmarkedSquare);
         }
 
         consoleDisplay.displayGrid(squares);
@@ -26,15 +26,15 @@ public class ConsoleDisplayTest {
         IOHelper ioHelper = new IOHelper("");
         ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
 
-        ArrayList<String> squares = new ArrayList<>();
-        squares.add("X");
+        ArrayList<Mark> squares = new ArrayList<>();
+        squares.add(Mark.playerOneMarkedSquare);
         for (int i = 0; i < 8; i++) {
-            squares.add(" ");
+            squares.add(Mark.unmarkedSquare);
         }
 
         consoleDisplay.displayGrid(squares);
 
-        assertEquals("[ ][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
+        assertEquals("[X][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
     }
 
     @Test
@@ -75,7 +75,7 @@ public class ConsoleDisplayTest {
 
         consoleDisplay.announceComputerTurn();
 
-        assertEquals("computer chooses...\n", ioHelper.output());
+        assertEquals("Computer chooses...\n", ioHelper.output());
 
     }
 }
