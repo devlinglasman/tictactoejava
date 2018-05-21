@@ -41,7 +41,7 @@ public class GameLogicTest {
     public void moveIsNotLegalNo() {
         GameLogic gameLogic = new GameLogic();
 
-        assertFalse(gameLogic.moveIsNotLegal("1"));
+        assertFalse(gameLogic.moveNotLegal("1"));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class GameLogicTest {
 
         gameLogic.markSquare(0, Mark.playerOneMarkedSquare);
 
-        assertTrue(gameLogic.moveIsNotLegal("1"));
+        assertTrue(gameLogic.moveNotLegal("1"));
     }
 
     @Test

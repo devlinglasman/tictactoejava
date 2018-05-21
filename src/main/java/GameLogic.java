@@ -16,8 +16,8 @@ public class GameLogic {
     }
 
     public String runHumanTurn(String input) {
-        if (inputIsNotValid(input)) return "inputNotValid";
-        else if (moveIsNotLegal(input)) return "moveNotLegal";
+        if (inputNotValid(input)) return "inputNotValid";
+        else if (moveNotLegal(input)) return "inputInvalid";
         else {
             makeMove(input);
             if (gameIsWon()) return "gameWon";
@@ -30,7 +30,7 @@ public class GameLogic {
         return activePlayer == Player.PLAYERONE;
     }
 
-    public boolean inputIsNotValid(String input) {
+    public boolean inputNotValid(String input) {
         return validator.inputIsNotValid(input);
     }
 
@@ -53,7 +53,7 @@ public class GameLogic {
         return grid.winningLineExistsInGrid();
     }
 
-    public boolean moveIsNotLegal(String input) {
+    public boolean moveNotLegal(String input) {
         int inputConverted = convertInputToGridSquare(input);
         return grid.moveIsNotLegal(inputConverted);
     }

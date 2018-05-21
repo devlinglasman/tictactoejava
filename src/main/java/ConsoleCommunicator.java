@@ -32,15 +32,23 @@ class ConsoleCommunicator {
             if (itIsHumanTurn()) {
                 boolean humanTurnOngoing = true;
                 while (humanTurnOngoing) {
-                    humanTurnOngoing = runHumanTurn();
+                     String statusMessage = sendInputToGame();
+                     if (statusMessage.equals("inputNotValid")) {
+                         announceInputInvalid();
+                         humanTurnOngoing = true;
+                     } else if (statusMessage.equals("gameWon")){
+                         announceWinner();
+                         humanTurnOngoing = false;
+                     } else if (statusMessage.equals("gameTied")){
+                         announceGameTied();
+                         humanTurnOngoing = false;
+                     } else {
+                         humanTurnOngoing = false;
+                     }
                 }
             } else {
                 runComputerTurn();
             }
-            if (gameIsWon()) {
-                announceWinner();
-            }
-            displayGrid();
             gameLogic.alternatePlayer();
         }
     }
@@ -57,32 +65,23 @@ class ConsoleCommunicator {
         return gameLogic.itIsHumanTurn();
     }
 
-    public boolean runHumanTurn() {
+    public String sendInputToGame() {
+        displayGrid();
         String input = takeHumanInput();
-        String statusReturn = gameLogic.runHumanTurn(input);
-        switch (statusReturn) {
-            case "inputNotValid":
-                announceComputerTurn();
-                return true;
-            case "moveNotLegal":
-                announceComputerTurn();
-                return true;
-            case "gameWon":
-                announceWinner();
-                return false;
-            case "gameDraw":
-                announceComputerTurn();
-                return false;
-        }
-        return false;
+        String statusMessage = gameLogic.runHumanTurn(input);
+        return statusMessage;
+    }
+
+    private void announceInputInvalid() {
+        consoleDisplay.announceInputInvalid();
     }
 
     private boolean inputIsNotValid(String input) {
-        return gameLogic.inputIsNotValid(input);
+        return gameLogic.inputNotValid(input);
     }
 
     public boolean moveIsNotLegal(String input) {
-        return gameLogic.moveIsNotLegal(input);
+        return gameLogic.moveNotLegal(input);
     }
 
     private void makeMove(String input) {
@@ -95,6 +94,10 @@ class ConsoleCommunicator {
 
     public void announceWinner() {
         consoleDisplay.announceWinner(gameLogic.getActivePlayer());
+    }
+
+    public void announceGameTied() {
+        consoleDisplay.announceGameTied();
     }
 
     public void runComputerTurn() {
@@ -111,7 +114,7 @@ class ConsoleCommunicator {
     public void runHumanGame() {
         displayGrid();
         while (gameOngoing()) {
-            runHumanTurn();
+            sendInputToGame();
             if (gameIsWon()) {
                 announceWinner();
             }

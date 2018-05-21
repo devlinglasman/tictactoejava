@@ -42,8 +42,16 @@ public class ConsoleDisplay {
                 "play against the computer or '2' to play human-vs-human.\n");
     }
 
+    public void announceInputInvalid() {
+        out.print("Looks like you made a boo-boo! Please enter a number from 1-9 that hasn't already been picked.\n");
+    }
+
     public void announceWinner(Player activePlayer) {
         out.print("Congratulations " + activePlayer.getName() + " - You're the winner!\n");
+    }
+
+    public void announceGameTied() {
+        out.print("Looks like the game was a tie!\n");
     }
 
     public void announceComputerTurn() {

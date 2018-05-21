@@ -59,6 +59,17 @@ public class ConsoleDisplayTest {
     }
 
     @Test
+    public void announceInputInvalid() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
+
+        consoleDisplay.announceInputInvalid();
+
+        assertEquals("Looks like you made a boo-boo! Please enter a number from 1-9 that hasn't already been picked.\n", ioHelper.output());
+
+    }
+
+    @Test
     public void announceWinner() {
         IOHelper ioHelper = new IOHelper("");
         ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
@@ -66,6 +77,17 @@ public class ConsoleDisplayTest {
         consoleDisplay.announceWinner(Player.PLAYERONE);
 
         assertEquals("Congratulations Player One - You're the winner!\n", ioHelper.output());
+    }
+
+    @Test
+    public void announceGameTied() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
+
+        consoleDisplay.announceGameTied();
+
+        assertEquals("Looks like the game was a tie!\n", ioHelper.output());
+
     }
 
     @Test
