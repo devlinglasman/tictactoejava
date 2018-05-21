@@ -28,10 +28,12 @@ class ConsoleCommunicator {
     }
 
     public void runComputerGame() {
-        displayGrid();
         while (gameOngoing()) {
             if (itIsHumanTurn()) {
-                runHumanTurn();
+                boolean humanTurnOngoing = true;
+                while (humanTurnOngoing) {
+                    humanTurnOngoing = runHumanTurn();
+                }
             } else {
                 runComputerTurn();
             }
@@ -55,11 +57,24 @@ class ConsoleCommunicator {
         return gameLogic.itIsHumanTurn();
     }
 
-    public void runHumanTurn() {
-        String input = "0";
-        while (inputIsNotValid(input)) input = takeHumanInput();
-        while (moveIsNotLegal(input)) input = takeHumanInput();
-        makeMove(input);
+    public boolean runHumanTurn() {
+        String input = takeHumanInput();
+        String statusReturn = gameLogic.runHumanTurn(input);
+        switch (statusReturn) {
+            case "inputNotValid":
+                announceComputerTurn();
+                return true;
+            case "moveNotLegal":
+                announceComputerTurn();
+                return true;
+            case "gameWon":
+                announceWinner();
+                return false;
+            case "gameDraw":
+                announceComputerTurn();
+                return false;
+        }
+        return false;
     }
 
     private boolean inputIsNotValid(String input) {
@@ -95,9 +110,9 @@ class ConsoleCommunicator {
 
     public void runHumanGame() {
         displayGrid();
-        while (gameLogic.gameOngoing()) {
+        while (gameOngoing()) {
             runHumanTurn();
-            if (gameLogic.gameIsWon()) {
+            if (gameIsWon()) {
                 announceWinner();
             }
             displayGrid();

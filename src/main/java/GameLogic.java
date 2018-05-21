@@ -15,6 +15,17 @@ public class GameLogic {
         }
     }
 
+    public String runHumanTurn(String input) {
+        if (inputIsNotValid(input)) return "inputNotValid";
+        else if (moveIsNotLegal(input)) return "moveNotLegal";
+        else {
+            makeMove(input);
+            if (gameIsWon()) return "gameWon";
+            else if (gameTied()) return "gameTied";
+            else return "nextTurn";
+        }
+    }
+
     public boolean itIsHumanTurn() {
         return activePlayer == Player.PLAYERONE;
     }
@@ -35,7 +46,7 @@ public class GameLogic {
     }
 
     public void markSquare(int squareNumber, Mark mark) {
-        grid.markSquare(squareNumber,mark);
+        grid.markSquare(squareNumber, mark);
     }
 
     public boolean gameIsWon() {
@@ -48,8 +59,12 @@ public class GameLogic {
     }
 
     public boolean gameOngoing() {
-        if (grid.isFull() || gameIsWon()) return false;
+        if (gameTied() || gameIsWon()) return false;
         else return true;
+    }
+
+    private boolean gameTied() {
+        return grid.isFull();
     }
 
     public String generateComputerInput() {
