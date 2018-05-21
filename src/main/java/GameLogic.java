@@ -15,9 +15,8 @@ public class GameLogic {
         }
     }
 
-    public String runHumanTurn(String input) {
-        if (inputNotValid(input)) return "inputNotValid";
-        else if (moveNotLegal(input)) return "inputInvalid";
+    public String receiveInputSendStatus(String input) {
+        if (inputNotValid(input) || moveNotLegal(input)) return "inputNotValid";
         else {
             makeMove(input);
             if (gameIsWon()) return "gameWon";
