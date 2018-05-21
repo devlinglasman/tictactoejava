@@ -35,32 +35,38 @@ class ConsoleCommunicator {
                 askForSquareChoice();
                 while (turnOngoing) {
                     String input = takeHumanInput();
-                    turnOngoing = runTurnReturnOngoingOrNot(input);
+                    if (inputNotLegal(input)) {
+                        announceInputInvalid();
+                    } else {
+                       turnOngoing = false;
+                       sendInputToGameReceiveResponse(input);
+                    }
                 }
             } else {
                 while (turnOngoing) {
                     String input = takeComputerInput();
-                    turnOngoing = runTurnReturnOngoingOrNot(input);
+                    if (!inputNotLegal(input)) {
+                        announceComputerTurn();
+                        turnOngoing = false;
+                        sendInputToGameReceiveResponse(input);
+                    }
                 }
             }
         }
     }
 
-    public boolean runTurnReturnOngoingOrNot(String input) {
+    public boolean inputNotLegal(String input) {
+       return gameLogic.inputNotLegal(input);
+    }
+
+    public void sendInputToGameReceiveResponse(String input) {
         String statusMessage = sendInputToGameReceiveStatusMessage(input);
-        if (statusMessage.equals("inputNotValid")) {
-            announceInputInvalid();
-            return true;
-        } else if (statusMessage.equals("gameWon")) {
+        if (statusMessage.equals("humanMadeChoice")) announceHumanSquareChoice();
+        displayGrid();
+        if (statusMessage.equals("gameWon")) {
             announceWinner();
-            return false;
         } else if (statusMessage.equals("gameTied")) {
             announceGameTied();
-            return false;
-        } else {
-            announceHumanSquareChoice();
-            displayGrid();
-            return false;
         }
     }
 

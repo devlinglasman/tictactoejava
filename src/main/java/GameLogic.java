@@ -16,24 +16,27 @@ public class GameLogic {
     }
 
     public String receiveInputSendStatus(String input) {
-        if (inputNotValid(input) || moveNotLegal(input)) return "inputNotValid";
+        makeMove(input);
+        if (gameIsWon()) return "gameWon";
+        else if (gameTied()) return "gameTied";
         else {
-            makeMove(input);
-            if (gameIsWon()) return "gameWon";
-            else if (gameTied()) return "gameTied";
-            else {
-                alternatePlayer();
-                return "nextTurn";
-            }
+            alternatePlayer();
+            if (getActivePlayer() == Player.PLAYERTWO) return "humanMadeChoice";
+            else return "nextTurn";
         }
+    }
+
+    public boolean inputNotLegal(String input) {
+        if (inputNotValidNumber(input) || moveNotLegal(input)) return true;
+        else return false;
     }
 
     public boolean itIsHumanTurn() {
         return activePlayer == Player.PLAYERONE;
     }
 
-    public boolean inputNotValid(String input) {
-        return validator.inputIsNotValid(input);
+    public boolean inputNotValidNumber(String input) {
+        return validator.inputNotValidNumber(input);
     }
 
     public int convertInputToGridSquare(String input) {

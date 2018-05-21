@@ -8,14 +8,14 @@ public class ValidatorTest {
     public void inputIsNotValidNumberYes() {
         Validator validator = new Validator();
 
-        assertTrue(validator.inputIsNotValidNumber("as"));
+        assertTrue(validator.inputIsNotCorrectFormat("as"));
     }
 
     @Test
     public void inputIsNotValidNumberNo() {
         Validator validator = new Validator();
 
-        assertFalse(validator.inputIsNotValidNumber("1"));
+        assertFalse(validator.inputIsNotCorrectFormat("1"));
     }
 
     @Test
