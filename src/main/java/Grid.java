@@ -41,7 +41,7 @@ public class Grid {
         return squares;
     }
 
-    public ArrayList<Mark> createGrid() {
+    private ArrayList<Mark> createGrid() {
         List<Mark> result = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             result.add(Mark.unmarkedSquare);

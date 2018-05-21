@@ -15,10 +15,6 @@ public class GameLogic {
         }
     }
 
-    public String sendHumanInputReceiveStatus(String input) {
-        return makeMoveReturnStatus(input);
-    }
-
     public String computerTurnStatus() {
         String input = generateComputerInput();
         return makeMoveReturnStatus(input);
@@ -47,7 +43,7 @@ public class GameLogic {
         return activePlayer == Player.PLAYERONE;
     }
 
-    public boolean inputNotValidNumber(String input) {
+    private boolean inputNotValidNumber(String input) {
         return validator.inputNotValidNumber(input);
     }
 
@@ -57,12 +53,12 @@ public class GameLogic {
         return inputConverted;
     }
 
-    public void makeMove(String input) {
+    private void makeMove(String input) {
         int inputConverted = convertInputToGridSquare(input);
         markSquare(inputConverted, activePlayer.getMark());
     }
 
-    public void markSquare(int squareNumber, Mark mark) {
+    private void markSquare(int squareNumber, Mark mark) {
         grid.markSquare(squareNumber, mark);
     }
 
@@ -75,8 +71,7 @@ public class GameLogic {
     }
 
     public boolean gameOngoing() {
-        if (gameTied() || gameIsWon()) return false;
-        else return true;
+        return !gameTied() && !gameIsWon();
     }
 
     private boolean gameTied() {
@@ -93,7 +88,7 @@ public class GameLogic {
         return String.valueOf(potentialInput + 1);
     }
     
-    public int generateRandomComputerNumber() {
+    private int generateRandomComputerNumber() {
         Random rand = new Random();
         return rand.nextInt(8);
     }
