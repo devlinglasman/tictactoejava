@@ -30,48 +30,37 @@ class ConsoleCommunicator {
     public void runComputerGame() {
         displayGrid();
         while (gameOngoing()) {
+            boolean turnOngoing = true;
             if (itIsHumanTurn()) {
                 askForSquareChoice();
-                boolean humanTurnOngoing = true;
-                while (humanTurnOngoing) {
+                while (turnOngoing) {
                     String input = takeHumanInput();
-                    String statusMessage = sendInputToGameReceiveStatusMessage(input);
-                    if (statusMessage.equals("inputNotValid")) {
-                        announceInputInvalid();
-                        humanTurnOngoing = true;
-                    } else if (statusMessage.equals("gameWon")) {
-                        announceWinner();
-                        humanTurnOngoing = false;
-                    } else if (statusMessage.equals("gameTied")) {
-                        announceGameTied();
-                        humanTurnOngoing = false;
-                    } else {
-                        announceHumanSquareChoice();
-                        displayGrid();
-                        humanTurnOngoing = false;
-                    }
+                    turnOngoing = runTurnReturnOngoingOrNot(input);
                 }
             } else {
-                boolean turnOngoing = true;
                 while (turnOngoing) {
                     String input = takeComputerInput();
-                    String statusMessage = sendInputToGameReceiveStatusMessage(input);
-                    if (statusMessage.equals("inputNotValid")) {
-                        turnOngoing = true;
-                    } else if (statusMessage.equals("gameWon")) {
-                        announceWinner();
-                        turnOngoing = false;
-                    } else if (statusMessage.equals("gameTied")) {
-                        announceGameTied();
-                        turnOngoing = false;
-                    } else {
-                        announceComputerTurn();
-                        displayGrid();
-                        turnOngoing = false;
-                    }
+                    turnOngoing = runTurnReturnOngoingOrNot(input);
                 }
             }
-            gameLogic.alternatePlayer();
+        }
+    }
+
+    public boolean runTurnReturnOngoingOrNot(String input) {
+        String statusMessage = sendInputToGameReceiveStatusMessage(input);
+        if (statusMessage.equals("inputNotValid")) {
+            announceInputInvalid();
+            return true;
+        } else if (statusMessage.equals("gameWon")) {
+            announceWinner();
+            return false;
+        } else if (statusMessage.equals("gameTied")) {
+            announceGameTied();
+            return false;
+        } else {
+            announceHumanSquareChoice();
+            displayGrid();
+            return false;
         }
     }
 

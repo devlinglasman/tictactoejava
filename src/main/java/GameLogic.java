@@ -21,7 +21,10 @@ public class GameLogic {
             makeMove(input);
             if (gameIsWon()) return "gameWon";
             else if (gameTied()) return "gameTied";
-            else return "nextTurn";
+            else {
+                alternatePlayer();
+                return "nextTurn";
+            }
         }
     }
 
