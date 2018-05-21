@@ -1,7 +1,6 @@
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static java.util.Arrays.*;
 import static org.junit.Assert.*;
@@ -12,7 +11,7 @@ public class GridTest {
     public void moveIsLegalYes() {
         Grid grid = new Grid();
 
-        assertFalse(grid.moveIsNotLegal(0));
+        assertFalse(grid.moveNotLegal(0));
     }
 
     @Test
@@ -21,7 +20,7 @@ public class GridTest {
 
         grid.markSquare(0, Mark.playerOneMarkedSquare);
 
-        assertTrue(grid.moveIsNotLegal(0));
+        assertTrue(grid.moveNotLegal(0));
     }
 
     @Test

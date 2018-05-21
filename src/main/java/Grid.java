@@ -8,7 +8,7 @@ public class Grid {
 
     private ArrayList<Mark> squares = createGrid();
 
-    public boolean moveIsNotLegal(int squareNumber) {
+    public boolean moveNotLegal(int squareNumber) {
         return squares.get(squareNumber) != Mark.unmarkedSquare;
     }
 

@@ -15,20 +15,32 @@ public class GameLogic {
         }
     }
 
-    public String receiveInputSendStatus(String input) {
+    public String sendHumanInputReceiveStatus(String input) {
+        return makeMoveReturnStatus(input);
+    }
+
+    public String computerTurnStatus() {
+        String input = generateComputerInput();
+        return makeMoveReturnStatus(input);
+    }
+
+    public String makeMoveReturnStatus(String input) {
         makeMove(input);
         if (gameIsWon()) return "gameWon";
         else if (gameTied()) return "gameTied";
         else {
             alternatePlayer();
-            if (getActivePlayer() == Player.PLAYERTWO) return "humanMadeChoice";
-            else return "nextTurn";
+            return "nextTurn";
         }
     }
 
     public boolean inputNotLegal(String input) {
-        if (inputNotValidNumber(input) || moveNotLegal(input)) return true;
-        else return false;
+        if (inputNotValidNumber(input)) return true;
+        else {
+            int inputForMoveLegality = convertInputToGridSquare(input);
+            if (moveNotLegal(inputForMoveLegality)) return true;
+            else return false;
+        }
     }
 
     public boolean itIsHumanTurn() {
@@ -58,9 +70,8 @@ public class GameLogic {
         return grid.winningLineExistsInGrid();
     }
 
-    public boolean moveNotLegal(String input) {
-        int inputConverted = convertInputToGridSquare(input);
-        return grid.moveIsNotLegal(inputConverted);
+    public boolean moveNotLegal(int input) {
+        return grid.moveNotLegal(input);
     }
 
     public boolean gameOngoing() {
@@ -73,9 +84,18 @@ public class GameLogic {
     }
 
     public String generateComputerInput() {
+        int potentialInput = 0;
+        boolean moveIllegalTrue = true;
+        while (moveIllegalTrue) {
+            potentialInput = generateRandomComputerNumber();
+            moveIllegalTrue = moveNotLegal(potentialInput);
+        }
+        return String.valueOf(potentialInput + 1);
+    }
+    
+    public int generateRandomComputerNumber() {
         Random rand = new Random();
-        int potentialInput = rand.nextInt(9) + 1;
-        return String.valueOf(potentialInput);
+        return rand.nextInt(8);
     }
 
     public void alternatePlayer() {
