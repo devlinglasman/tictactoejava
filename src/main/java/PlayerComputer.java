@@ -1,25 +1,15 @@
 import java.util.Random;
 
-public class PlayerComputer {
-
-    private String name;
-    private Mark mark;
+public class PlayerComputer extends Player {
 
     public PlayerComputer(String name, Mark mark) {
-        this.name = name;
-        this.mark = mark;
+        super(name, mark);
     }
 
-    public int generateComputerInput() {
+    @Override
+    public String getInput() {
         Random rand = new Random();
-        return rand.nextInt(8);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Mark getMark() {
-        return mark;
+        int input = rand.nextInt(8);
+        return Integer.toString(input);
     }
 }

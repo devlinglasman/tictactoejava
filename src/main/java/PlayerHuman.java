@@ -1,23 +1,15 @@
-public class PlayerHuman {
+public class PlayerHuman extends Player {
 
-    private String name;
-    private Mark mark;
+    private ConsoleDisplay consoleDisplay;
 
-    public PlayerHuman(String name, Mark mark) {
-        this.name = name;
-        this.mark = mark;
+    public PlayerHuman(String name, Mark mark, ConsoleDisplay consoleDisplay) {
+        super(name,mark);
+        this.consoleDisplay = consoleDisplay;
     }
 
-    public String askForMove(ConsoleDisplay consoleDisplay) {
-        consoleDisplay.askForSquareChoice(name);
+    @Override
+    public String getInput() {
+        consoleDisplay.askForSquareChoice(getName());
         return consoleDisplay.takeInput();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Mark getMark() {
-        return mark;
     }
 }

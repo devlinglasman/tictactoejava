@@ -3,62 +3,61 @@ import java.util.ArrayList;
 class GameRunner {
 
     private Grid grid;
-    private PlayerHuman playerOne;
-    private PlayerHuman playerTwo;
-    private PlayerComputer playerComputer;
+    private Player playerOne;
+    private Player playerTwo;
     private Validator validator;
     private ConsoleDisplay consoleDisplay;
-    private PlayerHuman activePlayer;
+    private Player activePlayer;
 
-    GameRunner(Grid grid, PlayerHuman playerOne, PlayerHuman playerTwo, PlayerComputer playerComputer, Validator validator, ConsoleDisplay consoleDisplay) {
+    GameRunner(Grid grid, Validator validator, ConsoleDisplay consoleDisplay) {
         this.grid = grid;
-        this.playerOne = playerOne;
-        this.playerTwo = playerTwo;
-        this.playerComputer = playerComputer;
         this.validator = validator;
         this.consoleDisplay = consoleDisplay;
-        activePlayer = playerOne;
     }
 
     public void run() {
         askGameMode();
         String gameChoice = consoleDisplay.takeInput();
         if (gameChoice.equals("1")) {
-            runComputerGame();
+//            runComputerGame();
         } else {
             runHumanGame();
         }
     }
 
-    public void runComputerGame() {
-       int counter = 0;
-        displayGrid();
-        while (gameOngoing()) {
-            if (counter == 0) {
-                String input = takeHumanInput(activePlayer);
-                makeMove(input);
-                announceHumanSquareChoice();
-            } else {
-                int input = playerComputer.generateComputerInput();
-                boolean illegalMove = moveNotLegal(input);
-                while (illegalMove) {
-                    input = playerComputer.generateComputerInput();
-                    illegalMove = moveNotLegal(input);
-                }
-                String inputConverted = Integer.toString(input);
-                makeMove(inputConverted);
-                announceComputerTurn();
-            }
-            displayGrid();
-            announceIfGameOver();
-            counter = (counter + 1) % 2;
-        }
-    }
+//    public void runComputerGame() {
+//        playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleDisplay);
+//        playerTwo = new PlayerComputer("Computer", Mark.playerTwoMark);
+//        displayGrid();
+//        while (gameOngoing()) {
+//            if (activePlayer == playerOne) {
+//                String input = getLegalInput(activePlayer);
+//                makeMove(input);
+//                announceHumanSquareChoice();
+//            } else {
+////                int input = playerTwo.getInput();
+//                boolean illegalMove = moveNotLegal(input);
+//                while (illegalMove) {
+//                    input = playerTwo.generateComputerInput();
+//                    illegalMove = moveNotLegal(input);
+//                }
+//                String inputConverted = Integer.toString(input);
+//                makeMove(inputConverted);
+//                announceComputerTurn();
+//            }
+//            displayGrid();
+//            announceIfGameOver();
+//            alternatePlayer();
+//        }
+//    }
 
     public void runHumanGame() {
+        playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleDisplay);
+        playerTwo = new PlayerHuman("Player Two", Mark.playerTwoMark, consoleDisplay);
+        activePlayer = playerOne;
         displayGrid();
         while (gameOngoing()) {
-            String input = takeHumanInput(activePlayer);
+            String input = getLegalInput(activePlayer);
             makeMove(input);
             announceHumanSquareChoice();
             displayGrid();
@@ -67,12 +66,12 @@ class GameRunner {
         }
     }
 
-    public String takeHumanInput(PlayerHuman player) {
-        String input = player.askForMove(consoleDisplay);
+    public String getLegalInput(Player player) {
+        String input = player.getInput();
         boolean inputNotLegal = inputNotLegal(input);
         while (inputNotLegal) {
             announceInputInvalid();
-            input = player.askForMove(consoleDisplay);
+            input = player.getInput();
             inputNotLegal = inputNotLegal(input);
         }
         return input;
