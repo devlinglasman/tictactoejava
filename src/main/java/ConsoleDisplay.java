@@ -57,4 +57,8 @@ public class ConsoleDisplay {
     public void announceSquareChoice(Player player) {
         out.print("\n" + player.getName() + " picked...\n");
     }
+
+    public void announceGameChoiceInvalid() {
+        out.print("\nUhoh please make a valid choice, 1 or 2.\n");
+    }
 }

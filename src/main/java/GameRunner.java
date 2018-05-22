@@ -18,6 +18,13 @@ class GameRunner {
     public void run() {
         askGameMode();
         String gameChoice = consoleDisplay.takeInput();
+        boolean gameChoiceInvalid = validator.inputNotValidGameChoice(gameChoice);
+        while (gameChoiceInvalid) {
+            consoleDisplay.announceGameChoiceInvalid();
+            gameChoice = consoleDisplay.takeInput();
+            gameChoiceInvalid = validator.inputNotValidGameChoice(gameChoice);
+        }
+
         playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleDisplay);
         if (gameChoice.equals("1")) {
             playerTwo = new PlayerComputer("Computer", Mark.playerTwoMark);
@@ -67,7 +74,7 @@ class GameRunner {
     }
 
     private boolean inputNotValidNumber(String input) {
-        return validator.inputNotValidNumber(input);
+        return validator.inputNotValidGridNumber(input);
     }
 
     public boolean moveNotLegal(String input) {
