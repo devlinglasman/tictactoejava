@@ -1,9 +1,9 @@
-class ConsoleCommunicator {
+class GameRunner {
 
     private GameLogic gameLogic;
     private ConsoleDisplay consoleDisplay;
 
-    ConsoleCommunicator(ConsoleDisplay consoleDisplay, GameLogic gameLogic) {
+    GameRunner(ConsoleDisplay consoleDisplay, GameLogic gameLogic) {
         this.consoleDisplay = consoleDisplay;
         this.gameLogic = gameLogic;
     }

@@ -80,10 +80,10 @@ public class GameLogic {
 
     public String generateComputerInput() {
         int potentialInput = 0;
-        boolean moveIllegalTrue = true;
-        while (moveIllegalTrue) {
+        boolean illegalMove = true;
+        while (illegalMove) {
             potentialInput = generateRandomComputerNumber();
-            moveIllegalTrue = moveNotLegal(potentialInput);
+            illegalMove = moveNotLegal(potentialInput);
         }
         return String.valueOf(potentialInput + 1);
     }
