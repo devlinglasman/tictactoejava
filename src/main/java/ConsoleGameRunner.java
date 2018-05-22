@@ -4,9 +4,9 @@ import java.util.Random;
 class ConsoleGameRunner {
 
     private ConsoleDisplay consoleDisplay;
-    private PlayerHuman playerHumanOne = new PlayerHuman();
-    private PlayerHuman playerHumanTwo = new PlayerHuman();
-    private Player activePlayer = Player.PLAYERONE;
+    private PlayerHuman playerHumanOne = new PlayerHuman("Player One", Mark.playerOneMarkedSquare);
+    private PlayerHuman playerHumanTwo = new PlayerHuman("Player Two", Mark.playerTwoMarkedSquare);
+    private PlayerHuman activePlayer = playerHumanOne;
     private Grid grid = new Grid();
     private Validator validator = new Validator();
 
@@ -53,8 +53,7 @@ class ConsoleGameRunner {
     }
 
     public String takeHumanInput() {
-        askForSquareChoice();
-        String input = consoleDisplay.takeInput();
+        String input = activePlayer.askForMove(consoleDisplay);
         boolean inputInvalid = inputNotLegal(input);
         while (inputInvalid) {
             announceInputInvalid();
@@ -91,7 +90,7 @@ class ConsoleGameRunner {
     }
 
     private boolean itIsHumanTurn() {
-        return activePlayer == Player.PLAYERONE;
+        return activePlayer == playerHumanOne;
     }
 
     private void announceInputInvalid() {
@@ -99,11 +98,11 @@ class ConsoleGameRunner {
     }
 
     private void askForSquareChoice() {
-        consoleDisplay.askForSquareChoice(activePlayer);
+        consoleDisplay.askForSquareChoice(activePlayer.getName());
     }
 
     private void announceWinner() {
-        consoleDisplay.announceWinner(activePlayer);
+        consoleDisplay.announceWinner(activePlayer.getName());
     }
 
     private void announceGameTied() {
@@ -135,12 +134,8 @@ class ConsoleGameRunner {
     }
 
     public void alternatePlayer() {
-        if (getActivePlayer() == Player.PLAYERONE) activePlayer = Player.PLAYERTWO;
-        else activePlayer = Player.PLAYERONE;
-    }
-
-    public Player getActivePlayer() {
-        return activePlayer;
+        if (activePlayer == playerHumanOne) activePlayer = playerHumanTwo;
+        else activePlayer = playerHumanOne;
     }
 
     public ArrayList<Mark> getGridSquares() {

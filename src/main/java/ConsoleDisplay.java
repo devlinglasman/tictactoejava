@@ -29,8 +29,8 @@ public class ConsoleDisplay {
         out.print("\n" + gridFinal + "\n");
     }
 
-    public void askForSquareChoice(Player activePlayer) {
-        out.print("\n" + activePlayer.getName() + " please select a square from 1-9.\n");
+    public void askForSquareChoice(String playerName) {
+        out.print("\n" + playerName + " please select a square from 1-9.\n");
     }
 
     public String takeInput() {
@@ -46,8 +46,8 @@ public class ConsoleDisplay {
         out.print("\nLooks like you made a boo-boo! Please enter a number from 1-9 that hasn't already been picked.\n");
     }
 
-    public void announceWinner(Player activePlayer) {
-        out.print("\nCongratulations " + activePlayer.getName() + " - You're the winner!\n");
+    public void announceWinner(String playerName) {
+        out.print("\nCongratulations " + playerName + " - You're the winner!\n");
     }
 
     public void announceGameTied() {
