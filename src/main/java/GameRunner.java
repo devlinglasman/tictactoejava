@@ -19,8 +19,14 @@ class GameRunner {
         askGameMode();
         String gameChoice = consoleDisplay.takeInput();
         if (gameChoice.equals("1")) {
+            playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleDisplay);
+            playerTwo = new PlayerComputer("Computer", Mark.playerTwoMark);
+            activePlayer = playerOne;
 //            runComputerGame();
         } else {
+            playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleDisplay);
+            playerTwo = new PlayerHuman("Player Two", Mark.playerTwoMark, consoleDisplay);
+            activePlayer = playerOne;
             runHumanGame();
         }
     }
@@ -52,50 +58,57 @@ class GameRunner {
 //    }
 
     public void runHumanGame() {
-        playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleDisplay);
-        playerTwo = new PlayerHuman("Player Two", Mark.playerTwoMark, consoleDisplay);
-        activePlayer = playerOne;
         displayGrid();
         while (gameOngoing()) {
             String input = getLegalInput(activePlayer);
-            makeMove(input);
-            announceHumanSquareChoice();
+            int inputConverted = validator.convertInputStrtoInt(input);
+            inputConverted--;
+            makeMove(inputConverted, activePlayer.getMark());
+            announceSquareChoice();
             displayGrid();
             announceIfGameOver();
             alternatePlayer();
         }
     }
 
+    public void announceSquareChoice() {
+        consoleDisplay.announceSquareChoice(activePlayer);
+    }
+
+    public void makeMove(int square, Mark mark) {
+        grid.markSquare(square, mark);
+    }
+
     public String getLegalInput(Player player) {
         String input = player.getInput();
-        boolean inputNotLegal = inputNotLegal(input);
-        while (inputNotLegal) {
-            announceInputInvalid();
+        boolean inputIllegal = inputNotLegal(input);
+        while (inputIllegal) {
+            if (player.isHumanPlayer()) announceInputInvalid();
             input = player.getInput();
-            inputNotLegal = inputNotLegal(input);
+            inputIllegal = inputNotLegal(input);
         }
         return input;
     }
 
-    private boolean inputNotLegal(String input) {
-        int inputConverted = validator.convertInputStrtoInt(input) - 1;
-        return validator.inputNotValidNumber(input) || moveNotLegal(inputConverted);
+    public boolean inputNotLegal(String input) {
+        if (inputNotValidNumber(input)) return true;
+        else if (moveNotLegal(input)) return true;
+        else return false;
     }
 
-    public void makeMove(String input) {
+    private boolean inputNotValidNumber(String input) {
+        return validator.inputNotValidNumber(input);
+    }
+
+    public boolean moveNotLegal(String input) {
         int inputConverted = validator.convertInputStrtoInt(input);
         inputConverted--;
-        grid.markSquare(inputConverted, activePlayer.getMark());
+        return grid.moveNotLegal(inputConverted);
     }
 
     public void announceIfGameOver() {
         if (gameIsWon()) announceWinner();
         else if (gameTied()) announceGameTied();
-    }
-
-
-    private void announceHumanSquareChoice() {
-        consoleDisplay.announceHumanSquareChoice();
     }
 
     private void displayGrid() {
@@ -118,16 +131,8 @@ class GameRunner {
         consoleDisplay.askGameMode();
     }
 
-    private void announceComputerTurn() {
-        consoleDisplay.announceComputerTurn();
-    }
-
     public boolean gameIsWon() {
         return grid.winningLineExistsInGrid();
-    }
-
-    public boolean moveNotLegal(int input) {
-        return grid.moveNotLegal(input);
     }
 
     public boolean gameOngoing() {

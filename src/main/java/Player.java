@@ -10,6 +10,8 @@ public abstract class Player {
 
     public abstract String getInput();
 
+    public abstract boolean isHumanPlayer();
+
     public String getName() {
         return name;
     }

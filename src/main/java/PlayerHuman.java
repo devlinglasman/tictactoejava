@@ -12,4 +12,9 @@ public class PlayerHuman extends Player {
         consoleDisplay.askForSquareChoice(getName());
         return consoleDisplay.takeInput();
     }
+
+    @Override
+    public boolean isHumanPlayer() {
+       return true;
+    }
 }

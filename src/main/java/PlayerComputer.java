@@ -12,4 +12,9 @@ public class PlayerComputer extends Player {
         int input = rand.nextInt(8);
         return Integer.toString(input);
     }
+
+    @Override
+    public boolean isHumanPlayer() {
+        return false;
+    }
 }

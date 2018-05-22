@@ -54,11 +54,7 @@ public class ConsoleDisplay {
         out.print("\nLooks like the game was a tie!\n");
     }
 
-    public void announceComputerTurn() {
-        out.print("\nComputer chooses...\n");
-    }
-
-    public void announceHumanSquareChoice() {
-        out.print("\nThanks! You picked...\n");
+    public void announceSquareChoice(Player player) {
+        out.print("\n" + player.getName() + " picked...\n");
     }
 }
