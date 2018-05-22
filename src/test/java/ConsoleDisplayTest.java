@@ -27,7 +27,7 @@ public class ConsoleDisplayTest {
         ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
 
         ArrayList<Mark> squares = new ArrayList<>();
-        squares.add(Mark.playerOneMarkedSquare);
+        squares.add(Mark.playerOneMark);
         for (int i = 0; i < 8; i++) {
             squares.add(Mark.unmarkedSquare);
         }

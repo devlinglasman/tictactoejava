@@ -1,8 +1,8 @@
 public enum Mark {
 
     unmarkedSquare(" "),
-    playerOneMarkedSquare("X"),
-    playerTwoMarkedSquare("O");
+    playerOneMark("X"),
+    playerTwoMark("O");
 
     private String stringRepresentation;
 

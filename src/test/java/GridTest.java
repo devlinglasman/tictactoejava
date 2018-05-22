@@ -18,7 +18,7 @@ public class GridTest {
     public void moveIsLegalNo() {
         Grid grid = new Grid();
 
-        grid.markSquare(0, Mark.playerOneMarkedSquare);
+        grid.markSquare(0, Mark.playerOneMark);
 
         assertTrue(grid.moveNotLegal(0));
     }
@@ -34,18 +34,18 @@ public class GridTest {
     public void markSquarePlayerOne() {
         Grid grid = new Grid();
 
-        grid.markSquare(0, Mark.playerOneMarkedSquare);
+        grid.markSquare(0, Mark.playerOneMark);
 
-        assertEquals(Mark.playerOneMarkedSquare, grid.getSquares().get(0));
+        assertEquals(Mark.playerOneMark, grid.getSquares().get(0));
     }
 
     @Test
     public void markSquarePlayerTwo() {
         Grid grid = new Grid();
 
-        grid.markSquare(0, Mark.playerTwoMarkedSquare);
+        grid.markSquare(0, Mark.playerTwoMark);
 
-        assertEquals(Mark.playerTwoMarkedSquare, grid.getSquares().get(0));
+        assertEquals(Mark.playerTwoMark, grid.getSquares().get(0));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class GridTest {
         Grid grid = new Grid();
 
         for (int i = 0; i < 9; i++) {
-            grid.markSquare(i, Mark.playerOneMarkedSquare);
+            grid.markSquare(i, Mark.playerOneMark);
         }
 
         assertTrue(grid.isFull());
@@ -71,7 +71,7 @@ public class GridTest {
         Grid grid = new Grid();
 
         for (int i = 0; i < 3; i++) {
-            grid.markSquare(i, Mark.playerOneMarkedSquare);
+            grid.markSquare(i, Mark.playerOneMark);
         }
 
         assertTrue(grid.winningLineExistsInGrid());
@@ -97,7 +97,7 @@ public class GridTest {
     public void lineIsWinnerYes() {
         Grid grid = new Grid();
         ArrayList<Mark> row1 = new ArrayList<>
-                (asList(Mark.playerOneMarkedSquare, Mark.playerOneMarkedSquare, Mark.playerOneMarkedSquare));
+                (asList(Mark.playerOneMark, Mark.playerOneMark, Mark.playerOneMark));
 
         assertTrue(grid.lineIsWinner(row1));
     }

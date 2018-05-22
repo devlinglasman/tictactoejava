@@ -5,13 +5,12 @@ public class PlayerHuman {
 
     public PlayerHuman(String name, Mark mark) {
         this.name = name;
-       this.mark = mark;
+        this.mark = mark;
     }
 
     public String askForMove(ConsoleDisplay consoleDisplay) {
-       consoleDisplay.askForSquareChoice(name);
-       String input = consoleDisplay.takeInput();
-       return input;
+        consoleDisplay.askForSquareChoice(name);
+        return consoleDisplay.takeInput();
     }
 
     public String getName() {

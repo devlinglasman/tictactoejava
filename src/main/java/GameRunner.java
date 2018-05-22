@@ -1,18 +1,22 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-class ConsoleGameRunner {
+class GameRunner {
 
+    private Grid grid;
+    private PlayerHuman playerOne;
+    private PlayerHuman playerTwo;
+    private Validator validator;
     private ConsoleDisplay consoleDisplay;
-    private PlayerHuman playerHumanOne = new PlayerHuman("Player One", Mark.playerOneMarkedSquare);
-    private PlayerHuman playerHumanTwo = new PlayerHuman("Player Two", Mark.playerTwoMarkedSquare);
-    private PlayerHuman activePlayer = playerHumanOne;
-    private Grid grid = new Grid();
-    private Validator validator = new Validator();
+    private PlayerHuman activePlayer;
 
-
-    ConsoleGameRunner(ConsoleDisplay consoleDisplay) {
+    GameRunner(Grid grid, PlayerHuman playerOne, PlayerHuman playerTwo, Validator validator, ConsoleDisplay consoleDisplay) {
+        this.grid = grid;
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
+        this.validator = validator;
         this.consoleDisplay = consoleDisplay;
+        activePlayer = playerOne;
     }
 
     public void run() {
@@ -28,7 +32,7 @@ class ConsoleGameRunner {
     public void runComputerGame() {
         displayGrid();
         while (gameOngoing()) {
-            if (itIsHumanTurn()) {
+            if (true) {
                 String input = generateComputerInput();
                 makeMove(input);
                 announceHumanSquareChoice();
@@ -43,7 +47,7 @@ class ConsoleGameRunner {
     public void runHumanGame() {
         displayGrid();
         while (gameOngoing()) {
-            String input = takeHumanInput();
+            String input = takeHumanInput(activePlayer);
             makeMove(input);
             announceHumanSquareChoice();
             displayGrid();
@@ -52,13 +56,13 @@ class ConsoleGameRunner {
         }
     }
 
-    public String takeHumanInput() {
-        String input = activePlayer.askForMove(consoleDisplay);
+    public String takeHumanInput(PlayerHuman player) {
+        String input = player.askForMove(consoleDisplay);
         boolean inputInvalid = inputNotLegal(input);
         while (inputInvalid) {
             announceInputInvalid();
             askForSquareChoice();
-            input = consoleDisplay.takeInput();
+            input = player.askForMove(consoleDisplay);
             inputInvalid = inputNotLegal(input);
         }
         return input;
@@ -87,10 +91,6 @@ class ConsoleGameRunner {
 
     private void displayGrid() {
         consoleDisplay.displayGrid(getGridSquares());
-    }
-
-    private boolean itIsHumanTurn() {
-        return activePlayer == playerHumanOne;
     }
 
     private void announceInputInvalid() {
@@ -134,8 +134,8 @@ class ConsoleGameRunner {
     }
 
     public void alternatePlayer() {
-        if (activePlayer == playerHumanOne) activePlayer = playerHumanTwo;
-        else activePlayer = playerHumanOne;
+        if (activePlayer == playerOne) activePlayer = playerTwo;
+        else activePlayer = playerOne;
     }
 
     public ArrayList<Mark> getGridSquares() {
