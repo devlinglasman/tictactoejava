@@ -1,7 +1,7 @@
 public class Validator {
 
     public boolean inputNotValidGameChoice(String input) {
-       if (inputIsNotCorrectFormat(input)) return true;
+       if (inputNotCorrectFormat(input)) return true;
        else {
            int inputConverted = convertInputStrtoInt(input);
            return inputConverted != 1 && inputConverted != 2;
@@ -9,14 +9,14 @@ public class Validator {
     }
 
     public boolean inputNotValidGridNumber(String input) {
-        if (inputIsNotCorrectFormat(input)) return true;
+        if (inputNotCorrectFormat(input)) return true;
         else {
             int inputConverted = convertInputStrtoInt(input);
             return inputIsNotWithinRange(inputConverted);
         }
     }
 
-    public boolean inputIsNotCorrectFormat(String input) {
+    public boolean inputNotCorrectFormat(String input) {
         try {
             convertInputStrtoInt(input);
         } catch (NumberFormatException error) {

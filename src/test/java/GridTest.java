@@ -8,22 +8,6 @@ import static org.junit.Assert.*;
 public class GridTest {
 
     @Test
-    public void moveIsLegalYes() {
-        Grid grid = new Grid();
-
-        assertFalse(grid.moveNotLegal(0));
-    }
-
-    @Test
-    public void moveIsLegalNo() {
-        Grid grid = new Grid();
-
-        grid.markSquare(0, Mark.playerOneMark);
-
-        assertTrue(grid.moveNotLegal(0));
-    }
-
-    @Test
     public void checkSquareEmptyBeforeMarkingSquare() {
         Grid grid = new Grid();
 
@@ -47,6 +31,23 @@ public class GridTest {
 
         assertEquals(Mark.playerTwoMark, grid.getSquares().get(0));
     }
+
+    @Test
+    public void moveNotLegalYes() {
+        Grid grid = new Grid();
+
+        grid.markSquare(0, Mark.playerOneMark);
+
+        assertTrue(grid.moveNotLegal(0));
+    }
+
+    @Test
+    public void moveNotLegalNo() {
+        Grid grid = new Grid();
+
+        assertFalse(grid.moveNotLegal(0));
+    }
+
 
     @Test
     public void isFullNo() {
@@ -85,10 +86,19 @@ public class GridTest {
     }
 
     @Test
-    public void lineIsWinnerNo() {
+    public void lineIsWinnerNo1() {
         Grid grid = new Grid();
         ArrayList<Mark> row1 = new ArrayList<>
                 (asList(Mark.unmarkedSquare, Mark.unmarkedSquare, Mark.unmarkedSquare));
+
+        assertFalse(grid.lineIsWinner(row1));
+    }
+
+    @Test
+    public void lineIsWinnerNo2() {
+        Grid grid = new Grid();
+        ArrayList<Mark> row1 = new ArrayList<>
+                (asList(Mark.unmarkedSquare, Mark.playerOneMark, Mark.playerOneMark));
 
         assertFalse(grid.lineIsWinner(row1));
     }
@@ -101,5 +111,4 @@ public class GridTest {
 
         assertTrue(grid.lineIsWinner(row1));
     }
-
 }

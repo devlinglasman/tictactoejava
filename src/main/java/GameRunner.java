@@ -50,14 +50,6 @@ class GameRunner {
         }
     }
 
-    public void announceSquareChoice() {
-        consoleDisplay.announceSquareChoice(activePlayer);
-    }
-
-    public void makeMove(int square, Mark mark) {
-        grid.markSquare(square, mark);
-    }
-
     public String getLegalInput(Player player) {
         String input = player.getInput();
         boolean inputIllegal = inputNotLegal(input);
@@ -69,7 +61,40 @@ class GameRunner {
         return input;
     }
 
-    public boolean inputNotLegal(String input) {
+    public void alternatePlayer() {
+        if (activePlayer == playerOne) activePlayer = playerTwo;
+        else activePlayer = playerOne;
+    }
+
+    public Player getPlayerOne() {
+        return playerOne;
+    }
+
+    public Player getActivePlayer() {
+        return activePlayer;
+    }
+
+    private void askGameMode() {
+        consoleDisplay.askGameMode();
+    }
+
+    private void displayGrid() {
+        consoleDisplay.displayGrid(getGridSquares());
+    }
+
+    private boolean gameOngoing() {
+        return !gameTied() && !gameIsWon();
+    }
+
+    private boolean gameIsWon() {
+        return grid.winningLineExistsInGrid();
+    }
+
+    private boolean gameTied() {
+        return grid.isFull();
+    }
+
+    private boolean inputNotLegal(String input) {
         return inputNotValidNumber(input) || moveNotLegal(input);
     }
 
@@ -77,23 +102,27 @@ class GameRunner {
         return validator.inputNotValidGridNumber(input);
     }
 
-    public boolean moveNotLegal(String input) {
+    private boolean moveNotLegal(String input) {
         int inputConverted = validator.convertInputStrtoInt(input);
         inputConverted--;
         return grid.moveNotLegal(inputConverted);
     }
 
-    public void announceIfGameOver() {
+    private void announceInputInvalid() {
+        consoleDisplay.announceInputInvalid(activePlayer.getName());
+    }
+
+    private void makeMove(int square, Mark mark) {
+        grid.markSquare(square, mark);
+    }
+
+    private void announceSquareChoice() {
+        consoleDisplay.announceSquareChoice(activePlayer.getName());
+    }
+
+    private void announceIfGameOver() {
         if (gameIsWon()) announceWinner();
         else if (gameTied()) announceGameTied();
-    }
-
-    private void displayGrid() {
-        consoleDisplay.displayGrid(getGridSquares());
-    }
-
-    private void announceInputInvalid() {
-        consoleDisplay.announceInputInvalid();
     }
 
     private void announceWinner() {
@@ -104,31 +133,9 @@ class GameRunner {
         consoleDisplay.announceGameTied();
     }
 
-    private void askGameMode() {
-        consoleDisplay.askGameMode();
-    }
-
-    public boolean gameIsWon() {
-        return grid.winningLineExistsInGrid();
-    }
-
-    public boolean gameOngoing() {
-        return !gameTied() && !gameIsWon();
-    }
-
-    public boolean gameTied() {
-        return grid.isFull();
-    }
-
-    public void alternatePlayer() {
-        if (activePlayer == playerOne) activePlayer = playerTwo;
-        else activePlayer = playerOne;
-    }
-
-    public ArrayList<Mark> getGridSquares() {
+    private ArrayList<Mark> getGridSquares() {
         return grid.getSquares();
     }
-
 }
 
 

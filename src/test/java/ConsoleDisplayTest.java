@@ -38,16 +38,6 @@ public class ConsoleDisplayTest {
     }
 
     @Test
-    public void askForSquareChoice() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
-
-        consoleDisplay.askForSquareChoice(Player.PLAYERONE);
-
-        assertEquals("\nPlayer One please select a square from 1-9.\n", ioHelper.output());
-    }
-
-    @Test
     public void askGameMode() {
         IOHelper ioHelper = new IOHelper("");
         ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
@@ -59,13 +49,43 @@ public class ConsoleDisplayTest {
     }
 
     @Test
+    public void announceSquareChoice() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
+
+        consoleDisplay.announceSquareChoice("Player One");
+
+        assertEquals("\nPlayer One picked...\n", ioHelper.output());
+    }
+
+    @Test
+    public void announceGameChoiceInvalid() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
+
+        consoleDisplay.announceGameChoiceInvalid();
+
+        assertEquals("\nUhoh please make a valid choice, 1 or 2.\n", ioHelper.output());
+    }
+
+    @Test
+    public void askForSquareChoice() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
+
+        consoleDisplay.askForSquareChoice("Player One");
+
+        assertEquals("\nPlayer One please select a square from 1-9.\n", ioHelper.output());
+    }
+
+    @Test
     public void announceInputInvalid() {
         IOHelper ioHelper = new IOHelper("");
         ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
 
-        consoleDisplay.announceInputInvalid();
+        consoleDisplay.announceInputInvalid("Player One");
 
-        assertEquals("\nLooks like you made a boo-boo! Please enter a number from 1-9 that hasn't already been picked.\n", ioHelper.output());
+        assertEquals("\nLooks like Player One made a boo-boo! Please enter a number from 1-9 that hasn't already been picked.\n", ioHelper.output());
 
     }
 
@@ -74,7 +94,7 @@ public class ConsoleDisplayTest {
         IOHelper ioHelper = new IOHelper("");
         ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
 
-        consoleDisplay.announceWinner(Player.PLAYERONE);
+        consoleDisplay.announceWinner("Player One");
 
         assertEquals("\nCongratulations Player One - You're the winner!\n", ioHelper.output());
     }
@@ -88,27 +108,4 @@ public class ConsoleDisplayTest {
 
         assertEquals("\nLooks like the game was a tie!\n", ioHelper.output());
     }
-
-    @Test
-    public void announceComputerTurn() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
-
-        consoleDisplay.announceComputerTurn();
-
-        assertEquals("\nComputer chooses...\n", ioHelper.output());
-    }
-
-    @Test
-    public void announceHumanSquareChoice() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
-
-        consoleDisplay.announceHumanSquareChoice();
-
-        assertEquals("\nThanks! You picked...\n", ioHelper.output());
-    }
-
-
-
 }

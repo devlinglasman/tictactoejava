@@ -8,12 +8,20 @@ public class Grid {
 
     private ArrayList<Mark> squares = createGrid();
 
-    public boolean moveNotLegal(int squareNumber) {
-        return squares.get(squareNumber) != Mark.unmarkedSquare;
+    public ArrayList<Mark> createGrid() {
+        List<Mark> result = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            result.add(Mark.unmarkedSquare);
+        }
+        return (ArrayList<Mark>) result;
     }
 
     public void markSquare(int squareNumber, Mark mark) {
         squares.set(squareNumber, mark);
+    }
+
+    public boolean moveNotLegal(int squareNumber) {
+        return squares.get(squareNumber) != Mark.unmarkedSquare;
     }
 
     public boolean isFull() {
@@ -37,19 +45,7 @@ public class Grid {
         return true;
     }
 
-    public ArrayList<Mark> getSquares() {
-        return squares;
-    }
-
-    private ArrayList<Mark> createGrid() {
-        List<Mark> result = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
-            result.add(Mark.unmarkedSquare);
-        }
-        return (ArrayList<Mark>) result;
-    }
-
-    private List<ArrayList<Mark>> possibleWinLines() {
+    public List<ArrayList<Mark>> possibleWinLines() {
         return asList(
                 group3Squares(0, 1, 2),
                 group3Squares(3, 4, 5),
@@ -62,7 +58,7 @@ public class Grid {
         );
     }
 
-    private ArrayList<Mark> group3Squares(int a, int b, int c) {
+    public ArrayList<Mark> group3Squares(int a, int b, int c) {
         List<Mark> result = new ArrayList<>();
         result.add(squares.get(a));
         result.add(squares.get(b));
@@ -70,4 +66,7 @@ public class Grid {
         return (ArrayList<Mark>) result;
     }
 
+    public ArrayList<Mark> getSquares() {
+        return squares;
+    }
 }
