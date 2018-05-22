@@ -1,14 +1,14 @@
 public class Validator {
 
-    public boolean inputIsNotValid(String input) {
-        if (inputIsNotValidNumber(input)) return true;
+    public boolean inputNotValidNumber(String input) {
+        if (inputIsNotCorrectFormat(input)) return true;
         else {
             int inputConverted = convertInputStrtoInt(input);
             return inputIsNotWithinRange(inputConverted);
         }
     }
 
-    public boolean inputIsNotValidNumber(String input) {
+    public boolean inputIsNotCorrectFormat(String input) {
         try {
             convertInputStrtoInt(input);
         } catch (NumberFormatException error) {

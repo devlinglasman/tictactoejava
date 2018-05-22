@@ -18,7 +18,7 @@ public class ConsoleDisplayTest {
 
         consoleDisplay.displayGrid(squares);
 
-        assertEquals("[ ][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
+        assertEquals("\n[ ][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
     }
 
     @Test
@@ -34,17 +34,17 @@ public class ConsoleDisplayTest {
 
         consoleDisplay.displayGrid(squares);
 
-        assertEquals("[X][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
+        assertEquals("\n[X][ ][ ]\n[ ][ ][ ]\n[ ][ ][ ]\n", ioHelper.output());
     }
 
     @Test
-    public void askForInput() {
+    public void askForSquareChoice() {
         IOHelper ioHelper = new IOHelper("");
         ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
 
-        consoleDisplay.askForInput(Player.PLAYERONE);
+        consoleDisplay.askForSquareChoice(Player.PLAYERONE);
 
-        assertEquals("\nHi Player One! Please select a square from 1-9\n", ioHelper.output());
+        assertEquals("\nPlayer One please select a square from 1-9.\n", ioHelper.output());
     }
 
     @Test
@@ -59,13 +59,34 @@ public class ConsoleDisplayTest {
     }
 
     @Test
+    public void announceInputInvalid() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
+
+        consoleDisplay.announceInputInvalid();
+
+        assertEquals("\nLooks like you made a boo-boo! Please enter a number from 1-9 that hasn't already been picked.\n", ioHelper.output());
+
+    }
+
+    @Test
     public void announceWinner() {
         IOHelper ioHelper = new IOHelper("");
         ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
 
         consoleDisplay.announceWinner(Player.PLAYERONE);
 
-        assertEquals("Congratulations Player One - You're the winner!\n", ioHelper.output());
+        assertEquals("\nCongratulations Player One - You're the winner!\n", ioHelper.output());
+    }
+
+    @Test
+    public void announceGameTied() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
+
+        consoleDisplay.announceGameTied();
+
+        assertEquals("\nLooks like the game was a tie!\n", ioHelper.output());
     }
 
     @Test
@@ -75,7 +96,19 @@ public class ConsoleDisplayTest {
 
         consoleDisplay.announceComputerTurn();
 
-        assertEquals("Computer chooses...\n", ioHelper.output());
-
+        assertEquals("\nComputer chooses...\n", ioHelper.output());
     }
+
+    @Test
+    public void announceHumanSquareChoice() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleDisplay consoleDisplay = new ConsoleDisplay(ioHelper.in, ioHelper.print);
+
+        consoleDisplay.announceHumanSquareChoice();
+
+        assertEquals("\nThanks! You picked...\n", ioHelper.output());
+    }
+
+
+
 }

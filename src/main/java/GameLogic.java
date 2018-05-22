@@ -15,12 +15,36 @@ public class GameLogic {
         }
     }
 
+    public String computerTurnStatus() {
+        String input = generateComputerInput();
+        return makeMoveReturnStatus(input);
+    }
+
+    public String makeMoveReturnStatus(String input) {
+        makeMove(input);
+        if (gameIsWon()) return "gameWon";
+        else if (gameTied()) return "gameTied";
+        else {
+            alternatePlayer();
+            return "nextTurn";
+        }
+    }
+
+    public boolean inputNotLegal(String input) {
+        if (inputNotValidNumber(input)) return true;
+        else {
+            int inputForMoveLegality = convertInputToGridSquare(input);
+            if (moveNotLegal(inputForMoveLegality)) return true;
+            else return false;
+        }
+    }
+
     public boolean itIsHumanTurn() {
         return activePlayer == Player.PLAYERONE;
     }
 
-    public boolean inputIsNotValid(String input) {
-        return validator.inputIsNotValid(input);
+    private boolean inputNotValidNumber(String input) {
+        return validator.inputNotValidNumber(input);
     }
 
     public int convertInputToGridSquare(String input) {
@@ -29,33 +53,44 @@ public class GameLogic {
         return inputConverted;
     }
 
-    public void makeMove(String input) {
+    private void makeMove(String input) {
         int inputConverted = convertInputToGridSquare(input);
         markSquare(inputConverted, activePlayer.getMark());
     }
 
-    public void markSquare(int squareNumber, Mark mark) {
-        grid.markSquare(squareNumber,mark);
+    private void markSquare(int squareNumber, Mark mark) {
+        grid.markSquare(squareNumber, mark);
     }
 
     public boolean gameIsWon() {
         return grid.winningLineExistsInGrid();
     }
 
-    public boolean moveIsNotLegal(String input) {
-        int inputConverted = convertInputToGridSquare(input);
-        return grid.moveIsNotLegal(inputConverted);
+    public boolean moveNotLegal(int input) {
+        return grid.moveNotLegal(input);
     }
 
     public boolean gameOngoing() {
-        if (grid.isFull() || gameIsWon()) return false;
-        else return true;
+        return !gameTied() && !gameIsWon();
+    }
+
+    private boolean gameTied() {
+        return grid.isFull();
     }
 
     public String generateComputerInput() {
+        int potentialInput = 0;
+        boolean illegalMove = true;
+        while (illegalMove) {
+            potentialInput = generateRandomComputerNumber();
+            illegalMove = moveNotLegal(potentialInput);
+        }
+        return String.valueOf(potentialInput + 1);
+    }
+    
+    private int generateRandomComputerNumber() {
         Random rand = new Random();
-        int potentialInput = rand.nextInt(9) + 1;
-        return String.valueOf(potentialInput);
+        return rand.nextInt(8);
     }
 
     public void alternatePlayer() {

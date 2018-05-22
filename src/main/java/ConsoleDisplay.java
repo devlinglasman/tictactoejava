@@ -26,11 +26,11 @@ public class ConsoleDisplay {
         for (String s : gridConglomerator) {
             gridFinal.append(s);
         }
-        out.print(gridFinal + "\n");
+        out.print("\n" + gridFinal + "\n");
     }
 
-    public void askForInput(Player activePlayer) {
-        out.print("\nHi " + activePlayer.getName() + "! Please select a square from 1-9\n");
+    public void askForSquareChoice(Player activePlayer) {
+        out.print("\n" + activePlayer.getName() + " please select a square from 1-9.\n");
     }
 
     public String takeInput() {
@@ -42,11 +42,23 @@ public class ConsoleDisplay {
                 "play against the computer or '2' to play human-vs-human.\n");
     }
 
+    public void announceInputInvalid() {
+        out.print("\nLooks like you made a boo-boo! Please enter a number from 1-9 that hasn't already been picked.\n");
+    }
+
     public void announceWinner(Player activePlayer) {
-        out.print("Congratulations " + activePlayer.getName() + " - You're the winner!\n");
+        out.print("\nCongratulations " + activePlayer.getName() + " - You're the winner!\n");
+    }
+
+    public void announceGameTied() {
+        out.print("\nLooks like the game was a tie!\n");
     }
 
     public void announceComputerTurn() {
-        out.print("Computer chooses...\n");
+        out.print("\nComputer chooses...\n");
+    }
+
+    public void announceHumanSquareChoice() {
+        out.print("\nThanks! You picked...\n");
     }
 }
