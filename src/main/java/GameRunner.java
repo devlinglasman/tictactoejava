@@ -1,19 +1,20 @@
 import java.util.ArrayList;
-import java.util.Random;
 
 class GameRunner {
 
     private Grid grid;
     private PlayerHuman playerOne;
     private PlayerHuman playerTwo;
+    private PlayerComputer playerComputer;
     private Validator validator;
     private ConsoleDisplay consoleDisplay;
     private PlayerHuman activePlayer;
 
-    GameRunner(Grid grid, PlayerHuman playerOne, PlayerHuman playerTwo, Validator validator, ConsoleDisplay consoleDisplay) {
+    GameRunner(Grid grid, PlayerHuman playerOne, PlayerHuman playerTwo, PlayerComputer playerComputer, Validator validator, ConsoleDisplay consoleDisplay) {
         this.grid = grid;
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
+        this.playerComputer = playerComputer;
         this.validator = validator;
         this.consoleDisplay = consoleDisplay;
         activePlayer = playerOne;
@@ -30,17 +31,27 @@ class GameRunner {
     }
 
     public void runComputerGame() {
+       int counter = 0;
         displayGrid();
         while (gameOngoing()) {
-            if (true) {
-                String input = generateComputerInput();
+            if (counter == 0) {
+                String input = takeHumanInput(activePlayer);
                 makeMove(input);
                 announceHumanSquareChoice();
             } else {
+                int input = playerComputer.generateComputerInput();
+                boolean illegalMove = moveNotLegal(input);
+                while (illegalMove) {
+                    input = playerComputer.generateComputerInput();
+                    illegalMove = moveNotLegal(input);
+                }
+                String inputConverted = Integer.toString(input);
+                makeMove(inputConverted);
                 announceComputerTurn();
             }
             displayGrid();
             announceIfGameOver();
+            counter = (counter + 1) % 2;
         }
     }
 
@@ -58,14 +69,18 @@ class GameRunner {
 
     public String takeHumanInput(PlayerHuman player) {
         String input = player.askForMove(consoleDisplay);
-        boolean inputInvalid = inputNotLegal(input);
-        while (inputInvalid) {
+        boolean inputNotLegal = inputNotLegal(input);
+        while (inputNotLegal) {
             announceInputInvalid();
-            askForSquareChoice();
             input = player.askForMove(consoleDisplay);
-            inputInvalid = inputNotLegal(input);
+            inputNotLegal = inputNotLegal(input);
         }
         return input;
+    }
+
+    private boolean inputNotLegal(String input) {
+        int inputConverted = validator.convertInputStrtoInt(input) - 1;
+        return validator.inputNotValidNumber(input) || moveNotLegal(inputConverted);
     }
 
     public void makeMove(String input) {
@@ -79,11 +94,6 @@ class GameRunner {
         else if (gameTied()) announceGameTied();
     }
 
-    private boolean inputNotLegal(String input) {
-        int inputConverted = validator.convertInputStrtoInt(input);
-        inputConverted--;
-        return grid.moveNotLegal(inputConverted);
-    }
 
     private void announceHumanSquareChoice() {
         consoleDisplay.announceHumanSquareChoice();
@@ -95,10 +105,6 @@ class GameRunner {
 
     private void announceInputInvalid() {
         consoleDisplay.announceInputInvalid();
-    }
-
-    private void askForSquareChoice() {
-        consoleDisplay.askForSquareChoice(activePlayer.getName());
     }
 
     private void announceWinner() {
@@ -142,20 +148,6 @@ class GameRunner {
         return grid.getSquares();
     }
 
-    public String generateComputerInput() {
-        int potentialInput = 0;
-        boolean illegalMove = true;
-        while (illegalMove) {
-            potentialInput = generateRandomComputerNumber();
-            illegalMove = moveNotLegal(potentialInput);
-        }
-        return String.valueOf(potentialInput + 1);
-    }
-
-    private int generateRandomComputerNumber() {
-        Random rand = new Random();
-        return rand.nextInt(8);
-    }
 }
 
 
