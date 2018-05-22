@@ -18,46 +18,18 @@ class GameRunner {
     public void run() {
         askGameMode();
         String gameChoice = consoleDisplay.takeInput();
+        playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleDisplay);
         if (gameChoice.equals("1")) {
-            playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleDisplay);
             playerTwo = new PlayerComputer("Computer", Mark.playerTwoMark);
             activePlayer = playerOne;
-//            runComputerGame();
         } else {
-            playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleDisplay);
             playerTwo = new PlayerHuman("Player Two", Mark.playerTwoMark, consoleDisplay);
             activePlayer = playerOne;
-            runHumanGame();
         }
+        runGame();
     }
 
-//    public void runComputerGame() {
-//        playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleDisplay);
-//        playerTwo = new PlayerComputer("Computer", Mark.playerTwoMark);
-//        displayGrid();
-//        while (gameOngoing()) {
-//            if (activePlayer == playerOne) {
-//                String input = getLegalInput(activePlayer);
-//                makeMove(input);
-//                announceHumanSquareChoice();
-//            } else {
-////                int input = playerTwo.getInput();
-//                boolean illegalMove = moveNotLegal(input);
-//                while (illegalMove) {
-//                    input = playerTwo.generateComputerInput();
-//                    illegalMove = moveNotLegal(input);
-//                }
-//                String inputConverted = Integer.toString(input);
-//                makeMove(inputConverted);
-//                announceComputerTurn();
-//            }
-//            displayGrid();
-//            announceIfGameOver();
-//            alternatePlayer();
-//        }
-//    }
-
-    public void runHumanGame() {
+    public void runGame() {
         displayGrid();
         while (gameOngoing()) {
             String input = getLegalInput(activePlayer);
@@ -91,9 +63,7 @@ class GameRunner {
     }
 
     public boolean inputNotLegal(String input) {
-        if (inputNotValidNumber(input)) return true;
-        else if (moveNotLegal(input)) return true;
-        else return false;
+        return inputNotValidNumber(input) || moveNotLegal(input);
     }
 
     private boolean inputNotValidNumber(String input) {
