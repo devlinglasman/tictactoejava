@@ -1,9 +1,11 @@
+package Core;
+
+import Core.Players.Player;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static java.util.Arrays.*;
-import static java.util.stream.Collectors.toList;
 
 public class Grid {
 
@@ -32,15 +34,16 @@ public class Grid {
         return true;
     }
 
-    public boolean winningLineExistsInGrid(Player player) {
-        for (ArrayList<Mark> line : possibleWinLines()) if (lineIsWinner(line,player)) return true;
+    public boolean winningLineExistsInGrid() {
+        for (ArrayList<Mark> line : possibleWinLines()) if (lineIsWinner(line)) return true;
         return false;
     }
 
-    public boolean lineIsWinner(ArrayList<Mark> line, Player player) {
+    public boolean lineIsWinner(ArrayList<Mark> line) {
         if (line.contains(Mark.unmarkedSquare)) return false;
+        Mark firstMark = squares.get(0);
         for (Mark m : line) {
-            if (m != player.getMark()) return false;
+            if (m != firstMark) return false;
         }
         return true;
     }

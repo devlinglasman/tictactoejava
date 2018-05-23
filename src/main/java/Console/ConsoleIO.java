@@ -1,14 +1,19 @@
+package Console;
+
+import Core.Mark;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ConsoleDisplay {
+public class ConsoleIO {
 
     private final Scanner scanner;
     private final PrintStream out;
+    private final ValidatorConsoleInput validatorConsoleInput = new ValidatorConsoleInput();
 
-    ConsoleDisplay(InputStream in, PrintStream out) {
+    public ConsoleIO(InputStream in, PrintStream out) {
         this.scanner = new Scanner(in);
         this.out = out;
     }
@@ -27,6 +32,18 @@ public class ConsoleDisplay {
             gridFinal.append(s);
         }
         out.print("\n" + gridFinal + "\n");
+    }
+
+    public int requestValidSquareChoice(String name) {
+        String input = takeInput();
+        boolean inputIllegal = validatorConsoleInput.inputNotValidGridNumber(input);
+        while (inputIllegal) {
+            announceInputInvalid(name);
+            input = takeInput();
+            inputIllegal = validatorConsoleInput.inputNotValidGridNumber(input);
+        }
+        int inputConverted = Integer.parseInt(input);
+        return inputConverted--;
     }
 
     public String takeInput() {

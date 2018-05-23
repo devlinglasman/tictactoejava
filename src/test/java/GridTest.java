@@ -1,3 +1,5 @@
+import Core.Grid;
+import Core.Mark;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -78,10 +80,10 @@ public class GridTest {
 //
 //    @Test
 //    public void winningLineExistsInGridYes() {
-//        Grid grid = new Grid();
+//        Core.Grid grid = new Core.Grid();
 //
 //        for (int i = 0; i < 3; i++) {
-//            grid.markSquare(i, Mark.playerOneMark);
+//            grid.markSquare(i, Core.Mark.playerOneMark);
 //        }
 //
 //        assertTrue(grid.winningLineExistsInGrid());
@@ -89,34 +91,34 @@ public class GridTest {
 //
 //    @Test
 //    public void winningLineExistsInGridNo() {
-//        Grid grid = new Grid();
+//        Core.Grid grid = new Core.Grid();
 //
 //        assertFalse(grid.winningLineExistsInGrid());
 //    }
 
 //    @Test
 //    public void lineIsWinnerNo1() {
-//        Grid grid = new Grid();
-//        ArrayList<Mark> row1 = new ArrayList<>
-//                (asList(Mark.unmarkedSquare, Mark.unmarkedSquare, Mark.unmarkedSquare));
+//        Core.Grid grid = new Core.Grid();
+//        ArrayList<Core.Mark> row1 = new ArrayList<>
+//                (asList(Core.Mark.unmarkedSquare, Core.Mark.unmarkedSquare, Core.Mark.unmarkedSquare));
 //
 //        assertFalse(grid.lineIsWinner(row1));
 //    }
 //
 //    @Test
 //    public void lineIsWinnerNo2() {
-//        Grid grid = new Grid();
-//        ArrayList<Mark> row1 = new ArrayList<>
-//                (asList(Mark.unmarkedSquare, Mark.playerOneMark, Mark.playerOneMark));
+//        Core.Grid grid = new Core.Grid();
+//        ArrayList<Core.Mark> row1 = new ArrayList<>
+//                (asList(Core.Mark.unmarkedSquare, Core.Mark.playerOneMark, Core.Mark.playerOneMark));
 //
 //        assertFalse(grid.lineIsWinner(row1));
 //    }
 //
 //    @Test
 //    public void lineIsWinnerYes() {
-//        Grid grid = new Grid();
-//        ArrayList<Mark> row1 = new ArrayList<>
-//                (asList(Mark.playerOneMark, Mark.playerOneMark, Mark.playerOneMark));
+//        Core.Grid grid = new Core.Grid();
+//        ArrayList<Core.Mark> row1 = new ArrayList<>
+//                (asList(Core.Mark.playerOneMark, Core.Mark.playerOneMark, Core.Mark.playerOneMark));
 //
 //        assertTrue(grid.lineIsWinner(row1));
 //    }
