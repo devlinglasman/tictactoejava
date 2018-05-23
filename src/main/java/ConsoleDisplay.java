@@ -29,10 +29,6 @@ public class ConsoleDisplay {
         out.print("\n" + gridFinal + "\n");
     }
 
-    public void askForSquareChoice(String playerName) {
-        out.print("\n" + playerName + " please select a square from 1-9.\n");
-    }
-
     public String takeInput() {
         return scanner.next();
     }
@@ -42,8 +38,20 @@ public class ConsoleDisplay {
                 "play against the computer or '2' to play human-vs-human.\n");
     }
 
-    public void announceInputInvalid() {
-        out.print("\nLooks like you made a boo-boo! Please enter a number from 1-9 that hasn't already been picked.\n");
+    public void announceGameChoiceInvalid() {
+        out.print("\nUhoh please make a valid choice, 1 or 2.\n");
+    }
+
+    public void askForSquareChoice(String playerName) {
+        out.print("\n" + playerName + " please select a square from 1-9.\n");
+    }
+
+    public void announceInputInvalid(String playerName) {
+        out.print("\nLooks like " + playerName + " made a boo-boo! Please enter a number from 1-9 that hasn't already been picked.\n");
+    }
+
+    public void announceSquareChoice(String playerName) {
+        out.print("\n" + playerName + " picked...\n");
     }
 
     public void announceWinner(String playerName) {
@@ -52,13 +60,5 @@ public class ConsoleDisplay {
 
     public void announceGameTied() {
         out.print("\nLooks like the game was a tie!\n");
-    }
-
-    public void announceComputerTurn() {
-        out.print("\nComputer chooses...\n");
-    }
-
-    public void announceHumanSquareChoice() {
-        out.print("\nThanks! You picked...\n");
     }
 }
