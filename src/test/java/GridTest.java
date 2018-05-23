@@ -48,6 +48,15 @@ public class GridTest {
         assertFalse(grid.moveNotLegal(0));
     }
 
+    @Test
+    public void emptySquareIndices() {
+        Grid grid = new Grid();
+
+        ArrayList<Integer> emptySquares = new ArrayList<>
+                (asList(0,1,2,3,4,5,6,7,8));
+
+        assertEquals(emptySquares, grid.emptySquareIndices());
+    }
 
     @Test
     public void isFullNo() {
@@ -66,49 +75,49 @@ public class GridTest {
 
         assertTrue(grid.isFull());
     }
+//
+//    @Test
+//    public void winningLineExistsInGridYes() {
+//        Grid grid = new Grid();
+//
+//        for (int i = 0; i < 3; i++) {
+//            grid.markSquare(i, Mark.playerOneMark);
+//        }
+//
+//        assertTrue(grid.winningLineExistsInGrid());
+//    }
+//
+//    @Test
+//    public void winningLineExistsInGridNo() {
+//        Grid grid = new Grid();
+//
+//        assertFalse(grid.winningLineExistsInGrid());
+//    }
 
-    @Test
-    public void winningLineExistsInGridYes() {
-        Grid grid = new Grid();
-
-        for (int i = 0; i < 3; i++) {
-            grid.markSquare(i, Mark.playerOneMark);
-        }
-
-        assertTrue(grid.winningLineExistsInGrid());
-    }
-
-    @Test
-    public void winningLineExistsInGridNo() {
-        Grid grid = new Grid();
-
-        assertFalse(grid.winningLineExistsInGrid());
-    }
-
-    @Test
-    public void lineIsWinnerNo1() {
-        Grid grid = new Grid();
-        ArrayList<Mark> row1 = new ArrayList<>
-                (asList(Mark.unmarkedSquare, Mark.unmarkedSquare, Mark.unmarkedSquare));
-
-        assertFalse(grid.lineIsWinner(row1));
-    }
-
-    @Test
-    public void lineIsWinnerNo2() {
-        Grid grid = new Grid();
-        ArrayList<Mark> row1 = new ArrayList<>
-                (asList(Mark.unmarkedSquare, Mark.playerOneMark, Mark.playerOneMark));
-
-        assertFalse(grid.lineIsWinner(row1));
-    }
-
-    @Test
-    public void lineIsWinnerYes() {
-        Grid grid = new Grid();
-        ArrayList<Mark> row1 = new ArrayList<>
-                (asList(Mark.playerOneMark, Mark.playerOneMark, Mark.playerOneMark));
-
-        assertTrue(grid.lineIsWinner(row1));
-    }
+//    @Test
+//    public void lineIsWinnerNo1() {
+//        Grid grid = new Grid();
+//        ArrayList<Mark> row1 = new ArrayList<>
+//                (asList(Mark.unmarkedSquare, Mark.unmarkedSquare, Mark.unmarkedSquare));
+//
+//        assertFalse(grid.lineIsWinner(row1));
+//    }
+//
+//    @Test
+//    public void lineIsWinnerNo2() {
+//        Grid grid = new Grid();
+//        ArrayList<Mark> row1 = new ArrayList<>
+//                (asList(Mark.unmarkedSquare, Mark.playerOneMark, Mark.playerOneMark));
+//
+//        assertFalse(grid.lineIsWinner(row1));
+//    }
+//
+//    @Test
+//    public void lineIsWinnerYes() {
+//        Grid grid = new Grid();
+//        ArrayList<Mark> row1 = new ArrayList<>
+//                (asList(Mark.playerOneMark, Mark.playerOneMark, Mark.playerOneMark));
+//
+//        assertTrue(grid.lineIsWinner(row1));
+//    }
 }

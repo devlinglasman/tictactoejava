@@ -1,3 +1,4 @@
+import java.lang.reflect.GenericArrayType;
 import java.util.ArrayList;
 
 class GameRunner {
@@ -8,6 +9,7 @@ class GameRunner {
     private Validator validator;
     private ConsoleDisplay consoleDisplay;
     private Player activePlayer;
+    private Player opponent;
 
     GameRunner(Grid grid, Validator validator, ConsoleDisplay consoleDisplay) {
         this.grid = grid;
@@ -28,26 +30,37 @@ class GameRunner {
         playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleDisplay);
         if (gameChoice.equals("1")) {
             playerTwo = new PlayerComputer("Computer", Mark.playerTwoMark);
-            activePlayer = playerOne;
         } else {
             playerTwo = new PlayerHuman("Player Two", Mark.playerTwoMark, consoleDisplay);
-            activePlayer = playerOne;
         }
+        activePlayer = playerOne;
+        opponent = playerTwo;
         runGame();
     }
 
     public void runGame() {
         displayGrid();
         while (gameOngoing()) {
-            String input = getLegalInput(activePlayer);
-            int inputConverted = validator.convertInputStrtoInt(input);
-            inputConverted--;
-            makeMove(inputConverted, activePlayer.getMark());
+            int inputForGrid;
+            if (activePlayer.isHumanPlayer()) {
+                String input = getLegalInput(activePlayer);
+                inputForGrid = validator.convertInputStrtoInt(input);
+                inputForGrid--;
+            } else {
+                inputForGrid = getComputerInput();
+            }
+            makeMove(inputForGrid, activePlayer.getMark());
             announceSquareChoice();
             displayGrid();
             announceIfGameOver();
             alternatePlayer();
         }
+    }
+
+    public int getComputerInput() {
+        GameState gameState = new GameState(grid, activePlayer, opponent);
+        Minimax minimax = new Minimax(gameState);
+        activePlayer.getInput(minimax);
     }
 
     public String getLegalInput(Player player) {
@@ -62,8 +75,14 @@ class GameRunner {
     }
 
     public void alternatePlayer() {
-        if (activePlayer == playerOne) activePlayer = playerTwo;
-        else activePlayer = playerOne;
+        if (activePlayer == playerOne) {
+            activePlayer = playerTwo;
+            opponent = playerOne;
+        }
+        else {
+            activePlayer = playerOne;
+            opponent = playerTwo;
+        }
     }
 
     public Player getPlayerOne() {
@@ -87,7 +106,7 @@ class GameRunner {
     }
 
     private boolean gameIsWon() {
-        return grid.winningLineExistsInGrid();
+        return grid.winningLineExistsInGrid(activePlayer);
     }
 
     private boolean gameTied() {

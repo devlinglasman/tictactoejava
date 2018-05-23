@@ -3,6 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static java.util.Arrays.*;
+import static java.util.stream.Collectors.toList;
 
 public class Grid {
 
@@ -31,16 +32,15 @@ public class Grid {
         return true;
     }
 
-    public boolean winningLineExistsInGrid() {
-        for (ArrayList<Mark> line : possibleWinLines()) if (lineIsWinner(line)) return true;
+    public boolean winningLineExistsInGrid(Player player) {
+        for (ArrayList<Mark> line : possibleWinLines()) if (lineIsWinner(line,player)) return true;
         return false;
     }
 
-    public boolean lineIsWinner(ArrayList<Mark> line) {
+    public boolean lineIsWinner(ArrayList<Mark> line, Player player) {
         if (line.contains(Mark.unmarkedSquare)) return false;
-        Mark first = line.get(0);
         for (Mark m : line) {
-            if (!m.equals(first)) return false;
+            if (m != player.getMark()) return false;
         }
         return true;
     }
@@ -66,7 +66,23 @@ public class Grid {
         return (ArrayList<Mark>) result;
     }
 
+    public ArrayList<Integer> emptySquareIndices() {
+        ArrayList<Integer> result = new ArrayList<>();
+        for (int i = 0; i < squares.size(); i++) {
+            if (squares.get(i) == Mark.unmarkedSquare) result.add(i);
+        }
+        return result;
+    }
+
+    public void setASquare(Integer index, Player player) {
+        squares.set(index, player.getMark());
+    }
+
     public ArrayList<Mark> getSquares() {
         return squares;
+    }
+
+    public void setSquares(ArrayList<Mark> squares) {
+        this.squares = squares;
     }
 }
