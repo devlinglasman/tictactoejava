@@ -45,9 +45,9 @@ public class Game {
             makeMove(input, activePlayer.getMark());
             announceSquareChoice();
             displayGrid();
-            announceIfGameOver();
             alternatePlayer();
         }
+        announceResult();
     }
 
     public void alternatePlayer() {
@@ -94,13 +94,14 @@ public class Game {
         consoleIO.announceSquareChoice(activePlayer.getName());
     }
 
-    private void announceIfGameOver() {
+    private void announceResult() {
         if (gameIsWon()) announceWinner();
         else if (gameTied()) announceGameTied();
     }
 
     private void announceWinner() {
-        consoleIO.announceWinner(activePlayer.getName());
+        if (grid.reportWinningMark() == Mark.playerOneMark) consoleIO.announceWinner(playerOne.getName());
+        else consoleIO.announceWinner(playerTwo.getName());
     }
 
     private void announceGameTied() {

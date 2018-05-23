@@ -34,6 +34,13 @@ public class Grid {
         return true;
     }
 
+    public Mark reportWinningMark() {
+        for (ArrayList<Mark> line : possibleWinLines()) if (lineIsWinner(line)) {
+            return line.get(0);
+        }
+        return Mark.unmarkedSquare;
+    }
+
     public boolean winningLineExistsInGrid() {
         for (ArrayList<Mark> line : possibleWinLines()) if (lineIsWinner(line)) return true;
         return false;
