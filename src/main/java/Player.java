@@ -8,6 +8,8 @@ public abstract class Player {
         this.mark = mark;
     }
 
+    public abstract String getInput();
+
     public abstract boolean isHumanPlayer();
 
     public String getName() {

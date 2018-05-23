@@ -14,7 +14,7 @@ public class Minimax {
         else return 0;
     }
 
-    public Integer minimaxCalculation(GameState currentGameState) {
+    public Integer minimaxCalculator(GameState currentGameState) {
         Integer score = score(currentGameState);
         if (currentGameState.gameOver()) return score;
 
@@ -25,7 +25,7 @@ public class Minimax {
             for (Integer emptySquareIndex : theseEmptySquares) {
                 GameState nextGameState = new GameState(currentGameState.getGrid(), currentGameState.getOpponent(), currentGameState.getActivePlayer());
                 nextGameState.getGrid().setASquare(emptySquareIndex, nextGameState.getActivePlayer());
-                Integer minimaxScore = minimaxCalculation(nextGameState);
+                Integer minimaxScore = minimaxCalculator(nextGameState);
                 scores.add(minimaxScore);
             }
 
@@ -52,10 +52,6 @@ public class Minimax {
             }
 
         }
-    }
-
-    public GameState getInitialGameState() {
-        return initialGameState;
     }
 }
 

@@ -1,11 +1,16 @@
+import java.util.Random;
+
 public class PlayerComputer extends Player {
 
     public PlayerComputer(String name, Mark mark) {
         super(name, mark);
     }
 
-    public int getComputerInput(Minimax minimax) {
-        minimax.minimaxCalculation(minimax.getInitialGameState());
+    @Override
+    public String getInput() {
+        Random rand = new Random();
+        int input = rand.nextInt(8);
+        return Integer.toString(input);
     }
 
     @Override

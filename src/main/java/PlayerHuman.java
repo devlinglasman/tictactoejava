@@ -7,7 +7,8 @@ public class PlayerHuman extends Player {
         this.consoleDisplay = consoleDisplay;
     }
 
-    public String getHumanInput() {
+    @Override
+    public String getInput() {
         consoleDisplay.askForSquareChoice(getName());
         return consoleDisplay.takeInput();
     }

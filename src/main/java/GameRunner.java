@@ -6,6 +6,7 @@ class GameRunner {
     private Grid grid;
     private Player playerOne;
     private Player playerTwo;
+    private Player computerPlayer;
     private Validator validator;
     private ConsoleDisplay consoleDisplay;
     private Player activePlayer;
@@ -15,6 +16,10 @@ class GameRunner {
         this.grid = grid;
         this.validator = validator;
         this.consoleDisplay = consoleDisplay;
+        playerOne = new PlayerHuman("Player One", Mark.playerOneMark, this.consoleDisplay);
+        playerTwo = new PlayerHuman("Player Two", Mark.playerTwoMark, this.consoleDisplay);
+        computerPlayer = new PlayerComputer("Computer", Mark.playerTwoMark);
+        activePlayer = playerOne;
     }
 
     public void run() {
@@ -26,15 +31,11 @@ class GameRunner {
             gameChoice = consoleDisplay.takeInput();
             gameChoiceInvalid = validator.inputNotValidGameChoice(gameChoice);
         }
-
-        playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleDisplay);
         if (gameChoice.equals("1")) {
-            playerTwo = new PlayerComputer("Computer", Mark.playerTwoMark);
+            opponent = playerTwo;
         } else {
-            playerTwo = new PlayerHuman("Player Two", Mark.playerTwoMark, consoleDisplay);
+            opponent = computerPlayer;
         }
-        activePlayer = playerOne;
-        opponent = playerTwo;
         runGame();
     }
 
@@ -43,7 +44,7 @@ class GameRunner {
         while (gameOngoing()) {
             int inputForGrid;
             if (activePlayer.isHumanPlayer()) {
-                String input = getLegalInput(activePlayer);
+                String input = getLegalInput();
                 inputForGrid = validator.convertInputStrtoInt(input);
                 inputForGrid--;
             } else {
@@ -60,15 +61,15 @@ class GameRunner {
     public int getComputerInput() {
         GameState gameState = new GameState(grid, activePlayer, opponent);
         Minimax minimax = new Minimax(gameState);
-        activePlayer.getInput(minimax);
+        return minimax.minimaxCalculator(gameState);
     }
 
-    public String getLegalInput(Player player) {
-        String input = player.getInput();
+    public String getLegalInput() {
+        String input = activePlayer.getInput();
         boolean inputIllegal = inputNotLegal(input);
         while (inputIllegal) {
-            if (player.isHumanPlayer()) announceInputInvalid();
-            input = player.getInput();
+            announceInputInvalid();
+            input = activePlayer.getInput();
             inputIllegal = inputNotLegal(input);
         }
         return input;
@@ -78,8 +79,7 @@ class GameRunner {
         if (activePlayer == playerOne) {
             activePlayer = playerTwo;
             opponent = playerOne;
-        }
-        else {
+        } else {
             activePlayer = playerOne;
             opponent = playerTwo;
         }
@@ -91,6 +91,10 @@ class GameRunner {
 
     public Player getActivePlayer() {
         return activePlayer;
+    }
+
+    public Player getOpponent() {
+        return opponent;
     }
 
     private void askGameMode() {
@@ -106,7 +110,7 @@ class GameRunner {
     }
 
     private boolean gameIsWon() {
-        return grid.winningLineExistsInGrid(activePlayer);
+        return grid.winningLineExistsInGrid(activePlayer) || grid.winningLineExistsInGrid(opponent);
     }
 
     private boolean gameTied() {
