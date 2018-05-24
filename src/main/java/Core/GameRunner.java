@@ -5,7 +5,7 @@ import Core.Players.Player;
 
 import java.util.ArrayList;
 
-public class Game {
+public class GameRunner {
 
     private Grid grid;
     private Player playerOne;
@@ -13,7 +13,7 @@ public class Game {
     private ConsoleIO consoleIO;
     private Player activePlayer;
 
-    public Game(Grid grid, Player playerOne, Player playerTwo, ConsoleIO consoleIO) {
+    public GameRunner(Grid grid, Player playerOne, Player playerTwo, ConsoleIO consoleIO) {
         this.grid = grid;
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
@@ -41,7 +41,10 @@ public class Game {
     public void runGame() {
         displayGrid();
         while (gameOngoing()) {
-            int input = activePlayer.getInput(grid);
+            Grid gridClone = new Grid();
+            gridClone.setSquares(grid.copySquares());
+
+            int input = activePlayer.getInput(gridClone);
             makeMove(input, activePlayer.getMark());
             announceSquareChoice();
             displayGrid();
@@ -58,32 +61,12 @@ public class Game {
         }
     }
 
-    public Player getPlayerOne() {
-        return playerOne;
-    }
-
-    public Player getActivePlayer() {
-        return activePlayer;
-    }
-
-    private void askGameMode() {
-        consoleIO.askGameMode();
-    }
-
     private void displayGrid() {
         consoleIO.displayGrid(getGridSquares());
     }
 
     private boolean gameOngoing() {
-        return !gameTied() && !gameIsWon();
-    }
-
-    private boolean gameIsWon() {
-        return grid.winningLineExistsInGrid();
-    }
-
-    private boolean gameTied() {
-        return grid.isFull();
+        return grid.gameOngoing();
     }
 
     private void makeMove(int square, Mark mark) {
@@ -95,21 +78,26 @@ public class Game {
     }
 
     private void announceResult() {
-        if (gameIsWon()) announceWinner();
-        else if (gameTied()) announceGameTied();
+        if (grid.winningLineExistsInGrid()) announceWinner();
+        else consoleIO.announceGameTied();
     }
 
     private void announceWinner() {
-        if (grid.reportWinningMark() == Mark.playerOneMark) consoleIO.announceWinner(playerOne.getName());
-        else consoleIO.announceWinner(playerTwo.getName());
-    }
-
-    private void announceGameTied() {
-        consoleIO.announceGameTied();
+        if (grid.reportWinningMark() == activePlayer.getMark()) {
+            consoleIO.announceWinner(activePlayer.getName());
+        }
+        else {
+            alternatePlayer();
+            consoleIO.announceWinner(activePlayer.getName());
+        }
     }
 
     private ArrayList<Mark> getGridSquares() {
         return grid.getSquares();
+    }
+
+    public Grid getGrid() {
+        return grid;
     }
 }
 

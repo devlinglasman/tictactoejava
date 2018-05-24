@@ -2,6 +2,7 @@ package Core;
 
 import Core.Players.Player;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,10 @@ public class Grid {
         return squares.get(squareNumber) != Mark.unmarkedSquare;
     }
 
+    public boolean gameOngoing() {
+        return !isFull() && !winningLineExistsInGrid();
+    }
+
     public boolean isFull() {
         for (Mark m : squares) {
             if (m.equals(Mark.unmarkedSquare)) return false;
@@ -48,7 +53,7 @@ public class Grid {
 
     public boolean lineIsWinner(ArrayList<Mark> line) {
         if (line.contains(Mark.unmarkedSquare)) return false;
-        Mark firstMark = squares.get(0);
+        Mark firstMark = line.get(0);
         for (Mark m : line) {
             if (m != firstMark) return false;
         }
@@ -84,12 +89,22 @@ public class Grid {
         return result;
     }
 
-    public void setASquare(Integer index, Player player) {
-        squares.set(index, player.getMark());
+    public void setASquare(Integer index, Mark activePlayerMark) {
+        squares.set(index, activePlayerMark);
     }
 
     public ArrayList<Mark> getSquares() {
         return squares;
+    }
+
+    public ArrayList<Mark> copySquares() {
+        ArrayList<Mark> result = new ArrayList<>();
+
+        for (Mark mark : squares) {
+           result.add(mark);
+        }
+
+        return result;
     }
 
     public void setSquares(ArrayList<Mark> squares) {
