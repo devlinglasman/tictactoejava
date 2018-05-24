@@ -16,12 +16,11 @@ public class MainRunner {
         Player playerTwo = new PlayerComputer("Computer", Mark.playerTwoMark);
         GameRunner gameRunner = new GameRunner(grid, playerOne, playerTwo, consoleIO);
 
-        gameRunner.getGrid().setASquare(0, playerOne.getMark());
-        gameRunner.getGrid().setASquare(2, playerTwo.getMark());
-        gameRunner.getGrid().setASquare(3, playerTwo.getMark());
-        gameRunner.getGrid().setASquare(6, playerTwo.getMark());
-        gameRunner.getGrid().setASquare(7, playerOne.getMark());
-        gameRunner.getGrid().setASquare(8, playerOne.getMark());
+        gameRunner.getGrid().setASquare(0, playerTwo.getMark());
+        gameRunner.getGrid().setASquare(2, playerOne.getMark());
+        gameRunner.getGrid().setASquare(3, playerOne.getMark());
+        gameRunner.getGrid().setASquare(7, playerTwo.getMark());
+        gameRunner.getGrid().setASquare(8, playerTwo.getMark());
 
         gameRunner.alternatePlayer();
 

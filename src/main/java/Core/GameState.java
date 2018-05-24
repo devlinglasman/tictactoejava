@@ -19,7 +19,7 @@ public class GameState {
     }
 
     public Mark getOpponentMark() {
-        if (getActivePlayerMark() == Mark.playerOneMark) return Mark.playerTwoMark;
+        if (activePlayerMark == Mark.playerOneMark) return Mark.playerTwoMark;
         else return Mark.playerOneMark;
     }
 }

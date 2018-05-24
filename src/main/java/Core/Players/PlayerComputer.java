@@ -14,7 +14,9 @@ public class PlayerComputer extends Player {
 
     @Override
     public int getInput(Grid grid) {
-        GameState initialGameState = new GameState(grid, getMark());
+        Grid gridClone = new Grid();
+        gridClone.setSquares(grid.copySquares());
+        GameState initialGameState = new GameState(gridClone, getMark());
         return emptySquareChoice(initialGameState);
     }
 
@@ -23,8 +25,11 @@ public class PlayerComputer extends Player {
         ArrayList<Integer> theseEmptySquares = gameState.getGrid().emptySquareIndices();
 
         for (Integer emptySquare : theseEmptySquares) {
-            gameState.getGrid().setASquare(emptySquare, gameState.getActivePlayerMark());
-            Integer minimaxScore = minimaxCalculator(gameState);
+            Grid gridClone = new Grid();
+            gridClone.setSquares(gameState.getGrid().copySquares());
+            GameState nextGameState = new GameState(gridClone, gameState.getOpponentMark());
+            nextGameState.getGrid().setASquare(emptySquare, getMark());
+            Integer minimaxScore = minimaxCalculator(nextGameState);
             scores.add(minimaxScore);
         }
 
@@ -41,7 +46,7 @@ public class PlayerComputer extends Player {
 
     public int score(GameState gameState) {
         if (gameState.getGrid().winningLineExistsInGrid()) {
-            if (gameState.getGrid().reportWinningMark() == gameState.getActivePlayerMark()) return 10;
+            if (gameState.getGrid().reportWinningMark() == getMark()) return 10;
             else return -10;
         } else return 0;
     }
@@ -55,8 +60,10 @@ public class PlayerComputer extends Player {
             ArrayList<Integer> theseEmptySquares = gameState.getGrid().emptySquareIndices();
 
             for (Integer emptySquareIndex : theseEmptySquares) {
-                GameState nextGameState = new GameState(gameState.getGrid(), gameState.getOpponentMark());
-                nextGameState.getGrid().setASquare(emptySquareIndex, nextGameState.getActivePlayerMark());
+                Grid gridClone = new Grid();
+                gridClone.setSquares(gameState.getGrid().copySquares());
+                GameState nextGameState = new GameState(gridClone, gameState.getOpponentMark());
+                nextGameState.getGrid().setASquare(emptySquareIndex, gameState.getActivePlayerMark());
                 Integer minimaxScore = minimaxCalculator(nextGameState);
                 scores.add(minimaxScore);
             }
