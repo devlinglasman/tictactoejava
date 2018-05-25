@@ -21,23 +21,6 @@ public class GameRunner {
         activePlayer = playerOne;
     }
 
-//    public void run() {
-//        askGameMode();
-//        String gameChoice = consoleIO.takeInput();
-//        boolean gameChoiceInvalid = validatorConsoleInput.inputNotValidGameChoice(gameChoice);
-//        while (gameChoiceInvalid) {
-//            consoleIO.announceGameChoiceInvalid();
-//            gameChoice = consoleIO.takeInput();
-//            gameChoiceInvalid = validatorConsoleInput.inputNotValidGameChoice(gameChoice);
-//        }
-//        if (gameChoice.equals("1")) {
-//            opponent = playerTwo;
-//        } else {
-//            opponent = computerPlayer;
-//        }
-//        runGame();
-//    }
-
     public void runGame() {
         displayGrid();
         while (gameOngoing()) {
