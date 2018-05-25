@@ -13,8 +13,7 @@ public class GameState {
     }
 
     public boolean isGameTied() {
-        if (isGameOver()) return grid.winningLineExistsInGrid();
-        else return false;
+        return !grid.winningLineExistsInGrid();
     }
 
     public Grid getGrid() {

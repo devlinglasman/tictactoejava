@@ -14,11 +14,26 @@ public class PlayerComputer extends Player {
 
     @Override
     public int getInput(Grid grid) {
-        Grid gridClone = new Grid();
-        gridClone.setSquares(grid.copySquares());
+        ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
+        ArrayList<Integer> scores = new ArrayList<>();
 
-        GameState gameState = new GameState(gridClone);
-        return moveChoice(gameState, getMark());
+        for (Integer emptySquare : emptyGridSquares) {
+            Grid gridClone = new Grid();
+            gridClone.setSquares(grid.copySquares());
+            GameState emulatedGameState = new GameState(gridClone);
+            emulatedGameState.getGrid().setASquare(emptySquare, getMark());
+//            If it's in terminal state:
+            if (emulatedGameState.isGameOver()) {
+                Integer scoreForEmulate = returnScoreForTerminalGameState(emulatedGameState);
+                scores.add(scoreForEmulate);
+            } else {
+//                Switch optimising Player and call minimax.
+                Integer gameScore = findGameStateScore(emulatedGameState, Mark.playerOneMark);
+                scores.add(gameScore);
+            }
+        }
+        Integer maxIndex = findMaxIndex(scores);
+        return emptyGridSquares.get(maxIndex);
     }
 
     public int returnScoreForTerminalGameState(GameState gameState) {
@@ -27,10 +42,10 @@ public class PlayerComputer extends Player {
         else return -1;
     }
 
-    public int moveChoice(GameState gameState, Mark optimisingPlayerMark) {
+    public int findGameStateScore(GameState gameState, Mark optimisingPlayerMark) {
 
         ArrayList<Integer> emptyGridSquares = gameState.getGrid().emptySquareIndices();
-       ArrayList<Integer> scores = new ArrayList<>();
+        ArrayList<Integer> scores = new ArrayList<>();
 
         for (Integer emptySquare : emptyGridSquares) {
             Grid gridClone = new Grid();
@@ -42,38 +57,43 @@ public class PlayerComputer extends Player {
                 Integer scoreForEmulate = returnScoreForTerminalGameState(emulatedGameState);
                 scores.add(scoreForEmulate);
             } else {
-//                Switch activePlayer
-                if (optimisingPlayerMark == getMark()) optimisingPlayerMark = Mark.playerOneMark;
-                else optimisingPlayerMark = getMark();
-                return moveChoice(emulatedGameState, optimisingPlayerMark);
+//                Switch optimising Player and call minimax.
+                Mark temporaryOptimisingPlayer;
+                if (optimisingPlayerMark == getMark()) temporaryOptimisingPlayer = Mark.playerOneMark;
+                else temporaryOptimisingPlayer = getMark();
+                Integer gameScore = findGameStateScore(emulatedGameState, temporaryOptimisingPlayer);
+                scores.add(gameScore);
             }
         }
 //        If player looking at the emulated gameStates is currently the maximising player (computer)...:
         if (optimisingPlayerMark == getMark()) {
             Integer maxIndex = findMaxIndex(scores);
-            return emptyGridSquares.get(maxIndex);
+            return scores.get(maxIndex);
         } else {
             Integer minIndex = findMinIndex(scores);
-            return emptyGridSquares.get(minIndex);
+            return scores.get(minIndex);
         }
-
     }
 
     public int findMaxIndex(ArrayList<Integer> scores) {
+        Integer score = -2;
         Integer maxIndex = 0;
-        for (Integer score : scores) {
-            if (score > maxIndex) {
-                maxIndex = score;
+        for (int i = 0; i < scores.size(); i++) {
+            if (scores.get(i) > score) {
+                maxIndex = i;
+                score = scores.get(i);
             }
         }
         return maxIndex;
     }
 
     public int findMinIndex(ArrayList<Integer> scores) {
+        Integer score = 2;
         Integer minIndex = 0;
-        for (Integer score : scores) {
-            if (score > minIndex) {
-                minIndex = score;
+        for (int i = 0; i < scores.size(); i++) {
+            if (scores.get(i) < score) {
+                minIndex = i;
+                score = scores.get(i);
             }
         }
         return minIndex;
