@@ -16,81 +16,44 @@ public class PlayerComputer extends Player {
     public int getInput(Grid grid) {
         Grid gridClone = new Grid();
         gridClone.setSquares(grid.copySquares());
-        GameState initialGameState = new GameState(gridClone, getMark());
-        return emptySquareChoice(initialGameState);
+
+        GameState gameState = new GameState(gridClone, getMark());
+        return moveChoice(gameState);
     }
 
-    public Integer emptySquareChoice(GameState gameState) {
-        ArrayList<Integer> scores = new ArrayList<>();
-        ArrayList<Integer> theseEmptySquares = gameState.getGrid().emptySquareIndices();
+    public int returnScoreForTerminalGameState(GameState gameState) {
+        if (gameState.isGameTied()) return 0;
+        else if (gameState.getGrid().reportWinningMark() == getMark()) return 1;
+        else return -1;
+    }
 
-        for (Integer emptySquare : theseEmptySquares) {
+    public int moveChoice(GameState gameState) {
+
+        ArrayList<Integer> emptyGridSquares = gameState.getGrid().emptySquareIndices();
+       ArrayList<Integer> scores = new ArrayList<>();
+
+        for (Integer emptySquare : emptyGridSquares) {
             Grid gridClone = new Grid();
             gridClone.setSquares(gameState.getGrid().copySquares());
-            GameState nextGameState = new GameState(gridClone, gameState.getOpponentMark());
-            nextGameState.getGrid().setASquare(emptySquare, getMark());
-            Integer minimaxScore = minimaxCalculator(nextGameState);
-            scores.add(minimaxScore);
-        }
 
-        Integer maxScoreIndex = 0;
-        for (int i = 0; i < scores.size(); i++) {
-            Integer newScoreIndex = scores.get(i);
-            if ((newScoreIndex > scores.get(maxScoreIndex))) {
-                maxScoreIndex = i;
-            }
+            GameState emulatedGameState = new GameState(gridClone, getMark());
+//            If it's in terminal state:
+            Integer scoreForEmulate = returnScoreForTerminalGameState(emulatedGameState);
+            scores.add(scoreForEmulate);
         }
-
-        return theseEmptySquares.get(maxScoreIndex);
+//        If playing looking at the emulated gameStates is currently the maximising player (computer) then:
+        Integer maxIndex = findMaxIndex(scores);
+        return emptyGridSquares.get(maxIndex);
     }
 
-    public int score(GameState gameState) {
-        if (gameState.getGrid().winningLineExistsInGrid()) {
-            if (gameState.getGrid().reportWinningMark() == getMark()) return 10;
-            else return -10;
-        } else return 0;
-    }
-
-    public Integer minimaxCalculator(GameState gameState) {
-        Integer score = score(gameState);
-        if (!gameState.getGrid().gameOngoing()) return score;
-
-        else {
-            ArrayList<Integer> scores = new ArrayList<>();
-            ArrayList<Integer> theseEmptySquares = gameState.getGrid().emptySquareIndices();
-
-            for (Integer emptySquareIndex : theseEmptySquares) {
-                Grid gridClone = new Grid();
-                gridClone.setSquares(gameState.getGrid().copySquares());
-                GameState nextGameState = new GameState(gridClone, gameState.getOpponentMark());
-                nextGameState.getGrid().setASquare(emptySquareIndex, gameState.getActivePlayerMark());
-                Integer minimaxScore = minimaxCalculator(nextGameState);
-                scores.add(minimaxScore);
-            }
-
-            if (gameState.getActivePlayerMark() == getMark()) {
-                Integer maxScoreIndex = 0;
-
-                for (int i = 0; i < scores.size(); i++) {
-                    Integer newScoreIndex = scores.get(i);
-                    if ((newScoreIndex > scores.get(maxScoreIndex))) {
-                        maxScoreIndex = i;
-                    }
-                }
-                return scores.get(maxScoreIndex);
-
-            } else {
-                Integer minScoreIndex = 0;
-
-                for (int i = 0; i < scores.size(); i++) {
-                    Integer newScoreIndex = scores.get(i);
-                    if ((newScoreIndex < scores.get(minScoreIndex))) {
-                        minScoreIndex = i;
-                    }
-                }
-                return scores.get(minScoreIndex);
+    public int findMaxIndex(ArrayList<Integer> scores) {
+        Integer maxIndex = 0;
+        for (Integer score : scores) {
+            if (score > maxIndex) {
+                maxIndex = score;
             }
         }
+        return maxIndex;
     }
 
     @Override

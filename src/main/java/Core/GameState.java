@@ -10,6 +10,15 @@ public class GameState {
         this.activePlayerMark = activePlayerMark;
     }
 
+    public boolean isGameOver() {
+        return grid.isFull() || grid.winningLineExistsInGrid();
+    }
+
+    public boolean isGameTied() {
+        if (isGameOver()) return grid.winningLineExistsInGrid();
+        else return false;
+    }
+
     public Grid getGrid() {
         return grid;
     }
