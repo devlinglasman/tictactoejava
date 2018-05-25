@@ -17,8 +17,8 @@ public class PlayerComputer extends Player {
         Grid gridClone = new Grid();
         gridClone.setSquares(grid.copySquares());
 
-        GameState gameState = new GameState(gridClone, getMark());
-        return moveChoice(gameState);
+        GameState gameState = new GameState(gridClone);
+        return moveChoice(gameState, getMark());
     }
 
     public int returnScoreForTerminalGameState(GameState gameState) {
@@ -27,7 +27,7 @@ public class PlayerComputer extends Player {
         else return -1;
     }
 
-    public int moveChoice(GameState gameState) {
+    public int moveChoice(GameState gameState, Mark optimisingPlayerMark) {
 
         ArrayList<Integer> emptyGridSquares = gameState.getGrid().emptySquareIndices();
        ArrayList<Integer> scores = new ArrayList<>();
@@ -35,15 +35,28 @@ public class PlayerComputer extends Player {
         for (Integer emptySquare : emptyGridSquares) {
             Grid gridClone = new Grid();
             gridClone.setSquares(gameState.getGrid().copySquares());
-
-            GameState emulatedGameState = new GameState(gridClone, getMark());
+            GameState emulatedGameState = new GameState(gridClone);
+            emulatedGameState.getGrid().setASquare(emptySquare, optimisingPlayerMark);
 //            If it's in terminal state:
-            Integer scoreForEmulate = returnScoreForTerminalGameState(emulatedGameState);
-            scores.add(scoreForEmulate);
+            if (emulatedGameState.isGameOver()) {
+                Integer scoreForEmulate = returnScoreForTerminalGameState(emulatedGameState);
+                scores.add(scoreForEmulate);
+            } else {
+//                Switch activePlayer
+                if (optimisingPlayerMark == getMark()) optimisingPlayerMark = Mark.playerOneMark;
+                else optimisingPlayerMark = getMark();
+                return moveChoice(emulatedGameState, optimisingPlayerMark);
+            }
         }
-//        If playing looking at the emulated gameStates is currently the maximising player (computer) then:
-        Integer maxIndex = findMaxIndex(scores);
-        return emptyGridSquares.get(maxIndex);
+//        If player looking at the emulated gameStates is currently the maximising player (computer)...:
+        if (optimisingPlayerMark == getMark()) {
+            Integer maxIndex = findMaxIndex(scores);
+            return emptyGridSquares.get(maxIndex);
+        } else {
+            Integer minIndex = findMinIndex(scores);
+            return emptyGridSquares.get(minIndex);
+        }
+
     }
 
     public int findMaxIndex(ArrayList<Integer> scores) {
@@ -54,6 +67,16 @@ public class PlayerComputer extends Player {
             }
         }
         return maxIndex;
+    }
+
+    public int findMinIndex(ArrayList<Integer> scores) {
+        Integer minIndex = 0;
+        for (Integer score : scores) {
+            if (score > minIndex) {
+                minIndex = score;
+            }
+        }
+        return minIndex;
     }
 
     @Override
