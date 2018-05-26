@@ -1,6 +1,8 @@
 package Core;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.stream.IntStream;
 
 public class Minimax {
 
@@ -40,6 +42,12 @@ public class Minimax {
         }
     }
 
+    private Grid emulateGrid(Grid grid, Integer emptySquare, Mark mark) {
+        Grid gridClone = grid.duplicate();
+        gridClone.markSquare(emptySquare, mark);
+        return gridClone;
+    }
+
     private Integer findGridScore(Grid grid, Mark optimisingPlayerMark) {
         if (grid.isGameOver()) {
             return scoreForTerminalGameState(grid);
@@ -49,30 +57,11 @@ public class Minimax {
         }
     }
 
-    private int findMaxIndex(ArrayList<Integer> scores) {
-        Integer maxScore = null;
-        Integer maxIndex = 0;
-        for (int i = 0; i < scores.size(); i++) {
-            Integer currentScore = scores.get(i);
-            if (maxScore == null || currentScore >= maxScore) {
-                maxScore = currentScore;
-                maxIndex = i;
-            }
-        }
-        return maxIndex;
-    }
-
-    private int findMinIndex(ArrayList<Integer> scores) {
-        Integer minScore = null;
-        Integer minIndex = 0;
-        for (int i = 0; i < scores.size(); i++) {
-            Integer currentScore = scores.get(i);
-            if (minScore == null || currentScore <= minScore) {
-                minScore = currentScore;
-                minIndex = i;
-            }
-        }
-        return minIndex;
+    private Mark makeOppositeOptimisingMark(Mark currentOptimisingPlayerMark) {
+        Mark oppositeOptimisingMark;
+        if (currentOptimisingPlayerMark == minimaxPlayerMark) oppositeOptimisingMark = Mark.playerOneMark;
+        else oppositeOptimisingMark = minimaxPlayerMark;
+        return oppositeOptimisingMark;
     }
 
     private int scoreForTerminalGameState(Grid grid) {
@@ -82,16 +71,15 @@ public class Minimax {
         } else return 0;
     }
 
-    private Grid emulateGrid(Grid grid, Integer emptySquare, Mark mark) {
-        Grid gridClone = grid.duplicate();
-        gridClone.markSquare(emptySquare, mark);
-        return gridClone;
+    private int findMaxIndex(ArrayList<Integer> scores) {
+        return IntStream.range(0, scores.size()).boxed()
+                .max(Comparator.comparingInt(scores::get))
+                .get();
     }
 
-    private Mark makeOppositeOptimisingMark(Mark currentOptimisingPlayerMark) {
-        Mark oppositeOptimisingMark;
-        if (currentOptimisingPlayerMark == minimaxPlayerMark) oppositeOptimisingMark = Mark.playerOneMark;
-        else oppositeOptimisingMark = minimaxPlayerMark;
-        return oppositeOptimisingMark;
+    private int findMinIndex(ArrayList<Integer> scores) {
+        return IntStream.range(0, scores.size()).boxed()
+                .min(Comparator.comparingInt(scores::get))
+                .get();
     }
 }
