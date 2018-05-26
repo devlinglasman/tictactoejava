@@ -24,13 +24,6 @@ public class MainRunner {
             Player playerTwo = new PlayerComputer("Computer", Mark.playerTwoMark);
             GameRunner gameRunner = new GameRunner(grid, playerOne, playerTwo, consoleIO);
 
-            gameRunner.getGrid().setASquare(0, playerOne.getMark());
-            gameRunner.getGrid().setASquare(1, playerOne.getMark());
-            gameRunner.getGrid().setASquare(4, playerOne.getMark());
-            gameRunner.getGrid().setASquare(6, playerTwo.getMark());
-
-            gameRunner.alternatePlayer();
-
             gameRunner.runGame();
 
         } else {

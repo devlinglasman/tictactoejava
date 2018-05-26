@@ -37,7 +37,7 @@ public class PlayerHuman extends Player {
     }
 
     @Override
-    public boolean isHumanPlayer() {
+    public boolean isHuman() {
        return true;
     }
 }

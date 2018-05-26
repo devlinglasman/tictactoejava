@@ -16,7 +16,7 @@ public abstract class Player {
 
     public abstract int getInput(Grid grid);
 
-    public abstract boolean isHumanPlayer();
+    public abstract boolean isHuman();
 
     public String getName() {
         return name;

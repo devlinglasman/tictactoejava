@@ -1,23 +1,16 @@
 package Core;
 
-import Core.Players.Player;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Arrays.*;
+import static java.util.Arrays.asList;
 
 public class Grid {
 
-    private ArrayList<Mark> squares = createGrid();
+    private ArrayList<Mark> squares;
 
-    public ArrayList<Mark> createGrid() {
-        List<Mark> result = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
-            result.add(Mark.unmarkedSquare);
-        }
-        return (ArrayList<Mark>) result;
+    public Grid() {
+        squares = createGrid();
     }
 
     public void markSquare(int squareNumber, Mark mark) {
@@ -51,7 +44,7 @@ public class Grid {
         return false;
     }
 
-    public boolean lineIsWinner(ArrayList<Mark> line) {
+    private boolean lineIsWinner(ArrayList<Mark> line) {
         if (line.contains(Mark.unmarkedSquare)) return false;
         Mark firstMark = line.get(0);
         for (Mark m : line) {
@@ -60,7 +53,7 @@ public class Grid {
         return true;
     }
 
-    public List<ArrayList<Mark>> possibleWinLines() {
+    private List<ArrayList<Mark>> possibleWinLines() {
         return asList(
                 group3Squares(0, 1, 2),
                 group3Squares(3, 4, 5),
@@ -73,7 +66,7 @@ public class Grid {
         );
     }
 
-    public ArrayList<Mark> group3Squares(int a, int b, int c) {
+    private ArrayList<Mark> group3Squares(int a, int b, int c) {
         List<Mark> result = new ArrayList<>();
         result.add(squares.get(a));
         result.add(squares.get(b));
@@ -87,10 +80,6 @@ public class Grid {
             if (squares.get(i) == Mark.unmarkedSquare) result.add(i);
         }
         return result;
-    }
-
-    public void setASquare(Integer index, Mark activePlayerMark) {
-        squares.set(index, activePlayerMark);
     }
 
     public ArrayList<Mark> getSquares() {
@@ -110,4 +99,13 @@ public class Grid {
     public void setSquares(ArrayList<Mark> squares) {
         this.squares = squares;
     }
+
+    private ArrayList<Mark> createGrid() {
+        List<Mark> result = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            result.add(Mark.unmarkedSquare);
+        }
+        return (ArrayList<Mark>) result;
+    }
+
 }

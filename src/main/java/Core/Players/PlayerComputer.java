@@ -21,7 +21,7 @@ public class PlayerComputer extends Player {
             Grid gridClone = new Grid();
             gridClone.setSquares(grid.copySquares());
             GameState emulatedGameState = new GameState(gridClone);
-            emulatedGameState.getGrid().setASquare(emptySquare, getMark());
+            emulatedGameState.getGrid().markSquare(emptySquare, getMark());
 //            If it's in terminal state:
             if (emulatedGameState.isGameOver()) {
                 Integer scoreForEmulate = returnScoreForTerminalGameState(emulatedGameState);
@@ -51,7 +51,7 @@ public class PlayerComputer extends Player {
             Grid gridClone = new Grid();
             gridClone.setSquares(gameState.getGrid().copySquares());
             GameState emulatedGameState = new GameState(gridClone);
-            emulatedGameState.getGrid().setASquare(emptySquare, optimisingPlayerMark);
+            emulatedGameState.getGrid().markSquare(emptySquare, optimisingPlayerMark);
 //            If it's in terminal state:
             if (emulatedGameState.isGameOver()) {
                 Integer scoreForEmulate = returnScoreForTerminalGameState(emulatedGameState);
@@ -100,7 +100,7 @@ public class PlayerComputer extends Player {
     }
 
     @Override
-    public boolean isHumanPlayer() {
+    public boolean isHuman() {
         return false;
     }
 }
