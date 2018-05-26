@@ -21,6 +21,10 @@ public class Grid {
         return squares.get(squareNumber) != Mark.unmarkedSquare;
     }
 
+    public boolean isGameOver() {
+        return isFull() || winningLineExistsInGrid();
+    }
+
     public boolean gameOngoing() {
         return !isFull() && !winningLineExistsInGrid();
     }
@@ -42,6 +46,12 @@ public class Grid {
     public boolean winningLineExistsInGrid() {
         for (ArrayList<Mark> line : possibleWinLines()) if (lineIsWinner(line)) return true;
         return false;
+    }
+
+    public Grid duplicate() {
+        Grid gridDuplicate = new Grid();
+        gridDuplicate.setSquares(copySquares());
+        return gridDuplicate;
     }
 
     private boolean lineIsWinner(ArrayList<Mark> line) {
@@ -87,13 +97,7 @@ public class Grid {
     }
 
     public ArrayList<Mark> copySquares() {
-        ArrayList<Mark> result = new ArrayList<>();
-
-        for (Mark mark : squares) {
-           result.add(mark);
-        }
-
-        return result;
+        return new ArrayList<>(squares);
     }
 
     public void setSquares(ArrayList<Mark> squares) {

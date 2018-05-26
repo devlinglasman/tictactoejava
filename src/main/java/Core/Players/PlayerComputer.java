@@ -1,6 +1,5 @@
 package Core.Players;
 
-import Core.GameState;
 import Core.Grid;
 import Core.Mark;
 
@@ -18,17 +17,15 @@ public class PlayerComputer extends Player {
         ArrayList<Integer> scores = new ArrayList<>();
 
         for (Integer emptySquare : emptyGridSquares) {
-            Grid gridClone = new Grid();
-            gridClone.setSquares(grid.copySquares());
-            GameState emulatedGameState = new GameState(gridClone);
-            emulatedGameState.getGrid().markSquare(emptySquare, getMark());
+            Grid gridClone = grid.duplicate();
+            gridClone.markSquare(emptySquare, getMark());
 //            If it's in terminal state:
-            if (emulatedGameState.isGameOver()) {
-                Integer scoreForEmulate = returnScoreForTerminalGameState(emulatedGameState);
+            if (gridClone.isGameOver()) {
+                Integer scoreForEmulate = returnScoreForTerminalGameState(gridClone);
                 scores.add(scoreForEmulate);
             } else {
 //                Switch optimising Player and call minimax.
-                Integer gameScore = findGameStateScore(emulatedGameState, Mark.playerOneMark);
+                Integer gameScore = findGameStateScore(gridClone, Mark.playerOneMark);
                 scores.add(gameScore);
             }
         }
@@ -36,32 +33,31 @@ public class PlayerComputer extends Player {
         return emptyGridSquares.get(maxIndex);
     }
 
-    public int returnScoreForTerminalGameState(GameState gameState) {
-        if (gameState.isGameTied()) return 0;
-        else if (gameState.getGrid().reportWinningMark() == getMark()) return 1;
-        else return -1;
+    private int returnScoreForTerminalGameState(Grid grid) {
+        if (grid.winningLineExistsInGrid()) {
+            if (grid.reportWinningMark() == getMark()) return 1;
+            else return -1;
+        } else return 0;
     }
 
-    public int findGameStateScore(GameState gameState, Mark optimisingPlayerMark) {
+    public int findGameStateScore(Grid grid, Mark optimisingPlayerMark) {
 
-        ArrayList<Integer> emptyGridSquares = gameState.getGrid().emptySquareIndices();
+        ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
         ArrayList<Integer> scores = new ArrayList<>();
 
         for (Integer emptySquare : emptyGridSquares) {
-            Grid gridClone = new Grid();
-            gridClone.setSquares(gameState.getGrid().copySquares());
-            GameState emulatedGameState = new GameState(gridClone);
-            emulatedGameState.getGrid().markSquare(emptySquare, optimisingPlayerMark);
+            Grid gridClone = grid.duplicate();
+            gridClone.markSquare(emptySquare, optimisingPlayerMark);
 //            If it's in terminal state:
-            if (emulatedGameState.isGameOver()) {
-                Integer scoreForEmulate = returnScoreForTerminalGameState(emulatedGameState);
+            if (gridClone.isGameOver()) {
+                Integer scoreForEmulate = returnScoreForTerminalGameState(gridClone);
                 scores.add(scoreForEmulate);
             } else {
 //                Switch optimising Player and call minimax.
                 Mark temporaryOptimisingPlayer;
                 if (optimisingPlayerMark == getMark()) temporaryOptimisingPlayer = Mark.playerOneMark;
                 else temporaryOptimisingPlayer = getMark();
-                Integer gameScore = findGameStateScore(emulatedGameState, temporaryOptimisingPlayer);
+                Integer gameScore = findGameStateScore(gridClone, temporaryOptimisingPlayer);
                 scores.add(gameScore);
             }
         }
