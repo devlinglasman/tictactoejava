@@ -27,12 +27,12 @@ public class PlayerHuman extends Player {
         return input;
     }
 
-    public int getValidNumberInput() {
+    private int getValidNumberInput() {
         consoleIO.askForSquareChoice(getName());
         return consoleIO.requestValidSquareChoice(getName());
     }
 
-    public boolean moveIllegal(Grid grid, int input) {
+    private boolean moveIllegal(Grid grid, int input) {
         return grid.moveNotLegal(input);
     }
 
