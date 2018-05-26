@@ -50,24 +50,26 @@ public class Minimax {
     }
 
     private int findMaxIndex(ArrayList<Integer> scores) {
-        Integer score = -2;
+        Integer maxScore = null;
         Integer maxIndex = 0;
         for (int i = 0; i < scores.size(); i++) {
-            if (scores.get(i) > score) {
+            Integer currentScore = scores.get(i);
+            if (maxScore == null || currentScore >= maxScore) {
+                maxScore = currentScore;
                 maxIndex = i;
-                score = scores.get(i);
             }
         }
         return maxIndex;
     }
 
     private int findMinIndex(ArrayList<Integer> scores) {
-        Integer score = 2;
+        Integer minScore = null;
         Integer minIndex = 0;
         for (int i = 0; i < scores.size(); i++) {
-            if (scores.get(i) < score) {
+            Integer currentScore = scores.get(i);
+            if (minScore == null || currentScore <= minScore) {
+                minScore = currentScore;
                 minIndex = i;
-                score = scores.get(i);
             }
         }
         return minIndex;
