@@ -24,9 +24,7 @@ public class GameRunner {
     public void runGame() {
         displayGrid();
         while (gameOngoing()) {
-            Grid gridClone = new Grid();
-            gridClone.setSquares(grid.copySquares());
-
+            Grid gridClone = grid.duplicate();
             int input = activePlayer.getInput(gridClone);
             makeMove(input, activePlayer.getMark());
             announceSquareChoice();
@@ -49,7 +47,7 @@ public class GameRunner {
     }
 
     private boolean gameOngoing() {
-        return grid.gameOngoing();
+        return !grid.isGameOver();
     }
 
     private void makeMove(int square, Mark mark) {
@@ -77,10 +75,6 @@ public class GameRunner {
 
     private ArrayList<Mark> getGridSquares() {
         return grid.getSquares();
-    }
-
-    public Grid getGrid() {
-        return grid;
     }
 }
 

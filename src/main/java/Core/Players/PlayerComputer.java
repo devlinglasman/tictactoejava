@@ -13,7 +13,7 @@ public class PlayerComputer extends Player {
     @Override
     public int getInput(Grid grid) {
        Minimax minimax = new Minimax(getMark(), grid);
-        return minimax.findSquareChoice(grid, getMark());
+        return minimax.findSquareChoice(grid, getMark(), 0);
     }
 
     @Override

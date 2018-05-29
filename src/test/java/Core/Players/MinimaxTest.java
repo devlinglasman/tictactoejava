@@ -27,7 +27,7 @@ public class MinimaxTest {
         grid.markSquare(5, Mark.playerOneMark);
         grid.markSquare(6, Mark.playerOneMark);
 
-        assertEquals(8, minimax.findSquareChoice(grid, Mark.playerTwoMark));
+        assertEquals(8, minimax.findSquareChoice(grid, Mark.playerTwoMark, 0));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class MinimaxTest {
         grid.markSquare(7, Mark.playerTwoMark);
         grid.markSquare(8, Mark.playerTwoMark);
 
-        assertEquals(4, minimax.findSquareChoice(grid, Mark.playerTwoMark));
+        assertEquals(4, minimax.findSquareChoice(grid, Mark.playerTwoMark, 0));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class MinimaxTest {
         grid.markSquare(7, Mark.playerTwoMark);
         grid.markSquare(8, Mark.playerTwoMark);
 
-        assertEquals(4, minimax.findSquareChoice(grid, Mark.playerTwoMark));
+        assertEquals(4, minimax.findSquareChoice(grid, Mark.playerTwoMark, 0));
     }
 
     @Test
@@ -84,6 +84,43 @@ public class MinimaxTest {
         grid.markSquare(6, Mark.playerTwoMark);
         grid.markSquare(8, Mark.playerTwoMark);
 
-        assertEquals(7, minimax.findSquareChoice(grid, Mark.playerTwoMark));
+        assertEquals(7, minimax.findSquareChoice(grid, Mark.playerTwoMark, 0));
+    }
+
+    @Test
+    public void minimaxTest5() {
+        Grid grid = new Grid();
+        Minimax minimax = new Minimax(Mark.playerTwoMark, grid);
+
+//         X _ O
+//         O _ _
+//         O X X
+
+        grid.markSquare(0, Mark.playerOneMark);
+        grid.markSquare(2, Mark.playerTwoMark);
+        grid.markSquare(3, Mark.playerTwoMark);
+        grid.markSquare(6, Mark.playerTwoMark);
+        grid.markSquare(7, Mark.playerOneMark);
+        grid.markSquare(8, Mark.playerOneMark);
+
+        assertEquals(4, minimax.findSquareChoice(grid, Mark.playerTwoMark, 0));
+    }
+
+    @Test
+    public void minimaxTest6WithDepth() {
+        Grid grid = new Grid();
+        Minimax minimax = new Minimax(Mark.playerTwoMark, grid);
+
+//         _ X _
+//         _ _ X
+//         O O X
+
+        grid.markSquare(1, Mark.playerOneMark);
+        grid.markSquare(5, Mark.playerOneMark);
+        grid.markSquare(6, Mark.playerTwoMark);
+        grid.markSquare(7, Mark.playerTwoMark);
+        grid.markSquare(8, Mark.playerOneMark);
+
+        assertEquals(2, minimax.findSquareChoice(grid, Mark.playerTwoMark, 0));
     }
 }
