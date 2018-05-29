@@ -1,4 +1,6 @@
-public class Validator {
+package Console;
+
+public class ValidatorConsoleInput {
 
     public boolean inputNotValidGameChoice(String input) {
        if (inputNotCorrectFormat(input)) return true;
