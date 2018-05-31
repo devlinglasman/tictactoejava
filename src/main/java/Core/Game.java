@@ -5,7 +5,7 @@ import Core.Players.Player;
 
 import java.util.ArrayList;
 
-public class GameRunner {
+public class Game {
 
     private Grid grid;
     private Player playerOne;
@@ -13,7 +13,7 @@ public class GameRunner {
     private ConsoleIO consoleIO;
     private Player activePlayer;
 
-    public GameRunner(Grid grid, Player playerOne, Player playerTwo, ConsoleIO consoleIO) {
+    public Game(Grid grid, Player playerOne, Player playerTwo, ConsoleIO consoleIO) {
         this.grid = grid;
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;

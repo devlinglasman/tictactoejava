@@ -1,5 +1,5 @@
 //import Console.ConsoleIO;
-//import Core.GameRunner;
+//import Core.Game;
 //import Core.Grid;
 //import Core.Mark;
 //import Core.Players.Player;
@@ -15,7 +15,7 @@
 //        ConsoleIO consoleIO = new ConsoleIO(System.in, System.out);
 //        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleIO);
 //        Player playerTwo = new PlayerComputer("Computer", Mark.playerTwoMark);
-//        GameRunner game = new GameRunner(grid, playerOne, playerTwo, consoleIO);
+//        Game game = new Game(grid, playerOne, playerTwo, consoleIO);
 //
 //        grid.setASquare(0, playerOne.getMark());
 //        grid.setASquare(2, playerTwo.getMark());
@@ -34,7 +34,7 @@
 //        Grid grid = new Grid();
 //        ValidatorConsoleInput validatorConsoleInput = new ValidatorConsoleInput();
 //        ConsoleIO consoleIO = new ConsoleIO(System.in, System.out);
-//        GameRunner game = new GameRunner(grid, validatorConsoleInput, consoleIO);
+//        Game game = new Game(grid, validatorConsoleInput, consoleIO);
 //
 //        game.alternatePlayer();
 //        game.alternatePlayer();
@@ -47,7 +47,7 @@
 //        Grid grid = new Grid();
 //        ValidatorConsoleInput validatorConsoleInput = new ValidatorConsoleInput();
 //        ConsoleIO consoleIO = new ConsoleIO(System.in, System.out);
-//        GameRunner game = new GameRunner(grid, validatorConsoleInput, consoleIO);
+//        Game game = new Game(grid, validatorConsoleInput, consoleIO);
 //
 //        game.alternatePlayer();
 //

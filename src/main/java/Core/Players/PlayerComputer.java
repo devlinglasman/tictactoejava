@@ -15,9 +15,4 @@ public class PlayerComputer extends Player {
        Minimax minimax = new Minimax(getMark(), grid);
         return minimax.findSquareChoice(grid, getMark(), 0);
     }
-
-    @Override
-    public boolean isHuman() {
-        return false;
-    }
 }

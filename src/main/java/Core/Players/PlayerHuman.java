@@ -35,9 +35,4 @@ public class PlayerHuman extends Player {
     private boolean moveIllegal(Grid grid, int input) {
         return grid.moveNotLegal(input);
     }
-
-    @Override
-    public boolean isHuman() {
-       return true;
-    }
 }

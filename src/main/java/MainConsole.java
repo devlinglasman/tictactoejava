@@ -1,12 +1,12 @@
 import Console.ConsoleIO;
-import Core.GameRunner;
+import Core.Game;
 import Core.Grid;
 import Core.Mark;
 import Core.Players.Player;
 import Core.Players.PlayerComputer;
 import Core.Players.PlayerHuman;
 
-public class MainRunner {
+public class MainConsole {
 
     public static void main(String[] args) {
         findGameMode();
@@ -22,15 +22,15 @@ public class MainRunner {
 
         if (gameChoice.equals("1")) {
             Player playerTwo = new PlayerComputer("Computer", Mark.playerTwoMark);
-            GameRunner gameRunner = new GameRunner(grid, playerOne, playerTwo, consoleIO);
+            Game game = new Game(grid, playerOne, playerTwo, consoleIO);
 
-            gameRunner.runGame();
+            game.runGame();
 
         } else {
             Player playerTwo = new PlayerHuman("Player Two", Mark.playerTwoMark, consoleIO);
-            GameRunner gameRunner = new GameRunner(grid, playerOne, playerTwo, consoleIO);
+            Game game = new Game(grid, playerOne, playerTwo, consoleIO);
 
-            gameRunner.runGame();
+            game.runGame();
         }
 
     }

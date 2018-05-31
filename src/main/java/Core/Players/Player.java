@@ -7,7 +7,6 @@ public abstract class Player {
 
     private String name;
     private Mark mark;
-    private Grid grid;
 
     public Player(String name, Mark mark) {
         this.name = name;
@@ -15,8 +14,6 @@ public abstract class Player {
     }
 
     public abstract int getInput(Grid grid);
-
-    public abstract boolean isHuman();
 
     public String getName() {
         return name;
