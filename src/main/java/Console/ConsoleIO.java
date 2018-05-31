@@ -52,7 +52,8 @@ public class ConsoleIO {
 
     public void askGameMode() {
         out.print("\nHi! please enter '1' to " +
-                "play against the computer or '2' to play human-vs-human.\n");
+                "play against the computer, '2' to see computer-vs-computer," +
+                " or '3' for human-vs-human.\n");
     }
 
     public void announceGameChoiceInvalid() {

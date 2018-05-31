@@ -15,7 +15,6 @@ public class ConsoleGameRunner {
     public ConsoleGameRunner(ConsoleIO consoleIO) {
         this.consoleIO = consoleIO;
         grid = new Grid();
-        playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleIO);
     }
 
     public void run() {
@@ -28,8 +27,13 @@ public class ConsoleGameRunner {
         consoleIO.askGameMode();
         String gameChoice = consoleIO.takeInput();
         if (gameChoice.equals("1")) {
-            playerTwo = new PlayerComputer("Computer", Mark.playerTwoMark);
+            playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleIO);
+            playerTwo = new PlayerComputer("Computer", Mark.playerTwoMark, Mark.playerOneMark);
+        } else if (gameChoice.equals("2")) {
+            playerOne = new PlayerComputer("ComputerOne", Mark.playerOneMark, Mark.playerTwoMark);
+            playerTwo = new PlayerComputer("ComputerTwo", Mark.playerTwoMark, Mark.playerOneMark);
         } else {
+            playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleIO);
             playerTwo = new PlayerHuman("Player Two", Mark.playerTwoMark, consoleIO);
         }
     }

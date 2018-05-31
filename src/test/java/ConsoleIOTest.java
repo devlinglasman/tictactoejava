@@ -47,7 +47,8 @@ public class ConsoleIOTest {
         consoleIO.askGameMode();
 
         assertEquals("\nHi! please enter '1' to " +
-                "play against the computer or '2' to play human-vs-human.\n", ioHelper.output());
+                "play against the computer, '2' to see computer-vs-computer," +
+                " or '3' for human-vs-human.\n", ioHelper.output());
     }
 
     @Test

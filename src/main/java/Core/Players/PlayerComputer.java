@@ -6,13 +6,16 @@ import Core.Minimax;
 
 public class PlayerComputer extends Player {
 
-    public PlayerComputer(String name, Mark mark) {
+    private Mark opponentMark;
+
+    public PlayerComputer(String name, Mark mark, Mark opponentMark) {
         super(name, mark);
+        this.opponentMark = opponentMark;
     }
 
     @Override
     public int getInput(Grid grid) {
-       Minimax minimax = new Minimax(getMark(), grid);
+       Minimax minimax = new Minimax(grid, getMark(), opponentMark);
         return minimax.findSquareChoice(grid, getMark(), 0);
     }
 }

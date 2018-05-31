@@ -6,12 +6,14 @@ import java.util.stream.IntStream;
 
 public class Minimax {
 
-    private Mark minimaxPlayerMark;
     private Grid firstGrid;
+    private Mark minimaxPlayerMark;
+    private Mark nonMinimaxPlayerMark;
 
-    public Minimax(Mark minimaxPlayerMark, Grid firstGrid) {
-        this.minimaxPlayerMark = minimaxPlayerMark;
+    public Minimax(Grid firstGrid, Mark minimaxPlayerMark, Mark nonMinimaxPlayerMark) {
         this.firstGrid = firstGrid;
+        this.minimaxPlayerMark = minimaxPlayerMark;
+        this.nonMinimaxPlayerMark = nonMinimaxPlayerMark;
     }
 
     public int findSquareChoice(Grid grid, Mark optimisingPlayerMark, Integer depth) {
@@ -67,7 +69,7 @@ public class Minimax {
 
     private Mark makeOppositeOptimisingMark(Mark currentOptimisingPlayerMark) {
         Mark oppositeOptimisingMark;
-        if (currentOptimisingPlayerMark == minimaxPlayerMark) oppositeOptimisingMark = Mark.playerOneMark;
+        if (currentOptimisingPlayerMark == minimaxPlayerMark) oppositeOptimisingMark = nonMinimaxPlayerMark;
         else oppositeOptimisingMark = minimaxPlayerMark;
         return oppositeOptimisingMark;
     }
