@@ -1,6 +1,8 @@
-package Core;
+package Console;
 
-import Console.ConsoleIO;
+import Core.Game;
+import Core.Grid;
+import Core.Mark;
 import Core.Players.Player;
 import Core.Players.PlayerComputer;
 import Core.Players.PlayerHuman;
