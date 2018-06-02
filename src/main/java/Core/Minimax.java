@@ -35,22 +35,22 @@ public class Minimax {
         }
 
         if (grid != firstGrid) {
-            if (optimisingPlayerMark == minimaxPlayerMark) {
-                Integer maxScore = scores.get(0);
-                for (Integer score: scores) {
-                   if (score > maxScore) maxScore = score;
-                }
-                return maxScore;
-            } else {
-                Integer minScore = scores.get(0);
-                for (Integer score: scores) {
-                    if (score < minScore) minScore = score;
-                }
-                return minScore;
-            }
+            return minimaxScore(scores, optimisingPlayerMark);
         } else {
             Integer relevantIndex = findMaxIndex(scores);
             return emptyGridSquares.get(relevantIndex);
+        }
+    }
+
+    private int minimaxScore(ArrayList<Integer> scores, Mark optimisingPlayerMark) {
+        if (optimisingPlayerMark == minimaxPlayerMark) {
+            Integer maxScore = scores.get(0);
+            for (Integer score : scores) if (score > maxScore) maxScore = score;
+            return maxScore;
+        } else {
+            Integer minScore = scores.get(0);
+            for (Integer score : scores) if (score < minScore) minScore = score;
+            return minScore;
         }
     }
 
