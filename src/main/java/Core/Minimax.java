@@ -21,25 +21,35 @@ public class Minimax {
         ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
         ArrayList<Integer> scores = new ArrayList<>();
 
-        emptyGridSquares
-                .stream()
-                .map(emptySquare -> emulateGrid(grid, emptySquare, optimisingPlayerMark))
-                .forEach(emulatedGrid ->
-                {
-                    Integer emulatedGridScore = findGridScore(emulatedGrid, optimisingPlayerMark, depth);
-                    scores.add(emulatedGridScore);
-                });
+        for (Integer emptySquare : emptyGridSquares) {
+            Grid emulatedGrid = emulateGrid(grid, emptySquare, optimisingPlayerMark);
+            Integer emulatedGridScore;
+            if (emulatedGrid.isGameOver()) {
+                emulatedGridScore = scoreForTerminalGameState(emulatedGrid, depth);
+            } else {
+                depth++;
+                Mark oppositeOptimiserMark = makeOppositeOptimisingMark(optimisingPlayerMark);
+                emulatedGridScore = findSquareChoice(emulatedGrid, oppositeOptimiserMark, depth);
+            }
+            scores.add(emulatedGridScore);
+        }
 
-        Integer relevantIndex;
         if (grid != firstGrid) {
             if (optimisingPlayerMark == minimaxPlayerMark) {
-                relevantIndex = findMaxIndex(scores);
+                Integer maxScore = scores.get(0);
+                for (Integer score: scores) {
+                   if (score > maxScore) maxScore = score;
+                }
+                return maxScore;
             } else {
-                relevantIndex = findMinIndex(scores);
+                Integer minScore = scores.get(0);
+                for (Integer score: scores) {
+                    if (score < minScore) minScore = score;
+                }
+                return minScore;
             }
-            return scores.get(relevantIndex);
         } else {
-            relevantIndex = findMaxIndex(scores);
+            Integer relevantIndex = findMaxIndex(scores);
             return emptyGridSquares.get(relevantIndex);
         }
     }
@@ -50,20 +60,10 @@ public class Minimax {
         return gridClone;
     }
 
-    private Integer findGridScore(Grid grid, Mark optimisingPlayerMark, Integer depth) {
-        if (grid.isGameOver()) {
-            return scoreForTerminalGameState(grid, depth);
-        } else {
-            depth++;
-            Mark oppositeOptimiserMark = makeOppositeOptimisingMark(optimisingPlayerMark);
-            return findSquareChoice(grid, oppositeOptimiserMark, depth);
-        }
-    }
-
     private int scoreForTerminalGameState(Grid grid, Integer depth) {
         if (grid.winningLineExistsInGrid()) {
-            if (grid.reportWinningMark() == minimaxPlayerMark) return 10 - depth;
-            else return depth - 10;
+            if (grid.reportWinningMark() == minimaxPlayerMark) return 100 - depth;
+            else return depth - 100;
         } else return 0;
     }
 
@@ -77,12 +77,6 @@ public class Minimax {
     private int findMaxIndex(ArrayList<Integer> scores) {
         return IntStream.range(0, scores.size()).boxed()
                 .max(Comparator.comparingInt(scores::get))
-                .get();
-    }
-
-    private int findMinIndex(ArrayList<Integer> scores) {
-        return IntStream.range(0, scores.size()).boxed()
-                .min(Comparator.comparingInt(scores::get))
                 .get();
     }
 }
