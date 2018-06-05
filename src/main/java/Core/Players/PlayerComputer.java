@@ -16,6 +16,6 @@ public class PlayerComputer extends Player {
     @Override
     public int getInput(Grid grid) {
        Minimax minimax = new Minimax(grid, getMark(), opponentMark);
-        return minimax.findSquareChoice(grid, getMark(), 0);
+        return minimax.maximise(grid, getMark(), 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 }
