@@ -7,29 +7,32 @@ import java.util.stream.IntStream;
 public class Minimax {
 
     private Grid firstGrid;
-    private Mark minimaxPlayerMark;
-    private Mark nonMinimaxPlayerMark;
+    private Mark maximisingPlayerMark;
+    private Mark minimisingPlayerMark;
 
-    public Minimax(Grid firstGrid, Mark minimaxPlayerMark, Mark nonMinimaxPlayerMark) {
+    public Minimax(Grid firstGrid, Mark maximisingPlayerMark, Mark minimisingPlayerMark) {
         this.firstGrid = firstGrid;
-        this.minimaxPlayerMark = minimaxPlayerMark;
-        this.nonMinimaxPlayerMark = nonMinimaxPlayerMark;
+        this.maximisingPlayerMark = maximisingPlayerMark;
+        this.minimisingPlayerMark = minimisingPlayerMark;
     }
 
-    public int maximise(Grid grid, Mark optimisingPlayerMark, Integer depth, Integer alpha, Integer beta) {
+    public int minimax() {
+        return maximise(firstGrid, maximisingPlayerMark, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private int maximise(Grid grid, Mark maximisingPlayerMark, Integer depth, Integer alpha, Integer beta) {
 
         ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
         ArrayList<Integer> scores = new ArrayList<>();
         Integer newAlpha = alpha;
 
         for (Integer emptySquare : emptyGridSquares) {
-            Grid emulatedGrid = emulateGrid(grid, emptySquare, optimisingPlayerMark);
+            Grid emulatedGrid = emulateGrid(grid, emptySquare, maximisingPlayerMark);
             if (emulatedGrid.isGameOver()) {
                 Integer emulatedGridScore = scoreForTerminalGameState(emulatedGrid, depth);
                 newAlpha = Math.max(newAlpha, emulatedGridScore);
             } else {
-                Mark oppositeOptimiserMark = makeOppositeOptimisingMark(optimisingPlayerMark);
-                newAlpha = Math.max(newAlpha, minimise(emulatedGrid, oppositeOptimiserMark, depth + 1, newAlpha, beta));
+                newAlpha = Math.max(newAlpha, minimise(emulatedGrid, oppositeOptimisingMark(maximisingPlayerMark), depth + 1, newAlpha, beta));
             }
             if (grid == firstGrid) scores.add(newAlpha);
             else if (newAlpha >= beta) {
@@ -55,8 +58,7 @@ public class Minimax {
                 Integer emulatedGridScore = scoreForTerminalGameState(emulatedGrid, depth);
                 newBeta = Math.min(newBeta, emulatedGridScore);
             } else {
-                Mark oppositeOptimiserMark = makeOppositeOptimisingMark(optimisingPlayerMark);
-                newBeta = Math.min(newBeta, maximise(emulatedGrid, oppositeOptimiserMark, depth + 1, alpha, newBeta));
+                newBeta = Math.min(newBeta, maximise(emulatedGrid, oppositeOptimisingMark(optimisingPlayerMark), depth + 1, alpha, newBeta));
             }
             if (alpha >= newBeta) break;
         }
@@ -71,15 +73,15 @@ public class Minimax {
 
     private int scoreForTerminalGameState(Grid grid, Integer depth) {
         if (grid.winningLineExistsInGrid()) {
-            if (grid.reportWinningMark() == minimaxPlayerMark) return 100 - depth;
-            else return depth - 100;
+            if (grid.reportWinningMark() == this.maximisingPlayerMark) return 1000 - depth;
+            else return depth - 1000;
         } else return 0;
     }
 
-    private Mark makeOppositeOptimisingMark(Mark currentOptimisingPlayerMark) {
+    private Mark oppositeOptimisingMark(Mark currentOptimisingPlayerMark) {
         Mark oppositeOptimisingMark;
-        if (currentOptimisingPlayerMark == minimaxPlayerMark) oppositeOptimisingMark = nonMinimaxPlayerMark;
-        else oppositeOptimisingMark = minimaxPlayerMark;
+        if (currentOptimisingPlayerMark == this.maximisingPlayerMark) oppositeOptimisingMark = this.minimisingPlayerMark;
+        else oppositeOptimisingMark = this.maximisingPlayerMark;
         return oppositeOptimisingMark;
     }
 
