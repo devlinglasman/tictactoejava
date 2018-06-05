@@ -22,7 +22,7 @@ public class Minimax {
 
         for (Integer emptySquare : emptyGridSquares) {
             Grid emulatedGrid = emulateGrid(firstGrid, emptySquare, maximisingPlayerMark);
-            Integer score = minimax(emulatedGrid, false, minimisingPlayerMark, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
+            Integer score = minimax(emulatedGrid, minimisingPlayerMark, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
             scores.add(score);
         }
 
@@ -30,20 +30,20 @@ public class Minimax {
         return emptyGridSquares.get(maxScoreIndex);
     }
 
-    private int minimax(Grid grid, boolean isMaximisingPlayer, Mark optimisingPlayerMark, Integer depth, Integer alpha, Integer beta) {
+    private int minimax(Grid grid, Mark optimisingPlayerMark, Integer depth, Integer alpha, Integer beta) {
 
         if (grid.isGameOver()) {
             return scoreForTerminalGameState(grid, depth);
         } else {
             Integer bestVal;
-            if (isMaximisingPlayer) bestVal = Integer.MIN_VALUE;
+            if (isMaximisingPlayer(optimisingPlayerMark)) bestVal = Integer.MIN_VALUE;
             else bestVal = Integer.MAX_VALUE;
 
             ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
             for (Integer emptySquare : emptyGridSquares) {
                 Grid emulatedGrid = emulateGrid(grid, emptySquare, optimisingPlayerMark);
-                Integer value = minimax(emulatedGrid, switchMaximisingPlayer(isMaximisingPlayer), oppositeOptimisingMark(optimisingPlayerMark), depth + 1, alpha, beta);
-                if (isMaximisingPlayer) {
+                Integer value = minimax(emulatedGrid, oppositeOptimisingMark(optimisingPlayerMark), depth + 1, alpha, beta);
+                if (isMaximisingPlayer(optimisingPlayerMark)) {
                     bestVal = Math.max(bestVal, value);
                     alpha = Math.max(alpha, bestVal);
                 } else {
@@ -58,10 +58,6 @@ public class Minimax {
 
     private boolean isMaximisingPlayer(Mark optimisingPlayerMark) {
         return optimisingPlayerMark == maximisingPlayerMark;
-    }
-
-    private boolean switchMaximisingPlayer(boolean isMaximisingPlayer) {
-        return !isMaximisingPlayer;
     }
 
     private Grid emulateGrid(Grid grid, Integer emptySquare, Mark mark) {
