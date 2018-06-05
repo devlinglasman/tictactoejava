@@ -5,8 +5,6 @@ import Core.Players.Player;
 
 import java.util.ArrayList;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-
 public class Game {
 
     private Grid grid;

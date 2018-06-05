@@ -20,8 +20,13 @@ public class ConsoleIO {
 
     public void displayGrid(ArrayList<Mark> squares) {
         ArrayList<String> gridConglomerator = new ArrayList<>();
-        for (Mark squareMark : squares) {
-            gridConglomerator.add("[" + squareMark.getStringRepresentation() + "]");
+        for (int i = 0; i < squares.size(); i++) {
+            Mark squareMark = squares.get(i);
+            if (squareMark != Mark.unmarkedSquare) {
+                gridConglomerator.add("[" + squareMark.getStringRepresentation() + "]");
+            } else {
+                gridConglomerator.add("[" + (i + 1) + "]");
+            }
         }
         gridConglomerator.add(3, "\n");
         gridConglomerator.add(7, "\n");
