@@ -27,7 +27,7 @@ public class MinimaxTest {
         grid.markSquare(5, Mark.playerOneMark);
         grid.markSquare(6, Mark.playerOneMark);
 
-        assertEquals(8, minimax.minimax());
+        assertEquals(8, minimax.findGridChoice());
     }
 
     @Test
@@ -47,7 +47,7 @@ public class MinimaxTest {
         grid.markSquare(7, Mark.playerTwoMark);
         grid.markSquare(8, Mark.playerTwoMark);
 
-        assertEquals(4, minimax.minimax());
+        assertEquals(4, minimax.findGridChoice());
     }
 
     @Test
@@ -66,7 +66,7 @@ public class MinimaxTest {
         grid.markSquare(7, Mark.playerTwoMark);
         grid.markSquare(8, Mark.playerTwoMark);
 
-        assertEquals(4, minimax.minimax());
+        assertEquals(4, minimax.findGridChoice());
     }
 
     @Test
@@ -84,7 +84,7 @@ public class MinimaxTest {
         grid.markSquare(6, Mark.playerTwoMark);
         grid.markSquare(8, Mark.playerTwoMark);
 
-        assertEquals(7, minimax.minimax());
+        assertEquals(7, minimax.findGridChoice());
     }
 
     @Test
@@ -103,7 +103,7 @@ public class MinimaxTest {
         grid.markSquare(7, Mark.playerOneMark);
         grid.markSquare(8, Mark.playerOneMark);
 
-        assertEquals(4, minimax.minimax());
+        assertEquals(4, minimax.findGridChoice());
     }
 
     @Test
@@ -121,7 +121,7 @@ public class MinimaxTest {
         grid.markSquare(7, Mark.playerTwoMark);
         grid.markSquare(8, Mark.playerOneMark);
 
-        assertEquals(2, minimax.minimax());
+        assertEquals(2, minimax.findGridChoice());
     }
 
     @Test
@@ -138,6 +138,6 @@ public class MinimaxTest {
         grid.markSquare(2, Mark.playerTwoMark);
         grid.markSquare(4, Mark.playerTwoMark);
 
-        assertEquals(6, minimax.minimax());
+        assertEquals(6, minimax.findGridChoice());
     }
 }

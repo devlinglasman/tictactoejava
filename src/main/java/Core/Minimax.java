@@ -16,53 +16,49 @@ public class Minimax {
         this.minimisingPlayerMark = minimisingPlayerMark;
     }
 
-    public int minimax() {
-        return maximise(firstGrid, maximisingPlayerMark, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
-    }
-
-    private int maximise(Grid grid, Mark maximisingPlayerMark, Integer depth, Integer alpha, Integer beta) {
-
-        ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
+    public int findGridChoice() {
+        ArrayList<Integer> emptyGridSquares = firstGrid.emptySquareIndices();
         ArrayList<Integer> scores = new ArrayList<>();
-        Integer newAlpha = alpha;
 
         for (Integer emptySquare : emptyGridSquares) {
-            Grid emulatedGrid = emulateGrid(grid, emptySquare, maximisingPlayerMark);
-            if (emulatedGrid.isGameOver()) {
-                Integer emulatedGridScore = scoreForTerminalGameState(emulatedGrid, depth);
-                newAlpha = Math.max(newAlpha, emulatedGridScore);
-            } else {
-                newAlpha = Math.max(newAlpha, minimise(emulatedGrid, oppositeOptimisingMark(maximisingPlayerMark), depth + 1, newAlpha, beta));
-            }
-            if (grid == firstGrid) scores.add(newAlpha);
-            else if (newAlpha >= beta) {
-                break;
-            }
+            Grid emulatedGrid = emulateGrid(firstGrid, emptySquare, maximisingPlayerMark);
+            Integer score = minimax(emulatedGrid, false, minimisingPlayerMark, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
+            scores.add(score);
         }
-        if (grid == firstGrid) {
-            Integer relevantIndex = findMaxIndex(scores);
-            return emptyGridSquares.get(relevantIndex);
-        } else {
-            return newAlpha;
-        }
+
+        Integer maxScoreIndex = findMaxIndex(scores);
+        return emptyGridSquares.get(maxScoreIndex);
     }
 
-    private Integer minimise(Grid grid, Mark optimisingPlayerMark, Integer depth, Integer alpha, Integer beta) {
+    private int minimax(Grid grid, boolean isMaximisingPlayer, Mark optimisingPlayerMark, Integer depth, Integer alpha, Integer beta) {
 
-        ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
-        Integer newBeta = beta;
-
-        for (Integer emptySquare : emptyGridSquares) {
-            Grid emulatedGrid = emulateGrid(grid, emptySquare, optimisingPlayerMark);
-            if (emulatedGrid.isGameOver()) {
-                Integer emulatedGridScore = scoreForTerminalGameState(emulatedGrid, depth);
-                newBeta = Math.min(newBeta, emulatedGridScore);
+        if (grid.isGameOver()) {
+            return scoreForTerminalGameState(grid, depth);
+        } else {
+            if (isMaximisingPlayer) {
+                Integer bestVal = Integer.MIN_VALUE;
+                ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
+                for (Integer emptySquare : emptyGridSquares) {
+                    Grid emulatedGrid = emulateGrid(grid, emptySquare, optimisingPlayerMark);
+                    Integer value = minimax(emulatedGrid, false, oppositeOptimisingMark(optimisingPlayerMark), depth + 1, alpha, beta);
+                    bestVal = Math.max(bestVal, value);
+                    alpha = Math.max(alpha, bestVal);
+                    if (beta <= alpha) break;
+                }
+                return bestVal;
             } else {
-                newBeta = Math.min(newBeta, maximise(emulatedGrid, oppositeOptimisingMark(optimisingPlayerMark), depth + 1, alpha, newBeta));
+                Integer bestVal = Integer.MAX_VALUE;
+                ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
+                for (Integer emptySquare : emptyGridSquares) {
+                    Grid emulatedGrid = emulateGrid(grid, emptySquare, optimisingPlayerMark);
+                    Integer value = minimax(emulatedGrid, true, oppositeOptimisingMark(optimisingPlayerMark), depth + 1, alpha, beta);
+                    bestVal = Math.min(bestVal, value);
+                    beta = Math.min(beta, bestVal);
+                    if (beta <= alpha) break;
+                }
+                return bestVal;
             }
-            if (alpha >= newBeta) break;
         }
-        return newBeta;
     }
 
     private Grid emulateGrid(Grid grid, Integer emptySquare, Mark mark) {
@@ -73,15 +69,16 @@ public class Minimax {
 
     private int scoreForTerminalGameState(Grid grid, Integer depth) {
         if (grid.winningLineExistsInGrid()) {
-            if (grid.reportWinningMark() == this.maximisingPlayerMark) return 1000 - depth;
+            if (grid.reportWinningMark() == maximisingPlayerMark) return 1000 - depth;
             else return depth - 1000;
         } else return 0;
     }
 
     private Mark oppositeOptimisingMark(Mark currentOptimisingPlayerMark) {
         Mark oppositeOptimisingMark;
-        if (currentOptimisingPlayerMark == this.maximisingPlayerMark) oppositeOptimisingMark = this.minimisingPlayerMark;
-        else oppositeOptimisingMark = this.maximisingPlayerMark;
+        if (currentOptimisingPlayerMark == maximisingPlayerMark)
+            oppositeOptimisingMark = minimisingPlayerMark;
+        else oppositeOptimisingMark = maximisingPlayerMark;
         return oppositeOptimisingMark;
     }
 

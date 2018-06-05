@@ -16,6 +16,6 @@ public class PlayerComputer extends Player {
     @Override
     public int getInput(Grid grid) {
        Minimax minimax = new Minimax(grid, getMark(), opponentMark);
-        return minimax.minimax();
+        return minimax.findGridChoice();
     }
 }
