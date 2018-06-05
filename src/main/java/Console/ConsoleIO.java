@@ -13,6 +13,22 @@ public class ConsoleIO {
     private final PrintStream out;
     private final ValidatorConsoleInput validatorConsoleInput = new ValidatorConsoleInput();
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BRIGHTBLACK = "\u001B[90m";
+    public static final String ANSI_BRIGHTWHITE = "\u001B[37m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_BRIGHTRED = "\u001B[91m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_BRIGHTGREEN = "\u001B[92m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BRIGHTYELLOW = "\u001B[93m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_BRIGHTBLUE = "\u001B[94m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_BRIGHTPURPLE = "\u001B[95m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_BRIGHTCYAN = "\u001B[96m";
+
     public ConsoleIO(InputStream in, PrintStream out) {
         this.scanner = new Scanner(in);
         this.out = out;
@@ -22,10 +38,41 @@ public class ConsoleIO {
         ArrayList<String> gridConglomerator = new ArrayList<>();
         for (int i = 0; i < squares.size(); i++) {
             Mark squareMark = squares.get(i);
-            if (squareMark != Mark.unmarkedSquare) {
-                gridConglomerator.add("[" + squareMark.getStringRepresentation() + "]");
+            if (squareMark == Mark.playerOneMark) {
+                gridConglomerator.add(ANSI_BRIGHTBLACK + "[" + squareMark.getStringRepresentation() + "]" + ANSI_RESET);
+            }
+                else if (squareMark == Mark.playerTwoMark){
+                gridConglomerator.add(ANSI_BRIGHTWHITE + "[" + squareMark.getStringRepresentation() + "]" + ANSI_RESET);
             } else {
-                gridConglomerator.add("[" + (i + 1) + "]");
+                switch (i) {
+                    case 0:
+                        gridConglomerator.add(ANSI_BRIGHTYELLOW + "[1]" + ANSI_RESET);
+                        break;
+                    case 1:
+                        gridConglomerator.add(ANSI_BRIGHTRED + "[2]" + ANSI_RESET);
+                        break;
+                    case 2:
+                        gridConglomerator.add(ANSI_BRIGHTPURPLE + "[3]" + ANSI_RESET);
+                        break;
+                    case 3:
+                        gridConglomerator.add(ANSI_BRIGHTRED + "[4]" + ANSI_RESET);
+                        break;
+                    case 4:
+                        gridConglomerator.add(ANSI_BRIGHTPURPLE + "[5]" + ANSI_RESET);
+                        break;
+                    case 5:
+                        gridConglomerator.add(ANSI_BRIGHTBLUE + "[6]" + ANSI_RESET);
+                        break;
+                    case 6:
+                        gridConglomerator.add(ANSI_BRIGHTPURPLE + "[7]" + ANSI_RESET);
+                        break;
+                    case 7:
+                        gridConglomerator.add(ANSI_BRIGHTBLUE + "[8]" + ANSI_RESET);
+                        break;
+                    case 8:
+                        gridConglomerator.add(ANSI_BRIGHTGREEN + "[9]" + ANSI_RESET);
+                        break;
+                }
             }
         }
         gridConglomerator.add(3, "\n");
