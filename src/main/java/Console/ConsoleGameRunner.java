@@ -21,6 +21,7 @@ public class ConsoleGameRunner {
 
     public void run() {
         findGameMode();
+        clearScreen();
         Game game = new Game(grid, playerOne, playerTwo, consoleIO);
         game.runGame();
     }
@@ -38,5 +39,9 @@ public class ConsoleGameRunner {
             playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleIO);
             playerTwo = new PlayerHuman("Player Two", Mark.playerTwoMark, consoleIO);
         }
+    }
+
+    private void clearScreen() {
+        consoleIO.clearScreen();
     }
 }

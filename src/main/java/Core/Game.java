@@ -5,6 +5,8 @@ import Core.Players.Player;
 
 import java.util.ArrayList;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 public class Game {
 
     private Grid grid;
@@ -27,14 +29,24 @@ public class Game {
             Grid gridClone = grid.duplicate();
             int input = activePlayer.getInput(gridClone);
             makeMove(input, activePlayer.getMark());
+            clearScreen();
             announceSquareChoice();
+            pause();
             displayGrid();
             alternatePlayer();
         }
         announceResult();
     }
 
-    public void alternatePlayer() {
+    private void clearScreen() {
+        consoleIO.clearScreen();
+    }
+
+    private void pause() {
+        consoleIO.pause();
+    }
+
+    private void alternatePlayer() {
         if (activePlayer == playerOne) {
             activePlayer = playerTwo;
         } else {

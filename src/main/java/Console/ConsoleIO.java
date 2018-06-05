@@ -79,4 +79,17 @@ public class ConsoleIO {
     public void announceGameTied() {
         out.print("\nLooks like the game was a tie!\n");
     }
+
+    public void pause() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void clearScreen() {
+        this.out.print("\033[H\033[2J");
+        out.flush();
+    }
 }
