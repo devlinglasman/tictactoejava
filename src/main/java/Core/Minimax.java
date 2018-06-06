@@ -2,7 +2,11 @@ package Core;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.IntStream;
+
+import static java.util.Map.*;
 
 public class Minimax {
 
@@ -17,17 +21,25 @@ public class Minimax {
     }
 
     public int findBestMove() {
+        HashMap<Integer, Integer> scores = buildScores();
+        return scores.entrySet().stream().max(Entry.comparingByValue()).get().getKey();
+    }
+
+    private HashMap<Integer, Integer> buildScores() {
         ArrayList<Integer> emptyGridSquares = firstGrid.emptySquareIndices();
-        ArrayList<Integer> scores = new ArrayList<>();
+        HashMap<Integer, Integer> scores = new HashMap<>();
 
         for (Integer emptySquare : emptyGridSquares) {
-            Grid emulatedGrid = playMove(firstGrid, emptySquare, maximisingPlayer);
-            Integer score = minimax(emulatedGrid, minimisingPlayer, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
-            scores.add(score);
+            Integer score = getScore(firstGrid, emptySquare, maximisingPlayer, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
+            scores.put(emptySquare, score);
         }
 
-        Integer maxScoreIndex = findMaxIndex(scores);
-        return emptyGridSquares.get(maxScoreIndex);
+        return scores;
+    }
+
+    private Integer getScore(Grid grid, Integer emptySquare, Mark optimisingPlayer, Integer depth, Integer alpha, Integer beta) {
+        Grid emulatedGrid = playMove(grid, emptySquare, optimisingPlayer);
+        return minimax(emulatedGrid, oppositeOptimising(optimisingPlayer), depth, alpha, beta);
     }
 
     private int minimax(Grid grid, Mark optimisingPlayer, Integer depth, Integer alpha, Integer beta) {
@@ -41,8 +53,7 @@ public class Minimax {
 
             ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
             for (Integer emptySquare : emptyGridSquares) {
-                Grid emulatedGrid = playMove(grid, emptySquare, optimisingPlayer);
-                Integer value = minimax(emulatedGrid, oppositeOptimising(optimisingPlayer), depth + 1, alpha, beta);
+                Integer value = getScore(grid, emptySquare, optimisingPlayer, depth + 1, alpha, beta);
                 if (isMaximisingPlayer(optimisingPlayer)) {
                     bestVal = Math.max(bestVal, value);
                     alpha = Math.max(alpha, bestVal);
@@ -79,11 +90,5 @@ public class Minimax {
             oppositeOptimising = minimisingPlayer;
         else oppositeOptimising = maximisingPlayer;
         return oppositeOptimising;
-    }
-
-    private int findMaxIndex(ArrayList<Integer> scores) {
-        return IntStream.range(0, scores.size()).boxed()
-                .max(Comparator.comparingInt(scores::get))
-                .get();
     }
 }
