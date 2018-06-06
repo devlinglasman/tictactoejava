@@ -7,22 +7,22 @@ import java.util.stream.IntStream;
 public class Minimax {
 
     private Grid firstGrid;
-    private Mark maximisingPlayerMark;
-    private Mark minimisingPlayerMark;
+    private Mark maximisingPlayer;
+    private Mark minimisingPlayer;
 
-    public Minimax(Grid firstGrid, Mark maximisingPlayerMark, Mark minimisingPlayerMark) {
+    public Minimax(Grid firstGrid, Mark maximisingPlayer, Mark minimisingPlayer) {
         this.firstGrid = firstGrid;
-        this.maximisingPlayerMark = maximisingPlayerMark;
-        this.minimisingPlayerMark = minimisingPlayerMark;
+        this.maximisingPlayer = maximisingPlayer;
+        this.minimisingPlayer = minimisingPlayer;
     }
 
-    public int findGridChoice() {
+    public int findBestMove() {
         ArrayList<Integer> emptyGridSquares = firstGrid.emptySquareIndices();
         ArrayList<Integer> scores = new ArrayList<>();
 
         for (Integer emptySquare : emptyGridSquares) {
-            Grid emulatedGrid = emulateGrid(firstGrid, emptySquare, maximisingPlayerMark);
-            Integer score = minimax(emulatedGrid, minimisingPlayerMark, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
+            Grid emulatedGrid = playMove(firstGrid, emptySquare, maximisingPlayer);
+            Integer score = minimax(emulatedGrid, minimisingPlayer, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
             scores.add(score);
         }
 
@@ -30,20 +30,20 @@ public class Minimax {
         return emptyGridSquares.get(maxScoreIndex);
     }
 
-    private int minimax(Grid grid, Mark optimisingPlayerMark, Integer depth, Integer alpha, Integer beta) {
+    private int minimax(Grid grid, Mark optimisingPlayer, Integer depth, Integer alpha, Integer beta) {
 
         if (grid.isGameOver()) {
             return scoreForTerminalGameState(grid, depth);
         } else {
             Integer bestVal;
-            if (isMaximisingPlayer(optimisingPlayerMark)) bestVal = Integer.MIN_VALUE;
+            if (isMaximisingPlayer(optimisingPlayer)) bestVal = Integer.MIN_VALUE;
             else bestVal = Integer.MAX_VALUE;
 
             ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
             for (Integer emptySquare : emptyGridSquares) {
-                Grid emulatedGrid = emulateGrid(grid, emptySquare, optimisingPlayerMark);
-                Integer value = minimax(emulatedGrid, oppositeOptimisingMark(optimisingPlayerMark), depth + 1, alpha, beta);
-                if (isMaximisingPlayer(optimisingPlayerMark)) {
+                Grid emulatedGrid = playMove(grid, emptySquare, optimisingPlayer);
+                Integer value = minimax(emulatedGrid, oppositeOptimising(optimisingPlayer), depth + 1, alpha, beta);
+                if (isMaximisingPlayer(optimisingPlayer)) {
                     bestVal = Math.max(bestVal, value);
                     alpha = Math.max(alpha, bestVal);
                 } else {
@@ -56,11 +56,11 @@ public class Minimax {
         }
     }
 
-    private boolean isMaximisingPlayer(Mark optimisingPlayerMark) {
-        return optimisingPlayerMark == maximisingPlayerMark;
+    private boolean isMaximisingPlayer(Mark optimisingPlayer) {
+        return optimisingPlayer == maximisingPlayer;
     }
 
-    private Grid emulateGrid(Grid grid, Integer emptySquare, Mark mark) {
+    private Grid playMove(Grid grid, Integer emptySquare, Mark mark) {
         Grid gridClone = grid.duplicate();
         gridClone.markSquare(emptySquare, mark);
         return gridClone;
@@ -68,17 +68,17 @@ public class Minimax {
 
     private int scoreForTerminalGameState(Grid grid, Integer depth) {
         if (grid.winningLineExistsInGrid()) {
-            if (grid.reportWinningMark() == maximisingPlayerMark) return 1000 - depth;
+            if (grid.reportWinningMark() == maximisingPlayer) return 1000 - depth;
             else return depth - 1000;
         } else return 0;
     }
 
-    private Mark oppositeOptimisingMark(Mark currentOptimisingPlayerMark) {
-        Mark oppositeOptimisingMark;
-        if (currentOptimisingPlayerMark == maximisingPlayerMark)
-            oppositeOptimisingMark = minimisingPlayerMark;
-        else oppositeOptimisingMark = maximisingPlayerMark;
-        return oppositeOptimisingMark;
+    private Mark oppositeOptimising(Mark currentOptimisingPlayer) {
+        Mark oppositeOptimising;
+        if (currentOptimisingPlayer == maximisingPlayer)
+            oppositeOptimising = minimisingPlayer;
+        else oppositeOptimising = maximisingPlayer;
+        return oppositeOptimising;
     }
 
     private int findMaxIndex(ArrayList<Integer> scores) {
