@@ -1,5 +1,4 @@
-import Console.ConsoleIO;
-import Console.ConsoleGameRunner;
+package Console;
 
 public class MainConsole {
 
