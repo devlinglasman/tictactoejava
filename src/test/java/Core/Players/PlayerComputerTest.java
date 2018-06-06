@@ -14,9 +14,15 @@ public class PlayerComputerTest {
         Grid grid = new Grid();
         Player computer = new PlayerComputer("Computer", Mark.playerTwoMark, Mark.playerOneMark);
 
+//         Grid state:
 //         O X O
 //         O O X
-//         X _ _
+//         X 8 9
+
+//         Player 'O' optimum move is at 9:
+//         O X O
+//         O O X
+//         X 8 O
 
         grid.markSquare(0, Mark.playerTwoMark);
         grid.markSquare(1, Mark.playerOneMark);
@@ -34,8 +40,14 @@ public class PlayerComputerTest {
         Grid grid = new Grid();
         Player computer = new PlayerComputer("Computer", Mark.playerTwoMark, Mark.playerOneMark);
 
+//         Grid state:
 //         O X O
-//         _ _ X
+//         4 5 X
+//         X O O
+
+//         Player 'O' optimum move is at 5:
+//         O X O
+//         4 O X
 //         X O O
 
         grid.markSquare(0, Mark.playerTwoMark);
@@ -54,9 +66,15 @@ public class PlayerComputerTest {
         Grid grid = new Grid();
         Player computer = new PlayerComputer("Computer", Mark.playerTwoMark, Mark.playerOneMark);
 
-//         O _ X
-//         X _ _
+//         Grid state:
+//         O 2 X
+//         X 5 6
 //         X O O
+
+//         Player 'O' optimum move is at 5:
+ //         O 2 X
+ //         X O 6
+ //         X O O
 
         grid.markSquare(0, Mark.playerTwoMark);
         grid.markSquare(2, Mark.playerOneMark);
@@ -73,9 +91,15 @@ public class PlayerComputerTest {
         Grid grid = new Grid();
         Player computer = new PlayerComputer("Computer", Mark.playerTwoMark, Mark.playerOneMark);
 
-//         X X _
-//         _ X _
-//         O _ O
+//         Grid state:
+//         X X 3
+//         4 X 6
+//         O 8 O
+
+//         Player 'O' optimum move:
+ //         X X 3
+ //         4 X 6
+ //         O O O
 
         grid.markSquare(0, Mark.playerOneMark);
         grid.markSquare(1, Mark.playerOneMark);
@@ -91,9 +115,15 @@ public class PlayerComputerTest {
         Grid grid = new Grid();
         Player computer = new PlayerComputer("Computer", Mark.playerTwoMark, Mark.playerOneMark);
 
-//         X _ O
-//         O _ _
+//         Grid state:
+//         X 2 O
+//         O 5 6
 //         O X X
+
+//         Player 'O' optimum move is at 5:
+ //         X 2 O
+ //         O O 6
+ //         O X X
 
         grid.markSquare(0, Mark.playerOneMark);
         grid.markSquare(2, Mark.playerTwoMark);
@@ -110,9 +140,15 @@ public class PlayerComputerTest {
         Grid grid = new Grid();
         Player computer = new PlayerComputer("Computer", Mark.playerTwoMark, Mark.playerOneMark);
 
-//         _ X _
-//         _ _ X
+//         Grid state:
+//         1 X 3
+//         4 5 X
 //         O O X
+
+//         Player 'O' optimum move is at 3:
+ //         1 X O
+ //         4 5 X
+ //         O O X
 
         grid.markSquare(1, Mark.playerOneMark);
         grid.markSquare(5, Mark.playerOneMark);
@@ -128,9 +164,15 @@ public class PlayerComputerTest {
         Grid grid = new Grid();
         Player computer = new PlayerComputer("Computer", Mark.playerTwoMark, Mark.playerOneMark);
 
+//         Grid state:
 //         O O X
-//         _ X _
-//         _ _ _
+//         4 X 6
+//         7 8 9
+
+//         Player 'X' optimum move is at 7:
+ //         O O X
+ //         4 X 6
+ //         X 8 9
 
         grid.markSquare(0, Mark.playerOneMark);
         grid.markSquare(1, Mark.playerOneMark);
