@@ -47,9 +47,7 @@ public class Minimax {
         if (grid.isGameOver()) {
             return scoreForTerminalGameState(grid, depth);
         } else {
-            Integer bestVal;
-            if (isMaximisingPlayer(optimisingPlayer)) bestVal = Integer.MIN_VALUE;
-            else bestVal = Integer.MAX_VALUE;
+            Integer bestVal = isMaximisingPlayer(optimisingPlayer) ? Integer.MIN_VALUE : Integer.MAX_VALUE;
 
             ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
             for (Integer emptySquare : emptyGridSquares) {
