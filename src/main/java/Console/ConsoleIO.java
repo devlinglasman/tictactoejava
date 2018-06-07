@@ -99,7 +99,7 @@ public class ConsoleIO {
     }
 
     public String takeInput() {
-        return scanner.next();
+        return scanner.nextLine();
     }
 
     public void askGameMode() {
@@ -134,7 +134,7 @@ public class ConsoleIO {
 
     public void pause() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -31,6 +31,7 @@ public class Game {
             announceSquareChoice();
             pause();
             displayGrid();
+            pause();
             alternatePlayer();
         }
         announceResult();

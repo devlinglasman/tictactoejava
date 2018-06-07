@@ -1,6 +1,7 @@
-package Console;
+import Console.ConsoleGameRunner;
+import Console.ConsoleIO;
 
-public class MainConsole {
+public class Main {
 
     public static void main(String[] args) {
         ConsoleIO consoleIO = new ConsoleIO(System.in, System.out);
