@@ -144,4 +144,8 @@ public class ConsoleIO {
         this.out.print("\033[H\033[2J");
         out.flush();
     }
+
+    public void askToRewatch() {
+        out.print("\nWould you like to rewatch the game? Please enter: y or n\n");
+    }
 }
