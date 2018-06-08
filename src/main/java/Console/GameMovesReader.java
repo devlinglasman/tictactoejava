@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class GameMovesReader {
 
-    private static File movesList = new File("src/dummyGame1.txt");
+    private static File movesList;
 
-    public ArrayList<String> runRead() throws IOException {
+    public ArrayList<String> runRead(File movesList) throws IOException {
         ArrayList<String> gameValues = new ArrayList<>();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(

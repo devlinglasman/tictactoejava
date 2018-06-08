@@ -8,6 +8,7 @@ import Core.Players.PlayerComputer;
 import Core.Players.PlayerHuman;
 import Core.Players.PlayerSimulated;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -18,21 +19,25 @@ public class ConsoleGameRunner {
     private ConsoleIO consoleIO;
     private Player playerOne;
     private Player playerTwo;
+    private GameMovesReader gameMovesReader;
+    private GameMovesWriter gameMovesWriter;
 
-    public ConsoleGameRunner(ConsoleIO consoleIO) {
+    public ConsoleGameRunner(ConsoleIO consoleIO) throws IOException {
         this.consoleIO = consoleIO;
         grid = new Grid();
+        gameMovesReader = new GameMovesReader();
+        gameMovesWriter = new GameMovesWriter();
     }
 
     public void run() throws IOException {
-//        findGameMode();
-//        clearScreen();
-//        Game game = new Game(grid, playerOne, playerTwo, consoleIO);
-//        game.runGame();
+        findGameMode();
+        clearScreen();
+        Game game = new Game(grid, playerOne, playerTwo, consoleIO, gameMovesWriter);
+        game.runGame();
         rewatch();
     }
 
-    private void findGameMode() {
+    private void findGameMode() throws IOException {
         consoleIO.askGameMode();
         String gameChoice = consoleIO.takeInput();
         if (gameChoice.equals("1")) {
@@ -45,6 +50,7 @@ public class ConsoleGameRunner {
             playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleIO);
             playerTwo = new PlayerHuman("Player Two", Mark.playerTwoMark, consoleIO);
         }
+        gameMovesWriter.writeValue(playerOne.getName() + "\n" + playerTwo.getName());
     }
 
     private void clearScreen() {
@@ -57,8 +63,7 @@ public class ConsoleGameRunner {
             consoleIO.askToRewatch();
             String rewatchChoice = consoleIO.takeInput();
             if (rewatchChoice.equals("y")) {
-                GameMovesReader gameMovesReader = new GameMovesReader();
-                ArrayList<String> gameValues = gameMovesReader.runRead();
+                ArrayList<String> gameValues = gameMovesReader.runRead(gameMovesWriter.getGameValues());
                 grid = new Grid();
                 String firstName = gameValues.get(0);
                 String secondName = gameValues.get(1);
@@ -67,7 +72,7 @@ public class ConsoleGameRunner {
 
                 playerOne = new PlayerSimulated(firstName, Mark.playerOneMark, playerOnePlies);
                 playerTwo = new PlayerSimulated(secondName, Mark.playerTwoMark, playerTwoPlies);
-                Game game = new Game(grid, playerOne, playerTwo, consoleIO);
+                Game game = new Game(grid, playerOne, playerTwo, consoleIO, gameMovesWriter);
                 game.runGame();
             } else {
                 rewatchOn = false;
@@ -83,7 +88,7 @@ public class ConsoleGameRunner {
             if (i + startingPosition < gameValues.size()) {
                 String move = gameValues.get(i + startingPosition);
                 Integer newMove = Integer.parseInt(move);
-                playerPlies.add(newMove - 1);
+                playerPlies.add(newMove);
             }
         }
         return playerPlies;

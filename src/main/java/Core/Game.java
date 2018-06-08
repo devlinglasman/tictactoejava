@@ -1,8 +1,10 @@
 package Core;
 
 import Console.ConsoleIO;
+import Console.GameMovesWriter;
 import Core.Players.Player;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Game {
@@ -12,21 +14,25 @@ public class Game {
     private Player playerTwo;
     private ConsoleIO consoleIO;
     private Player activePlayer;
+    private GameMovesWriter gameMovesWriter;
 
-    public Game(Grid grid, Player playerOne, Player playerTwo, ConsoleIO consoleIO) {
+    public Game(Grid grid, Player playerOne, Player playerTwo, ConsoleIO consoleIO, GameMovesWriter gameMovesWriter) throws IOException {
         this.grid = grid;
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
         this.consoleIO = consoleIO;
         activePlayer = playerOne;
+        this.gameMovesWriter = gameMovesWriter;
     }
 
-    public void runGame() {
+    public void runGame() throws IOException {
         displayGrid();
         while (gameOngoing()) {
             Grid gridClone = grid.duplicate();
             int input = activePlayer.getInput(gridClone);
             makeMove(input, activePlayer.getMark());
+            String inputString = Integer.toString(input);
+            gameMovesWriter.writeValue(inputString);
             clearScreen();
             announceSquareChoice();
             pause();
