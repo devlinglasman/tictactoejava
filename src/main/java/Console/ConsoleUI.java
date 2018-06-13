@@ -1,6 +1,7 @@
 package Console;
 
 import Core.Mark;
+import Core.Players.Player;
 import Core.UI;
 
 import java.io.InputStream;
@@ -32,46 +33,24 @@ public class ConsoleUI implements UI {
         return scanner.nextLine();
     }
 
-    @Override
-    public int getValidSquareChoice(String playerName) {
-        String input = getInput();
-        boolean inputIllegal = inputNotValidGridNumber(input);
-        while (inputIllegal) {
-            announceSquareChoiceInvalid(playerName);
-            input = getInput();
-            inputIllegal = inputNotValidGridNumber(input);
-        }
-        int inputConverted = Integer.parseInt(input);
-        return inputConverted--;
-    }
-
     public boolean inputNotValidGameChoice(String input) {
-        if (inputNotCorrectFormat(input)) return true;
+        if (checkIfInputNotNumber(input)) return true;
         else {
             int inputConverted = convertInputStrtoInt(input);
             return inputConverted != 1 && inputConverted != 2;
         }
     }
 
-    public boolean inputNotValidGridNumber(String input) {
-        if (inputNotCorrectFormat(input)) return true;
-        else {
-            int inputConverted = convertInputStrtoInt(input);
-            return inputIsNotWithinRange(inputConverted);
+    @Override
+    public int getValidNumber(Player player) {
+        String input = getInput();
+        boolean inputNotNumber = checkIfInputNotNumber(input);
+        while (inputNotNumber) {
+            announceSquareChoiceInvalid(player);
+            input = getInput();
+            inputNotNumber = checkIfInputNotNumber(input);
         }
-    }
-
-    public boolean inputNotCorrectFormat(String input) {
-        try {
-            convertInputStrtoInt(input);
-        } catch (NumberFormatException error) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean inputIsNotWithinRange(int input) {
-        return input < 1 || input > 9;
+        return Integer.parseInt(input);
     }
 
     @Override
@@ -140,36 +119,45 @@ public class ConsoleUI implements UI {
     }
 
     @Override
-    public void askSquareChoice(String playerName) {
-        out.print("\n" + playerName + " please select a square from 1-9.\n");
+    public void askSquareChoice(Player player) {
+        out.print("\n" + player.getName() + " please select a square from 1-9.\n");
     }
 
     @Override
-    public void announceSquareChoiceInvalid(String playerName) {
-        out.print("\nLooks like " + playerName + " made a boo-boo! Please enter a number from 1-9 that hasn't already been picked.\n");
+    public void announceSquareChoiceInvalid(Player player) {
+        out.print("\nLooks like " + player.getName() + " made a boo-boo! Please enter a valid number that hasn't already been picked.\n");
     }
 
 
     @Override
-    public void announceSquareChoice(String playerName) {
+    public void announceSquareChoice(Player player) {
         clearScreen();
         pause();
-        announceSquareChoiceMessage(playerName);
+        announceSquareChoiceMessage(player);
         pause();
     }
 
-    public void announceSquareChoiceMessage(String playerName) {
-        out.print("\n" + playerName + " picked...\n");
+    public void announceSquareChoiceMessage(Player player) {
+        out.print("\n" + player.getName() + " picked...\n");
     }
 
     @Override
-    public void announceWinner(String playerName) {
-        out.print("\nCongratulations " + playerName + " - You're the winner!\n");
+    public void announceWinner(Player player) {
+        out.print("\nCongratulations " + player.getName() + " - You're the winner!\n");
     }
 
     @Override
     public void announceTie() {
         out.print("\nLooks like the game was a tie!\n");
+    }
+
+    private boolean checkIfInputNotNumber(String input) {
+        try {
+            convertInputStrtoInt(input);
+        } catch (NumberFormatException ex) {
+            return true;
+        }
+        return false;
     }
 
     private int convertInputStrtoInt(String input) {

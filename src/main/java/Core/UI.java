@@ -1,5 +1,7 @@
 package Core;
 
+import Core.Players.Player;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,7 @@ public interface UI {
 
     String getInput();
 
-    int getValidSquareChoice(String playerName);
+    int getValidNumber(Player player);
 
     void askGameMode();
 
@@ -15,13 +17,13 @@ public interface UI {
 
     void displayGrid(ArrayList<Mark> gridSquares);
 
-    void announceSquareChoice(String playerName);
+    void announceSquareChoice(Player player);
 
-    void askSquareChoice(String playerName);
+    void askSquareChoice(Player player);
 
-    void announceSquareChoiceInvalid(String playerName);
+    void announceSquareChoiceInvalid(Player player);
 
     void announceTie();
 
-    void announceWinner(String playerName);
+    void announceWinner(Player player);
 }

@@ -1,5 +1,7 @@
 import Console.ConsoleUI;
 import Core.Mark;
+import Core.Players.Player;
+import Core.Players.PlayerHuman;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -22,63 +24,42 @@ public class ConsoleUITest {
         ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
         assertFalse(consoleUI.inputNotValidGameChoice("1"));
     }
+//
+//    @Test
+//    public void inputNotValidGridNumberTrue() {
+//        IOHelper ioHelper = new IOHelper("");
+//        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+//        assertTrue(consoleUI.checkIfInputNotNumber("3.4"));
+//    }
+//
+//    @Test
+//    public void inputNotValidGridNumberFalse() {
+//        IOHelper ioHelper = new IOHelper("");
+//        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+//        assertFalse(consoleUI.checkIfInputNotNumber("3"));
+//    }
+//
+//    @Test
+//    public void inputNotCorrectFormatTrueNotNumber() {
+//        IOHelper ioHelper = new IOHelper("");
+//        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+//        assertTrue(consoleUI.checkIfInputNotNumber("as"));
+//    }
+//
+//    @Test
+//    public void inputNotCorrectFormatTrueNotInteger() {
+//        IOHelper ioHelper = new IOHelper("");
+//        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+//        assertTrue(consoleUI.checkIfInputNotNumber("3.4"));
+//    }
+//
+//    @Test
+//    public void inputNotCorrectFormatFalse() {
+//        IOHelper ioHelper = new IOHelper("");
+//        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+//        assertFalse(consoleUI.checkIfInputNotNumber("1"));
+//    }
 
-    @Test
-    public void inputNotValidGridNumberTrue() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
-        assertTrue(consoleUI.inputNotValidGridNumber("3.4"));
-    }
-
-    @Test
-    public void inputNotValidGridNumberFalse() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
-        assertFalse(consoleUI.inputNotValidGridNumber("3"));
-    }
-
-    @Test
-    public void inputNotCorrectFormatTrueNotNumber() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
-        assertTrue(consoleUI.inputNotCorrectFormat("as"));
-    }
-
-    @Test
-    public void inputNotCorrectFormatTrueNotInteger() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
-        assertTrue(consoleUI.inputNotCorrectFormat("3.4"));
-    }
-
-    @Test
-    public void inputNotCorrectFormatFalse() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
-        assertFalse(consoleUI.inputNotCorrectFormat("1"));
-    }
-
-    @Test
-    public void inputIsNotWithinRangeTrueTooLow() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
-        assertTrue(consoleUI.inputIsNotWithinRange(0));
-    }
-
-    @Test
-    public void inputIsNotWithinRangeTrueTooHigh() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
-        assertTrue(consoleUI.inputIsNotWithinRange(10));
-    }
-
-    @Test
-    public void inputIsNotWithinRangeFalse() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
-
-        assertFalse(consoleUI.inputIsNotWithinRange(1));
-    }
     @Test
     public void displayGrid() {
         IOHelper ioHelper = new IOHelper("");
@@ -133,8 +114,9 @@ public class ConsoleUITest {
     public void announceSquareChoiceMessage() {
         IOHelper ioHelper = new IOHelper("");
         ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
 
-        consoleUI.announceSquareChoiceMessage("Player One");
+        consoleUI.announceSquareChoiceMessage(playerOne);
 
         assertEquals("\nPlayer One picked...\n", ioHelper.output());
     }
@@ -153,8 +135,9 @@ public class ConsoleUITest {
     public void askForSquareChoice() {
         IOHelper ioHelper = new IOHelper("");
         ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
 
-        consoleUI.askSquareChoice("Player One");
+        consoleUI.askSquareChoice(playerOne);
 
         assertEquals("\nPlayer One please select a square from 1-9.\n", ioHelper.output());
     }
@@ -163,10 +146,11 @@ public class ConsoleUITest {
     public void announceInputInvalid() {
         IOHelper ioHelper = new IOHelper("");
         ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
 
-        consoleUI.announceSquareChoiceInvalid("Player One");
+        consoleUI.announceSquareChoiceInvalid(playerOne);
 
-        assertEquals("\nLooks like Player One made a boo-boo! Please enter a number from 1-9 that hasn't already been picked.\n", ioHelper.output());
+        assertEquals("\nLooks like Player One made a boo-boo! Please enter a valid number that hasn't already been picked.\n", ioHelper.output());
 
     }
 
@@ -174,8 +158,9 @@ public class ConsoleUITest {
     public void announceWinner() {
         IOHelper ioHelper = new IOHelper("");
         ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
 
-        consoleUI.announceWinner("Player One");
+        consoleUI.announceWinner(playerOne);
 
         assertEquals("\nCongratulations Player One - You're the winner!\n", ioHelper.output());
     }

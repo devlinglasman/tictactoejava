@@ -1,6 +1,5 @@
 package Core.Players;
 
-import Console.ConsoleUI;
 import Core.Grid;
 import Core.Mark;
 import Core.UI;
@@ -20,7 +19,7 @@ public class PlayerHuman extends Player {
         input--;
         boolean inputIllegalMove = moveIllegal(grid, input);
         while (inputIllegalMove) {
-            ui.announceSquareChoiceInvalid(getName());
+            ui.announceSquareChoiceInvalid(this);
             input = getValidNumberInput();
             input--;
             inputIllegalMove = moveIllegal(grid, input);
@@ -29,8 +28,8 @@ public class PlayerHuman extends Player {
     }
 
     private int getValidNumberInput() {
-        ui.askSquareChoice(getName());
-        return ui.getValidSquareChoice(getName());
+        ui.askSquareChoice(this);
+        return ui.getValidNumber(this);
     }
 
     private boolean moveIllegal(Grid grid, int input) {

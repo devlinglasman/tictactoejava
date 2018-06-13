@@ -50,7 +50,7 @@ public class Game {
     }
 
     private void announceSquareChoice() {
-        ui.announceSquareChoice(activePlayer.getName());
+        ui.announceSquareChoice(activePlayer);
     }
 
     private void announceResult() {
@@ -60,11 +60,11 @@ public class Game {
 
     private void announceWinner() {
         if (grid.reportWinningMark() == activePlayer.getMark()) {
-            ui.announceWinner(activePlayer.getName());
+            ui.announceWinner(activePlayer);
         }
         else {
             alternatePlayer();
-            ui.announceWinner(activePlayer.getName());
+            ui.announceWinner(activePlayer);
         }
     }
 }
