@@ -1,9 +1,6 @@
 package Core;
 
-import Console.ConsoleUI;
 import Core.Players.Player;
-
-import java.util.ArrayList;
 
 public class Game {
 
@@ -43,9 +40,7 @@ public class Game {
     }
 
     private void makeMove(Player activePlayer, Grid grid) {
-        Grid gridClone = grid.duplicate();
-        int square = activePlayer.getInput(gridClone);
-        grid.markSquare(square, activePlayer.getMark());
+        activePlayer.makeMove(grid);
         showMove();
     }
 

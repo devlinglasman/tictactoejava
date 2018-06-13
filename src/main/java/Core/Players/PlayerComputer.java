@@ -17,8 +17,9 @@ public class PlayerComputer extends Player {
     }
 
     @Override
-    public int getInput(Grid grid) {
-        return findBestMove(grid);
+    public void makeMove(Grid grid) {
+        int input = findBestMove(grid);
+        grid.markSquare(input, getMark());
     }
 
     private int findBestMove(Grid grid) {

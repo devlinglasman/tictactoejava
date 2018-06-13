@@ -15,7 +15,7 @@ public class PlayerHuman extends Player {
     }
 
     @Override
-    public int getInput(Grid grid) {
+    public void makeMove(Grid grid) {
         int input = getValidNumberInput();
         input--;
         boolean inputIllegalMove = moveIllegal(grid, input);
@@ -25,7 +25,7 @@ public class PlayerHuman extends Player {
             input--;
             inputIllegalMove = moveIllegal(grid, input);
         }
-        return input;
+        grid.markSquare(input, getMark());
     }
 
     private int getValidNumberInput() {
