@@ -17,8 +17,12 @@ public class Grid {
         squares.set(squareNumber, mark);
     }
 
-    public boolean moveNotLegal(int squareNumber) {
-        return squares.get(squareNumber) != Mark.unmarkedSquare;
+    public boolean moveNotLegal(int squareChoice) {
+         if (choiceOutOfRange(squareChoice)) {
+             return true;
+         } else {
+             return choiceAlreadyMarked(squareChoice);
+         }
     }
 
     public boolean isFull() {
@@ -96,6 +100,14 @@ public class Grid {
             result.add(Mark.unmarkedSquare);
         }
         return (ArrayList<Mark>) result;
+    }
+
+    private boolean choiceOutOfRange(int squareChoice) {
+        return squareChoice < 0 || squareChoice >= squares.size();
+    }
+
+    private boolean choiceAlreadyMarked(int squareChoice) {
+        return squares.get(squareChoice) != Mark.unmarkedSquare;
     }
 
 }

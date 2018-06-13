@@ -17,12 +17,12 @@ public class PlayerHuman extends Player {
     public void makeMove(Grid grid) {
         int input = getValidNumberInput();
         input--;
-        boolean inputIllegalMove = moveIllegal(grid, input);
+        boolean inputIllegalMove = grid.moveNotLegal(input);
         while (inputIllegalMove) {
             ui.announceSquareChoiceInvalid(this);
             input = getValidNumberInput();
             input--;
-            inputIllegalMove = moveIllegal(grid, input);
+            inputIllegalMove = grid.moveNotLegal(input);
         }
         grid.markSquare(input, getMark());
     }
@@ -30,9 +30,5 @@ public class PlayerHuman extends Player {
     private int getValidNumberInput() {
         ui.askSquareChoice(this);
         return ui.getValidNumber(this);
-    }
-
-    private boolean moveIllegal(Grid grid, int input) {
-        return grid.moveNotLegal(input);
     }
 }

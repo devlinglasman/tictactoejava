@@ -24,41 +24,6 @@ public class ConsoleUITest {
         ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
         assertFalse(consoleUI.inputNotValidGameChoice("1"));
     }
-//
-//    @Test
-//    public void inputNotValidGridNumberTrue() {
-//        IOHelper ioHelper = new IOHelper("");
-//        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
-//        assertTrue(consoleUI.checkIfInputNotNumber("3.4"));
-//    }
-//
-//    @Test
-//    public void inputNotValidGridNumberFalse() {
-//        IOHelper ioHelper = new IOHelper("");
-//        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
-//        assertFalse(consoleUI.checkIfInputNotNumber("3"));
-//    }
-//
-//    @Test
-//    public void inputNotCorrectFormatTrueNotNumber() {
-//        IOHelper ioHelper = new IOHelper("");
-//        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
-//        assertTrue(consoleUI.checkIfInputNotNumber("as"));
-//    }
-//
-//    @Test
-//    public void inputNotCorrectFormatTrueNotInteger() {
-//        IOHelper ioHelper = new IOHelper("");
-//        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
-//        assertTrue(consoleUI.checkIfInputNotNumber("3.4"));
-//    }
-//
-//    @Test
-//    public void inputNotCorrectFormatFalse() {
-//        IOHelper ioHelper = new IOHelper("");
-//        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
-//        assertFalse(consoleUI.checkIfInputNotNumber("1"));
-//    }
 
     @Test
     public void displayGrid() {
