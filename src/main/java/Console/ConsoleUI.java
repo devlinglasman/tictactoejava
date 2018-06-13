@@ -34,12 +34,18 @@ public class ConsoleUI implements UI {
         return scanner.nextLine();
     }
 
-    public boolean inputNotValidGameChoice(String input) {
-        if (checkIfInputNotNumber(input)) return true;
-        else {
-            int inputConverted = convertInputStrtoInt(input);
-            return inputConverted != 1 && inputConverted != 2;
+    @Override
+    public String findGameMode() {
+        askGameMode();
+        String gameChoice = getInput();
+        boolean gameChoiceIllegal = gameChoiceNotValid(gameChoice);
+        while (gameChoiceIllegal) {
+            announceGameModeChoiceInvalid();
+            askGameMode();
+            gameChoice = getInput();
+            gameChoiceIllegal = gameChoiceNotValid(gameChoice);
         }
+        return gameChoice;
     }
 
     @Override
@@ -57,12 +63,12 @@ public class ConsoleUI implements UI {
     @Override
     public void displayGrid(ArrayList<Mark> squares) {
         ArrayList<String> gridConglomerator = new ArrayList<>();
+
         for (int i = 0; i < squares.size(); i++) {
             Mark squareMark = squares.get(i);
             if (squareMark == Mark.playerOneMark) {
                 gridConglomerator.add(ANSI_BRIGHTBLACK + "[" + squareMark.getStringRepresentation() + "]" + ANSI_RESET);
-            }
-                else if (squareMark == Mark.playerTwoMark){
+            } else if (squareMark == Mark.playerTwoMark) {
                 gridConglomerator.add(ANSI_BRIGHTWHITE + "[" + squareMark.getStringRepresentation() + "]" + ANSI_RESET);
             } else {
                 switch (i) {
@@ -116,7 +122,7 @@ public class ConsoleUI implements UI {
 
     @Override
     public void announceGameModeChoiceInvalid() {
-        out.print("\nUhoh please make a valid choice, 1 or 2.\n");
+        out.print("\nUhoh please make a valid choice...\n");
     }
 
     @Override
@@ -153,17 +159,26 @@ public class ConsoleUI implements UI {
         out.print("\nLooks like the game was a tie!\n");
     }
 
+    private boolean gameChoiceNotValid(String gameChoice) {
+        if (checkIfInputNotNumber(gameChoice)) {
+            return true;
+        } else {
+            return gameChoiceNotInRange(gameChoice);
+        }
+    }
+
+    private boolean gameChoiceNotInRange(String gameChoice) {
+        int gameChoiceInt = Integer.parseInt(gameChoice);
+        return gameChoiceInt < 1 || gameChoiceInt > 3;
+    }
+
     private boolean checkIfInputNotNumber(String input) {
         try {
-            convertInputStrtoInt(input);
+            Integer.parseInt(input);
         } catch (NumberFormatException ex) {
             return true;
         }
         return false;
-    }
-
-    private int convertInputStrtoInt(String input) {
-        return Integer.parseInt(input);
     }
 
     private void pause() {

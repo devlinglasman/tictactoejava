@@ -9,6 +9,8 @@ public interface UI {
 
     String getInput();
 
+    String findGameMode();
+
     int getValidNumber(Player player);
 
     void askGameMode();

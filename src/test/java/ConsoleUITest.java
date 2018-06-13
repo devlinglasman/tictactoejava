@@ -12,20 +12,6 @@ import static org.junit.Assert.*;
 public class ConsoleUITest {
 
     @Test
-    public void inputNotValidGameChoiceTrue() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
-        assertTrue(consoleUI.inputNotValidGameChoice("1.5"));
-    }
-
-    @Test
-    public void inputNotValidGameChoiceFalse() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
-        assertFalse(consoleUI.inputNotValidGameChoice("1"));
-    }
-
-    @Test
     public void displayGrid() {
         IOHelper ioHelper = new IOHelper("");
         ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
@@ -93,7 +79,7 @@ public class ConsoleUITest {
 
         consoleUI.announceGameModeChoiceInvalid();
 
-        assertEquals("\nUhoh please make a valid choice, 1 or 2.\n", ioHelper.output());
+        assertEquals("\nUhoh please make a valid choice...\n", ioHelper.output());
     }
 
     @Test
