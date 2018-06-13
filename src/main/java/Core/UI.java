@@ -5,6 +5,10 @@ import java.util.List;
 
 public interface UI {
 
+    String getInput();
+
+    int getValidSquareChoice(String playerName);
+
     void askGameMode();
 
     void announceGameModeChoiceInvalid();
@@ -20,8 +24,4 @@ public interface UI {
     void announceTie();
 
     void announceWinner(String playerName);
-
-    String getInput();
-
-    int getValidSquareChoice(String playerName);
 }

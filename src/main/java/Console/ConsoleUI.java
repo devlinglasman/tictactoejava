@@ -12,7 +12,6 @@ public class ConsoleUI implements UI {
 
     private final Scanner scanner;
     private final PrintStream out;
-    private final ValidatorConsoleInput validatorConsoleInput = new ValidatorConsoleInput();
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BRIGHTBLACK = "\u001B[90m";
@@ -26,6 +25,53 @@ public class ConsoleUI implements UI {
     public ConsoleUI(InputStream in, PrintStream out) {
         this.scanner = new Scanner(in);
         this.out = out;
+    }
+
+    @Override
+    public String getInput() {
+        return scanner.nextLine();
+    }
+
+    @Override
+    public int getValidSquareChoice(String playerName) {
+        String input = getInput();
+        boolean inputIllegal = inputNotValidGridNumber(input);
+        while (inputIllegal) {
+            announceSquareChoiceInvalid(playerName);
+            input = getInput();
+            inputIllegal = inputNotValidGridNumber(input);
+        }
+        int inputConverted = Integer.parseInt(input);
+        return inputConverted--;
+    }
+
+    public boolean inputNotValidGameChoice(String input) {
+        if (inputNotCorrectFormat(input)) return true;
+        else {
+            int inputConverted = convertInputStrtoInt(input);
+            return inputConverted != 1 && inputConverted != 2;
+        }
+    }
+
+    public boolean inputNotValidGridNumber(String input) {
+        if (inputNotCorrectFormat(input)) return true;
+        else {
+            int inputConverted = convertInputStrtoInt(input);
+            return inputIsNotWithinRange(inputConverted);
+        }
+    }
+
+    public boolean inputNotCorrectFormat(String input) {
+        try {
+            convertInputStrtoInt(input);
+        } catch (NumberFormatException error) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean inputIsNotWithinRange(int input) {
+        return input < 1 || input > 9;
     }
 
     @Override
@@ -82,24 +128,6 @@ public class ConsoleUI implements UI {
     }
 
     @Override
-    public int getValidSquareChoice(String playerName) {
-        String input = getInput();
-        boolean inputIllegal = validatorConsoleInput.inputNotValidGridNumber(input);
-        while (inputIllegal) {
-            announceSquareChoiceInvalid(playerName);
-            input = getInput();
-            inputIllegal = validatorConsoleInput.inputNotValidGridNumber(input);
-        }
-        int inputConverted = Integer.parseInt(input);
-        return inputConverted--;
-    }
-
-    @Override
-    public String getInput() {
-        return scanner.nextLine();
-    }
-
-    @Override
     public void askGameMode() {
         out.print("\nHi! please enter '1' to " +
                 "play against the computer, '2' to see computer-vs-computer," +
@@ -142,6 +170,10 @@ public class ConsoleUI implements UI {
     @Override
     public void announceTie() {
         out.print("\nLooks like the game was a tie!\n");
+    }
+
+    private int convertInputStrtoInt(String input) {
+        return Integer.parseInt(input);
     }
 
     private void pause() {

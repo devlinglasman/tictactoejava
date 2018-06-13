@@ -10,6 +10,76 @@ import static org.junit.Assert.*;
 public class ConsoleUITest {
 
     @Test
+    public void inputNotValidGameChoiceTrue() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        assertTrue(consoleUI.inputNotValidGameChoice("1.5"));
+    }
+
+    @Test
+    public void inputNotValidGameChoiceFalse() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        assertFalse(consoleUI.inputNotValidGameChoice("1"));
+    }
+
+    @Test
+    public void inputNotValidGridNumberTrue() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        assertTrue(consoleUI.inputNotValidGridNumber("3.4"));
+    }
+
+    @Test
+    public void inputNotValidGridNumberFalse() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        assertFalse(consoleUI.inputNotValidGridNumber("3"));
+    }
+
+    @Test
+    public void inputNotCorrectFormatTrueNotNumber() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        assertTrue(consoleUI.inputNotCorrectFormat("as"));
+    }
+
+    @Test
+    public void inputNotCorrectFormatTrueNotInteger() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        assertTrue(consoleUI.inputNotCorrectFormat("3.4"));
+    }
+
+    @Test
+    public void inputNotCorrectFormatFalse() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        assertFalse(consoleUI.inputNotCorrectFormat("1"));
+    }
+
+    @Test
+    public void inputIsNotWithinRangeTrueTooLow() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        assertTrue(consoleUI.inputIsNotWithinRange(0));
+    }
+
+    @Test
+    public void inputIsNotWithinRangeTrueTooHigh() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        assertTrue(consoleUI.inputIsNotWithinRange(10));
+    }
+
+    @Test
+    public void inputIsNotWithinRangeFalse() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+
+        assertFalse(consoleUI.inputIsNotWithinRange(1));
+    }
+    @Test
     public void displayGrid() {
         IOHelper ioHelper = new IOHelper("");
         ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
