@@ -1,4 +1,5 @@
 import Console.ConsoleUI;
+import Core.Grid;
 import Core.Mark;
 import Core.Players.Player;
 import Core.Players.PlayerHuman;
@@ -14,7 +15,7 @@ public class ConsoleUITest {
     @Test
     public void displayGrid() {
         IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print);
 
         ArrayList<Mark> squares = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
@@ -32,7 +33,7 @@ public class ConsoleUITest {
     @Test
     public void displayGrid2() {
         IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print);
 
         ArrayList<Mark> squares = new ArrayList<>();
         squares.add(Mark.playerOneMark);
@@ -52,7 +53,7 @@ public class ConsoleUITest {
     @Test
     public void askGameMode() {
         IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print);
 
         consoleUI.askGameMode();
 
@@ -62,20 +63,26 @@ public class ConsoleUITest {
     }
 
     @Test
-    public void announceSquareChoiceMessage() {
+    public void presentMove() {
         IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print);
+        Grid grid = new Grid();
         Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
 
-        consoleUI.announceSquareChoiceMessage(playerOne);
+        grid.markSquare(0, playerOne.getMark());
+        consoleUI.presentMove(playerOne, grid);
 
-        assertEquals("\nPlayer One picked...\n", ioHelper.output());
+        assertEquals("\033[H\033[2J\nPlayer One picked...\n\n" + (ANSI_BRIGHTBLACK + "[X]" + ANSI_RESET) + (ANSI_BRIGHTRED + "[2]" + ANSI_RESET) +
+                (ANSI_BRIGHTPURPLE + "[3]" + ANSI_RESET) + "\n" + (ANSI_BRIGHTRED + "[4]" + ANSI_RESET) +
+                (ANSI_BRIGHTPURPLE + "[5]" + ANSI_RESET) + (ANSI_BRIGHTBLUE + "[6]" + ANSI_RESET) +"\n" +
+                (ANSI_BRIGHTPURPLE + "[7]" + ANSI_RESET) + (ANSI_BRIGHTBLUE + "[8]" + ANSI_RESET) +
+                (ANSI_BRIGHTGREEN + "[9]" + ANSI_RESET + "\n"), ioHelper.output());
     }
 
     @Test
     public void announceGameChoiceInvalid() {
         IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print);
 
         consoleUI.announceGameModeChoiceInvalid();
 
@@ -85,7 +92,7 @@ public class ConsoleUITest {
     @Test
     public void askForSquareChoice() {
         IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print);
         Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
 
         consoleUI.askSquareChoice(playerOne);
@@ -96,7 +103,7 @@ public class ConsoleUITest {
     @Test
     public void announceInputInvalid() {
         IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print);
         Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
 
         consoleUI.announceSquareChoiceInvalid(playerOne);
@@ -106,9 +113,19 @@ public class ConsoleUITest {
     }
 
     @Test
+    public void announceGameTied() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print);
+
+        consoleUI.announceTie();
+
+        assertEquals("\nLooks like the game was a tie!\n", ioHelper.output());
+    }
+
+    @Test
     public void announceWinner() {
         IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
+        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print);
         Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
 
         consoleUI.announceWinner(playerOne);
@@ -116,13 +133,4 @@ public class ConsoleUITest {
         assertEquals("\nCongratulations Player One - You're the winner!\n", ioHelper.output());
     }
 
-    @Test
-    public void announceGameTied() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print);
-
-        consoleUI.announceTie();
-
-        assertEquals("\nLooks like the game was a tie!\n", ioHelper.output());
-    }
 }

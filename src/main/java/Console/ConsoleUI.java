@@ -140,18 +140,9 @@ public class ConsoleUI implements UI {
     public void presentMove(Player player, Grid grid) {
         clearScreen();
         pause();
-        announceSquareChoiceMessage(player);
+        out.print("\n" + player.getName() + " picked...\n");
         pause();
         displayGrid(grid.getSquares());
-    }
-
-    public void announceSquareChoiceMessage(Player player) {
-        out.print("\n" + player.getName() + " picked...\n");
-    }
-
-    @Override
-    public void announceWinner(Player player) {
-        out.print("\nCongratulations " + player.getName() + " - You're the winner!\n");
     }
 
     @Override
@@ -159,12 +150,13 @@ public class ConsoleUI implements UI {
         out.print("\nLooks like the game was a tie!\n");
     }
 
+    @Override
+    public void announceWinner(Player player) {
+        out.print("\nCongratulations " + player.getName() + " - You're the winner!\n");
+    }
+
     private boolean gameChoiceNotValid(String gameChoice) {
-        if (checkIfInputNotNumber(gameChoice)) {
-            return true;
-        } else {
-            return gameChoiceNotInRange(gameChoice);
-        }
+        return checkIfInputNotNumber(gameChoice) || gameChoiceNotInRange(gameChoice);
     }
 
     private boolean gameChoiceNotInRange(String gameChoice) {
@@ -189,7 +181,7 @@ public class ConsoleUI implements UI {
         }
     }
 
-    public void clearScreen() {
+    private void clearScreen() {
         out.print("\033[H\033[2J");
         out.flush();
     }
