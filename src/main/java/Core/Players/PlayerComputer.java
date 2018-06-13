@@ -24,7 +24,9 @@ public class PlayerComputer extends Player {
 
     private int findBestMove(Grid grid) {
         HashMap<Integer, Integer> scores = buildScores(grid);
-        return scores.entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();
+        return scores.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .get().getKey();
     }
 
     private HashMap<Integer, Integer> buildScores(Grid grid) {
@@ -46,25 +48,31 @@ public class PlayerComputer extends Player {
 
     private int minimax(Grid grid, Mark optimisingPlayer, Integer depth, Integer alpha, Integer beta) {
 
-        if (grid.isFull() || grid.winningLineExistsInGrid()) {
-            return scoreForTerminalGameState(grid, depth);
-        } else {
-            Integer bestVal = isMaximisingPlayer(optimisingPlayer) ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+        return grid.isFull() || grid.winningLineExistsInGrid() ?
+                scoreForTerminalGameState(grid, depth) :
+                findBestScore(grid, optimisingPlayer, depth, alpha, beta);
+    }
 
-            ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
-            for (Integer emptySquare : emptyGridSquares) {
-                Integer value = getScore(grid, emptySquare, optimisingPlayer, depth + 1, alpha, beta);
-                if (isMaximisingPlayer(optimisingPlayer)) {
-                    bestVal = Math.max(bestVal, value);
-                    alpha = Math.max(alpha, bestVal);
-                } else {
-                    bestVal = Math.min(bestVal, value);
-                    beta = Math.min(beta, bestVal);
-                }
-                if (beta <= alpha) break;
+    private Integer findBestScore(Grid grid, Mark optimisingPlayer, Integer depth, Integer alpha, Integer beta) {
+
+        Integer bestScore = isMaximisingPlayer(optimisingPlayer) ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+
+        ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
+
+        for (Integer emptySquare : emptyGridSquares) {
+
+            Integer score = getScore(grid, emptySquare, optimisingPlayer, depth + 1, alpha, beta);
+
+            if (isMaximisingPlayer(optimisingPlayer)) {
+                bestScore = Math.max(bestScore, score);
+                alpha = Math.max(alpha, bestScore);
+            } else {
+                bestScore = Math.min(bestScore, score);
+                beta = Math.min(beta, bestScore);
             }
-            return bestVal;
+            if (beta <= alpha) break;
         }
+        return bestScore;
     }
 
     private boolean isMaximisingPlayer(Mark optimisingPlayer) {
@@ -79,13 +87,15 @@ public class PlayerComputer extends Player {
 
     private int scoreForTerminalGameState(Grid grid, Integer depth) {
         if (grid.winningLineExistsInGrid()) {
-            if (grid.reportWinningMark() == getMark()) return 1000 - depth;
-            else return depth - 1000;
-        } else return 0;
+            return grid.reportWinningMark() == getMark() ?
+                    grid.getSquares().size() - depth :
+                    depth - grid.getSquares().size();
+        } else {
+            return 0;
+        }
     }
 
     private Mark oppositeOptimising(Mark currentOptimisingPlayer) {
-        if (currentOptimisingPlayer == getMark()) return opponentMark;
-        return getMark();
+        return currentOptimisingPlayer == getMark() ? opponentMark : getMark();
     }
 }
