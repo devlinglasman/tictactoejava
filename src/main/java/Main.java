@@ -1,11 +1,11 @@
 import Console.ConsoleGameRunner;
-import Console.ConsoleIO;
+import Console.ConsoleUI;
 
 public class Main {
 
     public static void main(String[] args) {
-        ConsoleIO consoleIO = new ConsoleIO(System.in, System.out);
-        ConsoleGameRunner consoleGameRunner = new ConsoleGameRunner(consoleIO);
+        ConsoleUI consoleUI = new ConsoleUI(System.in, System.out);
+        ConsoleGameRunner consoleGameRunner = new ConsoleGameRunner(consoleUI);
         consoleGameRunner.run();
     }
 }

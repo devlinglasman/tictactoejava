@@ -1,4 +1,4 @@
-//import Console.ConsoleIO;
+//import Console.ConsoleUI;
 //import Core.Game;
 //import Core.Grid;
 //import Core.Mark;
@@ -12,7 +12,7 @@
 //    @Test
 //    public void minimaxTest1() {
 //        Grid grid = new Grid();
-//        ConsoleIO consoleIO = new ConsoleIO(System.in, System.out);
+//        ConsoleUI consoleIO = new ConsoleUI(System.in, System.out);
 //        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleIO);
 //        Player playerTwo = new PlayerComputer("Computer", Mark.playerTwoMark);
 //        Game game = new Game(grid, playerOne, playerTwo, consoleIO);
@@ -33,7 +33,7 @@
 //    public void alternatePlayerOne() {
 //        Grid grid = new Grid();
 //        ValidatorConsoleInput validatorConsoleInput = new ValidatorConsoleInput();
-//        ConsoleIO consoleIO = new ConsoleIO(System.in, System.out);
+//        ConsoleUI consoleIO = new ConsoleUI(System.in, System.out);
 //        Game game = new Game(grid, validatorConsoleInput, consoleIO);
 //
 //        game.alternatePlayer();
@@ -46,7 +46,7 @@
 //    public void alternatePlayerPlayerTwo() {
 //        Grid grid = new Grid();
 //        ValidatorConsoleInput validatorConsoleInput = new ValidatorConsoleInput();
-//        ConsoleIO consoleIO = new ConsoleIO(System.in, System.out);
+//        ConsoleUI consoleIO = new ConsoleUI(System.in, System.out);
 //        Game game = new Game(grid, validatorConsoleInput, consoleIO);
 //
 //        game.alternatePlayer();

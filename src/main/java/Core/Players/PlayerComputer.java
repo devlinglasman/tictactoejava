@@ -45,7 +45,7 @@ public class PlayerComputer extends Player {
 
     private int minimax(Grid grid, Mark optimisingPlayer, Integer depth, Integer alpha, Integer beta) {
 
-        if (grid.isGameOver()) {
+        if (grid.isFull() || grid.winningLineExistsInGrid()) {
             return scoreForTerminalGameState(grid, depth);
         } else {
             Integer bestVal = isMaximisingPlayer(optimisingPlayer) ? Integer.MIN_VALUE : Integer.MAX_VALUE;

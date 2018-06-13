@@ -21,10 +21,6 @@ public class Grid {
         return squares.get(squareNumber) != Mark.unmarkedSquare;
     }
 
-    public boolean isGameOver() {
-        return isFull() || winningLineExistsInGrid();
-    }
-
     public boolean isFull() {
         return squares.stream().noneMatch(m -> m.equals(Mark.unmarkedSquare));
     }

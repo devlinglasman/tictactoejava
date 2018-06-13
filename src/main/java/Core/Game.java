@@ -1,6 +1,6 @@
 package Core;
 
-import Console.ConsoleIO;
+import Console.ConsoleUI;
 import Core.Players.Player;
 
 import java.util.ArrayList;
@@ -10,39 +10,24 @@ public class Game {
     private Grid grid;
     private Player playerOne;
     private Player playerTwo;
-    private ConsoleIO consoleIO;
+    private UI ui;
     private Player activePlayer;
 
-    public Game(Grid grid, Player playerOne, Player playerTwo, ConsoleIO consoleIO) {
+    public Game(Grid grid, Player playerOne, Player playerTwo, UI ui) {
         this.grid = grid;
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
-        this.consoleIO = consoleIO;
+        this.ui = ui;
         activePlayer = playerOne;
     }
 
     public void runGame() {
-        displayGrid();
+        ui.displayGrid(grid.getSquares());
         while (gameOngoing()) {
-            Grid gridClone = grid.duplicate();
-            int input = activePlayer.getInput(gridClone);
-            makeMove(input, activePlayer.getMark());
-            clearScreen();
-            announceSquareChoice();
-            pause();
-            displayGrid();
-            pause();
+            makeMove(activePlayer, grid);
             alternatePlayer();
         }
         announceResult();
-    }
-
-    private void clearScreen() {
-        consoleIO.clearScreen();
-    }
-
-    private void pause() {
-        consoleIO.pause();
     }
 
     private void alternatePlayer() {
@@ -53,39 +38,39 @@ public class Game {
         }
     }
 
-    private void displayGrid() {
-        consoleIO.displayGrid(getGridSquares());
-    }
-
     private boolean gameOngoing() {
-        return !grid.isGameOver();
+        return !grid.isFull() && !grid.winningLineExistsInGrid();
     }
 
-    private void makeMove(int square, Mark mark) {
-        grid.markSquare(square, mark);
+    private void makeMove(Player activePlayer, Grid grid) {
+        Grid gridClone = grid.duplicate();
+        int square = activePlayer.getInput(gridClone);
+        grid.markSquare(square, activePlayer.getMark());
+        showMove();
+    }
+
+    private void showMove() {
+        announceSquareChoice();
+        ui.displayGrid(grid.getSquares());
     }
 
     private void announceSquareChoice() {
-        consoleIO.announceSquareChoice(activePlayer.getName());
+        ui.announceSquareChoice(activePlayer.getName());
     }
 
     private void announceResult() {
         if (grid.winningLineExistsInGrid()) announceWinner();
-        else consoleIO.announceGameTied();
+        else ui.announceTie();
     }
 
     private void announceWinner() {
         if (grid.reportWinningMark() == activePlayer.getMark()) {
-            consoleIO.announceWinner(activePlayer.getName());
+            ui.announceWinner(activePlayer.getName());
         }
         else {
             alternatePlayer();
-            consoleIO.announceWinner(activePlayer.getName());
+            ui.announceWinner(activePlayer.getName());
         }
-    }
-
-    private ArrayList<Mark> getGridSquares() {
-        return grid.getSquares();
     }
 }
 

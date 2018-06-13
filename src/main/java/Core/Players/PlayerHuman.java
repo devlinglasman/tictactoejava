@@ -1,16 +1,17 @@
 package Core.Players;
 
-import Console.ConsoleIO;
+import Console.ConsoleUI;
 import Core.Grid;
 import Core.Mark;
+import Core.UI;
 
 public class PlayerHuman extends Player {
 
-    private ConsoleIO consoleIO;
+    private UI ui;
 
-    public PlayerHuman(String name, Mark mark, ConsoleIO consoleIO) {
+    public PlayerHuman(String name, Mark mark, UI ui) {
         super(name,mark);
-        this.consoleIO = consoleIO;
+        this.ui = ui;
     }
 
     @Override
@@ -19,7 +20,7 @@ public class PlayerHuman extends Player {
         input--;
         boolean inputIllegalMove = moveIllegal(grid, input);
         while (inputIllegalMove) {
-            consoleIO.announceInputInvalid(getName());
+            ui.announceSquareChoiceInvalid(getName());
             input = getValidNumberInput();
             input--;
             inputIllegalMove = moveIllegal(grid, input);
@@ -28,8 +29,8 @@ public class PlayerHuman extends Player {
     }
 
     private int getValidNumberInput() {
-        consoleIO.askForSquareChoice(getName());
-        return consoleIO.requestValidSquareChoice(getName());
+        ui.askSquareChoice(getName());
+        return ui.getValidSquareChoice(getName());
     }
 
     private boolean moveIllegal(Grid grid, int input) {
