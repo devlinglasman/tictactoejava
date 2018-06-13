@@ -1,5 +1,6 @@
 package Console;
 
+import Core.Grid;
 import Core.Mark;
 import Core.Players.Player;
 import Core.UI;
@@ -130,11 +131,12 @@ public class ConsoleUI implements UI {
 
 
     @Override
-    public void announceSquareChoice(Player player) {
+    public void presentMove(Player player, Grid grid) {
         clearScreen();
         pause();
         announceSquareChoiceMessage(player);
         pause();
+        displayGrid(grid.getSquares());
     }
 
     public void announceSquareChoiceMessage(Player player) {
@@ -166,7 +168,7 @@ public class ConsoleUI implements UI {
 
     private void pause() {
         try {
-            Thread.sleep(1500);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

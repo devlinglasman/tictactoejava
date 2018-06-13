@@ -17,7 +17,7 @@ public interface UI {
 
     void displayGrid(ArrayList<Mark> gridSquares);
 
-    void announceSquareChoice(Player player);
+    void presentMove(Player player, Grid grid);
 
     void askSquareChoice(Player player);
 

@@ -21,7 +21,8 @@ public class Game {
     public void runGame() {
         ui.displayGrid(grid.getSquares());
         while (gameOngoing()) {
-            makeMove(activePlayer, grid);
+            activePlayer.makeMove(grid);
+            ui.presentMove(activePlayer, grid);
             alternatePlayer();
         }
         announceResult();
@@ -39,23 +40,12 @@ public class Game {
         return !grid.isFull() && !grid.winningLineExistsInGrid();
     }
 
-    private void makeMove(Player activePlayer, Grid grid) {
-        activePlayer.makeMove(grid);
-        showMove();
-    }
-
-    private void showMove() {
-        announceSquareChoice();
-        ui.displayGrid(grid.getSquares());
-    }
-
-    private void announceSquareChoice() {
-        ui.announceSquareChoice(activePlayer);
-    }
-
     private void announceResult() {
-        if (grid.winningLineExistsInGrid()) announceWinner();
-        else ui.announceTie();
+        if (grid.winningLineExistsInGrid()) {
+            announceWinner();
+        } else {
+            ui.announceTie();
+        }
     }
 
     private void announceWinner() {
