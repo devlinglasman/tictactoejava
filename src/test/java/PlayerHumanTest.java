@@ -48,7 +48,7 @@ public class PlayerHumanTest {
     public void makeMove_InvalidAttemptThenAtSquare1() {
         Grid grid = new Grid();
         IOHelper ioHelper = new IOHelper("asdf\n1");
-        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print, 1);
+        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
         ArrayList<Mark> squaresResult = new ArrayList<>(
                 asList(Mark.playerOneMark, Mark.unmarkedSquare, Mark.unmarkedSquare,

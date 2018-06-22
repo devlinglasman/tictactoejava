@@ -11,9 +11,9 @@ public class IOHelper {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
 
-        this.out = out;
-        this.in = in;
-        this.print = new PrintStream(out);
+        IOHelper.out = out;
+        IOHelper.in = in;
+        print = new PrintStream(out);
     }
 
     public String output() {
