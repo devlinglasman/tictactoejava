@@ -37,6 +37,13 @@ public class ConsoleUI implements UI {
     }
 
     @Override
+    public void askGameMode() {
+        out.print("\nHi! please enter '1' to " +
+                "play against the computer, '2' to see computer-vs-computer," +
+                " or '3' for human-vs-human.\n");
+    }
+
+    @Override
     public String findGameMode() {
         askGameMode();
         String gameChoice = getInput();
@@ -60,6 +67,11 @@ public class ConsoleUI implements UI {
             inputNotNumber = checkIfInputNotNumber(input);
         }
         return Integer.parseInt(input);
+    }
+
+    @Override
+    public void announceGameModeChoiceInvalid() {
+        out.print("\nUhoh please make a valid choice...\n");
     }
 
     @Override
@@ -116,18 +128,6 @@ public class ConsoleUI implements UI {
     }
 
     @Override
-    public void askGameMode() {
-        out.print("\nHi! please enter '1' to " +
-                "play against the computer, '2' to see computer-vs-computer," +
-                " or '3' for human-vs-human.\n");
-    }
-
-    @Override
-    public void announceGameModeChoiceInvalid() {
-        out.print("\nUhoh please make a valid choice...\n");
-    }
-
-    @Override
     public void askSquareChoice(Player player) {
         out.print("\n" + player.getName() + " please select a square from 1-9.\n");
     }
@@ -136,7 +136,6 @@ public class ConsoleUI implements UI {
     public void announceSquareChoiceInvalid(Player player) {
         out.print("\nLooks like " + player.getName() + " made a boo-boo! Please enter a valid number that hasn't already been picked.\n");
     }
-
 
     @Override
     public void presentMove(Player player, Grid grid) {
