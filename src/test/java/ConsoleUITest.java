@@ -26,34 +26,31 @@ public class ConsoleUITest {
 
     @Test
     public void findGameMode_ValidAttempt() {
-        IOHelper ioHelper = new IOHelper("1");
+        new IOHelper("1");
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
 
         assertEquals("1", consoleUI.findGameMode());
     }
 
     @Test
     public void findGameMode_InvalidAttemptNotNumber() {
-        IOHelper ioHelper = new IOHelper("asdf\n1");
+        new IOHelper("asdf\n1");
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
 
         assertEquals("1", consoleUI.findGameMode());
     }
 
     @Test
     public void findGameMode_InvalidAttemptOutOfRange() {
-        IOHelper ioHelper = new IOHelper("0\n1");
+        new IOHelper("0\n1");
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
 
         assertEquals("1", consoleUI.findGameMode());
     }
 
     @Test
     public void getValidNumber_ValidAttempt() {
-        IOHelper ioHelper = new IOHelper("1");
+        new IOHelper("1");
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
 
@@ -62,7 +59,7 @@ public class ConsoleUITest {
 
     @Test
     public void getValidNumber_InvalidAttemptNotNumber() {
-        IOHelper ioHelper = new IOHelper("asdf\n1");
+        new IOHelper("asdf\n1");
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
 
@@ -136,7 +133,8 @@ public class ConsoleUITest {
 
         consoleUI.announceSquareChoiceInvalid(playerOne);
 
-        assertEquals("\nLooks like Player One made a boo-boo! Please enter a valid number that hasn't already been picked.\n", ioHelper.output());
+        assertEquals("\nLooks like Player One made a boo-boo! " +
+                "Please enter a valid number that hasn't already been picked.\n", ioHelper.output());
 
     }
 
