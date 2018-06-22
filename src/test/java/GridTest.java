@@ -9,6 +9,44 @@ import static org.junit.Assert.*;
 
 public class GridTest {
 
+
+    @Test
+    public void moveNotLegalFalse1() {
+        Grid grid = new Grid();
+
+        assertFalse(grid.moveNotLegal(0));
+    }
+
+    @Test
+    public void moveNotLegalFalse2() {
+        Grid grid = new Grid();
+
+        assertFalse(grid.moveNotLegal(8));
+    }
+
+    @Test
+    public void moveNotLegalTrueOutOfRange1() {
+        Grid grid = new Grid();
+
+        assertTrue(grid.moveNotLegal(-1));
+    }
+
+    @Test
+    public void moveNotLegalTrueOutOfRange2() {
+        Grid grid = new Grid();
+
+        assertTrue(grid.moveNotLegal(9));
+    }
+
+    @Test
+    public void moveNotLegalTrueChoiceAlreadyMarked() {
+        Grid grid = new Grid();
+
+        grid.markSquare(0, Mark.playerOneMark);
+
+        assertTrue(grid.moveNotLegal(0));
+    }
+
     @Test
     public void checkSquareEmptyBeforeMarkingSquare() {
         Grid grid = new Grid();

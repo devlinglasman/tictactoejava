@@ -13,7 +13,7 @@ public abstract class Player {
         this.mark = mark;
     }
 
-    public abstract int getInput(Grid grid);
+    public abstract void makeMove(Grid grid);
 
     public String getName() {
         return name;

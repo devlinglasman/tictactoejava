@@ -1,48 +1,36 @@
 package Core;
 
-import Console.ConsoleIO;
 import Core.Players.Player;
-
-import java.util.ArrayList;
 
 public class Game {
 
     private Grid grid;
     private Player playerOne;
     private Player playerTwo;
-    private ConsoleIO consoleIO;
+    private UI ui;
     private Player activePlayer;
 
-    public Game(Grid grid, Player playerOne, Player playerTwo, ConsoleIO consoleIO) {
+    public Game(Grid grid, Player playerOne, Player playerTwo, UI ui) {
         this.grid = grid;
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
-        this.consoleIO = consoleIO;
+        this.ui = ui;
         activePlayer = playerOne;
     }
 
     public void runGame() {
-        displayGrid();
+        ui.displayGrid(grid.getSquares());
         while (gameOngoing()) {
-            Grid gridClone = grid.duplicate();
-            int input = activePlayer.getInput(gridClone);
-            makeMove(input, activePlayer.getMark());
-            clearScreen();
-            announceSquareChoice();
-            pause();
-            displayGrid();
-            pause();
+            activePlayer.makeMove(grid);
+            ui.presentMove(activePlayer, grid);
+            ui.displayGrid(grid.getSquares());
             alternatePlayer();
         }
         announceResult();
     }
 
-    private void clearScreen() {
-        consoleIO.clearScreen();
-    }
-
-    private void pause() {
-        consoleIO.pause();
+    public Player getActivePlayer() {
+        return activePlayer;
     }
 
     private void alternatePlayer() {
@@ -53,39 +41,17 @@ public class Game {
         }
     }
 
-    private void displayGrid() {
-        consoleIO.displayGrid(getGridSquares());
-    }
-
     private boolean gameOngoing() {
-        return !grid.isGameOver();
-    }
-
-    private void makeMove(int square, Mark mark) {
-        grid.markSquare(square, mark);
-    }
-
-    private void announceSquareChoice() {
-        consoleIO.announceSquareChoice(activePlayer.getName());
+        return !grid.isFull() && !grid.winningLineExistsInGrid();
     }
 
     private void announceResult() {
-        if (grid.winningLineExistsInGrid()) announceWinner();
-        else consoleIO.announceGameTied();
-    }
-
-    private void announceWinner() {
-        if (grid.reportWinningMark() == activePlayer.getMark()) {
-            consoleIO.announceWinner(activePlayer.getName());
-        }
-        else {
+        if (grid.winningLineExistsInGrid()) {
             alternatePlayer();
-            consoleIO.announceWinner(activePlayer.getName());
+            ui.announceWinner(activePlayer);
+        } else {
+            ui.announceTie();
         }
-    }
-
-    private ArrayList<Mark> getGridSquares() {
-        return grid.getSquares();
     }
 }
 

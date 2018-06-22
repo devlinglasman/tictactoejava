@@ -2,6 +2,8 @@ package Core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static java.util.Arrays.asList;
 
@@ -17,12 +19,12 @@ public class Grid {
         squares.set(squareNumber, mark);
     }
 
-    public boolean moveNotLegal(int squareNumber) {
-        return squares.get(squareNumber) != Mark.unmarkedSquare;
-    }
-
-    public boolean isGameOver() {
-        return isFull() || winningLineExistsInGrid();
+    public boolean moveNotLegal(int squareChoice) {
+         if (choiceOutOfRange(squareChoice)) {
+             return true;
+         } else {
+             return choiceAlreadyMarked(squareChoice);
+         }
     }
 
     public boolean isFull() {
@@ -79,11 +81,9 @@ public class Grid {
     }
 
     public ArrayList<Integer> emptySquareIndices() {
-        ArrayList<Integer> result = new ArrayList<>();
-        for (int i = 0; i < squares.size(); i++) {
-            if (squares.get(i) == Mark.unmarkedSquare) result.add(i);
-        }
-        return result;
+        return IntStream.range(0, squares.size()).filter(i -> squares.get(i) == Mark.unmarkedSquare)
+                .boxed()
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public ArrayList<Mark> getSquares() {
@@ -95,11 +95,18 @@ public class Grid {
     }
 
     private ArrayList<Mark> createGrid() {
-        List<Mark> result = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
-            result.add(Mark.unmarkedSquare);
-        }
+        List<Mark> result = IntStream.range(0, 9)
+                .mapToObj(i -> Mark.unmarkedSquare)
+                .collect(Collectors.toList());
         return (ArrayList<Mark>) result;
+    }
+
+    private boolean choiceOutOfRange(int squareChoice) {
+        return squareChoice < 0 || squareChoice >= squares.size();
+    }
+
+    private boolean choiceAlreadyMarked(int squareChoice) {
+        return squares.get(squareChoice) != Mark.unmarkedSquare;
     }
 
 }
