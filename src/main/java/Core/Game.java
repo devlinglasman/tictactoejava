@@ -23,6 +23,7 @@ public class Game {
         while (gameOngoing()) {
             activePlayer.makeMove(grid);
             ui.presentMove(activePlayer, grid);
+            ui.displayGrid(grid.getSquares());
             alternatePlayer();
         }
         announceResult();

@@ -14,6 +14,7 @@ public class ConsoleUI implements UI {
 
     private final Scanner scanner;
     private final PrintStream out;
+    private int pauseLength;
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BRIGHTBLACK = "\u001B[90m";
@@ -24,9 +25,10 @@ public class ConsoleUI implements UI {
     public static final String ANSI_BRIGHTBLUE = "\u001B[94m";
     public static final String ANSI_BRIGHTPURPLE = "\u001B[95m";
 
-    public ConsoleUI(InputStream in, PrintStream out) {
+    public ConsoleUI(InputStream in, PrintStream out, int pauseLength) {
         this.scanner = new Scanner(in);
         this.out = out;
+        this.pauseLength = pauseLength;
     }
 
     @Override
@@ -140,9 +142,12 @@ public class ConsoleUI implements UI {
     public void presentMove(Player player, Grid grid) {
         clearScreen();
         pause();
-        out.print("\n" + player.getName() + " picked...\n");
+        announceSquareChoice(player);
         pause();
-        displayGrid(grid.getSquares());
+    }
+
+    public void announceSquareChoice(Player player) {
+        out.print("\n" + player.getName() + " picked...\n");
     }
 
     @Override
@@ -175,7 +180,7 @@ public class ConsoleUI implements UI {
 
     private void pause() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(pauseLength);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
