@@ -134,7 +134,7 @@ public class ConsoleIO {
 
     public void pause() {
         try {
-            Thread.sleep(1500);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -143,5 +143,9 @@ public class ConsoleIO {
     public void clearScreen() {
         this.out.print("\033[H\033[2J");
         out.flush();
+    }
+
+    public void askToRewatch() {
+        out.print("\nWould you like to rewatch the game? Please enter: y or n\n");
     }
 }
