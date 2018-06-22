@@ -1,7 +1,7 @@
-package Core.Players;
-
 import Core.Grid;
 import Core.Mark;
+import Core.Players.Player;
+import Core.Players.PlayerComputer;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
