@@ -29,6 +29,10 @@ public class Game {
         announceResult();
     }
 
+    public Player getActivePlayer() {
+        return activePlayer;
+    }
+
     private void alternatePlayer() {
         if (activePlayer == playerOne) {
             activePlayer = playerTwo;
@@ -43,19 +47,10 @@ public class Game {
 
     private void announceResult() {
         if (grid.winningLineExistsInGrid()) {
-            announceWinner();
-        } else {
-            ui.announceTie();
-        }
-    }
-
-    private void announceWinner() {
-        if (grid.reportWinningMark() == activePlayer.getMark()) {
-            ui.announceWinner(activePlayer);
-        }
-        else {
             alternatePlayer();
             ui.announceWinner(activePlayer);
+        } else {
+            ui.announceTie();
         }
     }
 }
