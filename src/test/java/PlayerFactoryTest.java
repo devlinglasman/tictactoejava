@@ -1,6 +1,5 @@
 import Console.ConsoleUI;
 import Core.GameMode;
-import Core.GameRunner;
 import Core.Players.Player;
 import Core.Players.PlayerComputer;
 import Core.Players.PlayerFactory;

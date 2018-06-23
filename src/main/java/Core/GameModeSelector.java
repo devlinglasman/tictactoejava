@@ -1,30 +1,21 @@
 package Core;
 
-import Core.Players.Player;
-import Core.Players.PlayerFactory;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 
-public class GameRunner {
+public class GameModeSelector {
 
-    private Grid grid;
     private UI ui;
-    private PlayerFactory playerFactory;
 
-    public GameRunner(UI ui) {
+    public GameModeSelector(UI ui) {
         this.ui = ui;
-        grid = new Grid();
-        playerFactory = new PlayerFactory(ui);
     }
 
-//    public void run() {
-//        int gameChoice = getValidGameModeChoice();
-//        ArrayList<Player> players = playerFactory.producePlayers(gameChoice);
-//        Game game = new Game();
-//    }
+    public GameMode getGameMode() {
+        int gameModeNumber = getValidGameModeChoiceNumber();
+        return GameMode.findGameModeUsingNumber(gameModeNumber);
+    }
 
-    public int getValidGameModeChoice() {
+    private int getValidGameModeChoiceNumber() {
         ui.askGameMode();
         int gameModeChoice = ui.getValidNumber();
         boolean gameChoiceIllegal = gameModeChoiceNotValid(gameModeChoice);
