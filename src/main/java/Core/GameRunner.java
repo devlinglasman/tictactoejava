@@ -1,12 +1,8 @@
 package Core;
 
-import Core.Game;
-import Core.Grid;
-import Core.Mark;
 import Core.Players.Player;
 import Core.Players.PlayerComputer;
 import Core.Players.PlayerHuman;
-import Core.UI;
 
 public class GameRunner {
 
