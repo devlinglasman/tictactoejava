@@ -1,15 +1,9 @@
 import Console.ConsoleUI;
-import Core.*;
-import Core.Players.Player;
-import Core.Players.PlayerComputer;
-import Core.Players.PlayerHuman;
+import Core.GameRunner;
+import Core.UI;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 public class GameRunnerTest {
 
@@ -48,5 +42,6 @@ public class GameRunnerTest {
 
         assertEquals(1, gameRunner.getValidGameModeChoice());
     }
+
 }
 

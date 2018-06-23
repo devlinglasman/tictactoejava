@@ -41,7 +41,7 @@ public class PlayerFactoryTest {
         UI ui = new ConsoleUI(System.in, System.out, 1);
         PlayerFactory playerFactory = new PlayerFactory(ui);
 
-        ArrayList<Player> players = playerFactory.producePlayers(GameMode.COMPVSCOMP);
+        ArrayList<Player> players = playerFactory.producePlayers(GameMode.HUMANVSHUMAN);
 
         assertTrue(players.get(0) instanceof PlayerHuman);
         assertTrue(players.get(1) instanceof PlayerHuman);
