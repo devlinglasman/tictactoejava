@@ -115,49 +115,4 @@ public class GridTest {
 
         assertTrue(grid.isFull());
     }
-//
-//    @Test
-//    public void winningLineExistsInGridYes() {
-//        Core.Grid grid = new Core.Grid();
-//
-//        for (int i = 0; i < 3; i++) {
-//            grid.markSquare(i, Core.Mark.playerOneMark);
-//        }
-//
-//        assertTrue(grid.winningLineExistsInGrid());
-//    }
-//
-//    @Test
-//    public void winningLineExistsInGridNo() {
-//        Core.Grid grid = new Core.Grid();
-//
-//        assertFalse(grid.winningLineExistsInGrid());
-//    }
-
-//    @Test
-//    public void lineIsWinnerNo1() {
-//        Core.Grid grid = new Core.Grid();
-//        ArrayList<Core.Mark> row1 = new ArrayList<>
-//                (asList(Core.Mark.unmarkedSquare, Core.Mark.unmarkedSquare, Core.Mark.unmarkedSquare));
-//
-//        assertFalse(grid.lineIsWinner(row1));
-//    }
-//
-//    @Test
-//    public void lineIsWinnerNo2() {
-//        Core.Grid grid = new Core.Grid();
-//        ArrayList<Core.Mark> row1 = new ArrayList<>
-//                (asList(Core.Mark.unmarkedSquare, Core.Mark.playerOneMark, Core.Mark.playerOneMark));
-//
-//        assertFalse(grid.lineIsWinner(row1));
-//    }
-//
-//    @Test
-//    public void lineIsWinnerYes() {
-//        Core.Grid grid = new Core.Grid();
-//        ArrayList<Core.Mark> row1 = new ArrayList<>
-//                (asList(Core.Mark.playerOneMark, Core.Mark.playerOneMark, Core.Mark.playerOneMark));
-//
-//        assertTrue(grid.lineIsWinner(row1));
-//    }
 }
