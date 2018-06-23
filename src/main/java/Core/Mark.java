@@ -2,9 +2,9 @@ package Core;
 
 public enum Mark {
 
-    unmarkedSquare(" "),
-    playerOneMark("X"),
-    playerTwoMark("O");
+    UNMARKEDSQUARE(" "),
+    PLAYERONEMARK("X"),
+    PLAYERTWOMARK("O");
 
     private String stringRepresentation;
 

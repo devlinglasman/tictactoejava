@@ -44,34 +44,24 @@ public class ConsoleUI implements UI {
     }
 
     @Override
-    public String findGameMode() {
-        askGameMode();
-        String gameChoice = getInput();
-        boolean gameChoiceIllegal = gameChoiceNotValid(gameChoice);
-        while (gameChoiceIllegal) {
-            announceGameModeChoiceInvalid();
-            askGameMode();
-            gameChoice = getInput();
-            gameChoiceIllegal = gameChoiceNotValid(gameChoice);
-        }
-        return gameChoice;
-    }
-
-    @Override
-    public int getValidNumber(Player player) {
+    public int getValidNumber() {
         String input = getInput();
         boolean inputNotNumber = checkIfInputNotNumber(input);
         while (inputNotNumber) {
-            announceSquareChoiceInvalid(player);
+            announceNumberNotValid();
             input = getInput();
             inputNotNumber = checkIfInputNotNumber(input);
         }
         return Integer.parseInt(input);
     }
 
+    public void announceNumberNotValid() {
+        out.print("\nNow, that's not a valid number, is it! Try again!\n");
+    }
+
     @Override
     public void announceGameModeChoiceInvalid() {
-        out.print("\nUhoh please make a valid choice...\n");
+        out.print("\nUhoh please make a valid game mode selection...\n");
     }
 
     @Override
@@ -80,9 +70,9 @@ public class ConsoleUI implements UI {
 
         for (int i = 0; i < squares.size(); i++) {
             Mark squareMark = squares.get(i);
-            if (squareMark == Mark.playerOneMark) {
+            if (squareMark == Mark.PLAYERONEMARK) {
                 gridConglomerator.add(ANSI_BRIGHTBLACK + "[" + squareMark.getStringRepresentation() + "]" + ANSI_RESET);
-            } else if (squareMark == Mark.playerTwoMark) {
+            } else if (squareMark == Mark.PLAYERTWOMARK) {
                 gridConglomerator.add(ANSI_BRIGHTWHITE + "[" + squareMark.getStringRepresentation() + "]" + ANSI_RESET);
             } else {
                 switch (i) {
@@ -157,15 +147,6 @@ public class ConsoleUI implements UI {
     @Override
     public void announceWinner(Player player) {
         out.print("\nCongratulations " + player.getName() + " - You're the winner!\n");
-    }
-
-    private boolean gameChoiceNotValid(String gameChoice) {
-        return checkIfInputNotNumber(gameChoice) || gameChoiceNotInRange(gameChoice);
-    }
-
-    private boolean gameChoiceNotInRange(String gameChoice) {
-        int gameChoiceInt = Integer.parseInt(gameChoice);
-        return gameChoiceInt < 1 || gameChoiceInt > 3;
     }
 
     private boolean checkIfInputNotNumber(String input) {

@@ -28,14 +28,14 @@ public class Grid {
     }
 
     public boolean isFull() {
-        return squares.stream().noneMatch(m -> m.equals(Mark.unmarkedSquare));
+        return squares.stream().noneMatch(m -> m.equals(Mark.UNMARKEDSQUARE));
     }
 
     public Mark reportWinningMark() {
         for (ArrayList<Mark> line : possibleWinLines()) if (lineIsWinner(line)) {
             return line.get(0);
         }
-        return Mark.unmarkedSquare;
+        return Mark.UNMARKEDSQUARE;
     }
 
     public boolean winningLineExistsInGrid() {
@@ -51,7 +51,7 @@ public class Grid {
     }
 
     private boolean lineIsWinner(ArrayList<Mark> line) {
-        if (line.contains(Mark.unmarkedSquare)) return false;
+        if (line.contains(Mark.UNMARKEDSQUARE)) return false;
         Mark firstMark = line.get(0);
         for (Mark m : line) {
             if (m != firstMark) return false;
@@ -81,7 +81,7 @@ public class Grid {
     }
 
     public ArrayList<Integer> emptySquareIndices() {
-        return IntStream.range(0, squares.size()).filter(i -> squares.get(i) == Mark.unmarkedSquare)
+        return IntStream.range(0, squares.size()).filter(i -> squares.get(i) == Mark.UNMARKEDSQUARE)
                 .boxed()
                 .collect(Collectors.toCollection(ArrayList::new));
     }
@@ -96,7 +96,7 @@ public class Grid {
 
     private ArrayList<Mark> createGrid() {
         List<Mark> result = IntStream.range(0, 9)
-                .mapToObj(i -> Mark.unmarkedSquare)
+                .mapToObj(i -> Mark.UNMARKEDSQUARE)
                 .collect(Collectors.toList());
         return (ArrayList<Mark>) result;
     }
@@ -106,7 +106,7 @@ public class Grid {
     }
 
     private boolean choiceAlreadyMarked(int squareChoice) {
-        return squares.get(squareChoice) != Mark.unmarkedSquare;
+        return squares.get(squareChoice) != Mark.UNMARKEDSQUARE;
     }
 
 }

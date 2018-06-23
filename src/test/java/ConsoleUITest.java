@@ -25,45 +25,45 @@ public class ConsoleUITest {
     }
 
     @Test
-    public void findGameMode_ValidAttempt() {
+    public void announceNumberNotValid() {
+        IOHelper ioHelper = new IOHelper("");
+        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+
+        consoleUI.announceNumberNotValid();
+
+        assertEquals("\nNow, that's not a valid number, is it! Try again!\n", ioHelper.output());
+    }
+
+    @Test
+    public void getValidNumber_ValidAttempt1() {
         new IOHelper("1");
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
 
-        assertEquals("1", consoleUI.findGameMode());
+        assertEquals(1, consoleUI.getValidNumber());
     }
 
     @Test
-    public void findGameMode_InvalidAttemptNotNumber() {
-        new IOHelper("asdf\n1");
+    public void getValidNumber_ValidAttempt2() {
+        new IOHelper("123098457");
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
 
-        assertEquals("1", consoleUI.findGameMode());
-    }
-
-    @Test
-    public void findGameMode_InvalidAttemptOutOfRange() {
-        new IOHelper("0\n1");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-
-        assertEquals("1", consoleUI.findGameMode());
-    }
-
-    @Test
-    public void getValidNumber_ValidAttempt() {
-        new IOHelper("1");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
-
-        assertEquals(1, consoleUI.getValidNumber(playerOne));
+        assertEquals(123098457, consoleUI.getValidNumber());
     }
 
     @Test
     public void getValidNumber_InvalidAttemptNotNumber() {
         new IOHelper("asdf\n1");
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
 
-        assertEquals(1, consoleUI.getValidNumber(playerOne));
+        assertEquals(1, consoleUI.getValidNumber());
+    }
+
+    @Test
+    public void getValidNumber_InvalidAttemptNotInteger() {
+        new IOHelper("1.1\n1");
+        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+
+        assertEquals(1, consoleUI.getValidNumber());
     }
 
     @Test
@@ -73,7 +73,7 @@ public class ConsoleUITest {
 
         consoleUI.announceGameModeChoiceInvalid();
 
-        assertEquals("\nUhoh please make a valid choice...\n", ioHelper.output());
+        assertEquals("\nUhoh please make a valid game mode selection...\n", ioHelper.output());
     }
 
     @Test
@@ -83,15 +83,15 @@ public class ConsoleUITest {
 
         ArrayList<Mark> squares = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
-            squares.add(Mark.unmarkedSquare);
+            squares.add(Mark.UNMARKEDSQUARE);
         }
         consoleUI.displayGrid(squares);
 
         assertEquals("\n" + (ANSI_BRIGHTYELLOW + "[1]" + ANSI_RESET) + (ANSI_BRIGHTRED + "[2]" + ANSI_RESET) +
                 (ANSI_BRIGHTPURPLE + "[3]" + ANSI_RESET) + "\n" + (ANSI_BRIGHTRED + "[4]" + ANSI_RESET) +
-                (ANSI_BRIGHTPURPLE + "[5]" + ANSI_RESET) + (ANSI_BRIGHTBLUE + "[6]" + ANSI_RESET) +"\n" +
+                (ANSI_BRIGHTPURPLE + "[5]" + ANSI_RESET) + (ANSI_BRIGHTBLUE + "[6]" + ANSI_RESET) + "\n" +
                 (ANSI_BRIGHTPURPLE + "[7]" + ANSI_RESET) + (ANSI_BRIGHTBLUE + "[8]" + ANSI_RESET) +
-                        (ANSI_BRIGHTGREEN + "[9]" + ANSI_RESET + "\n"), ioHelper.output());
+                (ANSI_BRIGHTGREEN + "[9]" + ANSI_RESET + "\n"), ioHelper.output());
     }
 
     @Test
@@ -100,25 +100,25 @@ public class ConsoleUITest {
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
 
         ArrayList<Mark> squares = new ArrayList<>();
-        squares.add(Mark.playerOneMark);
+        squares.add(Mark.PLAYERONEMARK);
         for (int i = 0; i < 8; i++) {
-            squares.add(Mark.unmarkedSquare);
+            squares.add(Mark.UNMARKEDSQUARE);
         }
 
         consoleUI.displayGrid(squares);
 
         assertEquals("\n" + (ANSI_BRIGHTBLACK + "[X]" + ANSI_RESET) + (ANSI_BRIGHTRED + "[2]" + ANSI_RESET) +
                 (ANSI_BRIGHTPURPLE + "[3]" + ANSI_RESET) + "\n" + (ANSI_BRIGHTRED + "[4]" + ANSI_RESET) +
-                (ANSI_BRIGHTPURPLE + "[5]" + ANSI_RESET) + (ANSI_BRIGHTBLUE + "[6]" + ANSI_RESET) +"\n" +
+                (ANSI_BRIGHTPURPLE + "[5]" + ANSI_RESET) + (ANSI_BRIGHTBLUE + "[6]" + ANSI_RESET) + "\n" +
                 (ANSI_BRIGHTPURPLE + "[7]" + ANSI_RESET) + (ANSI_BRIGHTBLUE + "[8]" + ANSI_RESET) +
-                        (ANSI_BRIGHTGREEN + "[9]" + ANSI_RESET + "\n"), ioHelper.output());
+                (ANSI_BRIGHTGREEN + "[9]" + ANSI_RESET + "\n"), ioHelper.output());
     }
 
     @Test
     public void askForSquareChoice() {
         IOHelper ioHelper = new IOHelper("");
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
+        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, consoleUI);
 
         consoleUI.askSquareChoice(playerOne);
 
@@ -129,7 +129,7 @@ public class ConsoleUITest {
     public void announceInputInvalid() {
         IOHelper ioHelper = new IOHelper("");
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
+        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, consoleUI);
 
         consoleUI.announceSquareChoiceInvalid(playerOne);
 
@@ -143,7 +143,7 @@ public class ConsoleUITest {
         IOHelper ioHelper = new IOHelper("");
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         Grid grid = new Grid();
-        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
+        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, consoleUI);
 
         consoleUI.presentMove(playerOne, grid);
 
@@ -154,7 +154,7 @@ public class ConsoleUITest {
     public void announceSquareChoice() {
         IOHelper ioHelper = new IOHelper("");
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
+        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, consoleUI);
 
         consoleUI.announceSquareChoice(playerOne);
 
@@ -176,7 +176,7 @@ public class ConsoleUITest {
     public void announceWinner() {
         IOHelper ioHelper = new IOHelper("");
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
+        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, consoleUI);
 
         consoleUI.announceWinner(playerOne);
 

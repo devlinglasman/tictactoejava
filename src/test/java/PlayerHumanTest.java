@@ -15,13 +15,13 @@ public class PlayerHumanTest {
     @Test
     public void makeMove_ValidAttemptAtSquare1() {
         Grid grid = new Grid();
-        IOHelper ioHelper = new IOHelper("1");
+        new IOHelper("1");
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
+        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, consoleUI);
         ArrayList<Mark> squaresResult = new ArrayList<>(
-                asList(Mark.playerOneMark, Mark.unmarkedSquare, Mark.unmarkedSquare,
-                        Mark.unmarkedSquare, Mark.unmarkedSquare, Mark.unmarkedSquare,
-                        Mark.unmarkedSquare, Mark.unmarkedSquare, Mark.unmarkedSquare));
+                asList(Mark.PLAYERONEMARK, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
+                        Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
+                        Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE));
 
         playerOne.makeMove(grid);
 
@@ -31,13 +31,13 @@ public class PlayerHumanTest {
     @Test
     public void makeMove_ValidAttemptAtSquare2() {
         Grid grid = new Grid();
-        IOHelper ioHelper = new IOHelper("2");
+        new IOHelper("2");
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
+        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, consoleUI);
         ArrayList<Mark> squaresResult = new ArrayList<>(
-                asList(Mark.unmarkedSquare, Mark.playerOneMark, Mark.unmarkedSquare,
-                        Mark.unmarkedSquare, Mark.unmarkedSquare, Mark.unmarkedSquare,
-                        Mark.unmarkedSquare, Mark.unmarkedSquare, Mark.unmarkedSquare));
+                asList(Mark.UNMARKEDSQUARE, Mark.PLAYERONEMARK, Mark.UNMARKEDSQUARE,
+                        Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
+                        Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE));
 
         playerOne.makeMove(grid);
 
@@ -47,13 +47,13 @@ public class PlayerHumanTest {
     @Test
     public void makeMove_InvalidAttemptThenAtSquare1() {
         Grid grid = new Grid();
-        IOHelper ioHelper = new IOHelper("asdf\n1");
+        new IOHelper("asdf\n1");
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.playerOneMark, consoleUI);
+        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, consoleUI);
         ArrayList<Mark> squaresResult = new ArrayList<>(
-                asList(Mark.playerOneMark, Mark.unmarkedSquare, Mark.unmarkedSquare,
-                        Mark.unmarkedSquare, Mark.unmarkedSquare, Mark.unmarkedSquare,
-                        Mark.unmarkedSquare, Mark.unmarkedSquare, Mark.unmarkedSquare));
+                asList(Mark.PLAYERONEMARK, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
+                        Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
+                        Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE));
 
         playerOne.makeMove(grid);
 

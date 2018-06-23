@@ -42,7 +42,7 @@ public class GridTest {
     public void moveNotLegalTrueChoiceAlreadyMarked() {
         Grid grid = new Grid();
 
-        grid.markSquare(0, Mark.playerOneMark);
+        grid.markSquare(0, Mark.PLAYERONEMARK);
 
         assertTrue(grid.moveNotLegal(0));
     }
@@ -51,32 +51,32 @@ public class GridTest {
     public void checkSquareEmptyBeforeMarkingSquare() {
         Grid grid = new Grid();
 
-        assertEquals(Mark.unmarkedSquare, grid.getSquares().get(0));
+        assertEquals(Mark.UNMARKEDSQUARE, grid.getSquares().get(0));
     }
 
     @Test
     public void markSquarePlayerOne() {
         Grid grid = new Grid();
 
-        grid.markSquare(0, Mark.playerOneMark);
+        grid.markSquare(0, Mark.PLAYERONEMARK);
 
-        assertEquals(Mark.playerOneMark, grid.getSquares().get(0));
+        assertEquals(Mark.PLAYERONEMARK, grid.getSquares().get(0));
     }
 
     @Test
     public void markSquarePlayerTwo() {
         Grid grid = new Grid();
 
-        grid.markSquare(0, Mark.playerTwoMark);
+        grid.markSquare(0, Mark.PLAYERTWOMARK);
 
-        assertEquals(Mark.playerTwoMark, grid.getSquares().get(0));
+        assertEquals(Mark.PLAYERTWOMARK, grid.getSquares().get(0));
     }
 
     @Test
     public void moveNotLegalYes() {
         Grid grid = new Grid();
 
-        grid.markSquare(0, Mark.playerOneMark);
+        grid.markSquare(0, Mark.PLAYERONEMARK);
 
         assertTrue(grid.moveNotLegal(0));
     }
@@ -110,7 +110,7 @@ public class GridTest {
         Grid grid = new Grid();
 
         for (int i = 0; i < 9; i++) {
-            grid.markSquare(i, Mark.playerOneMark);
+            grid.markSquare(i, Mark.PLAYERONEMARK);
         }
 
         assertTrue(grid.isFull());

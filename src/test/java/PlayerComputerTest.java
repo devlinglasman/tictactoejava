@@ -12,7 +12,7 @@ public class PlayerComputerTest {
     @Test
     public void minimaxTest1() {
         Grid grid = new Grid();
-        Player computer = new PlayerComputer("Computer", Mark.playerTwoMark, Mark.playerOneMark);
+        Player computer = new PlayerComputer("Computer", Mark.PLAYERTWOMARK, Mark.PLAYERONEMARK);
 
 //         Grid state:
 //         O X O
@@ -24,23 +24,23 @@ public class PlayerComputerTest {
 //         O O X
 //         X 8 O
 
-        grid.markSquare(0, Mark.playerTwoMark);
-        grid.markSquare(1, Mark.playerOneMark);
-        grid.markSquare(2, Mark.playerTwoMark);
-        grid.markSquare(3, Mark.playerTwoMark);
-        grid.markSquare(4, Mark.playerTwoMark);
-        grid.markSquare(5, Mark.playerOneMark);
-        grid.markSquare(6, Mark.playerOneMark);
+        grid.markSquare(0, Mark.PLAYERTWOMARK);
+        grid.markSquare(1, Mark.PLAYERONEMARK);
+        grid.markSquare(2, Mark.PLAYERTWOMARK);
+        grid.markSquare(3, Mark.PLAYERTWOMARK);
+        grid.markSquare(4, Mark.PLAYERTWOMARK);
+        grid.markSquare(5, Mark.PLAYERONEMARK);
+        grid.markSquare(6, Mark.PLAYERONEMARK);
 
         computer.makeMove(grid);
 
-        assertEquals(Mark.playerTwoMark, grid.getSquares().get(8));
+        assertEquals(Mark.PLAYERTWOMARK, grid.getSquares().get(8));
     }
 
     @Test
     public void minimaxTest2() {
         Grid grid = new Grid();
-        Player computer = new PlayerComputer("Computer", Mark.playerTwoMark, Mark.playerOneMark);
+        Player computer = new PlayerComputer("Computer", Mark.PLAYERTWOMARK, Mark.PLAYERONEMARK);
 
 //         Grid state:
 //         O X O
@@ -52,22 +52,22 @@ public class PlayerComputerTest {
 //         4 O X
 //         X O O
 
-        grid.markSquare(0, Mark.playerTwoMark);
-        grid.markSquare(1, Mark.playerOneMark);
-        grid.markSquare(2, Mark.playerTwoMark);
-        grid.markSquare(5, Mark.playerOneMark);
-        grid.markSquare(6, Mark.playerOneMark);
-        grid.markSquare(7, Mark.playerTwoMark);
-        grid.markSquare(8, Mark.playerTwoMark);
+        grid.markSquare(0, Mark.PLAYERTWOMARK);
+        grid.markSquare(1, Mark.PLAYERONEMARK);
+        grid.markSquare(2, Mark.PLAYERTWOMARK);
+        grid.markSquare(5, Mark.PLAYERONEMARK);
+        grid.markSquare(6, Mark.PLAYERONEMARK);
+        grid.markSquare(7, Mark.PLAYERTWOMARK);
+        grid.markSquare(8, Mark.PLAYERTWOMARK);
 
         computer.makeMove(grid);
-        assertEquals(Mark.playerTwoMark, grid.getSquares().get(4));
+        assertEquals(Mark.PLAYERTWOMARK, grid.getSquares().get(4));
     }
 
     @Test
     public void minimaxTest3() {
         Grid grid = new Grid();
-        Player computer = new PlayerComputer("Computer", Mark.playerTwoMark, Mark.playerOneMark);
+        Player computer = new PlayerComputer("Computer", Mark.PLAYERTWOMARK, Mark.PLAYERONEMARK);
 
 //         Grid state:
 //         O 2 X
@@ -79,21 +79,21 @@ public class PlayerComputerTest {
         //         X O 6
         //         X O O
 
-        grid.markSquare(0, Mark.playerTwoMark);
-        grid.markSquare(2, Mark.playerOneMark);
-        grid.markSquare(3, Mark.playerOneMark);
-        grid.markSquare(6, Mark.playerOneMark);
-        grid.markSquare(7, Mark.playerTwoMark);
-        grid.markSquare(8, Mark.playerTwoMark);
+        grid.markSquare(0, Mark.PLAYERTWOMARK);
+        grid.markSquare(2, Mark.PLAYERONEMARK);
+        grid.markSquare(3, Mark.PLAYERONEMARK);
+        grid.markSquare(6, Mark.PLAYERONEMARK);
+        grid.markSquare(7, Mark.PLAYERTWOMARK);
+        grid.markSquare(8, Mark.PLAYERTWOMARK);
 
         computer.makeMove(grid);
-        assertEquals(Mark.playerTwoMark, grid.getSquares().get(4));
+        assertEquals(Mark.PLAYERTWOMARK, grid.getSquares().get(4));
     }
 
     @Test
     public void minimaxTest4() {
         Grid grid = new Grid();
-        Player computer = new PlayerComputer("Computer", Mark.playerTwoMark, Mark.playerOneMark);
+        Player computer = new PlayerComputer("Computer", Mark.PLAYERTWOMARK, Mark.PLAYERONEMARK);
 
 //         Grid state:
 //         X X 3
@@ -105,21 +105,21 @@ public class PlayerComputerTest {
         //         4 X 6
         //         O O O
 
-        grid.markSquare(0, Mark.playerOneMark);
-        grid.markSquare(1, Mark.playerOneMark);
-        grid.markSquare(4, Mark.playerOneMark);
-        grid.markSquare(6, Mark.playerTwoMark);
-        grid.markSquare(8, Mark.playerTwoMark);
+        grid.markSquare(0, Mark.PLAYERONEMARK);
+        grid.markSquare(1, Mark.PLAYERONEMARK);
+        grid.markSquare(4, Mark.PLAYERONEMARK);
+        grid.markSquare(6, Mark.PLAYERTWOMARK);
+        grid.markSquare(8, Mark.PLAYERTWOMARK);
 
         computer.makeMove(grid);
 
-        assertEquals(Mark.playerTwoMark, grid.getSquares().get(7));
+        assertEquals(Mark.PLAYERTWOMARK, grid.getSquares().get(7));
     }
 
     @Test
     public void minimaxTest5() {
         Grid grid = new Grid();
-        Player computer = new PlayerComputer("Computer", Mark.playerTwoMark, Mark.playerOneMark);
+        Player computer = new PlayerComputer("Computer", Mark.PLAYERTWOMARK, Mark.PLAYERONEMARK);
 
 //         Grid state:
 //         X 2 O
@@ -131,21 +131,21 @@ public class PlayerComputerTest {
         //         O O 6
         //         O X X
 
-        grid.markSquare(0, Mark.playerOneMark);
-        grid.markSquare(2, Mark.playerTwoMark);
-        grid.markSquare(3, Mark.playerTwoMark);
-        grid.markSquare(6, Mark.playerTwoMark);
-        grid.markSquare(7, Mark.playerOneMark);
-        grid.markSquare(8, Mark.playerOneMark);
+        grid.markSquare(0, Mark.PLAYERONEMARK);
+        grid.markSquare(2, Mark.PLAYERTWOMARK);
+        grid.markSquare(3, Mark.PLAYERTWOMARK);
+        grid.markSquare(6, Mark.PLAYERTWOMARK);
+        grid.markSquare(7, Mark.PLAYERONEMARK);
+        grid.markSquare(8, Mark.PLAYERONEMARK);
 
         computer.makeMove(grid);
-        assertEquals(Mark.playerTwoMark, grid.getSquares().get(4));
+        assertEquals(Mark.PLAYERTWOMARK, grid.getSquares().get(4));
     }
 
     @Test
     public void minimaxTest6WithDepth() {
         Grid grid = new Grid();
-        Player computer = new PlayerComputer("Computer", Mark.playerTwoMark, Mark.playerOneMark);
+        Player computer = new PlayerComputer("Computer", Mark.PLAYERTWOMARK, Mark.PLAYERONEMARK);
 
 //         Grid state:
 //         1 X 3
@@ -157,21 +157,21 @@ public class PlayerComputerTest {
         //         4 5 X
         //         O O X
 
-        grid.markSquare(1, Mark.playerOneMark);
-        grid.markSquare(5, Mark.playerOneMark);
-        grid.markSquare(6, Mark.playerTwoMark);
-        grid.markSquare(7, Mark.playerTwoMark);
-        grid.markSquare(8, Mark.playerOneMark);
+        grid.markSquare(1, Mark.PLAYERONEMARK);
+        grid.markSquare(5, Mark.PLAYERONEMARK);
+        grid.markSquare(6, Mark.PLAYERTWOMARK);
+        grid.markSquare(7, Mark.PLAYERTWOMARK);
+        grid.markSquare(8, Mark.PLAYERONEMARK);
 
         computer.makeMove(grid);
 
-        assertEquals(Mark.playerTwoMark, grid.getSquares().get(2));
+        assertEquals(Mark.PLAYERTWOMARK, grid.getSquares().get(2));
     }
 
     @Test
     public void minimaxTest7WithDepthWithSwitchedMarks() {
         Grid grid = new Grid();
-        Player computer = new PlayerComputer("Computer", Mark.playerOneMark, Mark.playerTwoMark);
+        Player computer = new PlayerComputer("Computer", Mark.PLAYERONEMARK, Mark.PLAYERTWOMARK);
 
 //         Grid state:
 //         O O X
@@ -183,13 +183,13 @@ public class PlayerComputerTest {
         //         4 X 6
         //         X 8 9
 
-        grid.markSquare(0, Mark.playerOneMark);
-        grid.markSquare(1, Mark.playerOneMark);
-        grid.markSquare(2, Mark.playerTwoMark);
-        grid.markSquare(4, Mark.playerTwoMark);
+        grid.markSquare(0, Mark.PLAYERONEMARK);
+        grid.markSquare(1, Mark.PLAYERONEMARK);
+        grid.markSquare(2, Mark.PLAYERTWOMARK);
+        grid.markSquare(4, Mark.PLAYERTWOMARK);
 
         computer.makeMove(grid);
 
-        assertEquals(Mark.playerOneMark, grid.getSquares().get(6));
+        assertEquals(Mark.PLAYERONEMARK, grid.getSquares().get(6));
     }
 }

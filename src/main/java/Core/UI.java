@@ -3,15 +3,12 @@ package Core;
 import Core.Players.Player;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public interface UI {
 
     String getInput();
 
-    String findGameMode();
-
-    int getValidNumber(Player player);
+    int getValidNumber();
 
     void askGameMode();
 

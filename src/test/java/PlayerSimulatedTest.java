@@ -1,8 +1,6 @@
-import Console.ConsoleUI;
 import Core.Grid;
 import Core.Mark;
 import Core.Players.Player;
-import Core.Players.PlayerHuman;
 import Core.Players.PlayerSimulated;
 import org.junit.Test;
 
@@ -17,22 +15,22 @@ public class PlayerSimulatedTest {
     public void makeMove_FirstMove() {
         Grid grid = new Grid();
         ArrayList<Integer> moves = new ArrayList<>(asList(0,1));
-        Player playerOne = new PlayerSimulated("Player One", Mark.playerOneMark, moves);
+        Player playerOne = new PlayerSimulated("Player One", Mark.PLAYERONEMARK, moves);
 
         playerOne.makeMove(grid);
 
-        assertEquals(Mark.playerOneMark, grid.getSquares().get(0));
+        assertEquals(Mark.PLAYERONEMARK, grid.getSquares().get(0));
     }
 
     @Test
     public void makeMove_SecondMove() {
         Grid grid = new Grid();
         ArrayList<Integer> moves = new ArrayList<>(asList(0,1));
-        Player playerOne = new PlayerSimulated("Player One", Mark.playerOneMark, moves);
+        Player playerOne = new PlayerSimulated("Player One", Mark.PLAYERONEMARK, moves);
 
         playerOne.makeMove(grid);
         playerOne.makeMove(grid);
 
-        assertEquals(Mark.playerOneMark, grid.getSquares().get(1));
+        assertEquals(Mark.PLAYERONEMARK, grid.getSquares().get(1));
     }
 }

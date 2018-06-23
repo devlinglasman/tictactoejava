@@ -29,6 +29,6 @@ public class PlayerHuman extends Player {
 
     private int getValidNumberInput() {
         ui.askSquareChoice(this);
-        return ui.getValidNumber(this);
+        return ui.getValidNumber();
     }
 }
