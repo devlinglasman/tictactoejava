@@ -18,18 +18,17 @@ public class GameRunner {
         grid = new Grid();
     }
 
-//    public boolean getValidGameModeChoice() {
-//        ui.askGameMode();
-//        String gameModeChoice = ui.getInput();
-//        boolean gameChoiceIllegal = gameModeChoiceNotValid(gameModeChoice);
-//        while (gameChoiceIllegal) {
-//            announceGameModeChoiceInvalid();
-//            askGameMode();
-//            gameChoice = getInput();
-//            gameChoiceIllegal = gameChoiceNotValid(gameChoice);
-//        }
-//        return gameChoice;
-//    }
+    public int getValidGameModeChoice() {
+        ui.askGameMode();
+        int gameModeChoice = ui.getValidNumber();
+        boolean gameChoiceIllegal = gameModeChoiceNotValid(gameModeChoice);
+        while (gameChoiceIllegal) {
+            ui.announceGameModeChoiceInvalid();
+            gameModeChoice = ui.getValidNumber();
+            gameChoiceIllegal = gameModeChoiceNotValid(gameModeChoice);
+        }
+        return gameModeChoice;
+    }
 
     public void run() {
     }
@@ -50,7 +49,7 @@ public class GameRunner {
         }
     }
 
-    public boolean gameModeChoiceNotValid(int gameModeChoice) {
+    private boolean gameModeChoiceNotValid(int gameModeChoice) {
         return Arrays.stream(GameModes.values())
                 .noneMatch(gameMode -> gameMode.getModeNumber() == gameModeChoice);
     }

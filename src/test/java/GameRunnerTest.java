@@ -16,35 +16,39 @@ import static org.junit.Assert.assertFalse;
 public class GameRunnerTest {
 
     @Test
-    public void gameModeChoiceNotValid_False() {
-        UI ui = new ConsoleUI(System.in, System.out, 1);
+    public void getValidGameModeChoice_Valid_1() {
+        new IOHelper("1");
+        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         GameRunner gameRunner = new GameRunner(ui);
 
-        assertFalse(gameRunner.gameModeChoiceNotValid(1));
+        assertEquals(1, gameRunner.getValidGameModeChoice());
     }
 
     @Test
-    public void gameModeChoiceNotValid_True_0() {
-        UI ui = new ConsoleUI(System.in, System.out, 1);
+    public void getValidGameModeChoice_Invalid_TooLow() {
+        new IOHelper("0\n1");
+        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         GameRunner gameRunner = new GameRunner(ui);
 
-        assertTrue(gameRunner.gameModeChoiceNotValid(0));
+        assertEquals(1, gameRunner.getValidGameModeChoice());
     }
 
     @Test
-    public void gameModeChoiceNotValid_True_15() {
-        UI ui = new ConsoleUI(System.in, System.out, 1);
+    public void getValidGameModeChoice_Invalid_TooHigh() {
+        new IOHelper("15\n1");
+        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         GameRunner gameRunner = new GameRunner(ui);
 
-        assertTrue(gameRunner.gameModeChoiceNotValid(15));
+        assertEquals(1, gameRunner.getValidGameModeChoice());
     }
 
-//    @Test
-//    public void getValidGameModeChoice_True() {
-//        UI ui = new ConsoleUI(System.in, System.out, 1);
-//        GameRunner gameRunner = new GameRunner(ui);
-//
-//        assertTrue(gameRunner.getValidGameModeChoice());
-//    }
+    @Test
+    public void getValidGameModeChoice_Invalid_NotNumber() {
+        new IOHelper("asdf\n1");
+        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        GameRunner gameRunner = new GameRunner(ui);
 
+        assertEquals(1, gameRunner.getValidGameModeChoice());
+    }
 }
+
