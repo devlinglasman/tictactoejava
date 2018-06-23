@@ -1,6 +1,6 @@
 package Core;
 
-public enum GameModes {
+public enum GameMode {
 
     HUMANVSCOMP(1),
     COMPVSCOMP(2),
@@ -9,7 +9,7 @@ public enum GameModes {
 
     private int modeNumber;
 
-    GameModes(int modeNumber) {
+    GameMode(int modeNumber) {
         this.modeNumber = modeNumber;
     }
 

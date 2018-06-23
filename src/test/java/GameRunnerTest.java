@@ -1,10 +1,8 @@
 import Console.ConsoleUI;
-import Core.GameRunner;
-import Core.Grid;
-import Core.Mark;
+import Core.*;
 import Core.Players.Player;
+import Core.Players.PlayerComputer;
 import Core.Players.PlayerHuman;
-import Core.UI;
 import org.junit.Test;
 
 import java.util.ArrayList;
