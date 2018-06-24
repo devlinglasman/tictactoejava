@@ -1,10 +1,7 @@
 package Console;
 
-import Core.*;
-import Core.Players.Player;
-import Core.Players.PlayerFactory;
-
-import java.util.ArrayList;
+import Core.GameRunner;
+import Core.UI;
 
 public class MainConsole {
 

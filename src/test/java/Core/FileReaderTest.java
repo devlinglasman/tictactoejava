@@ -1,3 +1,5 @@
+package Core;
+
 import Core.GameDataReader;
 import org.junit.Test;
 

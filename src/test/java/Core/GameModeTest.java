@@ -1,3 +1,5 @@
+package Core;
+
 import Core.GameMode;
 import org.junit.Test;
 
@@ -18,5 +20,10 @@ public class GameModeTest {
     @Test
     public void findGameModeUsingNumber_humanvshuman() {
         assertEquals(GameMode.HUMANVSHUMAN, GameMode.findGameModeUsingNumber(3));
+    }
+
+    @Test
+    public void findGameModeUsingNumber_simulatedplay() {
+        assertEquals(GameMode.SIMULATEDPLAY, GameMode.findGameModeUsingNumber(4));
     }
 }

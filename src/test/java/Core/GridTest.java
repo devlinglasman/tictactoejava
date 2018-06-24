@@ -1,3 +1,5 @@
+package Core;
+
 import Core.Grid;
 import Core.Mark;
 import org.junit.Test;

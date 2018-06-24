@@ -1,7 +1,7 @@
+package Core.Players;
+
 import Core.Grid;
 import Core.Mark;
-import Core.Players.Player;
-import Core.Players.PlayerSimulated;
 import org.junit.Test;
 
 import java.util.ArrayList;

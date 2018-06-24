@@ -1,3 +1,5 @@
+package Core;
+
 import Console.ConsoleUI;
 import Core.Game;
 import Core.Grid;

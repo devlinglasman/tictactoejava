@@ -1,4 +1,7 @@
+package Core;
+
 import Console.ConsoleUI;
+import Console.IOHelper;
 import Core.GameMode;
 import Core.GameModeSelector;
 import Core.UI;

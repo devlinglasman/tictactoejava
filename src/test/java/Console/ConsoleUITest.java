@@ -1,8 +1,11 @@
+package Console;
+
 import Console.ConsoleUI;
 import Core.Grid;
 import Core.Mark;
 import Core.Players.Player;
 import Core.Players.PlayerHuman;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -19,7 +22,7 @@ public class ConsoleUITest {
 
         consoleUI.askGameMode();
 
-        assertEquals("\nHi! please enter '1' to " +
+        Assert.assertEquals("\nHi! please enter '1' to " +
                 "play against the computer, '2' to see computer-vs-computer," +
                 " or '3' for human-vs-human.\n", ioHelper.output());
     }
@@ -31,7 +34,7 @@ public class ConsoleUITest {
 
         consoleUI.announceNumberNotValid();
 
-        assertEquals("\nNow, that's not a valid number, is it! Try again!\n", ioHelper.output());
+        Assert.assertEquals("\nNow, that's not a valid number, is it! Try again!\n", ioHelper.output());
     }
 
     @Test
@@ -73,7 +76,7 @@ public class ConsoleUITest {
 
         consoleUI.announceGameModeChoiceInvalid();
 
-        assertEquals("\nUhoh please make a valid game mode selection...\n", ioHelper.output());
+        Assert.assertEquals("\nUhoh please make a valid game mode selection...\n", ioHelper.output());
     }
 
     @Test
@@ -87,7 +90,7 @@ public class ConsoleUITest {
         }
         consoleUI.displayGrid(squares);
 
-        assertEquals("\n" + (ANSI_BRIGHTYELLOW + "[1]" + ANSI_RESET) + (ANSI_BRIGHTRED + "[2]" + ANSI_RESET) +
+        Assert.assertEquals("\n" + (ANSI_BRIGHTYELLOW + "[1]" + ANSI_RESET) + (ANSI_BRIGHTRED + "[2]" + ANSI_RESET) +
                 (ANSI_BRIGHTPURPLE + "[3]" + ANSI_RESET) + "\n" + (ANSI_BRIGHTRED + "[4]" + ANSI_RESET) +
                 (ANSI_BRIGHTPURPLE + "[5]" + ANSI_RESET) + (ANSI_BRIGHTBLUE + "[6]" + ANSI_RESET) + "\n" +
                 (ANSI_BRIGHTPURPLE + "[7]" + ANSI_RESET) + (ANSI_BRIGHTBLUE + "[8]" + ANSI_RESET) +
@@ -107,7 +110,7 @@ public class ConsoleUITest {
 
         consoleUI.displayGrid(squares);
 
-        assertEquals("\n" + (ANSI_BRIGHTBLACK + "[X]" + ANSI_RESET) + (ANSI_BRIGHTRED + "[2]" + ANSI_RESET) +
+        Assert.assertEquals("\n" + (ANSI_BRIGHTBLACK + "[X]" + ANSI_RESET) + (ANSI_BRIGHTRED + "[2]" + ANSI_RESET) +
                 (ANSI_BRIGHTPURPLE + "[3]" + ANSI_RESET) + "\n" + (ANSI_BRIGHTRED + "[4]" + ANSI_RESET) +
                 (ANSI_BRIGHTPURPLE + "[5]" + ANSI_RESET) + (ANSI_BRIGHTBLUE + "[6]" + ANSI_RESET) + "\n" +
                 (ANSI_BRIGHTPURPLE + "[7]" + ANSI_RESET) + (ANSI_BRIGHTBLUE + "[8]" + ANSI_RESET) +
@@ -122,7 +125,7 @@ public class ConsoleUITest {
 
         consoleUI.askSquareChoice(playerOne);
 
-        assertEquals("\nPlayer One please select a square from 1-9.\n", ioHelper.output());
+        Assert.assertEquals("\nPlayer One please select a square from 1-9.\n", ioHelper.output());
     }
 
     @Test
@@ -133,7 +136,7 @@ public class ConsoleUITest {
 
         consoleUI.announceSquareChoiceInvalid(playerOne);
 
-        assertEquals("\nLooks like Player One made a boo-boo! " +
+        Assert.assertEquals("\nLooks like Player One made a boo-boo! " +
                 "Please enter a valid number that hasn't already been picked.\n", ioHelper.output());
 
     }
@@ -147,7 +150,7 @@ public class ConsoleUITest {
 
         consoleUI.presentMove(playerOne, grid);
 
-        assertEquals("\033[H\033[2J\nPlayer One picked...\n", ioHelper.output());
+        Assert.assertEquals("\033[H\033[2J\nPlayer One picked...\n", ioHelper.output());
     }
 
     @Test
@@ -158,7 +161,7 @@ public class ConsoleUITest {
 
         consoleUI.announceSquareChoice(playerOne);
 
-        assertEquals("\nPlayer One picked...\n", ioHelper.output());
+        Assert.assertEquals("\nPlayer One picked...\n", ioHelper.output());
 
     }
 
@@ -169,7 +172,7 @@ public class ConsoleUITest {
 
         consoleUI.announceTie();
 
-        assertEquals("\nLooks like the game was a tie!\n", ioHelper.output());
+        Assert.assertEquals("\nLooks like the game was a tie!\n", ioHelper.output());
     }
 
     @Test
@@ -180,7 +183,7 @@ public class ConsoleUITest {
 
         consoleUI.announceWinner(playerOne);
 
-        assertEquals("\nCongratulations Player One - You're the winner!\n", ioHelper.output());
+        Assert.assertEquals("\nCongratulations Player One - You're the winner!\n", ioHelper.output());
     }
 
 }

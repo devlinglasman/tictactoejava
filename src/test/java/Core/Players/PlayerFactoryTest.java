@@ -1,9 +1,7 @@
+package Core.Players;
+
 import Console.ConsoleUI;
 import Core.GameMode;
-import Core.Players.Player;
-import Core.Players.PlayerComputer;
-import Core.Players.PlayerFactory;
-import Core.Players.PlayerHuman;
 import Core.UI;
 import org.junit.Test;
 

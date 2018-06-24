@@ -1,8 +1,9 @@
+package Core.Players;
+
 import Console.ConsoleUI;
+import Console.IOHelper;
 import Core.Grid;
 import Core.Mark;
-import Core.Players.Player;
-import Core.Players.PlayerHuman;
 import org.junit.Test;
 
 import java.util.ArrayList;

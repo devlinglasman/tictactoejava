@@ -38,9 +38,7 @@ public class ConsoleUI implements UI {
 
     @Override
     public void askGameMode() {
-        out.print("\nHi! please enter '1' to " +
-                "play against the computer, '2' to see computer-vs-computer," +
-                " or '3' for human-vs-human.\n");
+        out.print(Messages.askGameMode);
     }
 
     @Override
@@ -56,12 +54,12 @@ public class ConsoleUI implements UI {
     }
 
     public void announceNumberNotValid() {
-        out.print("\nNow, that's not a valid number, is it! Try again!\n");
+        out.print(Messages.announceNumberNotValid);
     }
 
     @Override
     public void announceGameModeChoiceInvalid() {
-        out.print("\nUhoh please make a valid game mode selection...\n");
+        out.print(Messages.announceGameModeChoiceInvalid);
     }
 
     @Override
@@ -119,12 +117,12 @@ public class ConsoleUI implements UI {
 
     @Override
     public void askSquareChoice(Player player) {
-        out.print("\n" + player.getName() + " please select a square from 1-9.\n");
+        out.print(Messages.askSquareChoice(player));
     }
 
     @Override
     public void announceSquareChoiceInvalid(Player player) {
-        out.print("\nLooks like " + player.getName() + " made a boo-boo! Please enter a valid number that hasn't already been picked.\n");
+        out.print(Messages.announceSquareChoiceInvalid(player));
     }
 
     @Override
@@ -136,17 +134,17 @@ public class ConsoleUI implements UI {
     }
 
     public void announceSquareChoice(Player player) {
-        out.print("\n" + player.getName() + " picked...\n");
+        out.print(Messages.announceSquareChoice(player));
     }
 
     @Override
     public void announceTie() {
-        out.print("\nLooks like the game was a tie!\n");
+        out.print(Messages.announceTie);
     }
 
     @Override
     public void announceWinner(Player player) {
-        out.print("\nCongratulations " + player.getName() + " - You're the winner!\n");
+        out.print(Messages.announceWinner(player));
     }
 
     private boolean checkIfInputNotNumber(String input) {
