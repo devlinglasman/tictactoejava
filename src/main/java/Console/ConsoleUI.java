@@ -1,7 +1,7 @@
 package Console;
 
-import Core.*;
-import Core.Players.Player;
+import Core.Mark;
+import Core.UI;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -44,43 +44,47 @@ public class ConsoleUI implements UI {
         ArrayList<String> gridConglomerator = new ArrayList<>();
 
         for (int i = 0; i < squares.size(); i++) {
-            Mark squareMark = squares.get(i);
-            if (squareMark == Mark.PLAYERONEMARK) {
-                gridConglomerator.add(ANSI_BRIGHTBLACK + "[" + squareMark.getStringRepresentation() + "]" + ANSI_RESET);
-            } else if (squareMark == Mark.PLAYERTWOMARK) {
-                gridConglomerator.add(ANSI_BRIGHTWHITE + "[" + squareMark.getStringRepresentation() + "]" + ANSI_RESET);
-            } else {
+            String colour;
+            Mark mark = squares.get(i);
+            String tile;
+
                 switch (i) {
                     case 0:
-                        gridConglomerator.add(ANSI_BRIGHTYELLOW + "[1]" + ANSI_RESET);
+                        colour = ANSI_BRIGHTYELLOW;
                         break;
                     case 1:
-                        gridConglomerator.add(ANSI_BRIGHTRED + "[2]" + ANSI_RESET);
+                        colour = ANSI_BRIGHTRED;
                         break;
                     case 2:
-                        gridConglomerator.add(ANSI_BRIGHTPURPLE + "[3]" + ANSI_RESET);
+                        colour = ANSI_BRIGHTPURPLE;
                         break;
                     case 3:
-                        gridConglomerator.add(ANSI_BRIGHTRED + "[4]" + ANSI_RESET);
+                        colour = ANSI_BRIGHTRED;
                         break;
                     case 4:
-                        gridConglomerator.add(ANSI_BRIGHTPURPLE + "[5]" + ANSI_RESET);
+                        colour = ANSI_BRIGHTPURPLE;
                         break;
                     case 5:
-                        gridConglomerator.add(ANSI_BRIGHTBLUE + "[6]" + ANSI_RESET);
+                        colour = ANSI_BRIGHTBLUE;
                         break;
                     case 6:
-                        gridConglomerator.add(ANSI_BRIGHTPURPLE + "[7]" + ANSI_RESET);
+                        colour = ANSI_BRIGHTPURPLE;
                         break;
                     case 7:
-                        gridConglomerator.add(ANSI_BRIGHTBLUE + "[8]" + ANSI_RESET);
+                        colour = ANSI_BRIGHTBLUE;
                         break;
                     case 8:
-                        gridConglomerator.add(ANSI_BRIGHTGREEN + "[9]" + ANSI_RESET);
+                        colour = ANSI_BRIGHTGREEN;
                         break;
+                    default:
+                        colour = ANSI_BRIGHTBLACK;
                 }
+
+            tile = makeTile(mark, i, colour);
+            gridConglomerator.add(tile);
+
             }
-        }
+
         gridConglomerator.add(3, "\n");
         gridConglomerator.add(7, "\n");
 
@@ -90,6 +94,27 @@ public class ConsoleUI implements UI {
             gridFinal.append(s);
         }
         out.print("\n" + gridFinal + "\n");
+    }
+
+    private String makeTile(Mark mark, int index, String colour) {
+        String finalColour = findColour(mark, colour);
+        String symbol = findSymbol(mark, index);
+        return finalColour + "[" + symbol + "]" + ANSI_RESET;
+    }
+
+    private String findColour(Mark mark, String colour) {
+        if (mark == Mark.UNMARKEDSQUARE) {
+            return colour;
+        } else if (mark == Mark.PLAYERONEMARK) {
+            return ANSI_BRIGHTBLACK;
+        } else {
+            return ANSI_BRIGHTWHITE;
+        }
+    }
+
+    private String findSymbol(Mark mark, int index) {
+        return mark == Mark.UNMARKEDSQUARE ? Integer.toString(index + 1) :
+                mark.getStringRepresentation();
     }
 
     @Override
