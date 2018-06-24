@@ -41,59 +41,69 @@ public class ConsoleUI implements UI {
 
     @Override
     public void displayGrid(ArrayList<Mark> squares) {
-        ArrayList<String> gridConglomerator = new ArrayList<>();
-
+        out.println();
         for (int i = 0; i < squares.size(); i++) {
             String colour;
             Mark mark = squares.get(i);
             String tile;
+            boolean addNewLine = false;
 
-                switch (i) {
-                    case 0:
-                        colour = ANSI_BRIGHTYELLOW;
-                        break;
-                    case 1:
-                        colour = ANSI_BRIGHTRED;
-                        break;
-                    case 2:
-                        colour = ANSI_BRIGHTPURPLE;
-                        break;
-                    case 3:
-                        colour = ANSI_BRIGHTRED;
-                        break;
-                    case 4:
-                        colour = ANSI_BRIGHTPURPLE;
-                        break;
-                    case 5:
-                        colour = ANSI_BRIGHTBLUE;
-                        break;
-                    case 6:
-                        colour = ANSI_BRIGHTPURPLE;
-                        break;
-                    case 7:
-                        colour = ANSI_BRIGHTBLUE;
-                        break;
-                    case 8:
-                        colour = ANSI_BRIGHTGREEN;
-                        break;
-                    default:
-                        colour = ANSI_BRIGHTBLACK;
-                }
-
-            tile = makeTile(mark, i, colour);
-            gridConglomerator.add(tile);
-
+            switch (i) {
+                case 0:
+                    colour = ANSI_BRIGHTYELLOW;
+                    break;
+                case 1:
+                    colour = ANSI_BRIGHTRED;
+                    break;
+                case 2:
+                    colour = ANSI_BRIGHTPURPLE;
+                    addNewLine = true;
+                    break;
+                case 3:
+                    colour = ANSI_BRIGHTRED;
+                    break;
+                case 4:
+                    colour = ANSI_BRIGHTPURPLE;
+                    break;
+                case 5:
+                    colour = ANSI_BRIGHTBLUE;
+                    addNewLine = true;
+                    break;
+                case 6:
+                    colour = ANSI_BRIGHTPURPLE;
+                    break;
+                case 7:
+                    colour = ANSI_BRIGHTBLUE;
+                    break;
+                case 8:
+                    colour = ANSI_BRIGHTGREEN;
+                    addNewLine = true;
+                    break;
+                default:
+                    colour = ANSI_BRIGHTBLACK;
             }
 
-        gridConglomerator.add(3, "\n");
-        gridConglomerator.add(7, "\n");
-
-        StringBuilder gridFinal = new StringBuilder();
-
-        for (String s : gridConglomerator) {
-            gridFinal.append(s);
+            tile = makeTile(mark, i, colour);
+            out.print(tile);
+            if (addNewLine) {
+                out.print("\n");
+            }
         }
-        out.print("\n" + gridFinal + "\n");
+    }
+
+    @Override
+    public void pause() {
+        try {
+            Thread.sleep(pauseLength);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void clearScreen() {
+        out.print("\033[H\033[2J");
+        out.flush();
     }
 
     private String makeTile(Mark mark, int index, String colour) {
@@ -115,20 +125,5 @@ public class ConsoleUI implements UI {
     private String findSymbol(Mark mark, int index) {
         return mark == Mark.UNMARKEDSQUARE ? Integer.toString(index + 1) :
                 mark.getStringRepresentation();
-    }
-
-    @Override
-    public void pause() {
-        try {
-            Thread.sleep(pauseLength);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void clearScreen() {
-        out.print("\033[H\033[2J");
-        out.flush();
     }
 }
