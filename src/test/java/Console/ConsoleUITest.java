@@ -63,16 +63,13 @@ public class ConsoleUITest {
     }
 
     @Test
-    public void presentMove() {
+    public void clearScreen() {
         IOHelper ioHelper = new IOHelper("");
-        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Communicator communicator = new Communicator(ui);
-        Grid grid = new Grid();
-        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, communicator);
+        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
 
-        communicator.presentMove(playerOne, grid);
+        consoleUI.clearScreen();
 
-        Assert.assertEquals("\033[H\033[2J\nPlayer One picked...\n", ioHelper.output());
+        Assert.assertEquals("\033[H\033[2J", ioHelper.output());
     }
 }
 

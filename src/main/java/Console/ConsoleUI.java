@@ -35,18 +35,6 @@ public class ConsoleUI implements UI {
     }
 
     @Override
-    public int getValidNumber() {
-        String input = getInput();
-        boolean inputNotNumber = checkIfInputNotNumber(input);
-        while (inputNotNumber) {
-            presentMessage(Message.announceNumberNotValid);
-            input = getInput();
-            inputNotNumber = checkIfInputNotNumber(input);
-        }
-        return Integer.parseInt(input);
-    }
-
-    @Override
     public void presentMessage(String message) {
         out.print(message);
     }
@@ -105,23 +93,7 @@ public class ConsoleUI implements UI {
     }
 
     @Override
-    public void presentMove(Player player, Grid grid) {
-        clearScreen();
-        pause();
-        presentMessage(Message.announceSquareChoice(player));
-        pause();
-    }
-
-    private boolean checkIfInputNotNumber(String input) {
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException ex) {
-            return true;
-        }
-        return false;
-    }
-
-    private void pause() {
+    public void pause() {
         try {
             Thread.sleep(pauseLength);
         } catch (InterruptedException e) {
@@ -129,7 +101,8 @@ public class ConsoleUI implements UI {
         }
     }
 
-    private void clearScreen() {
+    @Override
+    public void clearScreen() {
         out.print("\033[H\033[2J");
         out.flush();
     }

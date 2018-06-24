@@ -1,9 +1,8 @@
 package Core.Players;
 
-import Console.ConsoleUI;
+import Core.Communicator;
 import Core.Grid;
 import Core.Mark;
-import Core.Communicator;
 
 public class PlayerHuman extends Player {
 

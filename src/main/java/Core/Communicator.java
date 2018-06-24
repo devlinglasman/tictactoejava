@@ -27,10 +27,6 @@ public class Communicator {
         return Integer.parseInt(input);
     }
 
-    public void announceNumberNotValid() {
-        ui.presentMessage(Message.announceNumberNotValid);
-    }
-
     public void askGameMode() {
         ui.presentMessage(Message.askGameMode);
     }
@@ -44,7 +40,11 @@ public class Communicator {
     }
 
     public void presentMove(Player player, Grid grid) {
-        ui.presentMove(player, grid);
+        ui.clearScreen();
+        ui.pause();
+        ui.presentMessage(Message.announceSquareChoice(player));
+        ui.pause();
+        displayGrid(grid.getSquares());
     }
 
     public void askSquareChoice(Player player) {
@@ -71,4 +71,9 @@ public class Communicator {
         }
         return false;
     }
+
+    private void announceNumberNotValid() {
+        ui.presentMessage(Message.announceNumberNotValid);
+    }
+
 }
