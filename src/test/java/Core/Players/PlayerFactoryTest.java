@@ -2,6 +2,7 @@ package Core.Players;
 
 import Console.ConsoleUI;
 import Core.GameMode;
+import Core.Communicator;
 import Core.UI;
 import org.junit.Test;
 
@@ -14,7 +15,8 @@ public class PlayerFactoryTest {
     @Test
     public void gameMode_humanvscomp() {
         UI ui = new ConsoleUI(System.in, System.out, 1);
-        PlayerFactory playerFactory = new PlayerFactory(ui);
+        Communicator communicator = new Communicator(ui);
+        PlayerFactory playerFactory = new PlayerFactory(communicator);
 
         ArrayList<Player> players = playerFactory.producePlayers(GameMode.HUMANVSCOMP);
 
@@ -25,7 +27,8 @@ public class PlayerFactoryTest {
     @Test
     public void gameMode_compvscomp() {
         UI ui = new ConsoleUI(System.in, System.out, 1);
-        PlayerFactory playerFactory = new PlayerFactory(ui);
+        Communicator communicator = new Communicator(ui);
+        PlayerFactory playerFactory = new PlayerFactory(communicator);
 
         ArrayList<Player> players = playerFactory.producePlayers(GameMode.COMPVSCOMP);
 
@@ -36,7 +39,8 @@ public class PlayerFactoryTest {
     @Test
     public void gameMode_humanvshuman() {
         UI ui = new ConsoleUI(System.in, System.out, 1);
-        PlayerFactory playerFactory = new PlayerFactory(ui);
+        Communicator communicator = new Communicator(ui);
+        PlayerFactory playerFactory = new PlayerFactory(communicator);
 
         ArrayList<Player> players = playerFactory.producePlayers(GameMode.HUMANVSHUMAN);
 

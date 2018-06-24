@@ -1,9 +1,7 @@
 package Console;
 
-import Core.Grid;
-import Core.Mark;
+import Core.*;
 import Core.Players.Player;
-import Core.UI;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -37,29 +35,20 @@ public class ConsoleUI implements UI {
     }
 
     @Override
-    public void askGameMode() {
-        out.print(Messages.askGameMode);
-    }
-
-    @Override
     public int getValidNumber() {
         String input = getInput();
         boolean inputNotNumber = checkIfInputNotNumber(input);
         while (inputNotNumber) {
-            announceNumberNotValid();
+            presentMessage(Message.announceNumberNotValid);
             input = getInput();
             inputNotNumber = checkIfInputNotNumber(input);
         }
         return Integer.parseInt(input);
     }
 
-    public void announceNumberNotValid() {
-        out.print(Messages.announceNumberNotValid);
-    }
-
     @Override
-    public void announceGameModeChoiceInvalid() {
-        out.print(Messages.announceGameModeChoiceInvalid);
+    public void presentMessage(String message) {
+        out.print(message);
     }
 
     @Override
@@ -116,35 +105,11 @@ public class ConsoleUI implements UI {
     }
 
     @Override
-    public void askSquareChoice(Player player) {
-        out.print(Messages.askSquareChoice(player));
-    }
-
-    @Override
-    public void announceSquareChoiceInvalid(Player player) {
-        out.print(Messages.announceSquareChoiceInvalid(player));
-    }
-
-    @Override
     public void presentMove(Player player, Grid grid) {
         clearScreen();
         pause();
-        announceSquareChoice(player);
+        presentMessage(Message.announceSquareChoice(player));
         pause();
-    }
-
-    public void announceSquareChoice(Player player) {
-        out.print(Messages.announceSquareChoice(player));
-    }
-
-    @Override
-    public void announceTie() {
-        out.print(Messages.announceTie);
-    }
-
-    @Override
-    public void announceWinner(Player player) {
-        out.print(Messages.announceWinner(player));
     }
 
     private boolean checkIfInputNotNumber(String input) {

@@ -1,8 +1,6 @@
 package Console;
 
-import Console.ConsoleUI;
-import Core.Grid;
-import Core.Mark;
+import Core.*;
 import Core.Players.Player;
 import Core.Players.PlayerHuman;
 import org.junit.Assert;
@@ -14,28 +12,6 @@ import static Console.ConsoleUI.*;
 import static org.junit.Assert.*;
 
 public class ConsoleUITest {
-
-    @Test
-    public void askGameMode() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-
-        consoleUI.askGameMode();
-
-        Assert.assertEquals("\nHi! please enter '1' to " +
-                "play against the computer, '2' to see computer-vs-computer," +
-                " or '3' for human-vs-human.\n", ioHelper.output());
-    }
-
-    @Test
-    public void announceNumberNotValid() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-
-        consoleUI.announceNumberNotValid();
-
-        Assert.assertEquals("\nNow, that's not a valid number, is it! Try again!\n", ioHelper.output());
-    }
 
     @Test
     public void getValidNumber_ValidAttempt1() {
@@ -70,11 +46,11 @@ public class ConsoleUITest {
     }
 
     @Test
-    public void announceGameChoiceInvalid() {
+    public void presentMessage() {
         IOHelper ioHelper = new IOHelper("");
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
 
-        consoleUI.announceGameModeChoiceInvalid();
+        consoleUI.presentMessage(Message.announceGameModeChoiceInvalid);
 
         Assert.assertEquals("\nUhoh please make a valid game mode selection...\n", ioHelper.output());
     }
@@ -118,72 +94,16 @@ public class ConsoleUITest {
     }
 
     @Test
-    public void askForSquareChoice() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, consoleUI);
-
-        consoleUI.askSquareChoice(playerOne);
-
-        Assert.assertEquals("\nPlayer One please select a square from 1-9.\n", ioHelper.output());
-    }
-
-    @Test
-    public void announceInputInvalid() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, consoleUI);
-
-        consoleUI.announceSquareChoiceInvalid(playerOne);
-
-        Assert.assertEquals("\nLooks like Player One made a boo-boo! " +
-                "Please enter a valid number that hasn't already been picked.\n", ioHelper.output());
-
-    }
-
-    @Test
     public void presentMove() {
         IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        Communicator communicator = new Communicator(ui);
         Grid grid = new Grid();
-        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, consoleUI);
+        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, communicator);
 
-        consoleUI.presentMove(playerOne, grid);
+        communicator.presentMove(playerOne, grid);
 
         Assert.assertEquals("\033[H\033[2J\nPlayer One picked...\n", ioHelper.output());
     }
-
-    @Test
-    public void announceSquareChoice() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, consoleUI);
-
-        consoleUI.announceSquareChoice(playerOne);
-
-        Assert.assertEquals("\nPlayer One picked...\n", ioHelper.output());
-
-    }
-
-    @Test
-    public void announceGameTied() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-
-        consoleUI.announceTie();
-
-        Assert.assertEquals("\nLooks like the game was a tie!\n", ioHelper.output());
-    }
-
-    @Test
-    public void announceWinner() {
-        IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, consoleUI);
-
-        consoleUI.announceWinner(playerOne);
-
-        Assert.assertEquals("\nCongratulations Player One - You're the winner!\n", ioHelper.output());
-    }
-
 }
+

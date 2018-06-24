@@ -1,8 +1,8 @@
-package Console;
+package Core;
 
 import Core.Players.Player;
 
-public class Messages {
+public class Message {
 
     public static final String askGameMode = "\nHi! please enter '1' to " +
             "play against the computer, '2' to see computer-vs-computer," +

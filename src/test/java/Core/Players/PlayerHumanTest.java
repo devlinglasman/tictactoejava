@@ -2,8 +2,10 @@ package Core.Players;
 
 import Console.ConsoleUI;
 import Console.IOHelper;
+import Core.Communicator;
 import Core.Grid;
 import Core.Mark;
+import Core.UI;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -17,8 +19,9 @@ public class PlayerHumanTest {
     public void makeMove_ValidAttemptAtSquare1() {
         Grid grid = new Grid();
         new IOHelper("1");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, consoleUI);
+        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        Communicator communicator = new Communicator(ui);
+        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, communicator);
         ArrayList<Mark> squaresResult = new ArrayList<>(
                 asList(Mark.PLAYERONEMARK, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
                         Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
@@ -33,8 +36,9 @@ public class PlayerHumanTest {
     public void makeMove_ValidAttemptAtSquare2() {
         Grid grid = new Grid();
         new IOHelper("2");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, consoleUI);
+        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        Communicator communicator = new Communicator(ui);
+        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, communicator);
         ArrayList<Mark> squaresResult = new ArrayList<>(
                 asList(Mark.UNMARKEDSQUARE, Mark.PLAYERONEMARK, Mark.UNMARKEDSQUARE,
                         Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
@@ -49,8 +53,9 @@ public class PlayerHumanTest {
     public void makeMove_InvalidAttemptThenAtSquare1() {
         Grid grid = new Grid();
         new IOHelper("asdf\n1");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, consoleUI);
+        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        Communicator communicator = new Communicator(ui);
+        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, communicator);
         ArrayList<Mark> squaresResult = new ArrayList<>(
                 asList(Mark.PLAYERONEMARK, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
                         Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,

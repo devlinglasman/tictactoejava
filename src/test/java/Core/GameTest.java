@@ -1,12 +1,8 @@
 package Core;
 
 import Console.ConsoleUI;
-import Core.Game;
-import Core.Grid;
-import Core.Mark;
 import Core.Players.Player;
 import Core.Players.PlayerComputer;
-import Core.UI;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -19,10 +15,11 @@ public class GameTest {
     @Test
     public void runGame_oneMove() {
         UI ui = new ConsoleUI(System.in, System.out, 1);
+        Communicator communicator = new Communicator(ui);
         Grid grid = new Grid();
         Player playerOne = new PlayerComputer("Player One", Mark.PLAYERONEMARK, Mark.PLAYERTWOMARK);
         Player playerTwo = new PlayerComputer("Player Two", Mark.PLAYERTWOMARK, Mark.PLAYERONEMARK);
-        Game game = new Game(grid, playerOne, playerTwo, ui);
+        Game game = new Game(grid, playerOne, playerTwo, communicator);
         ArrayList<Mark> squaresResult = new ArrayList<>(
                 asList(Mark.PLAYERONEMARK, Mark.PLAYERONEMARK, Mark.PLAYERONEMARK,
                         Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,

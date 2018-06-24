@@ -7,21 +7,21 @@ import java.util.ArrayList;
 
 public class GameRunner {
 
-    private UI ui;
+    private Communicator communicator;
     private GameModeSelector gameModeSelector;
     private PlayerFactory playerFactory;
 
-    public GameRunner(UI ui) {
-        this.ui = ui;
-        gameModeSelector = new GameModeSelector(ui);
-        playerFactory = new PlayerFactory(ui);
+    public GameRunner(Communicator communicator) {
+        this.communicator = communicator;
+        gameModeSelector = new GameModeSelector(communicator);
+        playerFactory = new PlayerFactory(communicator);
     }
 
     public void run() {
         GameMode gameMode = gameModeSelector.getGameMode();
         ArrayList<Player> players = playerFactory.producePlayers(gameMode);
         Grid grid = new Grid();
-        Game game = new Game(grid, players.get(0), players.get(1), ui);
+        Game game = new Game(grid, players.get(0), players.get(1), communicator);
         game.runGame();
     }
 }

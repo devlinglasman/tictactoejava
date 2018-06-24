@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public class GameModeSelector {
 
-    private UI ui;
+    private Communicator communicator;
 
-    public GameModeSelector(UI ui) {
-        this.ui = ui;
+    public GameModeSelector(Communicator communicator) {
+        this.communicator = communicator;
     }
 
     public GameMode getGameMode() {
@@ -16,12 +16,12 @@ public class GameModeSelector {
     }
 
     private int getValidGameModeChoiceNumber() {
-        ui.askGameMode();
-        int gameModeChoice = ui.getValidNumber();
+        communicator.askGameMode();
+        int gameModeChoice = communicator.getValidNumber();
         boolean gameChoiceIllegal = gameModeChoiceNotValid(gameModeChoice);
         while (gameChoiceIllegal) {
-            ui.announceGameModeChoiceInvalid();
-            gameModeChoice = ui.getValidNumber();
+            communicator.announceGameModeChoiceInvalid();
+            gameModeChoice = communicator.getValidNumber();
             gameChoiceIllegal = gameModeChoiceNotValid(gameModeChoice);
         }
         return gameModeChoice;

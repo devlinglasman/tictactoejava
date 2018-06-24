@@ -1,16 +1,17 @@
 package Core.Players;
 
+import Console.ConsoleUI;
 import Core.Grid;
 import Core.Mark;
-import Core.UI;
+import Core.Communicator;
 
 public class PlayerHuman extends Player {
 
-    private UI ui;
+    private Communicator communicator;
 
-    public PlayerHuman(String name, Mark mark, UI ui) {
+    public PlayerHuman(String name, Mark mark, Communicator communicator) {
         super(name,mark);
-        this.ui = ui;
+        this.communicator = communicator;
     }
 
     @Override
@@ -19,7 +20,7 @@ public class PlayerHuman extends Player {
         input--;
         boolean inputIllegalMove = grid.moveNotLegal(input);
         while (inputIllegalMove) {
-            ui.announceSquareChoiceInvalid(this);
+            communicator.announceSquareChoiceInvalid(this);
             input = getValidNumberInput();
             input--;
             inputIllegalMove = grid.moveNotLegal(input);
@@ -28,7 +29,7 @@ public class PlayerHuman extends Player {
     }
 
     private int getValidNumberInput() {
-        ui.askSquareChoice(this);
-        return ui.getValidNumber();
+        communicator.askSquareChoice(this);
+        return communicator.getValidNumber();
     }
 }

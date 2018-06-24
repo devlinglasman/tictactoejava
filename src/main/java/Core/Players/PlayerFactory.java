@@ -2,13 +2,13 @@ package Core.Players;
 
 import Core.GameMode;
 import Core.Mark;
-import Core.UI;
+import Core.Communicator;
 
 import java.util.ArrayList;
 
 public class PlayerFactory {
 
-    private UI ui;
+    private Communicator communicator;
 
     private final String playerOneName = "Player One";
     private final String playerTwoName = "Player Two";
@@ -16,8 +16,8 @@ public class PlayerFactory {
     private final String computerOneName = "Computer One";
     private final String computerTwoName = "Computer Two";
 
-    public PlayerFactory(UI ui) {
-        this.ui = ui;
+    public PlayerFactory(Communicator communicator) {
+        this.communicator = communicator;
     }
 
     public ArrayList<Player> producePlayers(GameMode gameMode) {
@@ -27,7 +27,7 @@ public class PlayerFactory {
 
         switch (gameMode) {
             case HUMANVSCOMP:
-                playerOne = new PlayerHuman(playerOneName, Mark.PLAYERONEMARK, ui);
+                playerOne = new PlayerHuman(playerOneName, Mark.PLAYERONEMARK, communicator);
                 playerTwo = new PlayerComputer(computerName, Mark.PLAYERTWOMARK, Mark.PLAYERONEMARK);
                 break;
             case COMPVSCOMP:
@@ -35,8 +35,8 @@ public class PlayerFactory {
                 playerTwo = new PlayerComputer(computerTwoName, Mark.PLAYERTWOMARK, Mark.PLAYERONEMARK);
                 break;
             case HUMANVSHUMAN:
-                playerOne = new PlayerHuman(playerOneName, Mark.PLAYERONEMARK, ui);
-                playerTwo = new PlayerHuman(playerTwoName, Mark.PLAYERTWOMARK, ui);
+                playerOne = new PlayerHuman(playerOneName, Mark.PLAYERONEMARK, communicator);
+                playerTwo = new PlayerHuman(playerTwoName, Mark.PLAYERTWOMARK, communicator);
                 break;
             default:
                 throw new RuntimeException("Something wrong with creating the players");

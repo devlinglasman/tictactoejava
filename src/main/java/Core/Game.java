@@ -7,23 +7,23 @@ public class Game {
     private Grid grid;
     private Player playerOne;
     private Player playerTwo;
-    private UI ui;
+    private Communicator communicator;
     private Player activePlayer;
 
-    public Game(Grid grid, Player playerOne, Player playerTwo, UI ui) {
+    public Game(Grid grid, Player playerOne, Player playerTwo, Communicator communicator) {
         this.grid = grid;
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
-        this.ui = ui;
+        this.communicator = communicator;
         activePlayer = playerOne;
     }
 
     public void runGame() {
-        ui.displayGrid(grid.getSquares());
+        communicator.displayGrid(grid.getSquares());
         while (gameOngoing()) {
             activePlayer.makeMove(grid);
-            ui.presentMove(activePlayer, grid);
-            ui.displayGrid(grid.getSquares());
+            communicator.presentMove(activePlayer, grid);
+            communicator.displayGrid(grid.getSquares());
             alternatePlayer();
         }
         announceResult();
@@ -48,9 +48,9 @@ public class Game {
     private void announceResult() {
         if (grid.winningLineExistsInGrid()) {
             alternatePlayer();
-            ui.announceWinner(activePlayer);
+            communicator.announceWinner(activePlayer);
         } else {
-            ui.announceTie();
+            communicator.announceTie();
         }
     }
 }

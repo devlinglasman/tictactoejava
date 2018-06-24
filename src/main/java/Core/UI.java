@@ -10,19 +10,10 @@ public interface UI {
 
     int getValidNumber();
 
-    void askGameMode();
-
-    void announceGameModeChoiceInvalid();
+    void presentMessage(String message);
 
     void displayGrid(ArrayList<Mark> gridSquares);
 
     void presentMove(Player player, Grid grid);
 
-    void askSquareChoice(Player player);
-
-    void announceSquareChoiceInvalid(Player player);
-
-    void announceTie();
-
-    void announceWinner(Player player);
 }
