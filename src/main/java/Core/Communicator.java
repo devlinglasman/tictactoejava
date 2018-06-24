@@ -17,7 +17,18 @@ public class Communicator {
     }
 
     public int getValidNumber() {
-        return ui.getValidNumber();
+        String input = getInput();
+        boolean inputNotNumber = checkIfInputNotNumber(input);
+        while (inputNotNumber) {
+            announceNumberNotValid();
+            input = getInput();
+            inputNotNumber = checkIfInputNotNumber(input);
+        }
+        return Integer.parseInt(input);
+    }
+
+    public void announceNumberNotValid() {
+        ui.presentMessage(Message.announceNumberNotValid);
     }
 
     public void askGameMode() {
@@ -50,5 +61,14 @@ public class Communicator {
 
     public void announceWinner(Player player) {
         ui.presentMessage(Message.announceWinner(player));
+    }
+
+    private boolean checkIfInputNotNumber(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException ex) {
+            return true;
+        }
+        return false;
     }
 }

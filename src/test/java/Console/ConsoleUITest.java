@@ -13,37 +13,6 @@ import static org.junit.Assert.*;
 
 public class ConsoleUITest {
 
-    @Test
-    public void getValidNumber_ValidAttempt1() {
-        new IOHelper("1");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-
-        assertEquals(1, consoleUI.getValidNumber());
-    }
-
-    @Test
-    public void getValidNumber_ValidAttempt2() {
-        new IOHelper("123098457");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-
-        assertEquals(123098457, consoleUI.getValidNumber());
-    }
-
-    @Test
-    public void getValidNumber_InvalidAttemptNotNumber() {
-        new IOHelper("asdf\n1");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-
-        assertEquals(1, consoleUI.getValidNumber());
-    }
-
-    @Test
-    public void getValidNumber_InvalidAttemptNotInteger() {
-        new IOHelper("1.1\n1");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-
-        assertEquals(1, consoleUI.getValidNumber());
-    }
 
     @Test
     public void presentMessage() {
