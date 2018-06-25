@@ -57,7 +57,7 @@ public class PlayerFactoryTest {
         PlayerFactory playerFactory = new PlayerFactory(communicator);
         File gameData = new File("src/test/resources/testFile1.txt");
 
-        ArrayList<Player> players = playerFactory.produceSimulatedPlayers(gameData);
+        ArrayList<Player> players = playerFactory.producePlayers(GameMode.SIMULATEDPLAY, gameData);
 
         assertTrue(players.get(0) instanceof PlayerSimulated);
         assertTrue(players.get(1) instanceof PlayerSimulated);

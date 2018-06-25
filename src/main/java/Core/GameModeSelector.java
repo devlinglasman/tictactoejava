@@ -10,14 +10,14 @@ public class GameModeSelector {
         this.communicator = communicator;
     }
 
-    public GameMode getGameMode() {
+    public GameMode getPrimaryGameMode() {
         int gameModeNumber = getValidGameModeChoiceNumber();
         return GameMode.findGameModeUsingNumber(gameModeNumber);
     }
 
-    public GameMode askSecondaryOptions() {
-        String rewatchDecision = askRewatch();
-        return rewatchDecision.equals("y") ? GameMode.SIMULATEDPLAY : GameMode.TERMINATE;
+    public GameMode getSecondaryGameMode() {
+        String rewatchDecision = getRewatchDecision();
+        return rewatchDecision.equals("y") ? GameMode.SIMULATEDPLAY : getPrimaryGameMode();
     }
 
     private int getValidGameModeChoiceNumber() {
@@ -37,7 +37,7 @@ public class GameModeSelector {
                 .noneMatch(gameMode -> gameMode.getModeNumber() == gameModeChoice);
     }
 
-    private String askRewatch() {
+    private String getRewatchDecision() {
         communicator.askRewatch();
         return communicator.findYesorNoAnswer();
     }

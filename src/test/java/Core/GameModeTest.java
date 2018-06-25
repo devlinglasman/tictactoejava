@@ -7,11 +7,6 @@ import static org.junit.Assert.assertEquals;
 public class GameModeTest {
 
     @Test
-    public void findGameModeUsingNumber_terminate() {
-        assertEquals(GameMode.TERMINATE, GameMode.findGameModeUsingNumber(0));
-    }
-
-    @Test
     public void findGameModeUsingNumber_humanVsComp() {
         assertEquals(GameMode.HUMANVSCOMP, GameMode.findGameModeUsingNumber(1));
     }

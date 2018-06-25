@@ -15,7 +15,7 @@ public class GameModeSelectorTest {
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
-        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getGameMode());
+        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getPrimaryGameMode());
     }
 
     @Test
@@ -25,7 +25,7 @@ public class GameModeSelectorTest {
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
-        assertEquals(GameMode.COMPVSCOMP, gameModeSelector.getGameMode());
+        assertEquals(GameMode.COMPVSCOMP, gameModeSelector.getPrimaryGameMode());
     }
 
     @Test
@@ -35,7 +35,7 @@ public class GameModeSelectorTest {
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
-        assertEquals(GameMode.HUMANVSHUMAN, gameModeSelector.getGameMode());
+        assertEquals(GameMode.HUMANVSHUMAN, gameModeSelector.getPrimaryGameMode());
     }
 
     @Test
@@ -45,7 +45,7 @@ public class GameModeSelectorTest {
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
-        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getGameMode());
+        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getPrimaryGameMode());
     }
 
     @Test
@@ -55,7 +55,7 @@ public class GameModeSelectorTest {
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
-        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getGameMode());
+        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getPrimaryGameMode());
     }
 
     @Test
@@ -65,7 +65,7 @@ public class GameModeSelectorTest {
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
-        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getGameMode());
+        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getPrimaryGameMode());
     }
 
     @Test
@@ -75,7 +75,7 @@ public class GameModeSelectorTest {
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
-        assertEquals(GameMode.SIMULATEDPLAY, gameModeSelector.askSecondaryOptions());
+        assertEquals(GameMode.SIMULATEDPLAY, gameModeSelector.getSecondaryGameMode());
     }
 
     @Test
@@ -85,17 +85,17 @@ public class GameModeSelectorTest {
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
-        assertEquals(GameMode.SIMULATEDPLAY, gameModeSelector.askSecondaryOptions());
+        assertEquals(GameMode.SIMULATEDPLAY, gameModeSelector.getSecondaryGameMode());
     }
 
     @Test
-    public void askSecondaryOptions_noRewatch() {
-        new IOHelper("N");
+    public void askSecondaryOptions_noRewatchSoHumanVsComp() {
+        new IOHelper("N\n1");
         UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
-        assertEquals(GameMode.TERMINATE, gameModeSelector.askSecondaryOptions());
+        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getSecondaryGameMode());
     }
 
 }
