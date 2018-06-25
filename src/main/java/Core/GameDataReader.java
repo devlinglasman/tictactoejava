@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class GameDataReader {
 
-    public ArrayList<String> readThis(File file) {
+    public ArrayList<String> extractData(File file) {
         ArrayList<String> gameData = new ArrayList<>();
 
         try {

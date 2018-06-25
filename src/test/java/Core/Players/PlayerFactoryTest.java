@@ -6,14 +6,16 @@ import Core.Communicator;
 import Core.UI;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class PlayerFactoryTest {
 
     @Test
-    public void gameMode_humanvscomp() {
+    public void gameMode_humanVsComp() {
         UI ui = new ConsoleUI(System.in, System.out, 1);
         Communicator communicator = new Communicator(ui);
         PlayerFactory playerFactory = new PlayerFactory(communicator);
@@ -25,7 +27,7 @@ public class PlayerFactoryTest {
     }
 
     @Test
-    public void gameMode_compvscomp() {
+    public void gameMode_compVsComp() {
         UI ui = new ConsoleUI(System.in, System.out, 1);
         Communicator communicator = new Communicator(ui);
         PlayerFactory playerFactory = new PlayerFactory(communicator);
@@ -37,7 +39,7 @@ public class PlayerFactoryTest {
     }
 
     @Test
-    public void gameMode_humanvshuman() {
+    public void gameMode_humanVsHuman() {
         UI ui = new ConsoleUI(System.in, System.out, 1);
         Communicator communicator = new Communicator(ui);
         PlayerFactory playerFactory = new PlayerFactory(communicator);
@@ -46,5 +48,20 @@ public class PlayerFactoryTest {
 
         assertTrue(players.get(0) instanceof PlayerHuman);
         assertTrue(players.get(1) instanceof PlayerHuman);
+    }
+
+    @Test
+    public void gameMode_simulatedPlay() {
+        UI ui = new ConsoleUI(System.in, System.out, 1);
+        Communicator communicator = new Communicator(ui);
+        PlayerFactory playerFactory = new PlayerFactory(communicator);
+        File gameData = new File("src/test/resources/testFile1.txt");
+
+        ArrayList<Player> players = playerFactory.produceSimulatedPlayers(gameData);
+
+        assertTrue(players.get(0) instanceof PlayerSimulated);
+        assertTrue(players.get(1) instanceof PlayerSimulated);
+        assertEquals("Player One", players.get(0).getName());
+        assertEquals("Player Two", players.get(1).getName());
     }
 }
