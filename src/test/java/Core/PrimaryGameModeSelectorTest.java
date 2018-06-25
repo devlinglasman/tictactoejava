@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class GameModeSelectorTest {
+public class PrimaryGameModeSelectorTest {
 
     @Test
     public void getGameMode_humanvscomp() {

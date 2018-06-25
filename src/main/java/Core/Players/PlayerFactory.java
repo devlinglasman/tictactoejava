@@ -24,7 +24,7 @@ public class PlayerFactory {
         gameDataReader = new GameDataReader();
     }
 
-    public ArrayList<Player> producePlayers(GameMode gameMode) {
+    public ArrayList<Player> producePrimaryPlayers(GameMode gameMode) {
         ArrayList<Player> players = new ArrayList<>();
         Player playerOne;
         Player playerTwo;
@@ -51,12 +51,7 @@ public class PlayerFactory {
         return players;
     }
 
-    public ArrayList<Player> producePlayers(GameMode gameMode, File gameData) {
-        return gameMode == GameMode.SIMULATEDPLAY ? produceSimulatedPlayers(gameData) :
-                producePlayers(gameMode);
-    }
-
-    private ArrayList<Player> produceSimulatedPlayers(File gameData) {
+    public ArrayList<Player> produceSimulatedPlayers(File gameData) {
         ArrayList<String> gameValues = gameDataReader.extractData(gameData);
         ArrayList<Player> players = new ArrayList<>();
 

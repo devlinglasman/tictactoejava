@@ -1,8 +1,11 @@
-package Core;
+package Core.Games;
 
+import Core.Communicator;
+import Core.Games.Game;
+import Core.Grid;
 import Core.Players.Player;
 
-public class Game {
+public class PrimaryGame implements Game {
 
     private Grid grid;
     private Player playerOne;
@@ -10,7 +13,7 @@ public class Game {
     private Communicator communicator;
     private Player activePlayer;
 
-    public Game(Grid grid, Player playerOne, Player playerTwo, Communicator communicator) {
+    public PrimaryGame(Grid grid, Player playerOne, Player playerTwo, Communicator communicator) {
         this.grid = grid;
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
@@ -18,6 +21,7 @@ public class Game {
         activePlayer = playerOne;
     }
 
+    @Override
     public void runGame() {
         communicator.displayGrid(grid.getSquares());
         while (gameOngoing()) {
@@ -28,11 +32,13 @@ public class Game {
         announceResult();
     }
 
+    @Override
     public Player getActivePlayer() {
         return activePlayer;
     }
 
-    private void alternatePlayer() {
+    @Override
+    public void alternatePlayer() {
         if (activePlayer == playerOne) {
             activePlayer = playerTwo;
         } else {
@@ -40,17 +46,29 @@ public class Game {
         }
     }
 
-    private boolean gameOngoing() {
+    @Override
+    public boolean gameOngoing() {
         return !grid.isFull() && !grid.winningLineExistsInGrid();
     }
 
-    private void announceResult() {
+    @Override
+    public void announceResult() {
         if (grid.winningLineExistsInGrid()) {
             alternatePlayer();
             communicator.announceWinner(activePlayer);
         } else {
             communicator.announceTie();
         }
+    }
+
+    @Override
+    public Communicator getCommunicator() {
+        return communicator;
+    }
+
+    @Override
+    public Grid getGrid() {
+        return grid;
     }
 }
 

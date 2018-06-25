@@ -1,5 +1,6 @@
 package Core;
 
+import Core.Games.PrimaryGame;
 import Core.Players.Player;
 import Core.Players.PlayerFactory;
 
@@ -28,8 +29,7 @@ public class GameRunner {
             String rewatchOrReplay = findIfPlayerWishesToRewatchOrReplay();
             switch (rewatchOrReplay) {
                 case "rewatch":
-                    players = getPlayers(GameMode.SIMULATEDPLAY, gameData);
-                    runGame(players);
+                    runSimulatedGame(gameData);
                     break;
                 case "replay":
                     runPrimaryGame();
@@ -37,7 +37,6 @@ public class GameRunner {
                 default:
                     programTerminated = true;
                     communicator.announceProgramOver();
-                    break;
             }
         }
     }
@@ -48,18 +47,23 @@ public class GameRunner {
         runGame(players);
     }
 
+    private void runSimulatedGame(File gameData) {
+        ArrayList<Player> players = getPlayers(gameData);
+        runGame(players);
+    }
+
     private void runGame(ArrayList<Player> players) {
         Grid grid = new Grid();
-        Game game = new Game(grid, players.get(0), players.get(1), communicator);
-        game.runGame();
+        PrimaryGame primaryGame = new PrimaryGame(grid, players.get(0), players.get(1), communicator);
+        primaryGame.runGame();
     }
 
     private ArrayList<Player> getPlayers(GameMode gameMode) {
-        return playerFactory.producePlayers(gameMode);
+        return playerFactory.producePrimaryPlayers(gameMode);
     }
 
-    private ArrayList<Player> getPlayers(GameMode gameMode, File gameData) {
-        return playerFactory.producePlayers(gameMode, gameData);
+    private ArrayList<Player> getPlayers(File gameData) {
+        return playerFactory.produceSimulatedPlayers(gameData);
     }
 
     private String findIfPlayerWishesToRewatchOrReplay() {
