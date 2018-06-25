@@ -20,11 +20,7 @@ public class Grid {
     }
 
     public boolean moveNotLegal(int squareChoice) {
-         if (choiceOutOfRange(squareChoice)) {
-             return true;
-         } else {
-             return choiceAlreadyMarked(squareChoice);
-         }
+         return choiceOutOfRange(squareChoice) || choiceAlreadyMarked(squareChoice);
     }
 
     public boolean isFull() {
@@ -39,8 +35,7 @@ public class Grid {
     }
 
     public boolean winningLineExistsInGrid() {
-        for (ArrayList<Mark> line : possibleWinLines()) if (lineIsWinner(line)) return true;
-        return false;
+        return possibleWinLines().stream().anyMatch(this::lineIsWinner);
     }
 
     public Grid duplicate() {
@@ -50,13 +45,27 @@ public class Grid {
         return gridDuplicate;
     }
 
+    public ArrayList<Integer> emptySquareIndices() {
+        return IntStream.range(0, squares.size()).filter(i -> squares.get(i) == Mark.UNMARKEDSQUARE)
+                .boxed()
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public ArrayList<Mark> getSquares() {
+        return squares;
+    }
+
     private boolean lineIsWinner(ArrayList<Mark> line) {
-        if (line.contains(Mark.UNMARKEDSQUARE)) return false;
+        return lineDoesNotContainUnmarkedSquare(line) && lineContainsAllIdenticalMarks(line);
+    }
+
+    private boolean lineDoesNotContainUnmarkedSquare(ArrayList<Mark> line) {
+        return !line.contains(Mark.UNMARKEDSQUARE);
+    }
+
+    private boolean lineContainsAllIdenticalMarks(ArrayList<Mark> line) {
         Mark firstMark = line.get(0);
-        for (Mark m : line) {
-            if (m != firstMark) return false;
-        }
-        return true;
+        return line.stream().noneMatch(m -> m != firstMark);
     }
 
     private List<ArrayList<Mark>> possibleWinLines() {
@@ -78,16 +87,6 @@ public class Grid {
         result.add(squares.get(b));
         result.add(squares.get(c));
         return (ArrayList<Mark>) result;
-    }
-
-    public ArrayList<Integer> emptySquareIndices() {
-        return IntStream.range(0, squares.size()).filter(i -> squares.get(i) == Mark.UNMARKEDSQUARE)
-                .boxed()
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    public ArrayList<Mark> getSquares() {
-        return squares;
     }
 
     private void setSquares(ArrayList<Mark> squares) {
