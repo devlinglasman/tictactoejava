@@ -67,6 +67,10 @@ public class Communicator {
         ui.presentMessage(Message.askRewatch());
     }
 
+    public void askReplay() {
+        ui.presentMessage(Message.askReplay());
+    }
+
     public String findYesorNoAnswer() {
         String input = getInput().toLowerCase();
         boolean inputNotCorrect = inputNotYesOrNo(input);
@@ -76,6 +80,10 @@ public class Communicator {
             inputNotCorrect = inputNotYesOrNo(input);
         }
         return input;
+    }
+
+    public void announceProgramOver() {
+        ui.presentMessage(Message.announceProgramOver());
     }
 
     private boolean checkIfInputNotNumber(String input) {

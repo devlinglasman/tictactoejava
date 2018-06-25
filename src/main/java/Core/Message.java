@@ -38,7 +38,15 @@ public class Message {
         return "\nThe game has drawn to a close. Would you like to watch it back? Please enter: y or n.\n";
     }
 
+    public static String askReplay() {
+        return "\nOkay, so would you like to play another game?\n";
+    }
+
     public static String askNewYOrN() {
         return "\nPlease enter either y or n.\n";
+    }
+
+    public static String announceProgramOver() {
+        return "\nOh how sad... you wish to leave me... goodbye!\n";
     }
 }
