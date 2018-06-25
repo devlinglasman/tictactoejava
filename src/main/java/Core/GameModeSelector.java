@@ -15,9 +15,10 @@ public class GameModeSelector {
         return GameMode.findGameModeUsingNumber(gameModeNumber);
     }
 
-//    public GameMode askSecondaryOptions() {
-//
-//    }
+    public GameMode askSecondaryOptions() {
+        String rewatchDecision = askRewatch();
+        return rewatchDecision.equals("y") ? GameMode.SIMULATEDPLAY : GameMode.TERMINATE;
+    }
 
     private int getValidGameModeChoiceNumber() {
         communicator.askGameMode();
@@ -36,10 +37,9 @@ public class GameModeSelector {
                 .noneMatch(gameMode -> gameMode.getModeNumber() == gameModeChoice);
     }
 
-    private boolean askRewatch() {
+    private String askRewatch() {
         communicator.askRewatch();
-        String rewatchAnswer = communicator.findYesorNoAnswer();
-        return true;
+        return communicator.findYesorNoAnswer();
     }
 
 }

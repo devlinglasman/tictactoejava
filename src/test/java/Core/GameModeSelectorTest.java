@@ -68,5 +68,35 @@ public class GameModeSelectorTest {
         assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getGameMode());
     }
 
+    @Test
+    public void askSecondaryOptions_rewatch() {
+        new IOHelper("y");
+        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        Communicator communicator = new Communicator(ui);
+        GameModeSelector gameModeSelector = new GameModeSelector(communicator);
+
+        assertEquals(GameMode.SIMULATEDPLAY, gameModeSelector.askSecondaryOptions());
+    }
+
+    @Test
+    public void askSecondaryOptions_InvalidChoice_ThenRewatch() {
+        new IOHelper("yes\ny");
+        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        Communicator communicator = new Communicator(ui);
+        GameModeSelector gameModeSelector = new GameModeSelector(communicator);
+
+        assertEquals(GameMode.SIMULATEDPLAY, gameModeSelector.askSecondaryOptions());
+    }
+
+    @Test
+    public void askSecondaryOptions_noRewatch() {
+        new IOHelper("N");
+        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        Communicator communicator = new Communicator(ui);
+        GameModeSelector gameModeSelector = new GameModeSelector(communicator);
+
+        assertEquals(GameMode.TERMINATE, gameModeSelector.askSecondaryOptions());
+    }
+
 }
 

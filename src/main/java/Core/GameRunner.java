@@ -19,7 +19,7 @@ public class GameRunner {
 
     public void run() {
         runPrimaryGame();
-//        runSecondaryOptions();
+        runSecondaryOptions();
     }
 
     private void runPrimaryGame() {
@@ -30,7 +30,7 @@ public class GameRunner {
         game.runGame();
     }
 
-//    private void runSecondaryOptions() {
-//        gameModeSelector.askSecondaryOptions();
-//    }
+    private void runSecondaryOptions() {
+        gameModeSelector.askSecondaryOptions();
+    }
 }

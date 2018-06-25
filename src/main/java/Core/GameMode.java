@@ -2,9 +2,11 @@ package Core;
 
 public enum GameMode {
 
+    TERMINATE(0),
     HUMANVSCOMP(1),
     COMPVSCOMP(2),
-    HUMANVSHUMAN(3);
+    HUMANVSHUMAN(3),
+    SIMULATEDPLAY(4);
 
     private int modeNumber;
 
