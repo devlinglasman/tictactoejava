@@ -1,5 +1,6 @@
-package Core;
+package FileManipulatorsTests;
 
+import Core.FileManipulators.GameDataReader;
 import org.junit.Test;
 
 import java.io.File;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 
-public class FileReaderTest {
+public class GameDataReaderTest {
 
     @Test
     public void convertFileToList() {

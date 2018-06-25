@@ -1,6 +1,6 @@
 package Core.Players;
 
-import Core.GameDataReader;
+import Core.FileManipulators.GameDataReader;
 import Core.GameMode;
 import Core.Mark;
 import Core.Communicator;

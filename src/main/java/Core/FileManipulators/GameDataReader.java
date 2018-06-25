@@ -1,4 +1,4 @@
-package Core;
+package Core.FileManipulators;
 
 import java.io.*;
 import java.util.ArrayList;
