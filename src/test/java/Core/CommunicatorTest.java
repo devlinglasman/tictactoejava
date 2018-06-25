@@ -43,4 +43,49 @@ public class CommunicatorTest {
 
         assertEquals(1, communicator.getValidNumber());
     }
+
+    @Test
+    public void findYesorNo_AnswerIsYes() {
+        new IOHelper("y");
+        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        Communicator communicator = new Communicator(ui);
+
+        assertEquals("y", communicator.findYesorNoAnswer());
+    }
+
+    @Test
+    public void findYesorNo_AnswerIsNo() {
+        new IOHelper("n");
+        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        Communicator communicator = new Communicator(ui);
+
+        assertEquals("n", communicator.findYesorNoAnswer());
+    }
+
+    @Test
+    public void findYesorNo_AnswerIsYesUppercase() {
+        new IOHelper("Y");
+        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        Communicator communicator = new Communicator(ui);
+
+        assertEquals("y", communicator.findYesorNoAnswer());
+    }
+
+    @Test
+    public void findYesorNo_AnswerIsIncorrectThenYes() {
+        new IOHelper("ye\nY");
+        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        Communicator communicator = new Communicator(ui);
+
+        assertEquals("y", communicator.findYesorNoAnswer());
+    }
+
+    @Test
+    public void findYesorNo_AnswerIsIncorrectThenYes2() {
+        new IOHelper(" \nY");
+        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        Communicator communicator = new Communicator(ui);
+
+        assertEquals("y", communicator.findYesorNoAnswer());
+    }
 }

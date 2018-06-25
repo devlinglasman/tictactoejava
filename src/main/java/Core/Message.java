@@ -33,4 +33,12 @@ public class Message {
     public static String announceWinner(Player player) {
         return "\nCongratulations " + player.getName() + " - You're the winner!\n";
     }
+
+    public static String askRewatch() {
+        return "\nThe game has drawn to a close. Would you like to watch it back? Please enter: y or n.\n";
+    }
+
+    public static String askNewYOrN() {
+        return "\nPlease enter either y or n.\n";
+    }
 }

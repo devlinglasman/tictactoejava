@@ -63,6 +63,21 @@ public class Communicator {
         ui.presentMessage(Message.announceWinner(player));
     }
 
+    public void askRewatch() {
+        ui.presentMessage(Message.askRewatch());
+    }
+
+    public String findYesorNoAnswer() {
+        String input = getInput().toLowerCase();
+        boolean inputNotCorrect = inputNotYesOrNo(input);
+        while (inputNotCorrect) {
+            askForNewYOrN();
+            input = getInput().toLowerCase();
+            inputNotCorrect = inputNotYesOrNo(input);
+        }
+        return input;
+    }
+
     private boolean checkIfInputNotNumber(String input) {
         try {
             Integer.parseInt(input);
@@ -76,4 +91,11 @@ public class Communicator {
         ui.presentMessage(Message.announceNumberNotValid);
     }
 
+    private boolean inputNotYesOrNo(String input) {
+        return !input.equals("y") && !input.equals("n");
+    }
+
+    private void askForNewYOrN() {
+        ui.presentMessage(Message.askNewYOrN());
+    }
 }

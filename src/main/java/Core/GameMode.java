@@ -4,8 +4,7 @@ public enum GameMode {
 
     HUMANVSCOMP(1),
     COMPVSCOMP(2),
-    HUMANVSHUMAN(3),
-    SIMULATEDPLAY(4);
+    HUMANVSHUMAN(3);
 
     private int modeNumber;
 

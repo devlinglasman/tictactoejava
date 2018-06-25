@@ -15,6 +15,10 @@ public class GameModeSelector {
         return GameMode.findGameModeUsingNumber(gameModeNumber);
     }
 
+//    public GameMode askSecondaryOptions() {
+//
+//    }
+
     private int getValidGameModeChoiceNumber() {
         communicator.askGameMode();
         int gameModeChoice = communicator.getValidNumber();
@@ -30,6 +34,12 @@ public class GameModeSelector {
     private boolean gameModeChoiceNotValid(int gameModeChoice) {
         return Arrays.stream(GameMode.values())
                 .noneMatch(gameMode -> gameMode.getModeNumber() == gameModeChoice);
+    }
+
+    private boolean askRewatch() {
+        communicator.askRewatch();
+        String rewatchAnswer = communicator.findYesorNoAnswer();
+        return true;
     }
 
 }
