@@ -23,4 +23,19 @@ public class GameDataWriterTest {
 
         assertEquals(expectedGameData, actualGameData);
     }
+
+    @Test
+    public void writeToFile_Two() {
+        GameDataReader gameDataReader = new GameDataReader();
+        GameDataWriter gameDataWriter = new GameDataWriter();
+        ArrayList<String> expectedGameData = new ArrayList<>(
+                asList("Player One", "Player Two", "0"));
+
+        gameDataWriter.writeGameValue("Player One");
+        gameDataWriter.writeGameValue("Player Two");
+        gameDataWriter.writeGameValue("0");
+        ArrayList<String> actualGameData = gameDataReader.extractData(gameDataWriter.getGameData());
+
+        assertEquals(expectedGameData, actualGameData);
+    }
 }
