@@ -4,12 +4,21 @@ import java.io.*;
 
 public class GameDataWriter {
 
-    private File gameData;
     private OutputStream outputStream;
+    private File gameData;
 
     public GameDataWriter() {
+        outputStream = null;
+        gameData = null;
+    }
+
+    public void createFile() {
         gameData = new File("src/main/resources/gameData.txt");
-        assignOutputStream();
+        try {
+            outputStream = new FileOutputStream(gameData);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void writeGameValue(String gameValue) {
@@ -23,13 +32,5 @@ public class GameDataWriter {
 
     public File getGameData() {
         return gameData;
-    }
-
-    private void assignOutputStream() {
-        try {
-            outputStream = new FileOutputStream(gameData);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -1,19 +1,24 @@
 package Core.Games;
 
+import Core.FileManipulators.GameDataWriter;
+
 public class GameRecordable extends GameDecorator {
 
-    private Game primaryGame;
+    private GameDataWriter gameDataWriter;
 
-    public GameRecordable(Game primaryGame) {
+    public GameRecordable(Game primaryGame, GameDataWriter gameDataWriter) {
         super(primaryGame);
+        this.gameDataWriter = gameDataWriter;
     }
 
     @Override
     public void runGame() {
-        primaryGame.getCommunicator().displayGrid(primaryGame.getGrid().getSquares());
+        getCommunicator().displayGrid(getGrid().getSquares());
         while (gameOngoing()) {
-            primaryGame.getActivePlayer().makeMove(primaryGame.getGrid());
-            primaryGame.getCommunicator().presentMove(primaryGame.getActivePlayer(), primaryGame.getGrid());
+            getActivePlayer().makeMove(getGrid());
+            String move = getActivePlayer().getPreviousMove().toString();
+            gameDataWriter.writeGameValue(move);
+            getCommunicator().presentMove(getActivePlayer(), getGrid());
             alternatePlayer();
         }
         announceResult();

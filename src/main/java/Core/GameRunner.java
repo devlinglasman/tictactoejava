@@ -1,5 +1,9 @@
 package Core;
 
+import Core.FileManipulators.GameDataReader;
+import Core.FileManipulators.GameDataWriter;
+import Core.Games.Game;
+import Core.Games.GameRecordable;
 import Core.Games.PrimaryGame;
 import Core.Players.Player;
 import Core.Players.PlayerFactory;
@@ -12,24 +16,26 @@ public class GameRunner {
     private Communicator communicator;
     private GameModeSelector gameModeSelector;
     private PlayerFactory playerFactory;
-    private File gameData = null;
     private boolean programTerminated;
+    private GameDataReader gameDataReader;
+    private GameDataWriter gameDataWriter;
 
     public GameRunner(Communicator communicator) {
         this.communicator = communicator;
         gameModeSelector = new GameModeSelector(communicator);
         playerFactory = new PlayerFactory(communicator);
         programTerminated = false;
+        gameDataReader = new GameDataReader();
+        gameDataWriter = new GameDataWriter();
     }
 
     public void run() {
-        ArrayList<Player> players;
         runPrimaryGame();
         while (!programTerminated) {
             String rewatchOrReplay = findIfPlayerWishesToRewatchOrReplay();
             switch (rewatchOrReplay) {
                 case "rewatch":
-                    runSimulatedGame(gameData);
+                    runSimulatedGame(gameDataWriter.getGameData());
                     break;
                 case "replay":
                     runPrimaryGame();
@@ -55,7 +61,11 @@ public class GameRunner {
     private void runGame(ArrayList<Player> players) {
         Grid grid = new Grid();
         PrimaryGame primaryGame = new PrimaryGame(grid, players.get(0), players.get(1), communicator);
-        primaryGame.runGame();
+        Game game = new GameRecordable(primaryGame, gameDataWriter);
+        gameDataWriter.createFile();
+        gameDataWriter.writeGameValue(players.get(0).getName());
+        gameDataWriter.writeGameValue(players.get(1).getName());
+        game.runGame();
     }
 
     private ArrayList<Player> getPlayers(GameMode gameMode) {

@@ -22,4 +22,6 @@ public abstract class Player {
     public Mark getMark() {
         return mark;
     }
+
+    public abstract Integer getPreviousMove();
 }

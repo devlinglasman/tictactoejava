@@ -12,6 +12,10 @@ public abstract class GameDecorator implements Game {
         this.primaryGame = primaryGame;
     }
 
+    public Game getPrimaryGame() {
+        return primaryGame;
+    }
+
     @Override
     public void runGame() {
         primaryGame.runGame();
