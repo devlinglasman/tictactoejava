@@ -57,16 +57,7 @@ public class PlayerFactory {
         String simulatedPlayerOneName = shift(gameValues);
         String simulatedPlayerTwoName = shift(gameValues);
 
-        ArrayList<Integer> gameMoves = new ArrayList<>();
-        for (String ply : gameValues) {
-            Integer move = null;
-            try {
-                move = Integer.parseInt(ply);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-            gameMoves.add(move);
-        }
+        ArrayList<Integer> gameMoves = convertToIntegers(gameValues);
 
         ArrayList<Integer> simulatedPlayerOnePlies = populatePlies(gameMoves, 0);
         ArrayList<Integer> simulatedPlayerTwoPlies = populatePlies(gameMoves, 1);
@@ -83,6 +74,20 @@ public class PlayerFactory {
         String playerName = gameValues.get(0);
         gameValues.remove(0);
         return playerName;
+    }
+
+    private ArrayList<Integer> convertToIntegers(ArrayList<String> gameValues) {
+        ArrayList<Integer> gameMoves = new ArrayList<>();
+        for (String ply : gameValues) {
+            Integer move = null;
+            try {
+                move = Integer.parseInt(ply);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+            gameMoves.add(move);
+        }
+        return gameMoves;
     }
 
     private ArrayList<Integer> populatePlies(ArrayList<Integer> gameValues, int playerPosition) {
