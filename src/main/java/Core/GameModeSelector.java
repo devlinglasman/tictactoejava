@@ -1,5 +1,7 @@
 package Core;
 
+import Core.UserInterfaces.Communicator;
+
 import java.util.Arrays;
 
 public class GameModeSelector {
@@ -13,11 +15,6 @@ public class GameModeSelector {
     public GameMode getPrimaryGameMode() {
         int gameModeNumber = getValidGameModeChoiceNumber();
         return GameMode.findGameModeUsingNumber(gameModeNumber);
-    }
-
-    public GameMode getSecondaryGameMode() {
-        String rewatchDecision = getRewatchDecision();
-        return rewatchDecision.equals("y") ? GameMode.SIMULATEDPLAY : getPrimaryGameMode();
     }
 
     private int getValidGameModeChoiceNumber() {
@@ -36,10 +33,4 @@ public class GameModeSelector {
         return Arrays.stream(GameMode.values())
                 .noneMatch(gameMode -> gameMode.getModeNumber() == gameModeChoice);
     }
-
-    private String getRewatchDecision() {
-        communicator.askRewatch();
-        return communicator.findYesorNoAnswer();
-    }
-
 }

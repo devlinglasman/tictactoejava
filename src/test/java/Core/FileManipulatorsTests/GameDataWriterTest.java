@@ -1,4 +1,4 @@
-package FileManipulatorsTests;
+package Core.FileManipulatorsTests;
 
 import Core.FileManipulators.GameDataReader;
 import Core.FileManipulators.GameDataWriter;

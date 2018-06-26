@@ -1,15 +1,13 @@
 package Console;
 
 import Core.*;
-import Core.Players.Player;
-import Core.Players.PlayerHuman;
+import Core.UserInterfaces.Message;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
 import static Console.ConsoleUI.*;
-import static org.junit.Assert.*;
 
 public class ConsoleUITest {
 

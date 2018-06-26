@@ -1,8 +1,8 @@
 package Console;
 
 import Core.GameRunner;
-import Core.Communicator;
-import Core.UI;
+import Core.UserInterfaces.Communicator;
+import Core.UserInterfaces.UI;
 
 public class MainConsole {
 

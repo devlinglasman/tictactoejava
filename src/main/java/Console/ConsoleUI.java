@@ -1,7 +1,7 @@
 package Console;
 
 import Core.Mark;
-import Core.UI;
+import Core.UserInterfaces.UI;
 
 import java.io.InputStream;
 import java.io.PrintStream;

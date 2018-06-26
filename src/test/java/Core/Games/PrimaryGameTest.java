@@ -1,9 +1,12 @@
-package Core;
+package Core.Games;
 
 import Console.ConsoleUI;
-import Core.Games.PrimaryGame;
+import Core.Grid;
+import Core.Mark;
 import Core.Players.Player;
 import Core.Players.PlayerComputer;
+import Core.UserInterfaces.Communicator;
+import Core.UserInterfaces.UI;
 import org.junit.Test;
 
 import java.util.ArrayList;

@@ -1,5 +1,7 @@
-package Core;
+package Core.UserInterfaces;
 
+import Core.Grid;
+import Core.Mark;
 import Core.Players.Player;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package Core.Players;
 
-import Core.Communicator;
+import Core.UserInterfaces.Communicator;
 import Core.Grid;
 import Core.Mark;
 

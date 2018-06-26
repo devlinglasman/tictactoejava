@@ -1,4 +1,6 @@
-package Core;
+package Core.UserInterfaces;
+
+import Core.Mark;
 
 import java.util.ArrayList;
 

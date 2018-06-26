@@ -1,12 +1,12 @@
 package Core;
 
-import Core.FileManipulators.GameDataReader;
 import Core.FileManipulators.GameDataWriter;
 import Core.Games.Game;
 import Core.Games.GameRecordable;
 import Core.Games.PrimaryGame;
 import Core.Players.Player;
 import Core.Players.PlayerFactory;
+import Core.UserInterfaces.Communicator;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,7 +17,6 @@ public class GameRunner {
     private GameModeSelector gameModeSelector;
     private PlayerFactory playerFactory;
     private boolean programTerminated;
-    private GameDataReader gameDataReader;
     private GameDataWriter gameDataWriter;
 
     public GameRunner(Communicator communicator) {
@@ -25,7 +24,6 @@ public class GameRunner {
         gameModeSelector = new GameModeSelector(communicator);
         playerFactory = new PlayerFactory(communicator);
         programTerminated = false;
-        gameDataReader = new GameDataReader();
         gameDataWriter = new GameDataWriter();
     }
 

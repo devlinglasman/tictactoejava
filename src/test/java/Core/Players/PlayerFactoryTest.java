@@ -2,8 +2,8 @@ package Core.Players;
 
 import Console.ConsoleUI;
 import Core.GameMode;
-import Core.Communicator;
-import Core.UI;
+import Core.UserInterfaces.Communicator;
+import Core.UserInterfaces.UI;
 import org.junit.Test;
 
 import java.io.File;

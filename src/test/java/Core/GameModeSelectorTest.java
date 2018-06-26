@@ -2,11 +2,13 @@ package Core;
 
 import Console.ConsoleUI;
 import Console.IOHelper;
+import Core.UserInterfaces.Communicator;
+import Core.UserInterfaces.UI;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class PrimaryGameModeSelectorTest {
+public class GameModeSelectorTest {
 
     @Test
     public void getGameMode_humanvscomp() {
@@ -67,36 +69,5 @@ public class PrimaryGameModeSelectorTest {
 
         assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getPrimaryGameMode());
     }
-
-    @Test
-    public void askSecondaryOptions_rewatch() {
-        new IOHelper("y");
-        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Communicator communicator = new Communicator(ui);
-        GameModeSelector gameModeSelector = new GameModeSelector(communicator);
-
-        assertEquals(GameMode.SIMULATEDPLAY, gameModeSelector.getSecondaryGameMode());
-    }
-
-    @Test
-    public void askSecondaryOptions_InvalidChoice_ThenRewatch() {
-        new IOHelper("yes\ny");
-        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Communicator communicator = new Communicator(ui);
-        GameModeSelector gameModeSelector = new GameModeSelector(communicator);
-
-        assertEquals(GameMode.SIMULATEDPLAY, gameModeSelector.getSecondaryGameMode());
-    }
-
-    @Test
-    public void askSecondaryOptions_noRewatchSoHumanVsComp() {
-        new IOHelper("N\n1");
-        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
-        Communicator communicator = new Communicator(ui);
-        GameModeSelector gameModeSelector = new GameModeSelector(communicator);
-
-        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getSecondaryGameMode());
-    }
-
 }
 

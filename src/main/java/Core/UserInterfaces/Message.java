@@ -1,4 +1,4 @@
-package Core;
+package Core.UserInterfaces;
 
 import Core.Players.Player;
 

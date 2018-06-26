@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class PrimaryGameModeTest {
+public class GameModeTest {
 
     @Test
     public void findGameModeUsingNumber_humanVsComp() {

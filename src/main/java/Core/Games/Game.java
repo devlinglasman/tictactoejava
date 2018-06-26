@@ -1,6 +1,6 @@
 package Core.Games;
 
-import Core.Communicator;
+import Core.UserInterfaces.Communicator;
 import Core.Grid;
 import Core.Players.Player;
 
