@@ -12,12 +12,15 @@ import static org.junit.Assert.assertEquals;
 public class GameDataWriterTest {
 
     @Test
-    public void writeToFile_One() {
+    public void createFile_OverwriteItWithNewData() {
         GameDataReader gameDataReader = new GameDataReader();
         GameDataWriter gameDataWriter = new GameDataWriter();
         ArrayList<String> expectedGameData = new ArrayList<>(
                 asList("Player One"));
 
+        gameDataWriter.createFile();
+        gameDataWriter.writeGameValue("Incorrect data.");
+        gameDataWriter.createFile();
         gameDataWriter.writeGameValue("Player One");
         ArrayList<String> actualGameData = gameDataReader.extractData(gameDataWriter.getGameData());
 
@@ -25,12 +28,13 @@ public class GameDataWriterTest {
     }
 
     @Test
-    public void writeToFile_Two() {
+    public void writeToFile_CheckItAcceptsMultipleData() {
         GameDataReader gameDataReader = new GameDataReader();
         GameDataWriter gameDataWriter = new GameDataWriter();
         ArrayList<String> expectedGameData = new ArrayList<>(
                 asList("Player One", "Player Two", "0"));
 
+        gameDataWriter.createFile();
         gameDataWriter.writeGameValue("Player One");
         gameDataWriter.writeGameValue("Player Two");
         gameDataWriter.writeGameValue("0");
