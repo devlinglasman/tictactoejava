@@ -66,11 +66,11 @@ public class Communicator {
     }
 
     public void askRewatch() {
-        ui.presentMessage(Message.askRewatch());
+        ui.presentMessage(Message.askRewatch);
     }
 
     public void askReplay() {
-        ui.presentMessage(Message.askReplay());
+        ui.presentMessage(Message.askReplay);
     }
 
     public String findYesorNoAnswer() {
@@ -85,7 +85,7 @@ public class Communicator {
     }
 
     public void announceProgramOver() {
-        ui.presentMessage(Message.announceProgramOver());
+        ui.presentMessage(Message.announceProgramOver);
     }
 
     private boolean checkIfInputNotNumber(String input) {
@@ -106,6 +106,6 @@ public class Communicator {
     }
 
     private void askForNewYOrN() {
-        ui.presentMessage(Message.askNewYOrN());
+        ui.presentMessage(Message.askNewYOrN);
     }
 }

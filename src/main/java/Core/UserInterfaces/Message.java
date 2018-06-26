@@ -14,6 +14,22 @@ public class Message {
     public static final String announceGameModeChoiceInvalid =
             "\nUhoh please make a valid game mode selection...\n";
 
+    public final static String announceTie =
+            "\nLooks like the game was a tie!\n";
+
+    public final static String askRewatch =
+        "\nThe game has drawn to a close. " +
+                "Would you like to watch it back? Please enter: y or n.\n";
+
+    public final static String askReplay =
+        "\nOkay, so would you like to play another game?\n";
+
+    public final static String askNewYOrN =
+        "\nPlease enter either y or n.\n";
+
+    public final static String announceProgramOver =
+        "\nOh how sad... you wish to leave me... goodbye!\n";
+
     public static String askSquareChoice(Player player) {
         return "\n" + player.getName() + " please select a square from 1-9.\n";
     }
@@ -27,26 +43,8 @@ public class Message {
         return "\n" + player.getName() + " picked...\n";
     }
 
-    public final static String announceTie =
-            "\nLooks like the game was a tie!\n";
-
     public static String announceWinner(Player player) {
         return "\nCongratulations " + player.getName() + " - You're the winner!\n";
     }
 
-    public static String askRewatch() {
-        return "\nThe game has drawn to a close. Would you like to watch it back? Please enter: y or n.\n";
-    }
-
-    public static String askReplay() {
-        return "\nOkay, so would you like to play another game?\n";
-    }
-
-    public static String askNewYOrN() {
-        return "\nPlease enter either y or n.\n";
-    }
-
-    public static String announceProgramOver() {
-        return "\nOh how sad... you wish to leave me... goodbye!\n";
-    }
 }
