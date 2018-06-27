@@ -25,17 +25,14 @@ public class PlayerFactory {
 
         String playerOneName = "Player One";
         String playerTwoName = "Player Two";
-        String computerName = "Computer";
-        String computerOneName = "Computer One";
-        String computerTwoName = "Computer Two";
         switch (gameMode) {
             case HUMANVSCOMP:
                 playerOne = new PlayerHuman(playerOneName, Mark.PLAYERONEMARK, communicator);
-                playerTwo = new PlayerComputer(computerName, Mark.PLAYERTWOMARK, Mark.PLAYERONEMARK);
+                playerTwo = new PlayerComputer(playerTwoName, Mark.PLAYERTWOMARK);
                 break;
             case COMPVSCOMP:
-                playerOne = new PlayerComputer(computerOneName, Mark.PLAYERONEMARK, Mark.PLAYERTWOMARK);
-                playerTwo = new PlayerComputer(computerTwoName, Mark.PLAYERTWOMARK, Mark.PLAYERONEMARK);
+                playerOne = new PlayerComputer(playerOneName, Mark.PLAYERONEMARK);
+                playerTwo = new PlayerComputer(playerTwoName, Mark.PLAYERTWOMARK);
                 break;
             case HUMANVSHUMAN:
                 playerOne = new PlayerHuman(playerOneName, Mark.PLAYERONEMARK, communicator);

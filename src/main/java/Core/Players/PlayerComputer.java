@@ -12,9 +12,9 @@ public class PlayerComputer extends Player {
     private Mark opponentMark;
     private Integer previousMove;
 
-    public PlayerComputer(String name, Mark mark, Mark opponentMark) {
+    public PlayerComputer(String name, Mark mark) {
         super(name, mark);
-        this.opponentMark = opponentMark;
+        opponentMark = findOpponentMark();
     }
 
     @Override
@@ -27,6 +27,10 @@ public class PlayerComputer extends Player {
     @Override
     public Integer getPreviousMove() {
         return previousMove;
+    }
+
+    private Mark findOpponentMark(){
+        return (getMark() == Mark.PLAYERONEMARK) ? Mark.PLAYERTWOMARK : Mark.PLAYERONEMARK;
     }
 
     private int findBestMove(Grid grid) {

@@ -3,7 +3,6 @@ package Core.Players;
 import Core.Grid;
 import Core.Mark;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class PlayerSimulated extends Player {

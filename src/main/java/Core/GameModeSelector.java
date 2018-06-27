@@ -20,16 +20,15 @@ public class GameModeSelector {
     private int getValidGameModeChoiceNumber() {
         communicator.askGameMode();
         int gameModeChoice = communicator.getValidNumber();
-        boolean gameChoiceIllegal = gameModeChoiceNotValid(gameModeChoice);
-        while (gameChoiceIllegal) {
+
+        while (choiceNotValid(gameModeChoice)) {
             communicator.announceGameModeChoiceInvalid();
             gameModeChoice = communicator.getValidNumber();
-            gameChoiceIllegal = gameModeChoiceNotValid(gameModeChoice);
         }
         return gameModeChoice;
     }
 
-    private boolean gameModeChoiceNotValid(int gameModeChoice) {
+    private boolean choiceNotValid(int gameModeChoice) {
         return Arrays.stream(GameMode.values())
                 .noneMatch(gameMode -> gameMode.getModeNumber() == gameModeChoice);
     }

@@ -12,7 +12,7 @@ public class GameDataWriter {
         gameData = null;
     }
 
-    public void createFile() {
+    public void createFile(){
         gameData = new File("src/main/resources/gameData.txt");
         try {
             outputStream = new FileOutputStream(gameData);

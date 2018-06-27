@@ -11,7 +11,7 @@ import Core.UserInterfaces.Communicator;
 import java.io.File;
 import java.util.ArrayList;
 
-public class GameRunner {
+public class TicTacToe {
 
     private Communicator communicator;
     private GameModeSelector gameModeSelector;
@@ -19,7 +19,7 @@ public class GameRunner {
     private boolean programTerminated;
     private GameDataWriter gameDataWriter;
 
-    public GameRunner(Communicator communicator) {
+    public TicTacToe(Communicator communicator) {
         this.communicator = communicator;
         gameModeSelector = new GameModeSelector(communicator);
         playerFactory = new PlayerFactory(communicator);
