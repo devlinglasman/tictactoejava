@@ -21,8 +21,8 @@ public class PrimaryGameTest {
         UI ui = new ConsoleUI(System.in, System.out, 1);
         Communicator communicator = new Communicator(ui);
         Grid grid = new Grid();
-        Player playerOne = new PlayerComputer("Player One", Mark.PLAYERONEMARK);
-        Player playerTwo = new PlayerComputer("Player Two", Mark.PLAYERTWOMARK);
+        Player playerOne = new PlayerComputer(Mark.PLAYERONEMARK);
+        Player playerTwo = new PlayerComputer(Mark.PLAYERTWOMARK);
         PrimaryGame primaryGame = new PrimaryGame(grid, playerOne, playerTwo, communicator);
         ArrayList<Mark> squaresResult = new ArrayList<>(
                 asList(Mark.PLAYERONEMARK, Mark.PLAYERONEMARK, Mark.PLAYERONEMARK,

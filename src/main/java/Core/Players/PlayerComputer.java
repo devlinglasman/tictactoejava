@@ -12,8 +12,8 @@ public class PlayerComputer extends Player {
     private Mark opponentMark;
     private Integer previousMove;
 
-    public PlayerComputer(String name, Mark mark) {
-        super(name, mark);
+    public PlayerComputer(Mark mark) {
+        super(mark);
         opponentMark = findOpponentMark();
     }
 

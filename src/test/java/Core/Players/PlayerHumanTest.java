@@ -21,7 +21,7 @@ public class PlayerHumanTest {
         new IOHelper("1");
         UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         Communicator communicator = new Communicator(ui);
-        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, communicator);
+        Player playerOne = new PlayerHuman(Mark.PLAYERONEMARK, communicator);
         ArrayList<Mark> squaresResult = new ArrayList<>(
                 asList(Mark.PLAYERONEMARK, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
                         Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
@@ -38,7 +38,7 @@ public class PlayerHumanTest {
         new IOHelper("2");
         UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         Communicator communicator = new Communicator(ui);
-        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, communicator);
+        Player playerOne = new PlayerHuman(Mark.PLAYERONEMARK, communicator);
         ArrayList<Mark> squaresResult = new ArrayList<>(
                 asList(Mark.UNMARKEDSQUARE, Mark.PLAYERONEMARK, Mark.UNMARKEDSQUARE,
                         Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
@@ -55,7 +55,7 @@ public class PlayerHumanTest {
         new IOHelper("asdf\n1");
         UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         Communicator communicator = new Communicator(ui);
-        Player playerOne = new PlayerHuman("Player One", Mark.PLAYERONEMARK, communicator);
+        Player playerOne = new PlayerHuman(Mark.PLAYERONEMARK, communicator);
         ArrayList<Mark> squaresResult = new ArrayList<>(
                 asList(Mark.PLAYERONEMARK, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
                         Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,

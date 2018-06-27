@@ -15,7 +15,7 @@ public class PlayerSimulatedTest {
     public void makeMove_FirstMove() {
         Grid grid = new Grid();
         ArrayList<Integer> moves = new ArrayList<>(asList(0,1));
-        Player playerOne = new PlayerSimulated("Player One", Mark.PLAYERONEMARK, moves);
+        Player playerOne = new PlayerSimulated(Mark.PLAYERONEMARK, moves);
 
         playerOne.makeMove(grid);
 
@@ -26,7 +26,7 @@ public class PlayerSimulatedTest {
     public void makeMove_SecondMove() {
         Grid grid = new Grid();
         ArrayList<Integer> moves = new ArrayList<>(asList(0,1));
-        Player playerOne = new PlayerSimulated("Player One", Mark.PLAYERONEMARK, moves);
+        Player playerOne = new PlayerSimulated(Mark.PLAYERONEMARK, moves);
 
         playerOne.makeMove(grid);
         playerOne.makeMove(grid);

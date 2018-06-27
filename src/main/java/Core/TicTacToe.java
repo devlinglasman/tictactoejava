@@ -61,8 +61,6 @@ public class TicTacToe {
         PrimaryGame primaryGame = new PrimaryGame(grid, players.get(0), players.get(1), communicator);
         Game game = new GameRecordable(primaryGame, gameDataWriter);
         gameDataWriter.createFile();
-        gameDataWriter.writeGameValue(players.get(0).getName());
-        gameDataWriter.writeGameValue(players.get(1).getName());
         game.runGame();
     }
 

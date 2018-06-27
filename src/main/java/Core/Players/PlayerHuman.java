@@ -9,8 +9,8 @@ public class PlayerHuman extends Player {
     private Communicator communicator;
     private Integer previousMove;
 
-    public PlayerHuman(String name, Mark mark, Communicator communicator) {
-        super(name,mark);
+    public PlayerHuman(Mark mark, Communicator communicator) {
+        super(mark);
         this.communicator = communicator;
         previousMove = null;
     }

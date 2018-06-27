@@ -12,6 +12,10 @@ public class PlayerFactory {
 
     private Communicator communicator;
     private GameDataReader gameDataReader;
+    private Player playerOne;
+    private Player playerTwo;
+    private final String playerOneName = "Player One";
+    private final String playerTwoName = "Player Two";
 
     public PlayerFactory(Communicator communicator) {
         this.communicator = communicator;
@@ -20,57 +24,64 @@ public class PlayerFactory {
 
     public ArrayList<Player> producePrimaryPlayers(GameMode gameMode) {
         ArrayList<Player> players = new ArrayList<>();
-        Player playerOne;
-        Player playerTwo;
 
-        String playerOneName = "Player One";
-        String playerTwoName = "Player Two";
+        boolean humanPlayerOne = true;
+        boolean humanPlayerTwo = true;
+
         switch (gameMode) {
             case HUMANVSCOMP:
-                playerOne = new PlayerHuman(playerOneName, Mark.PLAYERONEMARK, communicator);
-                playerTwo = new PlayerComputer(playerTwoName, Mark.PLAYERTWOMARK);
+                humanPlayerTwo = false;
                 break;
             case COMPVSCOMP:
-                playerOne = new PlayerComputer(playerOneName, Mark.PLAYERONEMARK);
-                playerTwo = new PlayerComputer(playerTwoName, Mark.PLAYERTWOMARK);
+                humanPlayerOne = false;
+                humanPlayerTwo = false;
                 break;
             case HUMANVSHUMAN:
-                playerOne = new PlayerHuman(playerOneName, Mark.PLAYERONEMARK, communicator);
-                playerTwo = new PlayerHuman(playerTwoName, Mark.PLAYERTWOMARK, communicator);
                 break;
             default:
                 throw new RuntimeException("Something wrong with creating the players");
         }
 
+        generatePlayerOne(humanPlayerOne);
+        generatePlayerTwo(humanPlayerTwo);
         players.add(playerOne);
         players.add(playerTwo);
         return players;
+    }
+
+    private Player generatePlayerOne(boolean human) {
+        if (human) {
+            playerOne = new PlayerHuman(Mark.PLAYERONEMARK, communicator);
+        } else {
+            playerOne = new PlayerComputer(Mark.PLAYERONEMARK);
+        }
+        return playerOne;
+    }
+
+    private Player generatePlayerTwo(boolean human) {
+        if (human) {
+            playerTwo = new PlayerHuman(Mark.PLAYERTWOMARK, communicator);
+        } else {
+            playerTwo = new PlayerComputer(Mark.PLAYERTWOMARK);
+        }
+        return playerTwo;
     }
 
     public ArrayList<Player> produceSimulatedPlayers(File gameData) {
         ArrayList<String> gameValues = gameDataReader.extractData(gameData);
         ArrayList<Player> players = new ArrayList<>();
 
-        String simulatedPlayerOneName = shift(gameValues);
-        String simulatedPlayerTwoName = shift(gameValues);
-
         ArrayList<Integer> gameMoves = convertToIntegers(gameValues);
 
         ArrayList<Integer> simulatedPlayerOnePlies = populatePlies(gameMoves, 0);
         ArrayList<Integer> simulatedPlayerTwoPlies = populatePlies(gameMoves, 1);
 
-        Player playerOne = new PlayerSimulated(simulatedPlayerOneName, Mark.PLAYERONEMARK, simulatedPlayerOnePlies);
-        Player playerTwo = new PlayerSimulated(simulatedPlayerTwoName, Mark.PLAYERTWOMARK, simulatedPlayerTwoPlies);
+        Player playerOne = new PlayerSimulated(Mark.PLAYERONEMARK, simulatedPlayerOnePlies);
+        Player playerTwo = new PlayerSimulated(Mark.PLAYERTWOMARK, simulatedPlayerTwoPlies);
 
         players.add(playerOne);
         players.add(playerTwo);
         return players;
-    }
-
-    private String shift(ArrayList<String> gameValues) {
-        String playerName = gameValues.get(0);
-        gameValues.remove(0);
-        return playerName;
     }
 
     private ArrayList<Integer> convertToIntegers(ArrayList<String> gameValues) {

@@ -12,7 +12,7 @@ public class PlayerComputerTest {
     @Test
     public void minimaxTest1() {
         Grid grid = new Grid();
-        Player computer = new PlayerComputer("Computer", Mark.PLAYERTWOMARK);
+        Player computer = new PlayerComputer( Mark.PLAYERTWOMARK);
 
 //         Grid state:
 //         O X O
@@ -40,7 +40,7 @@ public class PlayerComputerTest {
     @Test
     public void minimaxTest2() {
         Grid grid = new Grid();
-        Player computer = new PlayerComputer("Computer", Mark.PLAYERTWOMARK);
+        Player computer = new PlayerComputer(Mark.PLAYERTWOMARK);
 
 //         Grid state:
 //         O X O
@@ -67,7 +67,7 @@ public class PlayerComputerTest {
     @Test
     public void minimaxTest3() {
         Grid grid = new Grid();
-        Player computer = new PlayerComputer("Computer", Mark.PLAYERTWOMARK);
+        Player computer = new PlayerComputer(Mark.PLAYERTWOMARK);
 
 //         Grid state:
 //         O 2 X
@@ -93,7 +93,7 @@ public class PlayerComputerTest {
     @Test
     public void minimaxTest4() {
         Grid grid = new Grid();
-        Player computer = new PlayerComputer("Computer", Mark.PLAYERTWOMARK);
+        Player computer = new PlayerComputer(Mark.PLAYERTWOMARK);
 
 //         Grid state:
 //         X X 3
@@ -119,7 +119,7 @@ public class PlayerComputerTest {
     @Test
     public void minimaxTest5() {
         Grid grid = new Grid();
-        Player computer = new PlayerComputer("Computer", Mark.PLAYERTWOMARK);
+        Player computer = new PlayerComputer(Mark.PLAYERTWOMARK);
 
 //         Grid state:
 //         X 2 O
@@ -145,7 +145,7 @@ public class PlayerComputerTest {
     @Test
     public void minimaxTest6WithDepth() {
         Grid grid = new Grid();
-        Player computer = new PlayerComputer("Computer", Mark.PLAYERTWOMARK);
+        Player computer = new PlayerComputer(Mark.PLAYERTWOMARK);
 
 //         Grid state:
 //         1 X 3
@@ -171,7 +171,7 @@ public class PlayerComputerTest {
     @Test
     public void minimaxTest7WithDepthWithSwitchedMarks() {
         Grid grid = new Grid();
-        Player computer = new PlayerComputer("Computer", Mark.PLAYERONEMARK);
+        Player computer = new PlayerComputer(Mark.PLAYERONEMARK);
 
 //         Grid state:
 //         O O X

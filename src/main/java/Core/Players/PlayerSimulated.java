@@ -11,8 +11,8 @@ public class PlayerSimulated extends Player {
     private int movesCounter = 0;
     private Integer previousMove;
 
-    public PlayerSimulated(String name, Mark mark, ArrayList<Integer> moves) {
-       super(name, mark);
+    public PlayerSimulated(Mark mark, ArrayList<Integer> moves) {
+       super(mark);
        this.moves = moves;
        previousMove = null;
     }
