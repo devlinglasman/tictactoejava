@@ -12,10 +12,6 @@ public class PlayerFactory {
 
     private Communicator communicator;
     private GameDataReader gameDataReader;
-    private Player playerOne;
-    private Player playerTwo;
-    private final String playerOneName = "Player One";
-    private final String playerTwoName = "Player Two";
 
     public PlayerFactory(Communicator communicator) {
         this.communicator = communicator;
@@ -25,46 +21,34 @@ public class PlayerFactory {
     public ArrayList<Player> producePrimaryPlayers(GameMode gameMode) {
         ArrayList<Player> players = new ArrayList<>();
 
-        boolean humanPlayerOne = true;
-        boolean humanPlayerTwo = true;
+        boolean playerOneIsHuman;
+        boolean playerTwoIsHuman;
 
         switch (gameMode) {
             case HUMANVSCOMP:
-                humanPlayerTwo = false;
+                playerOneIsHuman = true;
+                playerTwoIsHuman = false;
                 break;
             case COMPVSCOMP:
-                humanPlayerOne = false;
-                humanPlayerTwo = false;
+                playerOneIsHuman = false;
+                playerTwoIsHuman = false;
                 break;
             case HUMANVSHUMAN:
+                playerOneIsHuman = true;
+                playerTwoIsHuman = true;
                 break;
             default:
                 throw new RuntimeException("Something wrong with creating the players");
         }
 
-        generatePlayerOne(humanPlayerOne);
-        generatePlayerTwo(humanPlayerTwo);
-        players.add(playerOne);
-        players.add(playerTwo);
+        players.add(generatePlayer(Mark.PLAYERONEMARK, playerOneIsHuman));
+        players.add(generatePlayer(Mark.PLAYERTWOMARK, playerTwoIsHuman));
         return players;
     }
 
-    private Player generatePlayerOne(boolean human) {
-        if (human) {
-            playerOne = new PlayerHuman(Mark.PLAYERONEMARK, communicator);
-        } else {
-            playerOne = new PlayerComputer(Mark.PLAYERONEMARK);
-        }
-        return playerOne;
-    }
-
-    private Player generatePlayerTwo(boolean human) {
-        if (human) {
-            playerTwo = new PlayerHuman(Mark.PLAYERTWOMARK, communicator);
-        } else {
-            playerTwo = new PlayerComputer(Mark.PLAYERTWOMARK);
-        }
-        return playerTwo;
+    private Player generatePlayer(Mark mark, boolean human) {
+        return human ? new PlayerHuman(mark, communicator)
+                : new PlayerComputer(mark);
     }
 
     public ArrayList<Player> produceSimulatedPlayers(File gameData) {
