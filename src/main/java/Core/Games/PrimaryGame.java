@@ -1,5 +1,6 @@
 package Core.Games;
 
+import Core.Mark;
 import Core.UserInterfaces.Communicator;
 import Core.Grid;
 import Core.Players.Player;
@@ -61,10 +62,17 @@ public class PrimaryGame {
 
     private void announceResult() {
         if (grid.winningLineExistsInGrid()) {
-            alternatePlayer();
-            communicator.announceWinner(activePlayer);
+            announceWinner();
         } else {
             communicator.announceTie();
+        }
+    }
+
+    private void announceWinner() {
+        if (grid.reportWinningMark() == Mark.PLAYERONEMARK) {
+            communicator.announceWinner(playerOne);
+        } else {
+            communicator.announceWinner(playerTwo);
         }
     }
 }

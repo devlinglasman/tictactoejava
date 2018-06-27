@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class PlayerSimulatedTest {
 
     @Test
-    public void makeMove_FirstMove() {
+    public void getMove_1() {
         Grid grid = new Grid();
         ArrayList<Integer> moves = new ArrayList<>(asList(0,1));
         Player playerOne = new PlayerSimulated(Mark.PLAYERONEMARK, moves);
@@ -21,7 +21,7 @@ public class PlayerSimulatedTest {
     }
 
     @Test
-    public void makeMove_SecondMove() {
+    public void getMove_2() {
         Grid grid = new Grid();
         ArrayList<Integer> moves = new ArrayList<>(asList(0,1));
         Player playerOne = new PlayerSimulated(Mark.PLAYERONEMARK, moves);

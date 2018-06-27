@@ -18,7 +18,7 @@ public class PrimaryGameTest {
 
     @Test
     public void runGame_oneMove() {
-        UI ui = new ConsoleUI(System.in, System.out, 1);
+        UI ui = new ConsoleUI(System.in, System.out, 0);
         Communicator communicator = new Communicator(ui);
         Grid grid = new Grid();
         Player playerOne = new PlayerComputer(Mark.PLAYERONEMARK);
@@ -34,6 +34,5 @@ public class PrimaryGameTest {
         primaryGame.runGame();
 
         assertEquals(squaresResult, grid.getSquares());
-        assertEquals(playerOne, primaryGame.getActivePlayer());
     }
 }

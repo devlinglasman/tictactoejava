@@ -17,8 +17,16 @@ public class PlayerSimulated extends Player {
 
     @Override
     public int getMove(Grid grid) {
-        int move = moves.get(movesCounter);
-        movesCounter++;
+        int move = retrieveCurrentMove();
+        advanceCounterPosition();
         return move;
+    }
+
+    private int retrieveCurrentMove() {
+        return moves.get(movesCounter);
+    }
+
+    private void advanceCounterPosition() {
+        movesCounter++;
     }
 }
