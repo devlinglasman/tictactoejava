@@ -13,7 +13,7 @@ public abstract class Player {
         name = generateName();
     }
 
-    public abstract void makeMove(Grid grid);
+    public abstract int getMove(Grid grid);
 
     private String generateName() {
         return (mark == Mark.PLAYERONEMARK) ? "Player One" : "Player Two";
@@ -26,6 +26,4 @@ public abstract class Player {
     public Mark getMark() {
         return mark;
     }
-
-    public abstract Integer getPreviousMove();
 }

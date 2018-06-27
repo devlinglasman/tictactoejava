@@ -32,9 +32,7 @@ public class PlayerComputerTest {
         grid.markSquare(5, Mark.PLAYERONEMARK);
         grid.markSquare(6, Mark.PLAYERONEMARK);
 
-        computer.makeMove(grid);
-
-        assertEquals(Mark.PLAYERTWOMARK, grid.getSquares().get(8));
+        assertEquals(8, computer.getMove(grid));
     }
 
     @Test
@@ -60,8 +58,7 @@ public class PlayerComputerTest {
         grid.markSquare(7, Mark.PLAYERTWOMARK);
         grid.markSquare(8, Mark.PLAYERTWOMARK);
 
-        computer.makeMove(grid);
-        assertEquals(Mark.PLAYERTWOMARK, grid.getSquares().get(4));
+        assertEquals(4, computer.getMove(grid));
     }
 
     @Test
@@ -75,9 +72,9 @@ public class PlayerComputerTest {
 //         X O O
 
 //         Player 'O' optimum move is at 5:
-        //         O 2 X
-        //         X O 6
-        //         X O O
+//         O 2 X
+//         X O 6
+//         X O O
 
         grid.markSquare(0, Mark.PLAYERTWOMARK);
         grid.markSquare(2, Mark.PLAYERONEMARK);
@@ -86,8 +83,7 @@ public class PlayerComputerTest {
         grid.markSquare(7, Mark.PLAYERTWOMARK);
         grid.markSquare(8, Mark.PLAYERTWOMARK);
 
-        computer.makeMove(grid);
-        assertEquals(Mark.PLAYERTWOMARK, grid.getSquares().get(4));
+        assertEquals(4, computer.getMove(grid));
     }
 
     @Test
@@ -101,9 +97,9 @@ public class PlayerComputerTest {
 //         O 8 O
 
 //         Player 'O' optimum move:
-        //         X X 3
-        //         4 X 6
-        //         O O O
+//         X X 3
+//         4 X 6
+//         O O O
 
         grid.markSquare(0, Mark.PLAYERONEMARK);
         grid.markSquare(1, Mark.PLAYERONEMARK);
@@ -111,9 +107,7 @@ public class PlayerComputerTest {
         grid.markSquare(6, Mark.PLAYERTWOMARK);
         grid.markSquare(8, Mark.PLAYERTWOMARK);
 
-        computer.makeMove(grid);
-
-        assertEquals(Mark.PLAYERTWOMARK, grid.getSquares().get(7));
+        assertEquals(7, computer.getMove(grid));
     }
 
     @Test
@@ -127,9 +121,9 @@ public class PlayerComputerTest {
 //         O X X
 
 //         Player 'O' optimum move is at 5:
-        //         X 2 O
-        //         O O 6
-        //         O X X
+//         X 2 O
+//         O O 6
+//         O X X
 
         grid.markSquare(0, Mark.PLAYERONEMARK);
         grid.markSquare(2, Mark.PLAYERTWOMARK);
@@ -138,8 +132,7 @@ public class PlayerComputerTest {
         grid.markSquare(7, Mark.PLAYERONEMARK);
         grid.markSquare(8, Mark.PLAYERONEMARK);
 
-        computer.makeMove(grid);
-        assertEquals(Mark.PLAYERTWOMARK, grid.getSquares().get(4));
+        assertEquals(4, computer.getMove(grid));
     }
 
     @Test
@@ -153,9 +146,9 @@ public class PlayerComputerTest {
 //         O O X
 
 //         Player 'O' optimum move is at 3:
-        //         1 X O
-        //         4 5 X
-        //         O O X
+//         1 X O
+//         4 5 X
+//         O O X
 
         grid.markSquare(1, Mark.PLAYERONEMARK);
         grid.markSquare(5, Mark.PLAYERONEMARK);
@@ -163,9 +156,7 @@ public class PlayerComputerTest {
         grid.markSquare(7, Mark.PLAYERTWOMARK);
         grid.markSquare(8, Mark.PLAYERONEMARK);
 
-        computer.makeMove(grid);
-
-        assertEquals(Mark.PLAYERTWOMARK, grid.getSquares().get(2));
+        assertEquals(2, computer.getMove(grid));
     }
 
     @Test
@@ -179,17 +170,15 @@ public class PlayerComputerTest {
 //         7 8 9
 
 //         Player 'X' optimum move is at 7:
-        //         O O X
-        //         4 X 6
-        //         X 8 9
+//         O O X
+//         4 X 6
+//         X 8 9
 
         grid.markSquare(0, Mark.PLAYERONEMARK);
         grid.markSquare(1, Mark.PLAYERONEMARK);
         grid.markSquare(2, Mark.PLAYERTWOMARK);
         grid.markSquare(4, Mark.PLAYERTWOMARK);
 
-        computer.makeMove(grid);
-
-        assertEquals(Mark.PLAYERONEMARK, grid.getSquares().get(6));
+        assertEquals(6, computer.getMove(grid));
     }
 }

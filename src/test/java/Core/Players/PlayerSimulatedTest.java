@@ -17,9 +17,7 @@ public class PlayerSimulatedTest {
         ArrayList<Integer> moves = new ArrayList<>(asList(0,1));
         Player playerOne = new PlayerSimulated(Mark.PLAYERONEMARK, moves);
 
-        playerOne.makeMove(grid);
-
-        assertEquals(Mark.PLAYERONEMARK, grid.getSquares().get(0));
+        assertEquals(0, playerOne.getMove(grid));
     }
 
     @Test
@@ -28,9 +26,8 @@ public class PlayerSimulatedTest {
         ArrayList<Integer> moves = new ArrayList<>(asList(0,1));
         Player playerOne = new PlayerSimulated(Mark.PLAYERONEMARK, moves);
 
-        playerOne.makeMove(grid);
-        playerOne.makeMove(grid);
+        playerOne.getMove(grid);
 
-        assertEquals(Mark.PLAYERONEMARK, grid.getSquares().get(1));
+        assertEquals(1, playerOne.getMove(grid));
     }
 }

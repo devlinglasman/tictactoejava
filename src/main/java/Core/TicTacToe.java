@@ -1,7 +1,6 @@
 package Core;
 
 import Core.FileManipulators.GameDataWriter;
-import Core.Games.Game;
 import Core.Games.GameRecordable;
 import Core.Games.PrimaryGame;
 import Core.Players.Player;
@@ -59,9 +58,7 @@ public class TicTacToe {
     private void runGame(ArrayList<Player> players) {
         Grid grid = new Grid();
         PrimaryGame primaryGame = new PrimaryGame(grid, players.get(0), players.get(1), communicator);
-        Game game = new GameRecordable(primaryGame, gameDataWriter);
-        gameDataWriter.createFile();
-        game.runGame();
+        primaryGame.runGame();
     }
 
     private ArrayList<Player> getPlayers(GameMode gameMode) {

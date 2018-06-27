@@ -16,37 +16,25 @@ import static org.junit.Assert.*;
 public class PlayerHumanTest {
 
     @Test
-    public void makeMove_ValidAttemptAtSquare1() {
+    public void makeMove_ValidAttemptAtGridPoint0() {
         Grid grid = new Grid();
         new IOHelper("1");
         UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         Communicator communicator = new Communicator(ui);
         Player playerOne = new PlayerHuman(Mark.PLAYERONEMARK, communicator);
-        ArrayList<Mark> squaresResult = new ArrayList<>(
-                asList(Mark.PLAYERONEMARK, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
-                        Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
-                        Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE));
 
-        playerOne.makeMove(grid);
-
-        assertEquals(squaresResult, grid.getSquares());
+        assertEquals(0, playerOne.getMove(grid));
     }
 
     @Test
-    public void makeMove_ValidAttemptAtSquare2() {
+    public void makeMove_ValidAttemptAtGridPoint1() {
         Grid grid = new Grid();
         new IOHelper("2");
         UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         Communicator communicator = new Communicator(ui);
         Player playerOne = new PlayerHuman(Mark.PLAYERONEMARK, communicator);
-        ArrayList<Mark> squaresResult = new ArrayList<>(
-                asList(Mark.UNMARKEDSQUARE, Mark.PLAYERONEMARK, Mark.UNMARKEDSQUARE,
-                        Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
-                        Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE));
 
-        playerOne.makeMove(grid);
-
-        assertEquals(squaresResult, grid.getSquares());
+        assertEquals(1, playerOne.getMove(grid));
     }
 
     @Test
@@ -56,13 +44,7 @@ public class PlayerHumanTest {
         UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         Communicator communicator = new Communicator(ui);
         Player playerOne = new PlayerHuman(Mark.PLAYERONEMARK, communicator);
-        ArrayList<Mark> squaresResult = new ArrayList<>(
-                asList(Mark.PLAYERONEMARK, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
-                        Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE,
-                        Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE, Mark.UNMARKEDSQUARE));
 
-        playerOne.makeMove(grid);
-
-        assertEquals(squaresResult, grid.getSquares());
+        assertEquals(0, playerOne.getMove(grid));
     }
 }

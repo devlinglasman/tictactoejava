@@ -7,16 +7,14 @@ import Core.Mark;
 public class PlayerHuman extends Player {
 
     private Communicator communicator;
-    private Integer previousMove;
 
     public PlayerHuman(Mark mark, Communicator communicator) {
         super(mark);
         this.communicator = communicator;
-        previousMove = null;
     }
 
     @Override
-    public void makeMove(Grid grid) {
+    public int getMove(Grid grid) {
         int input = getValidNumberInput();
         input--;
         boolean inputIllegalMove = grid.moveNotLegal(input);
@@ -26,13 +24,7 @@ public class PlayerHuman extends Player {
             input--;
             inputIllegalMove = grid.moveNotLegal(input);
         }
-        grid.markSquare(input, getMark());
-        previousMove = input;
-    }
-
-    @Override
-    public Integer getPreviousMove() {
-        return previousMove;
+        return input;
     }
 
     private int getValidNumberInput() {

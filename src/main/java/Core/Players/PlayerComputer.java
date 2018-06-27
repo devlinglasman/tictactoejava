@@ -10,7 +10,6 @@ import java.util.Map;
 public class PlayerComputer extends Player {
 
     private Mark opponentMark;
-    private Integer previousMove;
 
     public PlayerComputer(Mark mark) {
         super(mark);
@@ -18,15 +17,8 @@ public class PlayerComputer extends Player {
     }
 
     @Override
-    public void makeMove(Grid grid) {
-        int input = findBestMove(grid);
-        grid.markSquare(input, getMark());
-        previousMove = input;
-    }
-
-    @Override
-    public Integer getPreviousMove() {
-        return previousMove;
+    public int getMove(Grid grid) {
+        return findBestMove(grid);
     }
 
     private Mark findOpponentMark(){

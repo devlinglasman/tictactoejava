@@ -9,23 +9,16 @@ public class PlayerSimulated extends Player {
 
     private ArrayList<Integer> moves;
     private int movesCounter = 0;
-    private Integer previousMove;
 
     public PlayerSimulated(Mark mark, ArrayList<Integer> moves) {
        super(mark);
        this.moves = moves;
-       previousMove = null;
     }
 
     @Override
-    public void makeMove(Grid grid) {
-        grid.markSquare(moves.get(movesCounter), getMark());
-        previousMove = moves.get(movesCounter);
+    public int getMove(Grid grid) {
+        int move = moves.get(movesCounter);
         movesCounter++;
-    }
-
-    @Override
-    public Integer getPreviousMove() {
-        return previousMove;
+        return move;
     }
 }

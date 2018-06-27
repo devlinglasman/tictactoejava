@@ -4,7 +4,7 @@ import Core.UserInterfaces.Communicator;
 import Core.Grid;
 import Core.Players.Player;
 
-public class PrimaryGame implements Game {
+public class PrimaryGame {
 
     private Grid grid;
     private Player playerOne;
@@ -20,24 +20,34 @@ public class PrimaryGame implements Game {
         activePlayer = playerOne;
     }
 
-    @Override
     public void runGame() {
-        communicator.displayGrid(grid.getSquares());
+        displayGrid();
         while (gameOngoing()) {
-            activePlayer.makeMove(grid);
-            communicator.presentMove(activePlayer, grid);
+            makeMove();
+            presentMove();
             alternatePlayer();
         }
         announceResult();
     }
 
-    @Override
     public Player getActivePlayer() {
         return activePlayer;
     }
 
-    @Override
-    public void alternatePlayer() {
+    private void displayGrid() {
+        communicator.displayGrid(grid.getSquares());
+    }
+
+    private void makeMove() {
+        int move = activePlayer.getMove(grid);
+        grid.markSquare(move, activePlayer.getMark());
+    }
+
+    private void presentMove() {
+        communicator.presentMove(activePlayer, grid);
+    }
+
+    private void alternatePlayer() {
         if (activePlayer == playerOne) {
             activePlayer = playerTwo;
         } else {
@@ -45,29 +55,17 @@ public class PrimaryGame implements Game {
         }
     }
 
-    @Override
-    public boolean gameOngoing() {
+    private boolean gameOngoing() {
         return !grid.isFull() && !grid.winningLineExistsInGrid();
     }
 
-    @Override
-    public void announceResult() {
+    private void announceResult() {
         if (grid.winningLineExistsInGrid()) {
             alternatePlayer();
             communicator.announceWinner(activePlayer);
         } else {
             communicator.announceTie();
         }
-    }
-
-    @Override
-    public Communicator getCommunicator() {
-        return communicator;
-    }
-
-    @Override
-    public Grid getGrid() {
-        return grid;
     }
 }
 
