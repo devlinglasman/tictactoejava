@@ -23,7 +23,7 @@ public class GameFactoryTest {
         ArrayList<Player> players = playerFactory.buildPlayers(GameMode.HUMANVSCOMP);
         GameFactory gameFactory = new GameFactory();
 
-        Game game = gameFactory.buildGame(players.get(0), players.get(1), communicator);
+        Game game = gameFactory.buildGame(players.get(0), players.get(1), communicator, true);
 
         assertTrue(game != null);
     }

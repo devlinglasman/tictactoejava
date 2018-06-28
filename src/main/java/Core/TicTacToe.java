@@ -3,6 +3,7 @@ package Core;
 import Core.FileManipulators.GameDataWriter;
 import Core.Games.Game;
 import Core.Games.GameFactory;
+import Core.Games.GameRunner;
 import Core.Players.Player;
 import Core.Players.PlayerFactory;
 import Core.UserInterfaces.Communicator;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 public class TicTacToe {
 
     private Communicator communicator;
+    private GameRunner gameRunner;
     private GameFactory gameFactory;
     private GameModeSelector gameModeSelector;
     private PlayerFactory playerFactory;
@@ -21,6 +23,7 @@ public class TicTacToe {
 
     public TicTacToe(Communicator communicator) {
         this.communicator = communicator;
+        gameRunner = new GameRunner();
         gameFactory = new GameFactory();
         gameModeSelector = new GameModeSelector(communicator);
         playerFactory = new PlayerFactory(communicator);
@@ -37,7 +40,7 @@ public class TicTacToe {
         GameMode gameMode = gameModeSelector.getPrimaryGameMode();
         ArrayList<Player> players = getPlayers(gameMode);
         Game game = gameFactory.buildGame(players.get(0), players.get(1), communicator, isRecording);
-        game.runGame();
+        gameRunner.runGame(game);
     }
 
     private ArrayList<Player> getPlayers(GameMode gameMode) {

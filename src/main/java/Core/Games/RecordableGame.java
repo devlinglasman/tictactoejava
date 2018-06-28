@@ -12,15 +12,17 @@ public class RecordableGame implements Game {
         gameDataWriter = new GameDataWriter();
     }
 
-    @Override
-    public void runGame() {
-        primaryGame.runGame();
+    public void displayGrid() {
+        primaryGame.displayGrid();
     }
 
-    public void makeMove() {
-        int move = generateMove();
-        markGrid(move);
-        convertAndWriteMove(move);
+    public boolean gameOngoing() {
+        return primaryGame.gameOngoing();
+    }
+
+    public void nextMove() {
+        primaryGame.generateMove();
+        convertAndWriteMove(primaryGame.getLastMove());
     }
 
     @Override
@@ -33,7 +35,15 @@ public class RecordableGame implements Game {
         primaryGame.markGrid(move);
     }
 
-    public void convertAndWriteMove(int move) {
+    public void convertAndWriteMove(Integer move) {
         gameDataWriter.writeGameValue(Integer.toString(move));
+    }
+
+    public void announceResult() {
+        primaryGame.announceResult();
+    }
+
+    public int getLastMove() {
+        return primaryGame.getLastMove();
     }
 }

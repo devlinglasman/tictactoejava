@@ -12,6 +12,7 @@ public class PrimaryGame implements Game {
     private Player playerTwo;
     private Communicator communicator;
     private Player activePlayer;
+    private Integer lastMove;
 
     public PrimaryGame(Grid grid, Player playerOne, Player playerTwo, Communicator communicator) {
         this.grid = grid;
@@ -19,21 +20,14 @@ public class PrimaryGame implements Game {
         this.playerTwo = playerTwo;
         this.communicator = communicator;
         activePlayer = playerOne;
+        lastMove = null;
     }
 
-    public void runGame() {
-        displayGrid();
-        while (gameOngoing()) {
-            makeMove();
-            presentMove();
-            alternatePlayer();
-        }
-        announceResult();
-    }
-
-    public void makeMove() {
-        int move = generateMove();
-        markGrid(move);
+    public void nextMove() {
+        lastMove = generateMove();
+        markGrid(lastMove);
+        presentMove();
+        alternatePlayer();
     }
 
     public int generateMove() {
@@ -44,11 +38,11 @@ public class PrimaryGame implements Game {
         grid.markSquare(move, activePlayer.getMark());
     }
 
-    private void displayGrid() {
+    public void displayGrid() {
         communicator.displayGrid(grid.getSquares());
     }
 
-    private void presentMove() {
+    public void presentMove() {
         communicator.presentMove(activePlayer, grid);
     }
 
@@ -60,11 +54,15 @@ public class PrimaryGame implements Game {
         }
     }
 
-    private boolean gameOngoing() {
+    public boolean gameOngoing() {
         return !grid.isFull() && !grid.winningLineExistsInGrid();
     }
 
-    private void announceResult() {
+    public int getLastMove() {
+        return lastMove;
+    }
+
+    public void announceResult() {
         if (grid.winningLineExistsInGrid()) {
             announceWinner();
         } else {
