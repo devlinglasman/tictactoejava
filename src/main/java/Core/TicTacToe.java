@@ -7,7 +7,6 @@ import Core.Players.Player;
 import Core.Players.PlayerFactory;
 import Core.UserInterfaces.Communicator;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class TicTacToe {
@@ -18,6 +17,7 @@ public class TicTacToe {
     private PlayerFactory playerFactory;
     private boolean programTerminated;
     private GameDataWriter gameDataWriter;
+    private boolean isRecording;
 
     public TicTacToe(Communicator communicator) {
         this.communicator = communicator;
@@ -26,6 +26,7 @@ public class TicTacToe {
         playerFactory = new PlayerFactory(communicator);
         programTerminated = false;
         gameDataWriter = new GameDataWriter();
+        isRecording = true;
     }
 
     public void run() {
@@ -35,19 +36,11 @@ public class TicTacToe {
     private void runGame() {
         GameMode gameMode = gameModeSelector.getPrimaryGameMode();
         ArrayList<Player> players = getPlayers(gameMode);
-        Game game = gameFactory.buildGame(players.get(0), players.get(1), communicator);
+        Game game = gameFactory.buildGame(players.get(0), players.get(1), communicator, isRecording);
         game.runGame();
     }
-
-//    private void runSimulatedGame(File gameData) {
-//        ArrayList<Player> players = getPlayers(gameData);
-//    }
 
     private ArrayList<Player> getPlayers(GameMode gameMode) {
         return playerFactory.buildPlayers(gameMode);
     }
-
-//    private ArrayList<Player> getPlayers(File gameData) {
-//        return playerFactory.buildPlayers(gameData);
-//    }
 }

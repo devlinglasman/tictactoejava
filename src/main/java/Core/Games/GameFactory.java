@@ -6,8 +6,9 @@ import Core.UserInterfaces.Communicator;
 
 public class GameFactory {
 
-    public Game buildGame(Player playerOne, Player playerTwo, Communicator  communicator) {
+    public Game buildGame(Player playerOne, Player playerTwo, Communicator  communicator, boolean isRecordable) {
         Grid grid = new Grid();
-        return new PrimaryGame(grid, playerOne, playerTwo, communicator);
+        Game primaryGame = new PrimaryGame(grid, playerOne, playerTwo, communicator);
+        return (isRecordable) ? new RecordableGame(primaryGame) : primaryGame;
     }
 }
