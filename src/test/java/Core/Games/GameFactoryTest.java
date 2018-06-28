@@ -19,11 +19,9 @@ public class GameFactoryTest {
     public void buildGame() {
         UI ui = new ConsoleUI(System.in, System.out, 1);
         Communicator communicator = new Communicator(ui);
-        PlayerFactory playerFactory = new PlayerFactory(communicator);
-        ArrayList<Player> players = playerFactory.buildPlayers(GameMode.HUMANVSCOMP);
-        GameFactory gameFactory = new GameFactory();
+        GameFactory gameFactory = new GameFactory(communicator);
 
-        Game game = gameFactory.buildGame(players.get(0), players.get(1), communicator, true);
+        Game game = gameFactory.buildGame(GameMode.HUMANVSCOMP, communicator, true);
 
         assertTrue(game != null);
     }

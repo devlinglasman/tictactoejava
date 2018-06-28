@@ -20,7 +20,7 @@ public class RecordableGame implements Game {
         return primaryGame.gameOngoing();
     }
 
-    public void nextMove() {
+    public void playNextMove() {
         primaryGame.generateMove();
         convertAndWriteMove(primaryGame.getLastMove());
     }

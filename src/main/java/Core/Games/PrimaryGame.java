@@ -23,7 +23,7 @@ public class PrimaryGame implements Game {
         lastMove = null;
     }
 
-    public void nextMove() {
+    public void playNextMove() {
         lastMove = generateMove();
         markGrid(lastMove);
         presentMove();

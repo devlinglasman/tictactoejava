@@ -6,7 +6,7 @@ public interface Game {
 
     boolean gameOngoing();
 
-    void nextMove();
+    void playNextMove();
 
     int generateMove();
 

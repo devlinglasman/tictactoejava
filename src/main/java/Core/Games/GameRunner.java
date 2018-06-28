@@ -10,7 +10,7 @@ public class GameRunner {
 
     public void continuePlies(Game game) {
         while (game.gameOngoing()) {
-            game.nextMove();
+            game.playNextMove();
         }
     }
 

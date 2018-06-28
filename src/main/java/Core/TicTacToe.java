@@ -24,9 +24,8 @@ public class TicTacToe {
     public TicTacToe(Communicator communicator) {
         this.communicator = communicator;
         gameRunner = new GameRunner();
-        gameFactory = new GameFactory();
+        gameFactory = new GameFactory(communicator);
         gameModeSelector = new GameModeSelector(communicator);
-        playerFactory = new PlayerFactory(communicator);
         programTerminated = false;
         gameDataWriter = new GameDataWriter();
         isRecording = true;
@@ -38,12 +37,7 @@ public class TicTacToe {
 
     private void runGame() {
         GameMode gameMode = gameModeSelector.getPrimaryGameMode();
-        ArrayList<Player> players = getPlayers(gameMode);
-        Game game = gameFactory.buildGame(players.get(0), players.get(1), communicator, isRecording);
+        Game game = gameFactory.buildGame(gameMode, communicator, isRecording);
         gameRunner.runGame(game);
-    }
-
-    private ArrayList<Player> getPlayers(GameMode gameMode) {
-        return playerFactory.buildPlayers(gameMode);
     }
 }
