@@ -20,9 +20,4 @@ public class GameModeTest {
     public void findGameModeUsingNumber_humanVsHuman() {
         assertEquals(GameMode.HUMANVSHUMAN, GameMode.findGameModeUsingNumber(3));
     }
-
-    @Test
-    public void findGameModeUsingNumber_SimulatedPlay() {
-        assertEquals(GameMode.SIMULATEDPLAY, GameMode.findGameModeUsingNumber(4));
-    }
 }

@@ -1,6 +1,6 @@
 package Core.Players;
 
-import Core.FileManipulators.GameDataReader;
+import Core.FileManipulators.GameFileAnalyser;
 import Core.GameMode;
 import Core.Mark;
 import Core.UserInterfaces.Communicator;
@@ -11,14 +11,12 @@ import java.util.ArrayList;
 public class PlayerFactory {
 
     private Communicator communicator;
-    private GameDataReader gameDataReader;
 
     public PlayerFactory(Communicator communicator) {
         this.communicator = communicator;
-        gameDataReader = new GameDataReader();
     }
 
-    public ArrayList<Player> producePrimaryPlayers(GameMode gameMode) {
+    public ArrayList<Player> buildPlayers(GameMode gameMode) {
         ArrayList<Player> players = new ArrayList<>();
 
         boolean playerOneIsHuman;
@@ -46,47 +44,19 @@ public class PlayerFactory {
         return players;
     }
 
-    private Player generatePlayer(Mark mark, boolean human) {
-        return human ? new PlayerHuman(mark, communicator)
-                : new PlayerComputer(mark);
-    }
-
-    public ArrayList<Player> produceSimulatedPlayers(File gameData) {
-        ArrayList<String> gameValues = gameDataReader.extractData(gameData);
+    public ArrayList<Player> buildPlayers(ArrayList<Integer> playerOneMoves, ArrayList<Integer> playerTwoMoves) {
         ArrayList<Player> players = new ArrayList<>();
-
-        ArrayList<Integer> gameMoves = convertToIntegers(gameValues);
-
-        ArrayList<Integer> simulatedPlayerOnePlies = populatePlies(gameMoves, 0);
-        ArrayList<Integer> simulatedPlayerTwoPlies = populatePlies(gameMoves, 1);
-
-        Player playerOne = new PlayerSimulated(Mark.PLAYERONEMARK, simulatedPlayerOnePlies);
-        Player playerTwo = new PlayerSimulated(Mark.PLAYERTWOMARK, simulatedPlayerTwoPlies);
+        Player playerOne = new PlayerSimulated(Mark.PLAYERONEMARK, playerOneMoves);
+        Player playerTwo = new PlayerSimulated(Mark.PLAYERTWOMARK, playerTwoMoves);
 
         players.add(playerOne);
         players.add(playerTwo);
         return players;
     }
 
-    private ArrayList<Integer> convertToIntegers(ArrayList<String> gameValues) {
-        ArrayList<Integer> gameMoves = new ArrayList<>();
-        for (String ply : gameValues) {
-            Integer move = null;
-            try {
-                move = Integer.parseInt(ply);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-            gameMoves.add(move);
-        }
-        return gameMoves;
+    private Player generatePlayer(Mark mark, boolean human) {
+        return human ? new PlayerHuman(mark, communicator)
+                : new PlayerComputer(mark);
     }
 
-    private ArrayList<Integer> populatePlies(ArrayList<Integer> gameValues, int playerPosition) {
-        ArrayList<Integer> plies = new ArrayList<>();
-        for (int i = playerPosition; i < gameValues.size(); i = i + 2) {
-            plies.add(gameValues.get(i));
-        }
-        return plies;
-    }
 }

@@ -3,9 +3,7 @@ package Core.Games;
 import Console.ConsoleUI;
 import Core.GameMode;
 import Core.Players.Player;
-import Core.Players.PlayerComputer;
 import Core.Players.PlayerFactory;
-import Core.Players.PlayerHuman;
 import Core.UserInterfaces.Communicator;
 import Core.UserInterfaces.UI;
 import org.junit.Test;
@@ -22,7 +20,7 @@ public class GameFactoryTest {
         UI ui = new ConsoleUI(System.in, System.out, 1);
         Communicator communicator = new Communicator(ui);
         PlayerFactory playerFactory = new PlayerFactory(communicator);
-        ArrayList<Player> players = playerFactory.producePrimaryPlayers(GameMode.HUMANVSCOMP);
+        ArrayList<Player> players = playerFactory.buildPlayers(GameMode.HUMANVSCOMP);
         GameFactory gameFactory = new GameFactory();
 
         Game game = gameFactory.buildGame(players.get(0), players.get(1), communicator);

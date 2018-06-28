@@ -1,6 +1,6 @@
 package Core.FileManipulatorsTests;
 
-import Core.FileManipulators.GameDataReader;
+import Core.FileManipulators.GameFileAnalyser;
 import Core.FileManipulators.GameDataWriter;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class GameDataWriterTest {
 
     @Test
     public void createFile_OverwriteItWithNewData() {
-        GameDataReader gameDataReader = new GameDataReader();
+        GameFileAnalyser gameFileAnalyser = new GameFileAnalyser();
         GameDataWriter gameDataWriter = new GameDataWriter();
         ArrayList<String> expectedGameData = new ArrayList<>(
                 asList("Player One"));
@@ -22,14 +22,14 @@ public class GameDataWriterTest {
         gameDataWriter.writeGameValue("Incorrect data.");
         gameDataWriter.createFile();
         gameDataWriter.writeGameValue("Player One");
-        ArrayList<String> actualGameData = gameDataReader.extractData(gameDataWriter.getGameData());
+        ArrayList<String> actualGameData = gameFileAnalyser.extractData(gameDataWriter.getGameData());
 
         assertEquals(expectedGameData, actualGameData);
     }
 
     @Test
     public void writeToFile_CheckItAcceptsMultipleData() {
-        GameDataReader gameDataReader = new GameDataReader();
+        GameFileAnalyser gameFileAnalyser = new GameFileAnalyser();
         GameDataWriter gameDataWriter = new GameDataWriter();
         ArrayList<String> expectedGameData = new ArrayList<>(
                 asList("Player One", "Player Two", "0"));
@@ -38,7 +38,7 @@ public class GameDataWriterTest {
         gameDataWriter.writeGameValue("Player One");
         gameDataWriter.writeGameValue("Player Two");
         gameDataWriter.writeGameValue("0");
-        ArrayList<String> actualGameData = gameDataReader.extractData(gameDataWriter.getGameData());
+        ArrayList<String> actualGameData = gameFileAnalyser.extractData(gameDataWriter.getGameData());
 
         assertEquals(expectedGameData, actualGameData);
     }
