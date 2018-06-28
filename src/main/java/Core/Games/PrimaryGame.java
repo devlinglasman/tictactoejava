@@ -5,7 +5,7 @@ import Core.UserInterfaces.Communicator;
 import Core.Grid;
 import Core.Players.Player;
 
-public class PrimaryGame {
+public class PrimaryGame implements Game {
 
     private Grid grid;
     private Player playerOne;
@@ -31,17 +31,21 @@ public class PrimaryGame {
         announceResult();
     }
 
-    public Player getActivePlayer() {
-        return activePlayer;
+    public void makeMove() {
+        int move = generateMove();
+        markGrid(move);
+    }
+
+    public int generateMove() {
+        return activePlayer.getMove(grid);
+    }
+
+    public void markGrid(int move) {
+        grid.markSquare(move, activePlayer.getMark());
     }
 
     private void displayGrid() {
         communicator.displayGrid(grid.getSquares());
-    }
-
-    private void makeMove() {
-        int move = activePlayer.getMove(grid);
-        grid.markSquare(move, activePlayer.getMark());
     }
 
     private void presentMove() {

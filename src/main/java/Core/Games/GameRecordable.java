@@ -1,11 +1,8 @@
 package Core.Games;
 
 import Core.FileManipulators.GameDataWriter;
-import Core.Grid;
-import Core.Players.Player;
-import Core.UserInterfaces.Communicator;
 
-public class GameRecordable {
+public class GameRecordable implements Game {
 
     private PrimaryGame primaryGame;
     private GameDataWriter gameDataWriter;
@@ -15,7 +12,17 @@ public class GameRecordable {
         this.gameDataWriter = gameDataWriter;
     }
 
-    public void makeMove() {
+    public void runGame() {
+        primaryGame.runGame();
+    }
 
+    public void makeMove() {
+        int move = primaryGame.generateMove();
+        primaryGame.markGrid(move);
+        convertAndWriteMove(move);
+    }
+
+    public void convertAndWriteMove(int move) {
+        gameDataWriter.writeGameValue(Integer.toString(move));
     }
 }
