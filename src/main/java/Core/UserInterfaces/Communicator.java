@@ -73,7 +73,7 @@ public class Communicator {
         ui.presentMessage(Message.askReplay);
     }
 
-    public String findYesorNoAnswer() {
+    public boolean askIfYes() {
         String input = getInput().toLowerCase();
         boolean inputNotCorrect = inputNotYesOrNo(input);
         while (inputNotCorrect) {
@@ -81,7 +81,11 @@ public class Communicator {
             input = getInput().toLowerCase();
             inputNotCorrect = inputNotYesOrNo(input);
         }
-        return input;
+        return input.equals("y");
+    }
+
+    public void askIfPlayAgain() {
+        ui.presentMessage(Message.askIfPlayAgain);
     }
 
     public void announceProgramOver() {

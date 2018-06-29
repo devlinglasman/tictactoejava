@@ -27,6 +27,9 @@ public class Message {
     public final static String askNewYOrN =
         "\nPlease enter either y or n.\n";
 
+    public final static String askIfPlayAgain =
+            "\nSo... Would you like to play again?'n";
+
     public final static String announceProgramOver =
         "\nOh how sad... you wish to leave me... goodbye!\n";
 

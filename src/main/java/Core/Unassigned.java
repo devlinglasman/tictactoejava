@@ -75,13 +75,13 @@ public class Unassigned {
 //
 //    private boolean findIfPlayerWishesToRewatch() {
 //        communicator.askRewatch();
-//        String yesOrNoAnswer = communicator.findYesorNoAnswer();
+//        String yesOrNoAnswer = communicator.askIfYes();
 //        return yesOrNoAnswer.equals("y");
 //    }
 //
 //    private boolean findIfPlayerWishesToReplay() {
 //        communicator.askReplay();
-//        String yesOrNoAnswer = communicator.findYesorNoAnswer();
+//        String yesOrNoAnswer = communicator.askIfYes();
 //        return yesOrNoAnswer.equals("y");
 //    }
 }

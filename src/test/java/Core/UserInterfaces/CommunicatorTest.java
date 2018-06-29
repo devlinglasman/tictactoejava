@@ -50,7 +50,7 @@ public class CommunicatorTest {
         UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         Communicator communicator = new Communicator(ui);
 
-        assertEquals("y", communicator.findYesorNoAnswer());
+        assertTrue(communicator.askIfYes());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class CommunicatorTest {
         UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         Communicator communicator = new Communicator(ui);
 
-        assertEquals("n", communicator.findYesorNoAnswer());
+        assertFalse(communicator.askIfYes());
     }
 
     @Test
@@ -68,7 +68,7 @@ public class CommunicatorTest {
         UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         Communicator communicator = new Communicator(ui);
 
-        assertEquals("y", communicator.findYesorNoAnswer());
+        assertTrue(communicator.askIfYes());
     }
 
     @Test
@@ -77,7 +77,7 @@ public class CommunicatorTest {
         UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         Communicator communicator = new Communicator(ui);
 
-        assertEquals("y", communicator.findYesorNoAnswer());
+        assertTrue(communicator.askIfYes());
     }
 
     @Test
@@ -86,6 +86,6 @@ public class CommunicatorTest {
         UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
         Communicator communicator = new Communicator(ui);
 
-        assertEquals("y", communicator.findYesorNoAnswer());
+        assertTrue(communicator.askIfYes());
     }
 }

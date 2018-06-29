@@ -1,14 +1,30 @@
 package Core.FileManipulators;
 
-import Core.Players.Player;
-
 import java.io.*;
 import java.util.ArrayList;
 
 public class GameFileAnalyser {
 
-    public ArrayList<String> extractData(File file) {
-        ArrayList<String> gameData = new ArrayList<>();
+    private File gameData;
+
+    public GameFileAnalyser() {
+        gameData = new File("src/main/resources/gameData.txt");
+    }
+
+    public ArrayList<Integer> generateMovesFromFile(File file, int playerPosition) {
+        ArrayList<String> gameValues = performExtraction(file);
+        ArrayList<Integer> gameMoves = convertToIntegers(gameValues);
+        return populatePlies(gameMoves, playerPosition);
+    }
+
+    public ArrayList<Integer> generateMovesFromFile(int playerPosition) {
+        ArrayList<String> gameValues = performExtraction(gameData);
+        ArrayList<Integer> gameMoves = convertToIntegers(gameValues);
+        return populatePlies(gameMoves, playerPosition);
+    }
+
+    private ArrayList<String> performExtraction(File file) {
+        ArrayList<String> gameMoves = new ArrayList<>();
 
         try {
             FileReader fileReader = new FileReader(file);
@@ -16,19 +32,13 @@ public class GameFileAnalyser {
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                gameData.add(line);
+                gameMoves.add(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return gameData;
-    }
-
-    public ArrayList<Integer> generateMovesFromFile(File gameData, int playerPosition) {
-        ArrayList<String> gameValues = extractData(gameData);
-        ArrayList<Integer> gameMoves = convertToIntegers(gameValues);
-        return populatePlies(gameMoves, playerPosition);
+        return gameMoves;
     }
 
     private ArrayList<Integer> convertToIntegers(ArrayList<String> gameValues) {
