@@ -30,11 +30,11 @@ public class PrimaryGame implements Game {
         alternatePlayer();
     }
 
-    public int generateMove() {
+    public Integer generateMove() {
         return activePlayer.getMove(grid);
     }
 
-    public void markGrid(int move) {
+    public void markGrid(Integer move) {
         grid.markSquare(move, activePlayer.getMark());
     }
 
@@ -58,7 +58,7 @@ public class PrimaryGame implements Game {
         return !grid.isFull() && !grid.winningLineExistsInGrid();
     }
 
-    public int getLastMove() {
+    public Integer getLastMove() {
         return lastMove;
     }
 

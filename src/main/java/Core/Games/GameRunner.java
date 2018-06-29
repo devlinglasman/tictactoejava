@@ -4,11 +4,11 @@ public class GameRunner {
 
     public void runGame(Game game) {
         game.displayGrid();
-        continuePlies(game);
+        playPlies(game);
         game.announceResult();
     }
 
-    public void continuePlies(Game game) {
+    public void playPlies(Game game) {
         while (game.gameOngoing()) {
             game.playNextMove();
         }

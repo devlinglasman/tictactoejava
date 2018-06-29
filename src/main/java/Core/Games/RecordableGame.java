@@ -10,28 +10,32 @@ public class RecordableGame implements Game {
     public RecordableGame(Game primaryGame) {
         this.primaryGame = primaryGame;
         gameDataWriter = new GameDataWriter();
+        gameDataWriter.createFile();
     }
 
+    @Override
     public void displayGrid() {
         primaryGame.displayGrid();
     }
 
+    @Override
     public boolean gameOngoing() {
         return primaryGame.gameOngoing();
     }
 
+    @Override
     public void playNextMove() {
-        primaryGame.generateMove();
-        convertAndWriteMove(primaryGame.getLastMove());
+        primaryGame.playNextMove();
+        convertAndWriteMove(getLastMove());
     }
 
     @Override
-    public int generateMove() {
+    public Integer generateMove() {
         return primaryGame.generateMove();
     }
 
     @Override
-    public void markGrid(int move) {
+    public void markGrid(Integer move) {
         primaryGame.markGrid(move);
     }
 
@@ -43,7 +47,7 @@ public class RecordableGame implements Game {
         primaryGame.announceResult();
     }
 
-    public int getLastMove() {
+    public Integer getLastMove() {
         return primaryGame.getLastMove();
     }
 }
