@@ -23,27 +23,50 @@ public class PrimaryGame implements Game {
         lastMove = null;
     }
 
+    @Override
     public void playNextMove() {
+        displayGrid();
         lastMove = generateMove();
         markGrid(lastMove);
         presentMove();
         alternatePlayer();
     }
 
+    @Override
+    public boolean gameOngoing() {
+        return !grid.isFull() && !grid.winningLineExistsInGrid();
+    }
+
+    @Override
+    public Integer getLastMove() {
+        return lastMove;
+    }
+
+    @Override
+    public void announceResult() {
+        displayGrid();
+        if (grid.winningLineExistsInGrid()) {
+            announceWinner();
+        } else {
+            communicator.announceTie();
+        }
+    }
+
+    private void displayGrid() {
+        communicator.displayGrid(grid.getSquares());
+    }
+
+
     private Integer generateMove() {
         return activePlayer.getMove(grid);
     }
 
-    public void markGrid(Integer move) {
+    private void markGrid(Integer move) {
         grid.markSquare(move, activePlayer.getMark());
     }
 
-    public void displayGrid() {
-        communicator.displayGrid(grid.getSquares());
-    }
-
-    public void presentMove() {
-        communicator.presentMove(activePlayer, grid);
+    private void presentMove() {
+        communicator.presentMove(activePlayer);
     }
 
     private void alternatePlayer() {
@@ -54,24 +77,8 @@ public class PrimaryGame implements Game {
         }
     }
 
-    public boolean gameOngoing() {
-        return !grid.isFull() && !grid.winningLineExistsInGrid();
-    }
-
-    public Integer getLastMove() {
-        return lastMove;
-    }
-
-    public void announceResult() {
-        if (grid.winningLineExistsInGrid()) {
-            announceWinner();
-        } else {
-            communicator.announceTie();
-        }
-    }
-
     private void announceWinner() {
-        if (grid.reportWinningMark() == Mark.PLAYERONEMARK) {
+        if (grid.reportWinningMark() == Mark.PLAYER_ONE) {
             communicator.announceWinner(playerOne);
         } else {
             communicator.announceWinner(playerTwo);

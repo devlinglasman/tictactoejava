@@ -6,7 +6,6 @@ import Core.UserInterfaces.Communicator;
 import Core.UserInterfaces.UI;
 import org.junit.Test;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +23,8 @@ public class PlayerFactoryTest {
 
         List<Player> players = playerFactory.buildPlayers(GameMode.HUMANVSCOMP);
 
-        assertTrue(players.get(0) instanceof PlayerHuman);
-        assertTrue(players.get(1) instanceof PlayerComputer);
+        assertTrue(players.get(0) instanceof HumanPlayer);
+        assertTrue(players.get(1) instanceof ComputerPlayer);
         assertEquals("Player One", players.get(0).getName());
         assertEquals("Player Two", players.get(1).getName());
     }
@@ -38,8 +37,8 @@ public class PlayerFactoryTest {
 
         List<Player> players = playerFactory.buildPlayers(GameMode.COMPVSCOMP);
 
-        assertTrue(players.get(0) instanceof PlayerComputer);
-        assertTrue(players.get(1) instanceof PlayerComputer);
+        assertTrue(players.get(0) instanceof ComputerPlayer);
+        assertTrue(players.get(1) instanceof ComputerPlayer);
         assertEquals("Player One", players.get(0).getName());
         assertEquals("Player Two", players.get(1).getName());
     }
@@ -52,8 +51,8 @@ public class PlayerFactoryTest {
 
         List<Player> players = playerFactory.buildPlayers(GameMode.HUMANVSHUMAN);
 
-        assertTrue(players.get(0) instanceof PlayerHuman);
-        assertTrue(players.get(1) instanceof PlayerHuman);
+        assertTrue(players.get(0) instanceof HumanPlayer);
+        assertTrue(players.get(1) instanceof HumanPlayer);
         assertEquals("Player One", players.get(0).getName());
         assertEquals("Player Two", players.get(1).getName());
     }
@@ -68,8 +67,8 @@ public class PlayerFactoryTest {
 
         List<Player> players = playerFactory.buildPlayers(playerOneMoves, playerTwoMoves);
 
-        assertTrue(players.get(0) instanceof PlayerSimulated);
-        assertTrue(players.get(1) instanceof PlayerSimulated);
+        assertTrue(players.get(0) instanceof SimulatedPlayer);
+        assertTrue(players.get(1) instanceof SimulatedPlayer);
         assertEquals("Player One", players.get(0).getName());
         assertEquals("Player Two", players.get(1).getName());
     }

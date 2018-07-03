@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PlayerComputer extends Player {
+public class ComputerPlayer extends Player {
 
     private Mark opponentMark;
 
-    public PlayerComputer(Mark mark) {
+    public ComputerPlayer(Mark mark) {
         super(mark);
         opponentMark = findOpponentMark();
     }
@@ -22,7 +22,7 @@ public class PlayerComputer extends Player {
     }
 
     private Mark findOpponentMark(){
-        return (getMark() == Mark.PLAYERONEMARK) ? Mark.PLAYERTWOMARK : Mark.PLAYERONEMARK;
+        return (getMark() == Mark.PLAYER_ONE) ? Mark.PLAYER_TWO : Mark.PLAYER_ONE;
     }
 
     private int findBestMove(Grid grid) {

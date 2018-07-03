@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 
-public class PlayerSimulatedTest {
+public class SimulatedPlayerTest {
 
     @Test
     public void getMove_1() {
         Grid grid = new Grid();
         ArrayList<Integer> moves = new ArrayList<>(asList(0,1));
-        Player playerOne = new PlayerSimulated(Mark.PLAYERONEMARK, moves);
+        Player playerOne = new SimulatedPlayer(Mark.PLAYER_ONE, moves);
 
         assertEquals(0, playerOne.getMove(grid));
     }
@@ -24,7 +24,7 @@ public class PlayerSimulatedTest {
     public void getMove_2() {
         Grid grid = new Grid();
         ArrayList<Integer> moves = new ArrayList<>(asList(0,1));
-        Player playerOne = new PlayerSimulated(Mark.PLAYERONEMARK, moves);
+        Player playerOne = new SimulatedPlayer(Mark.PLAYER_ONE, moves);
 
         playerOne.getMove(grid);
 

@@ -5,12 +5,12 @@ import Core.Mark;
 
 import java.util.ArrayList;
 
-public class PlayerSimulated extends Player {
+public class SimulatedPlayer extends Player {
 
     private ArrayList<Integer> moves;
     private int movesCounter = 0;
 
-    public PlayerSimulated(Mark mark, ArrayList<Integer> moves) {
+    public SimulatedPlayer(Mark mark, ArrayList<Integer> moves) {
        super(mark);
        this.moves = moves;
     }

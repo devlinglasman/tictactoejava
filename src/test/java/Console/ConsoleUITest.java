@@ -29,7 +29,7 @@ public class ConsoleUITest {
 
         ArrayList<Mark> squares = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
-            squares.add(Mark.UNMARKEDSQUARE);
+            squares.add(Mark.EMPTY);
         }
         consoleUI.displayGrid(squares);
 
@@ -46,9 +46,9 @@ public class ConsoleUITest {
         ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
 
         ArrayList<Mark> squares = new ArrayList<>();
-        squares.add(Mark.PLAYERONEMARK);
+        squares.add(Mark.PLAYER_ONE);
         for (int i = 0; i < 8; i++) {
-            squares.add(Mark.UNMARKEDSQUARE);
+            squares.add(Mark.EMPTY);
         }
 
         consoleUI.displayGrid(squares);

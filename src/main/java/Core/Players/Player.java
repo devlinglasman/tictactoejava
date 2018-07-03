@@ -16,7 +16,7 @@ public abstract class Player {
     public abstract int getMove(Grid grid);
 
     private String generateName() {
-        return (mark == Mark.PLAYERONEMARK) ? "Player One" : "Player Two";
+        return (mark == Mark.PLAYER_ONE) ? "Player One" : "Player Two";
     }
 
     public String getName() {

@@ -14,11 +14,6 @@ public class RecordableGame implements Game {
     }
 
     @Override
-    public void displayGrid() {
-        primaryGame.displayGrid();
-    }
-
-    @Override
     public boolean gameOngoing() {
         return primaryGame.gameOngoing();
     }
@@ -30,19 +25,17 @@ public class RecordableGame implements Game {
     }
 
     @Override
-    public void markGrid(Integer move) {
-        primaryGame.markGrid(move);
-    }
-
-    public void convertAndWriteMove(Integer move) {
-        gameDataWriter.writeGameValue(Integer.toString(move));
-    }
-
     public void announceResult() {
         primaryGame.announceResult();
     }
 
+    @Override
     public Integer getLastMove() {
         return primaryGame.getLastMove();
     }
+
+    private void convertAndWriteMove(Integer move) {
+        gameDataWriter.writeGameValue(Integer.toString(move));
+    }
+
 }

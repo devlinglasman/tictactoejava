@@ -9,14 +9,14 @@ public class PlayerTest {
 
     @Test
     public void testNameGeneration_PlayerOne() {
-        Player player = new PlayerComputer(Mark.PLAYERONEMARK);
+        Player player = new ComputerPlayer(Mark.PLAYER_ONE);
 
         assertEquals("Player One", player.getName());
     }
 
     @Test
     public void testNameGeneration_PlayerTwo() {
-        Player player = new PlayerComputer(Mark.PLAYERTWOMARK);
+        Player player = new ComputerPlayer(Mark.PLAYER_TWO);
 
         assertEquals("Player Two", player.getName());
     }

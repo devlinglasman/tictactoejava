@@ -1,7 +1,5 @@
 package Core;
 
-import Core.Grid;
-import Core.Mark;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -44,7 +42,7 @@ public class GridTest {
     public void moveNotLegalTrueChoiceAlreadyMarked() {
         Grid grid = new Grid();
 
-        grid.markSquare(0, Mark.PLAYERONEMARK);
+        grid.markSquare(0, Mark.PLAYER_ONE);
 
         assertTrue(grid.moveNotLegal(0));
     }
@@ -53,32 +51,32 @@ public class GridTest {
     public void checkSquareEmptyBeforeMarkingSquare() {
         Grid grid = new Grid();
 
-        assertEquals(Mark.UNMARKEDSQUARE, grid.getSquares().get(0));
+        assertEquals(Mark.EMPTY, grid.getSquares().get(0));
     }
 
     @Test
     public void markSquarePlayerOne() {
         Grid grid = new Grid();
 
-        grid.markSquare(0, Mark.PLAYERONEMARK);
+        grid.markSquare(0, Mark.PLAYER_ONE);
 
-        assertEquals(Mark.PLAYERONEMARK, grid.getSquares().get(0));
+        assertEquals(Mark.PLAYER_ONE, grid.getSquares().get(0));
     }
 
     @Test
     public void markSquarePlayerTwo() {
         Grid grid = new Grid();
 
-        grid.markSquare(0, Mark.PLAYERTWOMARK);
+        grid.markSquare(0, Mark.PLAYER_TWO);
 
-        assertEquals(Mark.PLAYERTWOMARK, grid.getSquares().get(0));
+        assertEquals(Mark.PLAYER_TWO, grid.getSquares().get(0));
     }
 
     @Test
     public void moveNotLegalYes() {
         Grid grid = new Grid();
 
-        grid.markSquare(0, Mark.PLAYERONEMARK);
+        grid.markSquare(0, Mark.PLAYER_ONE);
 
         assertTrue(grid.moveNotLegal(0));
     }
@@ -112,7 +110,7 @@ public class GridTest {
         Grid grid = new Grid();
 
         for (int i = 0; i < 9; i++) {
-            grid.markSquare(i, Mark.PLAYERONEMARK);
+            grid.markSquare(i, Mark.PLAYER_ONE);
         }
 
         assertTrue(grid.isFull());

@@ -41,12 +41,11 @@ public class Communicator {
         ui.displayGrid(gridSquares);
     }
 
-    public void presentMove(Player player, Grid grid) {
+    public void presentMove(Player player) {
         ui.clearScreen();
         ui.pause();
         ui.presentMessage(Message.announceSquareChoice(player));
         ui.pause();
-        displayGrid(grid.getSquares());
     }
 
     public void askSquareChoice(Player player) {
@@ -67,10 +66,6 @@ public class Communicator {
 
     public void askRewatch() {
         ui.presentMessage(Message.askRewatch);
-    }
-
-    public void askReplay() {
-        ui.presentMessage(Message.askReplay);
     }
 
     public boolean returnTrueIfYes() {

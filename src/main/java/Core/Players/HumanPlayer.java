@@ -4,11 +4,11 @@ import Core.UserInterfaces.Communicator;
 import Core.Grid;
 import Core.Mark;
 
-public class PlayerHuman extends Player {
+public class HumanPlayer extends Player {
 
     private Communicator communicator;
 
-    public PlayerHuman(Mark mark, Communicator communicator) {
+    public HumanPlayer(Mark mark, Communicator communicator) {
         super(mark);
         this.communicator = communicator;
     }

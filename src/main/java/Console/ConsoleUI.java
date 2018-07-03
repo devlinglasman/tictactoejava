@@ -113,9 +113,9 @@ public class ConsoleUI implements UI {
     }
 
     private String findColour(Mark mark, String colour) {
-        if (mark == Mark.UNMARKEDSQUARE) {
+        if (mark == Mark.EMPTY) {
             return colour;
-        } else if (mark == Mark.PLAYERONEMARK) {
+        } else if (mark == Mark.PLAYER_ONE) {
             return ANSI_BRIGHTBLACK;
         } else {
             return ANSI_BRIGHTWHITE;
@@ -123,7 +123,7 @@ public class ConsoleUI implements UI {
     }
 
     private String findSymbol(Mark mark, int index) {
-        return mark == Mark.UNMARKEDSQUARE ? Integer.toString(index + 1) :
+        return mark == Mark.EMPTY ? Integer.toString(index + 1) :
                 mark.getStringRepresentation();
     }
 }
