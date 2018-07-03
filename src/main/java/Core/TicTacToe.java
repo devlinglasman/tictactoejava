@@ -11,7 +11,6 @@ public class TicTacToe {
     private GameRunner gameRunner;
     private GameFactory gameFactory;
     private GameModeSelector gameModeSelector;
-    private boolean anotherGame;
     private boolean isRecording;
 
     public TicTacToe(Communicator communicator) {
@@ -19,22 +18,22 @@ public class TicTacToe {
         gameRunner = new GameRunner();
         gameFactory = new GameFactory(communicator);
         gameModeSelector = new GameModeSelector(communicator);
-        anotherGame = true;
         isRecording = true;
     }
 
     public void run() {
-        while (anotherGame) {
-            GameMode gameMode = getMode();
-            runGame(gameMode);
-            findIfPlayAnotherGame();
+        GameMode gameMode = getMode();
+        runGame(gameMode);
+        if (findIfPlayAnotherGame()) {
+            run();
+        } else {
+            communicator.announceProgramOver();
         }
-        communicator.announceProgramOver();
     }
 
-    private void findIfPlayAnotherGame() {
+    private boolean findIfPlayAnotherGame() {
         communicator.askIfPlayAgain();
-        anotherGame = communicator.returnTrueIfYes();
+        return communicator.returnTrueIfYes();
     }
 
     private GameMode getMode() {

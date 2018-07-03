@@ -7,7 +7,6 @@ import Core.Players.Player;
 import Core.Players.PlayerFactory;
 import Core.UserInterfaces.Communicator;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class GameFactory {
@@ -18,7 +17,7 @@ public class GameFactory {
         playerFactory = new PlayerFactory(communicator);
     }
 
-    public Game buildGame(GameMode gameMode, Communicator  communicator, boolean isRecordable) {
+    public Game buildGame(GameMode gameMode, Communicator communicator, boolean isRecordable) {
         if (gameMode == GameMode.SIMULATEDPLAY) {
             return buildSimulatedGame(communicator, isRecordable);
         } else {

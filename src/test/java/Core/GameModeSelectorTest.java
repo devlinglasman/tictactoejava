@@ -17,7 +17,7 @@ public class GameModeSelectorTest {
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
-        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getPrimaryGameMode());
+        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getMode());
     }
 
     @Test
@@ -27,7 +27,7 @@ public class GameModeSelectorTest {
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
-        assertEquals(GameMode.COMPVSCOMP, gameModeSelector.getPrimaryGameMode());
+        assertEquals(GameMode.COMPVSCOMP, gameModeSelector.getMode());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class GameModeSelectorTest {
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
-        assertEquals(GameMode.HUMANVSHUMAN, gameModeSelector.getPrimaryGameMode());
+        assertEquals(GameMode.HUMANVSHUMAN, gameModeSelector.getMode());
     }
 
     @Test
@@ -47,7 +47,7 @@ public class GameModeSelectorTest {
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
-        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getPrimaryGameMode());
+        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getMode());
     }
 
     @Test
@@ -57,7 +57,7 @@ public class GameModeSelectorTest {
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
-        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getPrimaryGameMode());
+        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getMode());
     }
 
     @Test
@@ -67,7 +67,7 @@ public class GameModeSelectorTest {
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
-        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getPrimaryGameMode());
+        assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getMode());
     }
 }
 
