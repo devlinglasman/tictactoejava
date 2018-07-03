@@ -13,31 +13,34 @@ import java.util.List;
 
 public class GameFactory {
 
+    private Communicator communicator;
     private PlayerFactory playerFactory;
+    private GameFileAnalyser gameFileAnalyser;
 
-    public GameFactory(Communicator communicator) {
-        playerFactory = new PlayerFactory(communicator);
+    public GameFactory(Communicator communicator, PlayerFactory playerFactory, GameFileAnalyser gameFileAnalyser) {
+        this.communicator = communicator;
+        this.playerFactory = playerFactory;
+        this.gameFileAnalyser = gameFileAnalyser;
     }
 
-    public Game buildGame(GameMode gameMode, Communicator  communicator, boolean isRecordable) {
+    public Game buildGame(GameMode gameMode, boolean isRecordable) {
         if (gameMode == GameMode.SIMULATEDPLAY) {
-            return buildSimulatedGame(communicator, isRecordable);
+            return buildSimulatedGame(isRecordable);
         } else {
             List<Player> players = playerFactory.buildPlayers(gameMode);
-            return buildGameWithPlayers(players, communicator, isRecordable);
+            return buildGameWithPlayers(players, isRecordable);
         }
     }
 
-    private Game buildSimulatedGame(Communicator communicator, boolean isRecordable) {
-        GameFileAnalyser gameFileAnalyser = new GameFileAnalyser();
+    private Game buildSimulatedGame(boolean isRecordable) {
         ArrayList<Integer> playerOneMoves = gameFileAnalyser.generateMovesFromFile(0);
         ArrayList<Integer> playerTwoMoves = gameFileAnalyser.generateMovesFromFile(1);
         List<Player> players = playerFactory.buildPlayers(playerOneMoves, playerTwoMoves);
-        return buildGameWithPlayers(players, communicator, isRecordable);
+        return buildGameWithPlayers(players, isRecordable);
     }
 
 
-    private Game buildGameWithPlayers(List<Player> players, Communicator communicator, boolean isRecordable) {
+    private Game buildGameWithPlayers(List<Player> players, boolean isRecordable) {
         Grid grid = new Grid();
         Game primaryGame = new PrimaryGame(grid, players.get(0), players.get(1), communicator);
         return (isRecordable) ? new RecordableGame(primaryGame) : primaryGame;
