@@ -73,7 +73,7 @@ public class Communicator {
         ui.presentMessage(Message.askReplay);
     }
 
-    public boolean askIfYes() {
+    public boolean returnTrueIfYes() {
         String input = getInput().toLowerCase();
         boolean inputNotCorrect = inputNotYesOrNo(input);
         while (inputNotCorrect) {

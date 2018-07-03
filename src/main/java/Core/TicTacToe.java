@@ -27,14 +27,14 @@ public class TicTacToe {
         while (anotherGame) {
             GameMode gameMode = getMode();
             runGame(gameMode);
-            askIfPlayAgain();
+            findIfPlayAnotherGame();
         }
         communicator.announceProgramOver();
     }
 
-    private void askIfPlayAgain() {
+    private void findIfPlayAnotherGame() {
         communicator.askIfPlayAgain();
-        anotherGame = communicator.askIfYes();
+        anotherGame = communicator.returnTrueIfYes();
     }
 
     private GameMode getMode() {
@@ -44,5 +44,14 @@ public class TicTacToe {
     private void runGame(GameMode gameMode) {
         Game game = gameFactory.buildGame(gameMode, communicator, isRecording);
         gameRunner.runGame(game);
+        while (rewatch()) {
+            Game rewatchGame = gameFactory.buildGame(GameMode.SIMULATEDPLAY, communicator, isRecording);
+            gameRunner.runGame(rewatchGame);
+        }
+    }
+
+    private boolean rewatch() {
+        communicator.askRewatch();
+        return communicator.returnTrueIfYes();
     }
 }
