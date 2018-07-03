@@ -4,6 +4,7 @@ import Core.Mark;
 import Core.Players.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Communicator {
 
@@ -36,7 +37,7 @@ public class Communicator {
         ui.presentMessage(Message.announceGameModeChoiceInvalid);
     }
 
-    public void displayGrid(ArrayList<Mark> gridSquares) {
+    public void displayGrid(List<Mark> gridSquares) {
         ui.displayGrid(gridSquares);
     }
 

@@ -3,14 +3,14 @@ package Core.Players;
 import Core.Grid;
 import Core.Mark;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class SimulatedPlayer extends Player {
 
-    private ArrayList<Integer> moves;
+    private List<Integer> moves;
     private int movesCounter = 0;
 
-    public SimulatedPlayer(Mark mark, ArrayList<Integer> moves) {
+    public SimulatedPlayer(Mark mark, List<Integer> moves) {
        super(mark);
        this.moves = moves;
     }

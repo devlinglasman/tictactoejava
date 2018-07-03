@@ -35,13 +35,10 @@ public class PlayerFactory {
         }
     }
 
-    public List<Player> buildSimulatedPlayers(ArrayList<Integer> playerOneMoves, ArrayList<Integer> playerTwoMoves) {
+    public List<Player> buildSimulatedPlayers(List<Integer> playerOneMoves, List<Integer> playerTwoMoves) {
         List<Player> players = new ArrayList<>();
-        Player playerOne = new SimulatedPlayer(Mark.PLAYER_ONE, playerOneMoves);
-        Player playerTwo = new SimulatedPlayer(Mark.PLAYER_TWO, playerTwoMoves);
-
-        players.add(playerOne);
-        players.add(playerTwo);
+        players.add(new SimulatedPlayer(Mark.PLAYER_ONE, playerOneMoves));
+        players.add(new SimulatedPlayer(Mark.PLAYER_TWO, playerTwoMoves));
         return players;
     }
 }

@@ -2,7 +2,7 @@ package Core.UserInterfaces;
 
 import Core.Mark;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface UI {
 
@@ -10,7 +10,7 @@ public interface UI {
 
     void presentMessage(String message);
 
-    void displayGrid(ArrayList<Mark> gridSquares);
+    void displayGrid(List<Mark> gridSquares);
 
     void clearScreen();
 

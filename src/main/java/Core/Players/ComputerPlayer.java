@@ -5,6 +5,7 @@ import Core.Mark;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ComputerPlayer extends Player {
@@ -33,7 +34,7 @@ public class ComputerPlayer extends Player {
     }
 
     private HashMap<Integer, Integer> buildScores(Grid grid) {
-        ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
+        List<Integer> emptyGridSquares = grid.emptySquareIndices();
         HashMap<Integer, Integer> scores = new HashMap<>();
 
         for (Integer emptySquare : emptyGridSquares) {
@@ -60,7 +61,7 @@ public class ComputerPlayer extends Player {
 
         Integer bestScore = isMaximisingPlayer(optimisingPlayer) ? Integer.MIN_VALUE : Integer.MAX_VALUE;
 
-        ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
+        List<Integer> emptyGridSquares = grid.emptySquareIndices();
 
         for (Integer emptySquare : emptyGridSquares) {
 

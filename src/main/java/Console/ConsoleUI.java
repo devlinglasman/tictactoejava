@@ -6,6 +6,7 @@ import Core.UserInterfaces.UI;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleUI implements UI {
@@ -40,7 +41,7 @@ public class ConsoleUI implements UI {
     }
 
     @Override
-    public void displayGrid(ArrayList<Mark> squares) {
+    public void displayGrid(List<Mark> squares) {
         out.println();
         for (int i = 0; i < squares.size(); i++) {
             String colour;
