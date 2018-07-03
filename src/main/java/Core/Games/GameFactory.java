@@ -23,26 +23,26 @@ public class GameFactory {
         this.gameFileAnalyser = gameFileAnalyser;
     }
 
-    public Game buildGame(GameMode gameMode, boolean isRecordable) {
+    public Game buildGame(GameMode gameMode) {
         if (gameMode == GameMode.SIMULATEDPLAY) {
-            return buildSimulatedGame(isRecordable);
+            return buildSimulatedGame();
         } else {
             List<Player> players = playerFactory.buildPlayers(gameMode);
-            return buildGameWithPlayers(players, isRecordable);
+            return buildGameWithPlayers(players);
         }
     }
 
-    private Game buildSimulatedGame(boolean isRecordable) {
+    private Game buildSimulatedGame() {
         ArrayList<Integer> playerOneMoves = gameFileAnalyser.generateMovesFromFile(0);
         ArrayList<Integer> playerTwoMoves = gameFileAnalyser.generateMovesFromFile(1);
         List<Player> players = playerFactory.buildPlayers(playerOneMoves, playerTwoMoves);
-        return buildGameWithPlayers(players, isRecordable);
+        return buildGameWithPlayers(players);
     }
 
 
-    private Game buildGameWithPlayers(List<Player> players, boolean isRecordable) {
+    private Game buildGameWithPlayers(List<Player> players) {
         Grid grid = new Grid();
         Game primaryGame = new PrimaryGame(grid, players.get(0), players.get(1), communicator);
-        return (isRecordable) ? new RecordableGame(primaryGame) : primaryGame;
+        return new RecordableGame(primaryGame);
     }
 }

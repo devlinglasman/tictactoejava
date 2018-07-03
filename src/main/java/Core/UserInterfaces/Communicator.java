@@ -1,6 +1,5 @@
 package Core.UserInterfaces;
 
-import Core.Grid;
 import Core.Mark;
 import Core.Players.Player;
 
@@ -64,8 +63,18 @@ public class Communicator {
         ui.presentMessage(Message.announceWinner(player));
     }
 
-    public void askRewatch() {
+    public boolean findRewatchResponse() {
         ui.presentMessage(Message.askRewatch);
+        return returnTrueIfYes();
+    }
+
+    public boolean findPlayAgainResponse() {
+        ui.presentMessage(Message.askIfPlayAgain);
+        return returnTrueIfYes();
+    }
+
+    public void announceProgramOver() {
+        ui.presentMessage(Message.announceProgramOver);
     }
 
     public boolean returnTrueIfYes() {
@@ -77,14 +86,6 @@ public class Communicator {
             inputNotCorrect = inputNotYesOrNo(input);
         }
         return input.equals("y");
-    }
-
-    public void askIfPlayAgain() {
-        ui.presentMessage(Message.askIfPlayAgain);
-    }
-
-    public void announceProgramOver() {
-        ui.presentMessage(Message.announceProgramOver);
     }
 
     private boolean checkIfInputNotNumber(String input) {

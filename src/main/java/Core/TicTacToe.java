@@ -1,6 +1,5 @@
 package Core;
 
-import Core.FileManipulators.GameFileAnalyser;
 import Core.Games.Game;
 import Core.Games.GameFactory;
 import Core.Games.GameRunner;
@@ -12,14 +11,12 @@ public class TicTacToe {
     private GameRunner gameRunner;
     private GameFactory gameFactory;
     private GameModeSelector gameModeSelector;
-    private boolean isRecording;
 
     public TicTacToe(Communicator communicator, GameRunner gameRunner, GameFactory gameFactory, GameModeSelector gameModeSelector) {
         this.communicator = communicator;
         this.gameRunner = gameRunner;
         this.gameFactory = gameFactory;
         this.gameModeSelector = gameModeSelector;
-        isRecording = true;
     }
 
     public void run() {
@@ -33,8 +30,7 @@ public class TicTacToe {
     }
 
     private boolean findIfPlayAnotherGame() {
-        communicator.askIfPlayAgain();
-        return communicator.returnTrueIfYes();
+        return communicator.findPlayAgainResponse();
     }
 
     private GameMode getMode() {
@@ -42,16 +38,15 @@ public class TicTacToe {
     }
 
     private void runGame(GameMode gameMode) {
-        Game game = gameFactory.buildGame(gameMode, isRecording);
+        Game game = gameFactory.buildGame(gameMode);
         gameRunner.runGame(game);
         while (rewatch()) {
-            Game rewatchGame = gameFactory.buildGame(GameMode.SIMULATEDPLAY, isRecording);
+            Game rewatchGame = gameFactory.buildGame(GameMode.SIMULATEDPLAY);
             gameRunner.runGame(rewatchGame);
         }
     }
 
     private boolean rewatch() {
-        communicator.askRewatch();
-        return communicator.returnTrueIfYes();
+        return communicator.findRewatchResponse();
     }
 }
