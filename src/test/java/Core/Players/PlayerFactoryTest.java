@@ -21,7 +21,7 @@ public class PlayerFactoryTest {
         Communicator communicator = new Communicator(ui);
         PlayerFactory playerFactory = new PlayerFactory(communicator);
 
-        List<Player> players = playerFactory.buildPlayers(GameMode.HUMANVSCOMP);
+        List<Player> players = playerFactory.buildPrimaryPlayers(GameMode.HUMANVSCOMP);
 
         assertTrue(players.get(0) instanceof HumanPlayer);
         assertTrue(players.get(1) instanceof ComputerPlayer);
@@ -35,7 +35,7 @@ public class PlayerFactoryTest {
         Communicator communicator = new Communicator(ui);
         PlayerFactory playerFactory = new PlayerFactory(communicator);
 
-        List<Player> players = playerFactory.buildPlayers(GameMode.COMPVSCOMP);
+        List<Player> players = playerFactory.buildPrimaryPlayers(GameMode.COMPVSCOMP);
 
         assertTrue(players.get(0) instanceof ComputerPlayer);
         assertTrue(players.get(1) instanceof ComputerPlayer);
@@ -49,7 +49,7 @@ public class PlayerFactoryTest {
         Communicator communicator = new Communicator(ui);
         PlayerFactory playerFactory = new PlayerFactory(communicator);
 
-        List<Player> players = playerFactory.buildPlayers(GameMode.HUMANVSHUMAN);
+        List<Player> players = playerFactory.buildPrimaryPlayers(GameMode.HUMANVSHUMAN);
 
         assertTrue(players.get(0) instanceof HumanPlayer);
         assertTrue(players.get(1) instanceof HumanPlayer);
@@ -65,7 +65,7 @@ public class PlayerFactoryTest {
         ArrayList<Integer> playerOneMoves = new ArrayList<>(asList(1,3,5));
         ArrayList<Integer> playerTwoMoves = new ArrayList<>(asList(2,4,6));
 
-        List<Player> players = playerFactory.buildPlayers(playerOneMoves, playerTwoMoves);
+        List<Player> players = playerFactory.buildSimulatedPlayers(playerOneMoves, playerTwoMoves);
 
         assertTrue(players.get(0) instanceof SimulatedPlayer);
         assertTrue(players.get(1) instanceof SimulatedPlayer);

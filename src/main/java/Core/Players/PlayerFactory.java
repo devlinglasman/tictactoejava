@@ -16,29 +16,26 @@ public class PlayerFactory {
         this.communicator = communicator;
     }
 
-    public List<Player> buildPlayers(GameMode gameMode) {
+    public List<Player> buildPrimaryPlayers(GameMode gameMode) {
         switch (gameMode) {
             case HUMANVSCOMP:
                 return Arrays.asList(
                         new HumanPlayer(Mark.PLAYER_ONE, communicator),
-                        new ComputerPlayer(Mark.PLAYER_TWO)
-                );
+                        new ComputerPlayer(Mark.PLAYER_TWO));
             case COMPVSCOMP:
                 return Arrays.asList(
                         new ComputerPlayer(Mark.PLAYER_ONE),
-                        new ComputerPlayer(Mark.PLAYER_TWO)
-                );
+                        new ComputerPlayer(Mark.PLAYER_TWO));
             case HUMANVSHUMAN:
                 return Arrays.asList(
                         new HumanPlayer(Mark.PLAYER_ONE, communicator),
-                        new HumanPlayer(Mark.PLAYER_TWO, communicator)
-                );
+                        new HumanPlayer(Mark.PLAYER_TWO, communicator));
             default:
                 throw new RuntimeException("Something wrong with creating the players");
         }
     }
 
-    public List<Player> buildPlayers(ArrayList<Integer> playerOneMoves, ArrayList<Integer> playerTwoMoves) {
+    public List<Player> buildSimulatedPlayers(ArrayList<Integer> playerOneMoves, ArrayList<Integer> playerTwoMoves) {
         List<Player> players = new ArrayList<>();
         Player playerOne = new SimulatedPlayer(Mark.PLAYER_ONE, playerOneMoves);
         Player playerTwo = new SimulatedPlayer(Mark.PLAYER_TWO, playerTwoMoves);

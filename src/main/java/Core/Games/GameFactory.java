@@ -7,7 +7,6 @@ import Core.Players.Player;
 import Core.Players.PlayerFactory;
 import Core.UserInterfaces.Communicator;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,21 +23,24 @@ public class GameFactory {
     }
 
     public Game buildGame(GameMode gameMode) {
+        List<Player> players;
         if (gameMode == GameMode.SIMULATEDPLAY) {
-            return buildSimulatedGame();
+            players = buildSimulatedPlayers();
         } else {
-            List<Player> players = playerFactory.buildPlayers(gameMode);
-            return buildGameWithPlayers(players);
+            players = buildPrimaryPlayers(gameMode);
         }
-    }
-
-    private Game buildSimulatedGame() {
-        ArrayList<Integer> playerOneMoves = gameFileAnalyser.generateMovesFromFile(0);
-        ArrayList<Integer> playerTwoMoves = gameFileAnalyser.generateMovesFromFile(1);
-        List<Player> players = playerFactory.buildPlayers(playerOneMoves, playerTwoMoves);
         return buildGameWithPlayers(players);
     }
 
+    private List<Player> buildSimulatedPlayers() {
+        ArrayList<Integer> playerOneMoves = gameFileAnalyser.generateMovesFromFile(0);
+        ArrayList<Integer> playerTwoMoves = gameFileAnalyser.generateMovesFromFile(1);
+        return playerFactory.buildSimulatedPlayers(playerOneMoves, playerTwoMoves);
+    }
+
+    private List<Player> buildPrimaryPlayers(GameMode gameMode) {
+        return playerFactory.buildPrimaryPlayers(gameMode);
+    }
 
     private Game buildGameWithPlayers(List<Player> players) {
         Grid grid = new Grid();
