@@ -3,7 +3,6 @@ package Core.Players;
 import Core.Grid;
 import Core.Mark;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

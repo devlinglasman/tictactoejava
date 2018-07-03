@@ -3,7 +3,6 @@ package Core.UserInterfaces;
 import Core.Mark;
 import Core.Players.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Communicator {

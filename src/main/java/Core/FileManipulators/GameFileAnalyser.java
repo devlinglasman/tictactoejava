@@ -2,29 +2,24 @@ package Core.FileManipulators;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameFileAnalyser {
 
     private File gameData;
 
-    public GameFileAnalyser() {
-        gameData = new File("src/main/resources/gameData.txt");
+    public GameFileAnalyser(String pathName) {
+        gameData = new File(pathName);
     }
 
-    public ArrayList<Integer> generateMovesFromFile(File file, int playerPosition) {
-        ArrayList<String> gameValues = performExtraction(file);
-        ArrayList<Integer> gameMoves = convertToIntegers(gameValues);
+    public List<Integer> generateMovesFromFile(int playerPosition) {
+        List<String> gameValues = performExtraction(gameData);
+        List<Integer> gameMoves = convertToIntegers(gameValues);
         return populatePlies(gameMoves, playerPosition);
     }
 
-    public ArrayList<Integer> generateMovesFromFile(int playerPosition) {
-        ArrayList<String> gameValues = performExtraction(gameData);
-        ArrayList<Integer> gameMoves = convertToIntegers(gameValues);
-        return populatePlies(gameMoves, playerPosition);
-    }
-
-    private ArrayList<String> performExtraction(File file) {
-        ArrayList<String> gameMoves = new ArrayList<>();
+    private List<String> performExtraction(File file) {
+        List<String> gameMoves = new ArrayList<>();
 
         try {
             FileReader fileReader = new FileReader(file);
@@ -41,8 +36,8 @@ public class GameFileAnalyser {
         return gameMoves;
     }
 
-    private ArrayList<Integer> convertToIntegers(ArrayList<String> gameValues) {
-        ArrayList<Integer> gameMoves = new ArrayList<>();
+    private List<Integer> convertToIntegers(List<String> gameValues) {
+        List<Integer> gameMoves = new ArrayList<>();
         for (String ply : gameValues) {
             Integer move = null;
             try {
@@ -55,8 +50,8 @@ public class GameFileAnalyser {
         return gameMoves;
     }
 
-    private ArrayList<Integer> populatePlies(ArrayList<Integer> gameValues, int playerPosition) {
-        ArrayList<Integer> plies = new ArrayList<>();
+    private List<Integer> populatePlies(List<Integer> gameValues, int playerPosition) {
+        List<Integer> plies = new ArrayList<>();
         for (int i = playerPosition; i < gameValues.size(); i = i + 2) {
             plies.add(gameValues.get(i));
         }

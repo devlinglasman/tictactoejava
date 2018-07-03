@@ -15,7 +15,7 @@ public class MainConsole {
         UI ui = new ConsoleUI(System.in, System.out, 1000);
         Communicator communicator = new Communicator(ui);
         PlayerFactory playerFactory = new PlayerFactory(communicator);
-        GameFileAnalyser gameFileAnalyser = new GameFileAnalyser();
+        GameFileAnalyser gameFileAnalyser = new GameFileAnalyser("src/main/resources/gameData.txt");
         GameFactory gameFactory = new GameFactory(communicator, playerFactory, gameFileAnalyser);
         GameRunner gameRunner = new GameRunner();
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
