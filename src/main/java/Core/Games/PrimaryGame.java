@@ -30,7 +30,7 @@ public class PrimaryGame implements Game {
         alternatePlayer();
     }
 
-    public Integer generateMove() {
+    private Integer generateMove() {
         return activePlayer.getMove(grid);
     }
 

@@ -8,8 +8,6 @@ public interface Game {
 
     void playNextMove();
 
-    Integer generateMove();
-
     void markGrid(Integer move);
 
     void announceResult();

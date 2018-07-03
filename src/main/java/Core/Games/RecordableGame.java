@@ -30,11 +30,6 @@ public class RecordableGame implements Game {
     }
 
     @Override
-    public Integer generateMove() {
-        return primaryGame.generateMove();
-    }
-
-    @Override
     public void markGrid(Integer move) {
         primaryGame.markGrid(move);
     }
