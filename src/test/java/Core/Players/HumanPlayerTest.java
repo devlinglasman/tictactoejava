@@ -3,8 +3,8 @@ package Core.Players;
 import Console.ConsoleUI;
 import Console.IOHelper;
 import Core.UserInterfaces.Communicator;
-import Core.Grid;
-import Core.Mark;
+import Core.Board.Grid;
+import Core.Board.Mark;
 import Core.UserInterfaces.UI;
 import org.junit.Test;
 

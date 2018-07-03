@@ -1,7 +1,9 @@
-package Core;
+package Core.GameModes;
 
 import Console.ConsoleUI;
 import Console.IOHelper;
+import Core.GameModes.GameMode;
+import Core.GameModes.GameModeSelector;
 import Core.UserInterfaces.Communicator;
 import Core.UserInterfaces.UI;
 import org.junit.Test;

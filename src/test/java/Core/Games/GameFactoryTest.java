@@ -3,7 +3,7 @@ package Core.Games;
 import Console.ConsoleUI;
 import Core.FileManipulators.GameDataWriter;
 import Core.FileManipulators.GameFileAnalyser;
-import Core.GameMode;
+import Core.GameModes.GameMode;
 import Core.Players.PlayerFactory;
 import Core.UserInterfaces.Communicator;
 import Core.UserInterfaces.UI;

@@ -1,8 +1,9 @@
 package Core;
 
+import Core.GameModes.GameMode;
+import Core.GameModes.GameModeSelector;
 import Core.Games.Game;
 import Core.Games.GameFactory;
-import Core.Games.GameRunner;
 import Core.UserInterfaces.Communicator;
 
 public class TicTacToe {

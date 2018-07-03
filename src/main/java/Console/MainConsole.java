@@ -2,9 +2,9 @@ package Console;
 
 import Core.FileManipulators.GameDataWriter;
 import Core.FileManipulators.GameFileAnalyser;
-import Core.GameModeSelector;
+import Core.GameModes.GameModeSelector;
 import Core.Games.GameFactory;
-import Core.Games.GameRunner;
+import Core.GameRunner;
 import Core.Players.PlayerFactory;
 import Core.TicTacToe;
 import Core.UserInterfaces.Communicator;

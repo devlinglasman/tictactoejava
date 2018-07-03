@@ -1,5 +1,6 @@
-package Core;
+package Core.GameModes;
 
+import Core.GameModes.GameMode;
 import Core.UserInterfaces.Communicator;
 
 import java.util.Arrays;

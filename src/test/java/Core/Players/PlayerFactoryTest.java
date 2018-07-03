@@ -1,7 +1,7 @@
 package Core.Players;
 
 import Console.ConsoleUI;
-import Core.GameMode;
+import Core.GameModes.GameMode;
 import Core.UserInterfaces.Communicator;
 import Core.UserInterfaces.UI;
 import org.junit.Test;

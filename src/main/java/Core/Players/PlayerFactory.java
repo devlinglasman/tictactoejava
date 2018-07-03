@@ -1,7 +1,7 @@
 package Core.Players;
 
-import Core.GameMode;
-import Core.Mark;
+import Core.GameModes.GameMode;
+import Core.Board.Mark;
 import Core.UserInterfaces.Communicator;
 
 import java.util.ArrayList;

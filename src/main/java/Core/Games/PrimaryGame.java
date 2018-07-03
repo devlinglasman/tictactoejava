@@ -1,8 +1,8 @@
 package Core.Games;
 
-import Core.Mark;
+import Core.Board.Mark;
 import Core.UserInterfaces.Communicator;
-import Core.Grid;
+import Core.Board.Grid;
 import Core.Players.Player;
 
 public class PrimaryGame implements Game {

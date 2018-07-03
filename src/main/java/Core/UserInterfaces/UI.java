@@ -1,6 +1,6 @@
 package Core.UserInterfaces;
 
-import Core.Mark;
+import Core.Board.Mark;
 
 import java.util.List;
 

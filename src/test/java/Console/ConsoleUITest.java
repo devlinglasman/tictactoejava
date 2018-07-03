@@ -1,6 +1,6 @@
 package Console;
 
-import Core.*;
+import Core.Board.Mark;
 import Core.UserInterfaces.Message;
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,6 +1,6 @@
 package Console;
 
-import Core.Mark;
+import Core.Board.Mark;
 import Core.UserInterfaces.UI;
 
 import java.io.InputStream;

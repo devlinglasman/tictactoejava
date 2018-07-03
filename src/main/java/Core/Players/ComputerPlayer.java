@@ -1,7 +1,7 @@
 package Core.Players;
 
-import Core.Grid;
-import Core.Mark;
+import Core.Board.Grid;
+import Core.Board.Mark;
 
 import java.util.HashMap;
 import java.util.List;

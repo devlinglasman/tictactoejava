@@ -1,8 +1,9 @@
 package Core.Games;
 
 import Console.ConsoleUI;
-import Core.Grid;
-import Core.Mark;
+import Core.Board.Grid;
+import Core.Board.Mark;
+import Core.GameRunner;
 import Core.Players.Player;
 import Core.Players.ComputerPlayer;
 import Core.UserInterfaces.Communicator;

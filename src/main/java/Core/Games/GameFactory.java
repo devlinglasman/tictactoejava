@@ -2,8 +2,8 @@ package Core.Games;
 
 import Core.FileManipulators.GameDataWriter;
 import Core.FileManipulators.GameFileAnalyser;
-import Core.GameMode;
-import Core.Grid;
+import Core.GameModes.GameMode;
+import Core.Board.Grid;
 import Core.Players.Player;
 import Core.Players.PlayerFactory;
 import Core.UserInterfaces.Communicator;

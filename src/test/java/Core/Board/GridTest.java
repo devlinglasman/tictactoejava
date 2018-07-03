@@ -1,10 +1,10 @@
-package Core;
+package Core.Board;
 
 import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static java.util.Arrays.*;
+import static java.util.Arrays.asList;
 import static org.junit.Assert.*;
 
 public class GridTest {

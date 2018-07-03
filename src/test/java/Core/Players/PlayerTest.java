@@ -1,6 +1,6 @@
 package Core.Players;
 
-import Core.Mark;
+import Core.Board.Mark;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
