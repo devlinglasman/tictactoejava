@@ -36,9 +36,9 @@ public class GameDataWriterTest {
         ArrayList<String> expectedGameData = new ArrayList<>(
                 asList("0","1"));
 
-        gameDataWriter.createFile();
+        gameDataWriter.createFile("src/main/resources/gameData.txt");
         gameDataWriter.writeGameValue("Incorrect data.");
-        gameDataWriter.createFile();
+        gameDataWriter.createFile("src/main/resources/gameData.txt");
         gameDataWriter.writeGameValue("0");
         gameDataWriter.writeGameValue("1");
 

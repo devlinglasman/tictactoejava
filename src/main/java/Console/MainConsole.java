@@ -1,5 +1,6 @@
 package Console;
 
+import Core.FileManipulators.GameDataWriter;
 import Core.FileManipulators.GameFileAnalyser;
 import Core.GameModeSelector;
 import Core.Games.GameFactory;
@@ -16,7 +17,8 @@ public class MainConsole {
         Communicator communicator = new Communicator(ui);
         PlayerFactory playerFactory = new PlayerFactory(communicator);
         GameFileAnalyser gameFileAnalyser = new GameFileAnalyser("src/main/resources/gameData.txt");
-        GameFactory gameFactory = new GameFactory(communicator, playerFactory, gameFileAnalyser);
+        GameDataWriter gameDataWriter = new GameDataWriter();
+        GameFactory gameFactory = new GameFactory(communicator, playerFactory, gameFileAnalyser, gameDataWriter);
         GameRunner gameRunner = new GameRunner();
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
         TicTacToe ticTacToe = new TicTacToe(communicator, gameRunner, gameFactory, gameModeSelector);

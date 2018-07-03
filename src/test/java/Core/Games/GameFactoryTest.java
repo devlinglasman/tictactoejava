@@ -1,6 +1,7 @@
 package Core.Games;
 
 import Console.ConsoleUI;
+import Core.FileManipulators.GameDataWriter;
 import Core.FileManipulators.GameFileAnalyser;
 import Core.GameMode;
 import Core.Players.PlayerFactory;
@@ -19,7 +20,8 @@ public class GameFactoryTest {
         Communicator communicator = new Communicator(ui);
         PlayerFactory playerFactory = new PlayerFactory(communicator);
         GameFileAnalyser gameFileAnalyser = new GameFileAnalyser("src/main/resources/gameData.txt");
-        GameFactory gameFactory = new GameFactory(communicator, playerFactory, gameFileAnalyser);
+        GameDataWriter gameDataWriter = new GameDataWriter();
+        GameFactory gameFactory = new GameFactory(communicator, playerFactory, gameFileAnalyser, gameDataWriter);
 
         Game game = gameFactory.buildGame(GameMode.HUMANVSCOMP);
 

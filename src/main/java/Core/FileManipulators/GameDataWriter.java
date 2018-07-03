@@ -12,8 +12,8 @@ public class GameDataWriter {
         gameData = null;
     }
 
-    public void createFile(){
-        gameData = new File("src/main/resources/gameData.txt");
+    public void createFile(String pathName){
+        gameData = new File(pathName);
         try {
             outputStream = new FileOutputStream(gameData);
         } catch (FileNotFoundException e) {
