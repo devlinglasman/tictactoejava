@@ -1,11 +1,11 @@
 package Console;
 
 import Core.Board.Mark;
-import Core.UserInterfaces.Message;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static Console.ConsoleUI.*;
 
@@ -15,19 +15,19 @@ public class ConsoleUITest {
     @Test
     public void presentMessage() {
         IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print, 0);
 
-        consoleUI.presentMessage(Message.announceGameModeChoiceInvalid);
+        consoleUI.presentMessage("This prints a String.");
 
-        Assert.assertEquals("\nUhoh please make a valid game mode selection...\n", ioHelper.output());
+        Assert.assertEquals("This prints a String.", ioHelper.output());
     }
 
     @Test
     public void displayGrid() {
         IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print, 0);
 
-        ArrayList<Mark> squares = new ArrayList<>();
+        List<Mark> squares = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             squares.add(Mark.EMPTY);
         }
@@ -43,9 +43,9 @@ public class ConsoleUITest {
     @Test
     public void displayGrid2() {
         IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print, 0);
 
-        ArrayList<Mark> squares = new ArrayList<>();
+        List<Mark> squares = new ArrayList<>();
         squares.add(Mark.PLAYER_ONE);
         for (int i = 0; i < 8; i++) {
             squares.add(Mark.EMPTY);
@@ -63,7 +63,7 @@ public class ConsoleUITest {
     @Test
     public void clearScreen() {
         IOHelper ioHelper = new IOHelper("");
-        ConsoleUI consoleUI = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        ConsoleUI consoleUI = new ConsoleUI(ioHelper.in, ioHelper.print, 1);
 
         consoleUI.clearScreen();
 

@@ -5,16 +5,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 public class IOHelper {
-    public static ByteArrayOutputStream out;
-    public static ByteArrayInputStream in;
-    public static PrintStream print;
+    public ByteArrayOutputStream out;
+    public ByteArrayInputStream in;
+    public PrintStream print;
 
     public IOHelper(String input) {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
-
-        IOHelper.out = out;
-        IOHelper.in = in;
+        out = new ByteArrayOutputStream();
+        in = new ByteArrayInputStream(input.getBytes());
         print = new PrintStream(out);
     }
 

@@ -15,8 +15,8 @@ public class HumanPlayerTest {
     @Test
     public void makeMove_ValidAttemptAtGridPoint0() {
         Grid grid = new Grid();
-        new IOHelper("1");
-        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        IOHelper ioHelper = new IOHelper("1");
+        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 1);
         Communicator communicator = new Communicator(ui);
         Player playerOne = new HumanPlayer(Mark.PLAYER_ONE, communicator);
 
@@ -26,8 +26,8 @@ public class HumanPlayerTest {
     @Test
     public void makeMove_ValidAttemptAtGridPoint1() {
         Grid grid = new Grid();
-        new IOHelper("2");
-        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        IOHelper ioHelper = new IOHelper("2");
+        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 1);
         Communicator communicator = new Communicator(ui);
         Player playerOne = new HumanPlayer(Mark.PLAYER_ONE, communicator);
 
@@ -37,8 +37,8 @@ public class HumanPlayerTest {
     @Test
     public void makeMove_InvalidAttemptThenAtSquare1() {
         Grid grid = new Grid();
-        new IOHelper("asdf\n1");
-        UI ui = new ConsoleUI(IOHelper.in, IOHelper.print, 1);
+        IOHelper ioHelper = new IOHelper("asdf\n1");
+        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 1);
         Communicator communicator = new Communicator(ui);
         Player playerOne = new HumanPlayer(Mark.PLAYER_ONE, communicator);
 
