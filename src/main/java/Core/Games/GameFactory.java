@@ -35,8 +35,8 @@ public class GameFactory {
     }
 
     private List<Player> buildSimulatedPlayers() {
-        List<Integer> playerOneMoves = gameFileAnalyser.generateMovesFromFile(0);
-        List<Integer> playerTwoMoves = gameFileAnalyser.generateMovesFromFile(1);
+        List<Integer> playerOneMoves = gameFileAnalyser.generateMovesFromFile(gameDataWriter.getGameData(), 0);
+        List<Integer> playerTwoMoves = gameFileAnalyser.generateMovesFromFile(gameDataWriter.getGameData(),1);
         return playerFactory.buildSimulatedPlayers(playerOneMoves, playerTwoMoves);
     }
 

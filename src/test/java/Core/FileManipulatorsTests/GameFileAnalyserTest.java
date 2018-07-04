@@ -1,5 +1,6 @@
 package Core.FileManipulatorsTests;
 
+import Core.FileManipulators.GameDataWriter;
 import Core.FileManipulators.GameFileAnalyser;
 import org.junit.Test;
 
@@ -14,21 +15,23 @@ public class GameFileAnalyserTest {
 
     @Test
     public void generatePlies_playerOne() {
-        GameFileAnalyser gameFileAnalyser = new GameFileAnalyser("src/test/resources/testFile1.txt");
+        GameFileAnalyser gameFileAnalyser = new GameFileAnalyser();
+        File testFile = new File("src/test/resources/testFile1.txt");
 
         List<Integer> expectedGameData = new ArrayList<>(
                 asList(1,3,5,7,9));
 
-        assertEquals(expectedGameData, gameFileAnalyser.generateMovesFromFile(0));
+        assertEquals(expectedGameData, gameFileAnalyser.generateMovesFromFile(testFile, 0));
     }
 
     @Test
     public void generatePlies_playerTwo() {
-        GameFileAnalyser gameFileAnalyser = new GameFileAnalyser("src/test/resources/testFile1.txt");
+        GameFileAnalyser gameFileAnalyser = new GameFileAnalyser();
+        File testFile = new File("src/test/resources/testFile1.txt");
 
         List<Integer> expectedGameData = new ArrayList<>(
                 asList(2,4,6,8));
 
-        assertEquals(expectedGameData, gameFileAnalyser.generateMovesFromFile(1));
+        assertEquals(expectedGameData, gameFileAnalyser.generateMovesFromFile(testFile, 1));
     }
 }

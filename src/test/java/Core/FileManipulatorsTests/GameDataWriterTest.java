@@ -3,7 +3,6 @@ package Core.FileManipulatorsTests;
 import Core.FileManipulators.GameDataWriter;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
