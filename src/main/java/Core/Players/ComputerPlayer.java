@@ -1,25 +1,28 @@
 package Core.Players;
 
-import Core.Grid;
-import Core.Mark;
+import Core.Board.Grid;
+import Core.Board.Mark;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class PlayerComputer extends Player {
+public class ComputerPlayer extends Player {
 
     private Mark opponentMark;
 
-    public PlayerComputer(String name, Mark mark, Mark opponentMark) {
-        super(name, mark);
-        this.opponentMark = opponentMark;
+    public ComputerPlayer(Mark mark) {
+        super(mark);
+        opponentMark = findOpponentMark();
     }
 
     @Override
-    public void makeMove(Grid grid) {
-        int input = findBestMove(grid);
-        grid.markSquare(input, getMark());
+    public int getMove(Grid grid) {
+        return findBestMove(grid);
+    }
+
+    private Mark findOpponentMark(){
+        return (getMark() == Mark.PLAYER_ONE) ? Mark.PLAYER_TWO : Mark.PLAYER_ONE;
     }
 
     private int findBestMove(Grid grid) {
@@ -30,7 +33,7 @@ public class PlayerComputer extends Player {
     }
 
     private HashMap<Integer, Integer> buildScores(Grid grid) {
-        ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
+        List<Integer> emptyGridSquares = grid.emptySquareIndices();
         HashMap<Integer, Integer> scores = new HashMap<>();
 
         for (Integer emptySquare : emptyGridSquares) {
@@ -57,7 +60,7 @@ public class PlayerComputer extends Player {
 
         Integer bestScore = isMaximisingPlayer(optimisingPlayer) ? Integer.MIN_VALUE : Integer.MAX_VALUE;
 
-        ArrayList<Integer> emptyGridSquares = grid.emptySquareIndices();
+        List<Integer> emptyGridSquares = grid.emptySquareIndices();
 
         for (Integer emptySquare : emptyGridSquares) {
 

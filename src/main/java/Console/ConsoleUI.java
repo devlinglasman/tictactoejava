@@ -1,13 +1,11 @@
 package Console;
 
-import Core.Grid;
-import Core.Mark;
-import Core.Players.Player;
-import Core.UI;
+import Core.Board.Mark;
+import Core.UserInterfaces.UI;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleUI implements UI {
@@ -37,147 +35,64 @@ public class ConsoleUI implements UI {
     }
 
     @Override
-    public void askGameMode() {
-        out.print("\nHi! please enter '1' to " +
-                "play against the computer, '2' to see computer-vs-computer," +
-                " or '3' for human-vs-human.\n");
+    public void presentMessage(String message) {
+        out.print(message);
     }
 
     @Override
-    public String findGameMode() {
-        askGameMode();
-        String gameChoice = getInput();
-        boolean gameChoiceIllegal = gameChoiceNotValid(gameChoice);
-        while (gameChoiceIllegal) {
-            announceGameModeChoiceInvalid();
-            askGameMode();
-            gameChoice = getInput();
-            gameChoiceIllegal = gameChoiceNotValid(gameChoice);
-        }
-        return gameChoice;
-    }
-
-    @Override
-    public int getValidNumber(Player player) {
-        String input = getInput();
-        boolean inputNotNumber = checkIfInputNotNumber(input);
-        while (inputNotNumber) {
-            announceSquareChoiceInvalid(player);
-            input = getInput();
-            inputNotNumber = checkIfInputNotNumber(input);
-        }
-        return Integer.parseInt(input);
-    }
-
-    @Override
-    public void announceGameModeChoiceInvalid() {
-        out.print("\nUhoh please make a valid choice...\n");
-    }
-
-    @Override
-    public void displayGrid(ArrayList<Mark> squares) {
-        ArrayList<String> gridConglomerator = new ArrayList<>();
-
+    public void displayGrid(List<Mark> squares) {
+        out.println();
         for (int i = 0; i < squares.size(); i++) {
-            Mark squareMark = squares.get(i);
-            if (squareMark == Mark.playerOneMark) {
-                gridConglomerator.add(ANSI_BRIGHTBLACK + "[" + squareMark.getStringRepresentation() + "]" + ANSI_RESET);
-            } else if (squareMark == Mark.playerTwoMark) {
-                gridConglomerator.add(ANSI_BRIGHTWHITE + "[" + squareMark.getStringRepresentation() + "]" + ANSI_RESET);
-            } else {
-                switch (i) {
-                    case 0:
-                        gridConglomerator.add(ANSI_BRIGHTYELLOW + "[1]" + ANSI_RESET);
-                        break;
-                    case 1:
-                        gridConglomerator.add(ANSI_BRIGHTRED + "[2]" + ANSI_RESET);
-                        break;
-                    case 2:
-                        gridConglomerator.add(ANSI_BRIGHTPURPLE + "[3]" + ANSI_RESET);
-                        break;
-                    case 3:
-                        gridConglomerator.add(ANSI_BRIGHTRED + "[4]" + ANSI_RESET);
-                        break;
-                    case 4:
-                        gridConglomerator.add(ANSI_BRIGHTPURPLE + "[5]" + ANSI_RESET);
-                        break;
-                    case 5:
-                        gridConglomerator.add(ANSI_BRIGHTBLUE + "[6]" + ANSI_RESET);
-                        break;
-                    case 6:
-                        gridConglomerator.add(ANSI_BRIGHTPURPLE + "[7]" + ANSI_RESET);
-                        break;
-                    case 7:
-                        gridConglomerator.add(ANSI_BRIGHTBLUE + "[8]" + ANSI_RESET);
-                        break;
-                    case 8:
-                        gridConglomerator.add(ANSI_BRIGHTGREEN + "[9]" + ANSI_RESET);
-                        break;
-                }
+            String colour;
+            Mark mark = squares.get(i);
+            String tile;
+            boolean addNewLine = false;
+
+            switch (i) {
+                case 0:
+                    colour = ANSI_BRIGHTYELLOW;
+                    break;
+                case 1:
+                    colour = ANSI_BRIGHTRED;
+                    break;
+                case 2:
+                    colour = ANSI_BRIGHTPURPLE;
+                    addNewLine = true;
+                    break;
+                case 3:
+                    colour = ANSI_BRIGHTRED;
+                    break;
+                case 4:
+                    colour = ANSI_BRIGHTPURPLE;
+                    break;
+                case 5:
+                    colour = ANSI_BRIGHTBLUE;
+                    addNewLine = true;
+                    break;
+                case 6:
+                    colour = ANSI_BRIGHTPURPLE;
+                    break;
+                case 7:
+                    colour = ANSI_BRIGHTBLUE;
+                    break;
+                case 8:
+                    colour = ANSI_BRIGHTGREEN;
+                    addNewLine = true;
+                    break;
+                default:
+                    colour = ANSI_BRIGHTBLACK;
+            }
+
+            tile = makeTile(mark, i, colour);
+            out.print(tile);
+            if (addNewLine) {
+                out.print("\n");
             }
         }
-        gridConglomerator.add(3, "\n");
-        gridConglomerator.add(7, "\n");
-
-        StringBuilder gridFinal = new StringBuilder();
-
-        for (String s : gridConglomerator) {
-            gridFinal.append(s);
-        }
-        out.print("\n" + gridFinal + "\n");
     }
 
     @Override
-    public void askSquareChoice(Player player) {
-        out.print("\n" + player.getName() + " please select a square from 1-9.\n");
-    }
-
-    @Override
-    public void announceSquareChoiceInvalid(Player player) {
-        out.print("\nLooks like " + player.getName() + " made a boo-boo! Please enter a valid number that hasn't already been picked.\n");
-    }
-
-    @Override
-    public void presentMove(Player player, Grid grid) {
-        clearScreen();
-        pause();
-        announceSquareChoice(player);
-        pause();
-    }
-
-    public void announceSquareChoice(Player player) {
-        out.print("\n" + player.getName() + " picked...\n");
-    }
-
-    @Override
-    public void announceTie() {
-        out.print("\nLooks like the game was a tie!\n");
-    }
-
-    @Override
-    public void announceWinner(Player player) {
-        out.print("\nCongratulations " + player.getName() + " - You're the winner!\n");
-    }
-
-    private boolean gameChoiceNotValid(String gameChoice) {
-        return checkIfInputNotNumber(gameChoice) || gameChoiceNotInRange(gameChoice);
-    }
-
-    private boolean gameChoiceNotInRange(String gameChoice) {
-        int gameChoiceInt = Integer.parseInt(gameChoice);
-        return gameChoiceInt < 1 || gameChoiceInt > 3;
-    }
-
-    private boolean checkIfInputNotNumber(String input) {
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException ex) {
-            return true;
-        }
-        return false;
-    }
-
-    private void pause() {
+    public void pause() {
         try {
             Thread.sleep(pauseLength);
         } catch (InterruptedException e) {
@@ -185,8 +100,30 @@ public class ConsoleUI implements UI {
         }
     }
 
-    private void clearScreen() {
+    @Override
+    public void clearScreen() {
         out.print("\033[H\033[2J");
         out.flush();
+    }
+
+    private String makeTile(Mark mark, int index, String colour) {
+        String finalColour = findColour(mark, colour);
+        String symbol = findSymbol(mark, index);
+        return finalColour + "[" + symbol + "]" + ANSI_RESET;
+    }
+
+    private String findColour(Mark mark, String colour) {
+        if (mark == Mark.EMPTY) {
+            return colour;
+        } else if (mark == Mark.PLAYER_ONE) {
+            return ANSI_BRIGHTBLACK;
+        } else {
+            return ANSI_BRIGHTWHITE;
+        }
+    }
+
+    private String findSymbol(Mark mark, int index) {
+        return mark == Mark.EMPTY ? Integer.toString(index + 1) :
+                mark.getStringRepresentation();
     }
 }

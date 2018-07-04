@@ -1,10 +1,10 @@
-package Core;
+package Core.Board;
 
 public enum Mark {
 
-    unmarkedSquare(" "),
-    playerOneMark("X"),
-    playerTwoMark("O");
+    EMPTY(" "),
+    PLAYER_ONE("X"),
+    PLAYER_TWO("O");
 
     private String stringRepresentation;
 

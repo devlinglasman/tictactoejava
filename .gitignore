@@ -80,7 +80,7 @@ fabric.properties
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
+# Core.Players Files #
 *.jar
 *.war
 *.ear

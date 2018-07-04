@@ -1,27 +1,30 @@
-package Console;
+package Core.Games;
 
+import Console.ConsoleUI;
 import Core.FileManipulators.GameDataWriter;
 import Core.FileManipulators.GameFileAnalyser;
-import Core.GameModes.GameModeSelector;
-import Core.Games.GameFactory;
-import Core.GameRunner;
+import Core.GameModes.GameMode;
 import Core.Players.PlayerFactory;
-import Core.TicTacToe;
 import Core.UserInterfaces.Communicator;
 import Core.UserInterfaces.UI;
+import org.junit.Test;
 
-public class MainConsole {
+import static junit.framework.TestCase.assertTrue;
 
-    public static void main(String[] args) {
-        UI ui = new ConsoleUI(System.in, System.out, 1000);
+public class GameFactoryTest {
+
+
+    @Test
+    public void buildGame() {
+        UI ui = new ConsoleUI(System.in, System.out, 1);
         Communicator communicator = new Communicator(ui);
         PlayerFactory playerFactory = new PlayerFactory(communicator);
         GameFileAnalyser gameFileAnalyser = new GameFileAnalyser("src/main/resources/gameData.txt");
         GameDataWriter gameDataWriter = new GameDataWriter();
         GameFactory gameFactory = new GameFactory(communicator, playerFactory, gameFileAnalyser, gameDataWriter);
-        GameRunner gameRunner = new GameRunner();
-        GameModeSelector gameModeSelector = new GameModeSelector(communicator);
-        TicTacToe ticTacToe = new TicTacToe(communicator, gameRunner, gameFactory, gameModeSelector);
-        ticTacToe.run();
+
+        Game game = gameFactory.buildGame(GameMode.HUMANVSCOMP);
+
+        assertTrue(game != null);
     }
 }
