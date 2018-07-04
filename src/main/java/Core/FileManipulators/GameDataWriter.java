@@ -22,9 +22,9 @@ public class GameDataWriter {
     }
 
     public void writeGameValue(String gameValue) {
-        String gameValuePlusNewLine = gameValue + "\n";
+        String valueNewLine = gameValue + "\n";
         try {
-            outputStream.write(gameValuePlusNewLine.getBytes());
+            outputStream.write(valueNewLine.getBytes());
         } catch (Exception e) {
             e.printStackTrace();
         }
