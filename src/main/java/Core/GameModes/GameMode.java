@@ -18,12 +18,12 @@ public enum GameMode {
     }
 
     public static GameMode findGameModeUsingNumber(int gameModeChoice) {
+        GameMode chosenGameMode = null;
         for (GameMode gameMode : GameMode.values()) {
             if (gameModeChoice == gameMode.getModeNumber()) {
-                return gameMode;
+                chosenGameMode = gameMode;
             }
         }
-        throw new IllegalArgumentException(String.valueOf(gameModeChoice));
+        return chosenGameMode;
     }
-
 }

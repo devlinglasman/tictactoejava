@@ -6,12 +6,6 @@ import java.util.List;
 
 public class GameFileAnalyser {
 
-    private File gameData;
-
-    public GameFileAnalyser() {
-        gameData = null;
-    }
-
     public List<Integer> generateMovesFromFile(File file, int playerPosition) {
         List<String> gameValues = performExtraction(file);
         List<Integer> gameMoves = convertToIntegers(gameValues);

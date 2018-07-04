@@ -13,7 +13,7 @@ public class GameModeSelectorTest {
     @Test
     public void getGameMode_humanvscomp() {
         IOHelper ioHelper = new IOHelper("1");
-        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 1);
+        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 0);
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
@@ -23,7 +23,7 @@ public class GameModeSelectorTest {
     @Test
     public void getGameMode_compvscomp() {
         IOHelper ioHelper = new IOHelper("2");
-        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 1);
+        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 0);
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
@@ -33,7 +33,7 @@ public class GameModeSelectorTest {
     @Test
     public void getGameMode_humanvshuman() {
         IOHelper ioHelper = new IOHelper("3");
-        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 1);
+        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 0);
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
@@ -43,7 +43,7 @@ public class GameModeSelectorTest {
     @Test
     public void getGameMode_Invalid_TooLow() {
         IOHelper ioHelper = new IOHelper("0\n1");
-        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 1);
+        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 0);
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
@@ -53,7 +53,7 @@ public class GameModeSelectorTest {
     @Test
     public void getGameMode_Invalid_TooHigh() {
         IOHelper ioHelper = new IOHelper("15\n1");
-        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 1);
+        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 0);
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 
@@ -63,7 +63,7 @@ public class GameModeSelectorTest {
     @Test
     public void getGameMode_Invalid_NotNumber() {
         IOHelper ioHelper = new IOHelper("asdf\n1");
-        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 1);
+        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 0);
         Communicator communicator = new Communicator(ui);
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
 

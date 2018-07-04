@@ -25,28 +25,32 @@ public class GameFactory {
     }
 
     public Game buildGame(GameMode gameMode) {
+        List<Player> players = getPlayers(gameMode);
+        Grid grid = new Grid();
+        Game primaryGame = new PrimaryGame(grid, players.get(0), players.get(1), communicator);
+        return new RecordableGame(primaryGame, gameDataWriter);
+    }
+
+    private List<Player> getPlayers(GameMode gameMode) {
         List<Player> players;
         if (gameMode == GameMode.SIMULATEDPLAY) {
             players = buildSimulatedPlayers();
         } else {
             players = buildPrimaryPlayers(gameMode);
         }
-        return buildGameWithPlayers(players);
+        return players;
     }
 
     private List<Player> buildSimulatedPlayers() {
-        List<Integer> playerOneMoves = gameFileAnalyser.generateMovesFromFile(gameDataWriter.getGameData(), 0);
-        List<Integer> playerTwoMoves = gameFileAnalyser.generateMovesFromFile(gameDataWriter.getGameData(),1);
-        return playerFactory.buildSimulatedPlayers(playerOneMoves, playerTwoMoves);
+        return playerFactory.buildSimulatedPlayers(generateMoves(0), generateMoves(1));
+    }
+
+    private List<Integer> generateMoves(int playerPosition) {
+        return gameFileAnalyser.generateMovesFromFile(gameDataWriter.getGameData(),playerPosition);
     }
 
     private List<Player> buildPrimaryPlayers(GameMode gameMode) {
         return playerFactory.buildPrimaryPlayers(gameMode);
     }
 
-    private Game buildGameWithPlayers(List<Player> players) {
-        Grid grid = new Grid();
-        Game primaryGame = new PrimaryGame(grid, players.get(0), players.get(1), communicator);
-        return new RecordableGame(primaryGame, gameDataWriter);
-    }
 }

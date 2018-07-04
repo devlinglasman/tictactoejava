@@ -1,6 +1,5 @@
 package Core.FileManipulatorsTests;
 
-import Core.FileManipulators.GameDataWriter;
 import Core.FileManipulators.GameFileAnalyser;
 import org.junit.Test;
 
