@@ -12,19 +12,17 @@ public class TicTacToe {
     private GameRunner gameRunner;
     private GameFactory gameFactory;
     private GameModeSelector gameModeSelector;
-    private String filePathName;
 
-    public TicTacToe(Communicator communicator, GameRunner gameRunner, GameFactory gameFactory, GameModeSelector gameModeSelector, String filePathName) {
+    public TicTacToe(Communicator communicator, GameRunner gameRunner, GameFactory gameFactory, GameModeSelector gameModeSelector) {
         this.communicator = communicator;
         this.gameRunner = gameRunner;
         this.gameFactory = gameFactory;
         this.gameModeSelector = gameModeSelector;
-        this.filePathName = filePathName;
     }
 
     public void run() {
         GameMode gameMode = getMode();
-        runGame(gameMode);
+        startGame(gameMode);
         if (findIfPlayAnotherGame()) {
             run();
         } else {
@@ -40,11 +38,11 @@ public class TicTacToe {
         return gameModeSelector.getMode();
     }
 
-    private void runGame(GameMode gameMode) {
-        Game game = gameFactory.buildGame(gameMode, filePathName);
+    private void startGame(GameMode gameMode) {
+        Game game = gameFactory.buildGame(gameMode);
         gameRunner.runGame(game);
         while (rewatch()) {
-            Game rewatchGame = gameFactory.buildGame(GameMode.SIMULATEDPLAY, filePathName);
+            Game rewatchGame = gameFactory.buildGame(GameMode.SIMULATEDPLAY);
             gameRunner.runGame(rewatchGame);
         }
     }

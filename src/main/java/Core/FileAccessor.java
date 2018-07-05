@@ -6,10 +6,15 @@ import java.util.List;
 
 public class FileAccessor {
 
+    private File gameData;
     private OutputStream outputStream;
 
     public FileAccessor(String pathName) {
-        File gameData = new File(pathName);
+        overwriteFile(pathName);
+    }
+
+    public void overwriteFile(String pathName) {
+        gameData = new File(pathName);
         try {
             outputStream = new FileOutputStream(gameData);
         } catch (FileNotFoundException e) {
@@ -26,12 +31,11 @@ public class FileAccessor {
         }
     }
 
-    public List<String> performExtraction(String pathName) {
-        File file = new File(pathName);
+    public List<String> performExtraction() {
         List<String> gameMoves = new ArrayList<>();
 
         try {
-            FileReader fileReader = new FileReader(file);
+            FileReader fileReader = new FileReader(gameData);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             String line;
