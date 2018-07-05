@@ -2,16 +2,22 @@ package Core.Players;
 
 import Core.Board.Grid;
 import Core.Board.Mark;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class ComputerPlayerTest {
 
+    private Grid grid;
+
+    @Before
+    public void setUp() {
+        grid = new Grid();
+    }
 
     @Test
     public void minimaxTest1() {
-        Grid grid = new Grid();
         Player computer = new ComputerPlayer( Mark.PLAYER_TWO);
 
 //         Grid state:
@@ -37,7 +43,6 @@ public class ComputerPlayerTest {
 
     @Test
     public void minimaxTest2() {
-        Grid grid = new Grid();
         Player computer = new ComputerPlayer(Mark.PLAYER_TWO);
 
 //         Grid state:
@@ -63,7 +68,6 @@ public class ComputerPlayerTest {
 
     @Test
     public void minimaxTest3() {
-        Grid grid = new Grid();
         Player computer = new ComputerPlayer(Mark.PLAYER_TWO);
 
 //         Grid state:
@@ -88,7 +92,6 @@ public class ComputerPlayerTest {
 
     @Test
     public void minimaxTest4() {
-        Grid grid = new Grid();
         Player computer = new ComputerPlayer(Mark.PLAYER_TWO);
 
 //         Grid state:
@@ -112,7 +115,6 @@ public class ComputerPlayerTest {
 
     @Test
     public void minimaxTest5() {
-        Grid grid = new Grid();
         Player computer = new ComputerPlayer(Mark.PLAYER_TWO);
 
 //         Grid state:
@@ -137,7 +139,6 @@ public class ComputerPlayerTest {
 
     @Test
     public void minimaxTest6WithDepth() {
-        Grid grid = new Grid();
         Player computer = new ComputerPlayer(Mark.PLAYER_TWO);
 
 //         Grid state:
@@ -161,7 +162,6 @@ public class ComputerPlayerTest {
 
     @Test
     public void minimaxTest7WithDepthWithSwitchedMarks() {
-        Grid grid = new Grid();
         Player computer = new ComputerPlayer(Mark.PLAYER_ONE);
 
 //         Grid state:
