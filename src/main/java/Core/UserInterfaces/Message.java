@@ -4,7 +4,7 @@ import Core.Players.Player;
 
 public class Message {
 
-    public static final String askGameMode = "\nHi! please enter '1' to " +
+    public static final String askGameMode = "\nHi! Please enter '1' to " +
             "play against the computer, '2' to see computer-vs-computer," +
             " or '3' for human-vs-human.\n";
 
@@ -20,9 +20,6 @@ public class Message {
     public final static String askRewatch =
         "\nThe game has drawn to a close. " +
                 "Would you like to watch it back? Please enter: y or n.\n";
-
-    public final static String askReplay =
-        "\nOkay, so would you like to play another game?\n";
 
     public final static String askNewYOrN =
         "\nPlease enter either y or n.\n";

@@ -33,6 +33,10 @@ public class Communicator {
         return getValidNumber();
     }
 
+    public void announceGameModeChoiceInvalid() {
+        ui.presentMessage(Message.announceGameModeChoiceInvalid);
+    }
+
     public void displayGrid(List<Mark> gridSquares) {
         ui.displayGrid(gridSquares);
     }

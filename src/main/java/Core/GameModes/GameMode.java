@@ -2,10 +2,10 @@ package Core.GameModes;
 
 public enum GameMode {
 
+    SIMULATEDPLAY(0),
     HUMANVSCOMP(1),
     COMPVSCOMP(2),
-    HUMANVSHUMAN(3),
-    SIMULATEDPLAY(4);
+    HUMANVSHUMAN(3);
 
     private int modeNumber;
 
