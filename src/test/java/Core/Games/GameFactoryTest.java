@@ -2,23 +2,16 @@ package Core.Games;
 
 import Console.ConsoleUI;
 import Core.FileManipulators.GameDataWriter;
-import Core.FileManipulators.GameFileAnalyser;
 import Core.GameModes.GameMode;
 import Core.Players.PlayerFactory;
 import Core.UserInterfaces.Communicator;
 import Core.UserInterfaces.UI;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
 
 public class GameFactoryTest {
-
-    @Before
-    public static void setUp() {
-
-    }
 
     @Test
     public void buildGame() {

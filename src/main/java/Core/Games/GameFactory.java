@@ -1,9 +1,8 @@
 package Core.Games;
 
-import Core.FileManipulators.GameDataWriter;
-import Core.FileManipulators.GameFileAnalyser;
-import Core.GameModes.GameMode;
 import Core.Board.Grid;
+import Core.FileManipulators.GameDataWriter;
+import Core.GameModes.GameMode;
 import Core.Players.Player;
 import Core.Players.PlayerFactory;
 import Core.UserInterfaces.Communicator;
@@ -14,7 +13,6 @@ public class GameFactory {
 
     private Communicator communicator;
     private PlayerFactory playerFactory;
-    private GameFileAnalyser gameFileAnalyser;
     private GameDataWriter gameDataWriter;
 
     public GameFactory(Communicator communicator, PlayerFactory playerFactory, GameDataWriter gameDataWriter) {

@@ -39,8 +39,6 @@ public class PlayerFactoryTest {
 
         assertTrue(players.get(0) instanceof ComputerPlayer);
         assertTrue(players.get(1) instanceof ComputerPlayer);
-        assertEquals("Player One", players.get(0).getName());
-        assertEquals("Player Two", players.get(1).getName());
     }
 
     @Test
@@ -53,8 +51,6 @@ public class PlayerFactoryTest {
 
         assertTrue(players.get(0) instanceof HumanPlayer);
         assertTrue(players.get(1) instanceof HumanPlayer);
-        assertEquals("Player One", players.get(0).getName());
-        assertEquals("Player Two", players.get(1).getName());
     }
 
     @Test
@@ -69,7 +65,5 @@ public class PlayerFactoryTest {
 
         assertTrue(players.get(0) instanceof SimulatedPlayer);
         assertTrue(players.get(1) instanceof SimulatedPlayer);
-        assertEquals("Player One", players.get(0).getName());
-        assertEquals("Player Two", players.get(1).getName());
     }
 }

@@ -10,62 +10,53 @@ import static org.junit.Assert.assertEquals;
 
 public class GameModeSelectorTest {
 
-    @Test
-    public void getGameMode_humanvscomp() {
-        IOHelper ioHelper = new IOHelper("1");
+    private GameModeSelector gameModeSelector;
+
+    private void setUpWithInput(String input) {
+        IOHelper ioHelper = new IOHelper(input);
         UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 0);
         Communicator communicator = new Communicator(ui);
-        GameModeSelector gameModeSelector = new GameModeSelector(communicator);
+        gameModeSelector = new GameModeSelector(communicator);
+    }
+
+    @Test
+    public void getGameMode_humanvscomp() {
+        setUpWithInput("1");
 
         assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getMode());
     }
 
     @Test
     public void getGameMode_compvscomp() {
-        IOHelper ioHelper = new IOHelper("2");
-        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 0);
-        Communicator communicator = new Communicator(ui);
-        GameModeSelector gameModeSelector = new GameModeSelector(communicator);
+        setUpWithInput("2");
 
         assertEquals(GameMode.COMPVSCOMP, gameModeSelector.getMode());
     }
 
     @Test
     public void getGameMode_humanvshuman() {
-        IOHelper ioHelper = new IOHelper("3");
-        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 0);
-        Communicator communicator = new Communicator(ui);
-        GameModeSelector gameModeSelector = new GameModeSelector(communicator);
+        setUpWithInput("3");
 
         assertEquals(GameMode.HUMANVSHUMAN, gameModeSelector.getMode());
     }
 
     @Test
     public void getGameMode_Invalid_TooLow() {
-        IOHelper ioHelper = new IOHelper("0\n1");
-        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 0);
-        Communicator communicator = new Communicator(ui);
-        GameModeSelector gameModeSelector = new GameModeSelector(communicator);
+        setUpWithInput("0\n1");
 
         assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getMode());
     }
 
     @Test
     public void getGameMode_Invalid_TooHigh() {
-        IOHelper ioHelper = new IOHelper("15\n1");
-        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 0);
-        Communicator communicator = new Communicator(ui);
-        GameModeSelector gameModeSelector = new GameModeSelector(communicator);
+        setUpWithInput("15\n1");
 
         assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getMode());
     }
 
     @Test
     public void getGameMode_Invalid_NotNumber() {
-        IOHelper ioHelper = new IOHelper("asdf\n1");
-        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 0);
-        Communicator communicator = new Communicator(ui);
-        GameModeSelector gameModeSelector = new GameModeSelector(communicator);
+        setUpWithInput("asdf\n1");
 
         assertEquals(GameMode.HUMANVSCOMP, gameModeSelector.getMode());
     }
