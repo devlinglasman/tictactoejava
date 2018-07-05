@@ -33,6 +33,10 @@ public class RecordableGame implements Game {
         return primaryGame.getLastMove();
     }
 
+    public GameDataWriter getGameDataWriter() {
+        return gameDataWriter;
+    }
+
     private void convertAndWriteMove(Integer move) {
         gameDataWriter.writeGameValue(Integer.toString(move));
     }

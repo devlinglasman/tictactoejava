@@ -9,12 +9,7 @@ public class GameDataWriter {
     private OutputStream outputStream;
     private File gameData;
 
-    public GameDataWriter() {
-        outputStream = null;
-        gameData = null;
-    }
-
-    public void createFile(String pathName){
+    public GameDataWriter(String pathName) {
         gameData = new File(pathName);
         try {
             outputStream = new FileOutputStream(gameData);

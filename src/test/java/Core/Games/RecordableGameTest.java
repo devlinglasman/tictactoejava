@@ -13,8 +13,7 @@ public class RecordableGameTest {
     @Test
     public void playNextMove() {
         PrimaryGameDouble primaryGameDouble = new PrimaryGameDouble();
-        GameDataWriter gameDataWriter = new GameDataWriter();
-        gameDataWriter.createFile("src/test/resources/dummyDataRGame.txt");
+        GameDataWriter gameDataWriter = new GameDataWriter("src/test/resources/dummyDataRGame.txt");
         RecordableGame recordableGame = new RecordableGame(primaryGameDouble, gameDataWriter);
         List<Integer> expectedMove = new ArrayList<>();
         expectedMove.add(0);

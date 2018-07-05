@@ -13,11 +13,10 @@ public class GameDataWriterTest {
 
     @Test
     public void writeAndExtractMoves1() {
-        GameDataWriter gameDataWriter = new GameDataWriter();
+        GameDataWriter gameDataWriter = new GameDataWriter("src/test/resources/dummyData.txt");
         List<Integer> expectedGameData = new ArrayList<>(
                 asList(9,7));
 
-        gameDataWriter.createFile("src/test/resources/dummyData.txt");
         gameDataWriter.writeGameValue("9");
         gameDataWriter.writeGameValue("8");
         gameDataWriter.writeGameValue("7");
@@ -29,13 +28,10 @@ public class GameDataWriterTest {
 
     @Test
     public void writeAndExtractMoves_afterOverwrite() {
-        GameDataWriter gameDataWriter = new GameDataWriter();
+        GameDataWriter gameDataWriter = new GameDataWriter("src/test/resources/dummyData.txt");
         List<Integer> expectedGameData = new ArrayList<>(
                 asList(8,6));
 
-        gameDataWriter.createFile("src/test/resources/dummyData.txt");
-        gameDataWriter.writeGameValue("Incorrect Values");
-        gameDataWriter.createFile("src/test/resources/dummyData.txt");
         gameDataWriter.writeGameValue("9");
         gameDataWriter.writeGameValue("8");
         gameDataWriter.writeGameValue("7");

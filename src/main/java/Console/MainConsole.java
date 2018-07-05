@@ -16,12 +16,11 @@ public class MainConsole {
         UI ui = new ConsoleUI(System.in, System.out, 1000);
         Communicator communicator = new Communicator(ui);
         PlayerFactory playerFactory = new PlayerFactory(communicator);
-        GameDataWriter gameDataWriter = new GameDataWriter();
-        gameDataWriter.createFile("src/main/resources/gameData.txt");
-        GameFactory gameFactory = new GameFactory(communicator, playerFactory, gameDataWriter);
+        GameFactory gameFactory = new GameFactory(communicator, playerFactory);
         GameRunner gameRunner = new GameRunner();
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
-        TicTacToe ticTacToe = new TicTacToe(communicator, gameRunner, gameFactory, gameModeSelector);
+        String filePathName = "src/main/resources/gameData.txt";
+        TicTacToe ticTacToe = new TicTacToe(communicator, gameRunner, gameFactory, gameModeSelector, filePathName);
         ticTacToe.run();
     }
 }
