@@ -1,12 +1,10 @@
 package Console;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 
 public class IOHelper {
-    public ByteArrayOutputStream out;
-    public ByteArrayInputStream in;
+    public OutputStream out;
+    public InputStream in;
     public PrintStream print;
 
     public IOHelper(String input) {

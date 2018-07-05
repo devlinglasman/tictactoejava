@@ -1,16 +1,15 @@
 package Core.Games;
 
-import Core.FileManipulators.GameDataWriter;
+import Core.FileAccessor;
 
 public class RecordableGame implements Game {
 
     private Game primaryGame;
-    private GameDataWriter gameDataWriter;
+    private FileAccessor fileAccessor;
 
-    public RecordableGame(Game primaryGame, GameDataWriter gameDataWriter) {
+    public RecordableGame(Game primaryGame, FileAccessor fileAccessor) {
         this.primaryGame = primaryGame;
-        this.gameDataWriter = gameDataWriter;
-        gameDataWriter.createFile("src/main/resources/gameData.txt");
+        this.fileAccessor = fileAccessor;
     }
 
     @Override
@@ -35,7 +34,7 @@ public class RecordableGame implements Game {
     }
 
     private void convertAndWriteMove(Integer move) {
-        gameDataWriter.writeGameValue(Integer.toString(move));
+        fileAccessor.writeGameValue(Integer.toString(move));
     }
 
 }

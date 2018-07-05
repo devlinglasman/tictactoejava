@@ -22,7 +22,7 @@ public class TicTacToe {
 
     public void run() {
         GameMode gameMode = getMode();
-        runGame(gameMode);
+        startGame(gameMode);
         if (findIfPlayAnotherGame()) {
             run();
         } else {
@@ -38,7 +38,7 @@ public class TicTacToe {
         return gameModeSelector.getMode();
     }
 
-    private void runGame(GameMode gameMode) {
+    private void startGame(GameMode gameMode) {
         Game game = gameFactory.buildGame(gameMode);
         gameRunner.runGame(game);
         while (rewatch()) {

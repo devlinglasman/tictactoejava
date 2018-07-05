@@ -1,6 +1,5 @@
 package Core.GameModes;
 
-import Core.GameModes.GameMode;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

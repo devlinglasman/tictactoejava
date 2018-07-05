@@ -1,27 +1,27 @@
 package Core.Games;
 
-import Core.FileManipulators.GameDataWriter;
-import Core.FileManipulators.GameFileAnalyser;
-import Core.GameModes.GameMode;
 import Core.Board.Grid;
+import Core.FileAccessor;
+import Core.GameModes.GameMode;
 import Core.Players.Player;
 import Core.Players.PlayerFactory;
 import Core.UserInterfaces.Communicator;
 
+import java.io.File;
 import java.util.List;
 
 public class GameFactory {
 
     private Communicator communicator;
     private PlayerFactory playerFactory;
-    private GameFileAnalyser gameFileAnalyser;
-    private GameDataWriter gameDataWriter;
+    private FileAccessor fileAccessor;
+    private String pathName;
 
-    public GameFactory(Communicator communicator, PlayerFactory playerFactory, GameFileAnalyser gameFileAnalyser, GameDataWriter gameDataWriter) {
+    public GameFactory(Communicator communicator, PlayerFactory playerFactory, FileAccessor fileAccessor, String pathName) {
         this.communicator = communicator;
         this.playerFactory = playerFactory;
-        this.gameFileAnalyser = gameFileAnalyser;
-        this.gameDataWriter = gameDataWriter;
+        this.fileAccessor = fileAccessor;
+        this.pathName = pathName;
     }
 
     public Game buildGame(GameMode gameMode) {
@@ -29,24 +29,20 @@ public class GameFactory {
         if (gameMode == GameMode.SIMULATEDPLAY) {
             players = buildSimulatedPlayers();
         } else {
+            fileAccessor.overwriteFile(pathName);
             players = buildPrimaryPlayers(gameMode);
         }
-        return buildGameWithPlayers(players);
+        Grid grid = new Grid();
+        Game primaryGame = new PrimaryGame(grid, players.get(0), players.get(1), communicator);
+        return new RecordableGame(primaryGame, fileAccessor);
     }
 
     private List<Player> buildSimulatedPlayers() {
-        List<Integer> playerOneMoves = gameFileAnalyser.generateMovesFromFile(0);
-        List<Integer> playerTwoMoves = gameFileAnalyser.generateMovesFromFile(1);
-        return playerFactory.buildSimulatedPlayers(playerOneMoves, playerTwoMoves);
+        List<String> allMoves = fileAccessor.performExtraction();
+        return playerFactory.buildSimulatedPlayers(allMoves);
     }
 
     private List<Player> buildPrimaryPlayers(GameMode gameMode) {
         return playerFactory.buildPrimaryPlayers(gameMode);
-    }
-
-    private Game buildGameWithPlayers(List<Player> players) {
-        Grid grid = new Grid();
-        Game primaryGame = new PrimaryGame(grid, players.get(0), players.get(1), communicator);
-        return new RecordableGame(primaryGame, gameDataWriter);
     }
 }

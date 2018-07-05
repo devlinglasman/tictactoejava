@@ -1,19 +1,20 @@
 package Core.Players;
 
-import Core.GameModes.GameMode;
 import Core.Board.Mark;
+import Core.GameModes.GameMode;
 import Core.UserInterfaces.Communicator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class PlayerFactory {
 
     private Communicator communicator;
+    private MovesGenerator movesGenerator;
 
-    public PlayerFactory(Communicator communicator) {
+    public PlayerFactory(Communicator communicator, MovesGenerator movesGenerator) {
         this.communicator = communicator;
+        this.movesGenerator = movesGenerator;
     }
 
     public List<Player> buildPrimaryPlayers(GameMode gameMode) {
@@ -35,10 +36,10 @@ public class PlayerFactory {
         }
     }
 
-    public List<Player> buildSimulatedPlayers(List<Integer> playerOneMoves, List<Integer> playerTwoMoves) {
-        List<Player> players = new ArrayList<>();
-        players.add(new SimulatedPlayer(Mark.PLAYER_ONE, playerOneMoves));
-        players.add(new SimulatedPlayer(Mark.PLAYER_TWO, playerTwoMoves));
-        return players;
+    public List<Player> buildSimulatedPlayers(List<String> allMoves) {
+        List<Integer> playerOneMoves = movesGenerator.generateMoves(allMoves, 0);
+        List<Integer> playerTwoMoves = movesGenerator.generateMoves(allMoves, 1);
+        return Arrays.asList(new SimulatedPlayer(Mark.PLAYER_ONE, playerOneMoves),
+                new SimulatedPlayer(Mark.PLAYER_TWO, playerTwoMoves));
     }
 }

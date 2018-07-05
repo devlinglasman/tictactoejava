@@ -12,36 +12,35 @@ import static org.junit.Assert.*;
 
 public class HumanPlayerTest {
 
+    private Player player;
+    private Grid grid;
+
+    private void setUpWithInput(String input) {
+        grid = new Grid();
+        IOHelper ioHelper = new IOHelper(input);
+        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 0);
+        Communicator communicator = new Communicator(ui);
+        player = new HumanPlayer(Mark.PLAYER_ONE, communicator);
+    }
+
     @Test
     public void makeMove_ValidAttemptAtGridPoint0() {
-        Grid grid = new Grid();
-        IOHelper ioHelper = new IOHelper("1");
-        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 1);
-        Communicator communicator = new Communicator(ui);
-        Player playerOne = new HumanPlayer(Mark.PLAYER_ONE, communicator);
+        setUpWithInput("1");
 
-        assertEquals(0, playerOne.getMove(grid));
+        assertEquals(0, player.getMove(grid));
     }
 
     @Test
     public void makeMove_ValidAttemptAtGridPoint1() {
-        Grid grid = new Grid();
-        IOHelper ioHelper = new IOHelper("2");
-        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 1);
-        Communicator communicator = new Communicator(ui);
-        Player playerOne = new HumanPlayer(Mark.PLAYER_ONE, communicator);
+        setUpWithInput("2");
 
-        assertEquals(1, playerOne.getMove(grid));
+        assertEquals(1, player.getMove(grid));
     }
 
     @Test
     public void makeMove_InvalidAttemptThenAtSquare1() {
-        Grid grid = new Grid();
-        IOHelper ioHelper = new IOHelper("asdf\n1");
-        UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 1);
-        Communicator communicator = new Communicator(ui);
-        Player playerOne = new HumanPlayer(Mark.PLAYER_ONE, communicator);
+        setUpWithInput("asdf\n1");
 
-        assertEquals(0, playerOne.getMove(grid));
+        assertEquals(0, player.getMove(grid));
     }
 }

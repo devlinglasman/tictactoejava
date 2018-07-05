@@ -28,12 +28,9 @@ public class Communicator {
         return Integer.parseInt(input);
     }
 
-    public void askGameMode() {
-        ui.presentMessage(Message.askGameMode);
-    }
-
-    public void announceGameModeChoiceInvalid() {
-        ui.presentMessage(Message.announceGameModeChoiceInvalid);
+    public int findGameModeChoice() {
+        askGameMode();
+        return getValidNumber();
     }
 
     public void displayGrid(List<Mark> gridSquares) {
@@ -86,6 +83,10 @@ public class Communicator {
             inputNotCorrect = inputNotYesOrNo(input);
         }
         return input.equals("y");
+    }
+
+    private void askGameMode() {
+        ui.presentMessage(Message.askGameMode);
     }
 
     private boolean checkIfInputNotNumber(String input) {

@@ -1,6 +1,5 @@
 package Core.GameModes;
 
-import Core.GameModes.GameMode;
 import Core.UserInterfaces.Communicator;
 
 import java.util.Arrays;
@@ -14,22 +13,18 @@ public class GameModeSelector {
     }
 
     public GameMode getMode() {
-        int gameModeNumber = getValidGameModeChoiceNumber();
-        return GameMode.findGameModeUsingNumber(gameModeNumber);
+        return GameMode.findGameModeUsingNumber(getGameModeChoice());
     }
 
-    private int getValidGameModeChoiceNumber() {
-        communicator.askGameMode();
-        int gameModeChoice = communicator.getValidNumber();
-
-        while (choiceNotValid(gameModeChoice)) {
-            communicator.announceGameModeChoiceInvalid();
-            gameModeChoice = communicator.getValidNumber();
+    private int getGameModeChoice() {
+        int gameModeChoice = communicator.findGameModeChoice();
+        while (invalid(gameModeChoice)) {
+            gameModeChoice = communicator.findGameModeChoice();
         }
         return gameModeChoice;
     }
 
-    private boolean choiceNotValid(int gameModeChoice) {
+    private boolean invalid(int gameModeChoice) {
         return Arrays.stream(GameMode.values())
                 .noneMatch(gameMode -> gameMode.getModeNumber() == gameModeChoice);
     }
