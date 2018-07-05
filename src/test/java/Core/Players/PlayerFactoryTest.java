@@ -17,7 +17,7 @@ public class PlayerFactoryTest {
 
     @Test
     public void gameMode_humanVsComp() {
-        UI ui = new ConsoleUI(System.in, System.out, 1);
+        UI ui = new ConsoleUI(System.in, System.out, 0);
         Communicator communicator = new Communicator(ui);
         PlayerFactory playerFactory = new PlayerFactory(communicator);
 
