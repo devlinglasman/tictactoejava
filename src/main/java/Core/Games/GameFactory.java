@@ -1,7 +1,7 @@
 package Core.Games;
 
 import Core.Board.Grid;
-import Core.FileManipulators.FileAccessor;
+import Core.FileAccessor;
 import Core.GameModes.GameMode;
 import Core.Players.Player;
 import Core.Players.PlayerFactory;
@@ -21,21 +21,20 @@ public class GameFactory {
 
     public Game buildGame(GameMode gameMode, String filePathName) {
         FileAccessor fileAccessor = new FileAccessor(filePathName);
-        List<Player> players = buildPlayers(gameMode, fileAccessor);
+        List<Player> players = buildPlayers(gameMode, fileAccessor, filePathName);
         Grid grid = new Grid();
         Game primaryGame = new PrimaryGame(grid, players.get(0), players.get(1), communicator);
         return new RecordableGame(primaryGame, fileAccessor);
     }
 
-    private List<Player> buildPlayers(GameMode gameMode, FileAccessor fileAccessor) {
-        return (gameMode == GameMode.SIMULATEDPLAY) ? buildSimulatedPlayers(fileAccessor)
+    private List<Player> buildPlayers(GameMode gameMode, FileAccessor fileAccessor, String filePathName) {
+        return (gameMode == GameMode.SIMULATEDPLAY) ? buildSimulatedPlayers(fileAccessor, filePathName)
             : buildPrimaryPlayers(gameMode);
     }
 
-    private List<Player> buildSimulatedPlayers(FileAccessor fileAccessor) {
-        List<Integer> playerOneMoves = fileAccessor.generateMoves(0);
-        List<Integer> playerTwoMoves = fileAccessor.generateMoves(1);
-        return playerFactory.buildSimulatedPlayers(playerOneMoves, playerTwoMoves);
+    private List<Player> buildSimulatedPlayers(FileAccessor fileAccessor, String filePathName) {
+        List<String> allMoves = fileAccessor.performExtraction(filePathName);
+        return playerFactory.buildSimulatedPlayers(allMoves);
     }
 
     private List<Player> buildPrimaryPlayers(GameMode gameMode) {

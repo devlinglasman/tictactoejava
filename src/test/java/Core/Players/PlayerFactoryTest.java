@@ -7,6 +7,7 @@ import Core.UserInterfaces.UI;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -19,7 +20,8 @@ public class PlayerFactoryTest {
     public void gameMode_humanVsComp() {
         UI ui = new ConsoleUI(System.in, System.out, 0);
         Communicator communicator = new Communicator(ui);
-        PlayerFactory playerFactory = new PlayerFactory(communicator);
+        MovesGenerator movesGenerator = new MovesGenerator();
+        PlayerFactory playerFactory = new PlayerFactory(communicator, movesGenerator);
 
         List<Player> players = playerFactory.buildPrimaryPlayers(GameMode.HUMANVSCOMP);
 
@@ -33,7 +35,8 @@ public class PlayerFactoryTest {
     public void gameMode_compVsComp() {
         UI ui = new ConsoleUI(System.in, System.out, 1);
         Communicator communicator = new Communicator(ui);
-        PlayerFactory playerFactory = new PlayerFactory(communicator);
+        MovesGenerator movesGenerator = new MovesGenerator();
+        PlayerFactory playerFactory = new PlayerFactory(communicator, movesGenerator);
 
         List<Player> players = playerFactory.buildPrimaryPlayers(GameMode.COMPVSCOMP);
 
@@ -45,7 +48,8 @@ public class PlayerFactoryTest {
     public void gameMode_humanVsHuman() {
         UI ui = new ConsoleUI(System.in, System.out, 1);
         Communicator communicator = new Communicator(ui);
-        PlayerFactory playerFactory = new PlayerFactory(communicator);
+        MovesGenerator movesGenerator = new MovesGenerator();
+        PlayerFactory playerFactory = new PlayerFactory(communicator, movesGenerator);
 
         List<Player> players = playerFactory.buildPrimaryPlayers(GameMode.HUMANVSHUMAN);
 
@@ -57,11 +61,11 @@ public class PlayerFactoryTest {
     public void gameMode_simulatedPlay() {
         UI ui = new ConsoleUI(System.in, System.out, 1);
         Communicator communicator = new Communicator(ui);
-        PlayerFactory playerFactory = new PlayerFactory(communicator);
-        ArrayList<Integer> playerOneMoves = new ArrayList<>(asList(1,3,5));
-        ArrayList<Integer> playerTwoMoves = new ArrayList<>(asList(2,4,6));
+        MovesGenerator movesGenerator = new MovesGenerator();
+        PlayerFactory playerFactory = new PlayerFactory(communicator, movesGenerator);
+        List<String> allMoves = Arrays.asList("0","1","2","3","4","5");
 
-        List<Player> players = playerFactory.buildSimulatedPlayers(playerOneMoves, playerTwoMoves);
+        List<Player> players = playerFactory.buildSimulatedPlayers(allMoves);
 
         assertTrue(players.get(0) instanceof SimulatedPlayer);
         assertTrue(players.get(1) instanceof SimulatedPlayer);

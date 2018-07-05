@@ -1,6 +1,6 @@
 package Core.Games;
 
-import Core.FileManipulators.FileAccessor;
+import Core.FileAccessor;
 
 public class RecordableGame implements Game {
 
@@ -31,10 +31,6 @@ public class RecordableGame implements Game {
     @Override
     public Integer getLastMove() {
         return primaryGame.getLastMove();
-    }
-
-    public FileAccessor getFileAccessor() {
-        return fileAccessor;
     }
 
     private void convertAndWriteMove(Integer move) {
