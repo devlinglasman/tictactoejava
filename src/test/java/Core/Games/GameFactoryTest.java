@@ -1,7 +1,7 @@
 package Core.Games;
 
 import Console.ConsoleUI;
-import Core.FileManipulators.GameDataWriter;
+import Core.FileManipulators.FileAccessor;
 import Core.GameModes.GameMode;
 import Core.Players.PlayerFactory;
 import Core.UserInterfaces.Communicator;
@@ -18,7 +18,7 @@ public class GameFactoryTest {
         Communicator communicator = new Communicator(ui);
         PlayerFactory playerFactory = new PlayerFactory(communicator);
         String pathName = "src/test/resources/dummyData.txt";
-        GameDataWriter gameDataWriter = new GameDataWriter(pathName);
+        FileAccessor fileAccessor = new FileAccessor(pathName);
         GameFactory gameFactory = new GameFactory(communicator, playerFactory);
 
         Game game = gameFactory.buildGame(GameMode.HUMANVSCOMP, pathName);

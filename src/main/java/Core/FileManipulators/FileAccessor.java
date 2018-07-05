@@ -4,12 +4,12 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameDataWriter {
+public class FileAccessor {
 
     private OutputStream outputStream;
     private File gameData;
 
-    public GameDataWriter(String pathName) {
+    public FileAccessor(String pathName) {
         gameData = new File(pathName);
         try {
             outputStream = new FileOutputStream(gameData);

@@ -1,7 +1,5 @@
 package Console;
 
-import Core.FileManipulators.GameDataWriter;
-import Core.FileManipulators.GameFileAnalyser;
 import Core.GameModes.GameModeSelector;
 import Core.Games.GameFactory;
 import Core.GameRunner;

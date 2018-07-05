@@ -1,7 +1,7 @@
 package Core.Games;
 
 import Core.Board.Grid;
-import Core.FileManipulators.GameDataWriter;
+import Core.FileManipulators.FileAccessor;
 import Core.GameModes.GameMode;
 import Core.Players.Player;
 import Core.Players.PlayerFactory;
@@ -20,30 +20,22 @@ public class GameFactory {
     }
 
     public Game buildGame(GameMode gameMode, String filePathName) {
-        GameDataWriter gameDataWriter = new GameDataWriter(filePathName);
-        List<Player> players = buildPlayers(gameMode, gameDataWriter);
+        FileAccessor fileAccessor = new FileAccessor(filePathName);
+        List<Player> players = buildPlayers(gameMode, fileAccessor);
         Grid grid = new Grid();
         Game primaryGame = new PrimaryGame(grid, players.get(0), players.get(1), communicator);
-        return new RecordableGame(primaryGame, gameDataWriter);
+        return new RecordableGame(primaryGame, fileAccessor);
     }
 
-    private List<Player> buildPlayers(GameMode gameMode, GameDataWriter gameDataWriter) {
-        List<Player> players;
-        if (gameMode == GameMode.SIMULATEDPLAY) {
-            players = buildSimulatedPlayers(gameDataWriter);
-        } else {
-            players = buildPrimaryPlayers(gameMode);
-        }
-        return players;
+    private List<Player> buildPlayers(GameMode gameMode, FileAccessor fileAccessor) {
+        return (gameMode == GameMode.SIMULATEDPLAY) ? buildSimulatedPlayers(fileAccessor)
+            : buildPrimaryPlayers(gameMode);
     }
 
-    private List<Player> buildSimulatedPlayers(GameDataWriter gameDataWriter) {
-        return playerFactory.buildSimulatedPlayers(generateMoves(gameDataWriter, 0)
-                , generateMoves(gameDataWriter, 1));
-    }
-
-    private List<Integer> generateMoves(GameDataWriter gameDataWriter, int playerPosition) {
-        return gameDataWriter.generateMoves(playerPosition);
+    private List<Player> buildSimulatedPlayers(FileAccessor fileAccessor) {
+        List<Integer> playerOneMoves = fileAccessor.generateMoves(0);
+        List<Integer> playerTwoMoves = fileAccessor.generateMoves(1);
+        return playerFactory.buildSimulatedPlayers(playerOneMoves, playerTwoMoves);
     }
 
     private List<Player> buildPrimaryPlayers(GameMode gameMode) {

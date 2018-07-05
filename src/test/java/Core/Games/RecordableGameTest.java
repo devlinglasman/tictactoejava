@@ -1,6 +1,6 @@
 package Core.Games;
 
-import Core.FileManipulators.GameDataWriter;
+import Core.FileManipulators.FileAccessor;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -13,13 +13,13 @@ public class RecordableGameTest {
     @Test
     public void playNextMove() {
         PrimaryGameDouble primaryGameDouble = new PrimaryGameDouble();
-        GameDataWriter gameDataWriter = new GameDataWriter("src/test/resources/dummyDataRGame.txt");
-        RecordableGame recordableGame = new RecordableGame(primaryGameDouble, gameDataWriter);
+        FileAccessor fileAccessor = new FileAccessor("src/test/resources/dummyDataRGame.txt");
+        RecordableGame recordableGame = new RecordableGame(primaryGameDouble, fileAccessor);
         List<Integer> expectedMove = new ArrayList<>();
         expectedMove.add(0);
 
         recordableGame.playNextMove();
 
-        assertEquals(gameDataWriter.generateMoves(0), expectedMove);
+        assertEquals(fileAccessor.generateMoves(0), expectedMove);
     }
 }

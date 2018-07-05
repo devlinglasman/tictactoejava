@@ -1,15 +1,15 @@
 package Core.Games;
 
-import Core.FileManipulators.GameDataWriter;
+import Core.FileManipulators.FileAccessor;
 
 public class RecordableGame implements Game {
 
     private Game primaryGame;
-    private GameDataWriter gameDataWriter;
+    private FileAccessor fileAccessor;
 
-    public RecordableGame(Game primaryGame, GameDataWriter gameDataWriter) {
+    public RecordableGame(Game primaryGame, FileAccessor fileAccessor) {
         this.primaryGame = primaryGame;
-        this.gameDataWriter = gameDataWriter;
+        this.fileAccessor = fileAccessor;
     }
 
     @Override
@@ -33,12 +33,12 @@ public class RecordableGame implements Game {
         return primaryGame.getLastMove();
     }
 
-    public GameDataWriter getGameDataWriter() {
-        return gameDataWriter;
+    public FileAccessor getFileAccessor() {
+        return fileAccessor;
     }
 
     private void convertAndWriteMove(Integer move) {
-        gameDataWriter.writeGameValue(Integer.toString(move));
+        fileAccessor.writeGameValue(Integer.toString(move));
     }
 
 }
