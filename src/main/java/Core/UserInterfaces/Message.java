@@ -34,7 +34,7 @@ public class Message {
         "\nOh how sad... you wish to leave me... goodbye!\n";
 
     public static String askSquareChoice(Player player) {
-        return "\n" + player.getName() + " please select a square from 1-9.\n";
+        return "\n" + player.getName() + " please select a free square.\n";
     }
 
     public static String announceSquareChoiceInvalid(Player player) {

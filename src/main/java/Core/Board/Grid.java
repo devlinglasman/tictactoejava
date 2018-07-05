@@ -5,13 +5,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toCollection;
+import static java.util.stream.Collectors.toList;
 
 public class Grid {
 
     private List<Mark> squares;
+    private Integer gridSize;
+    private Integer gridMaxSquares;
 
     public Grid() {
+        gridSize = 3;
+        gridMaxSquares = gridSize * gridSize;
         squares = createGrid();
     }
 
@@ -20,7 +25,7 @@ public class Grid {
     }
 
     public boolean moveNotLegal(int squareChoice) {
-         return choiceOutOfRange(squareChoice) || choiceAlreadyMarked(squareChoice);
+        return choiceOutOfRange(squareChoice) || choiceAlreadyMarked(squareChoice);
     }
 
     public boolean isFull() {
@@ -28,9 +33,10 @@ public class Grid {
     }
 
     public Mark reportWinningMark() {
-        for (List<Mark> line : possibleWinLines()) if (lineIsWinner(line)) {
-            return line.get(0);
-        }
+        for (List<Mark> line : possibleWinLines())
+            if (lineIsWinner(line)) {
+                return line.get(0);
+            }
         return Mark.EMPTY;
     }
 
@@ -48,7 +54,7 @@ public class Grid {
     public List<Integer> emptySquareIndices() {
         return IntStream.range(0, squares.size()).filter(i -> squares.get(i) == Mark.EMPTY)
                 .boxed()
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(toCollection(ArrayList::new));
     }
 
     public List<Mark> getSquares() {
@@ -69,24 +75,45 @@ public class Grid {
     }
 
     private List<List<Mark>> possibleWinLines() {
-        return asList(
-                group3Squares(0, 1, 2),
-                group3Squares(3, 4, 5),
-                group3Squares(6, 7, 8),
-                group3Squares(0, 3, 6),
-                group3Squares(1, 4, 7),
-                group3Squares(2, 5, 8),
-                group3Squares(0, 4, 8),
-                group3Squares(2, 4, 6)
-        );
+        List<List<Mark>> result = new ArrayList<>();
+        for (int i = 0; i < gridSize; i++) {
+            result.add(buildRow(i));
+            result.add(buildCol(i));
+        }
+        result.add(topLeftDiag());
+        result.add(topRightDiag());
+        return result;
     }
 
-    private List<Mark> group3Squares(int a, int b, int c) {
+    private List<Mark> topRightDiag() {
         List<Mark> result = new ArrayList<>();
-        result.add(squares.get(a));
-        result.add(squares.get(b));
-        result.add(squares.get(c));
+        for (int i = 0; i < gridSize; i++) {
+            i++;
+            Integer winSquare = (i * gridSize) - i;
+            result.add(squares.get(winSquare));
+        }
         return result;
+    }
+
+    private List<Mark> topLeftDiag() {
+        return IntStream.range(0, gridSize)
+                .mapToObj(i -> (i * gridSize) + i)
+                .map(winSquare -> squares.get(winSquare))
+                .collect(Collectors.toList());
+    }
+
+    private List<Mark> buildCol(int position) {
+        List<Mark> result = new ArrayList<>();
+        for (int i = position; i < gridMaxSquares; i += gridSize) {
+            result.add(squares.get(i));
+        }
+        return result;
+    }
+
+    private List<Mark> buildRow(int position) {
+        return IntStream.range(position, gridSize * (position + 1))
+                .mapToObj(i -> squares.get(i))
+                .collect(Collectors.toList());
     }
 
     private void setSquares(List<Mark> squares) {
@@ -94,10 +121,9 @@ public class Grid {
     }
 
     private List<Mark> createGrid() {
-        List<Mark> result = IntStream.range(0, 9)
+        return IntStream.range(0, (gridMaxSquares))
                 .mapToObj(i -> Mark.EMPTY)
-                .collect(Collectors.toList());
-        return result;
+                .collect(toList());
     }
 
     private boolean choiceOutOfRange(int squareChoice) {
