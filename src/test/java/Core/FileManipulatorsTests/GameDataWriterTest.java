@@ -12,35 +12,36 @@ import static org.junit.Assert.assertEquals;
 public class GameDataWriterTest {
 
     @Test
-    public void writeValues() {
-        FileReaderHelper fileReaderHelper = new FileReaderHelper();
+    public void writeAndExtractMoves1() {
         GameDataWriter gameDataWriter = new GameDataWriter();
-        List<String> expectedGameData = new ArrayList<>(
-                asList("9","8"));
+        List<Integer> expectedGameData = new ArrayList<>(
+                asList(9,7));
 
         gameDataWriter.createFile("src/test/resources/dummyData.txt");
         gameDataWriter.writeGameValue("9");
         gameDataWriter.writeGameValue("8");
+        gameDataWriter.writeGameValue("7");
 
-        List<String> actualGameData = fileReaderHelper.extractData(gameDataWriter.getGameData());
+        List<Integer> actualGameData = gameDataWriter.generateMoves(0);
 
         assertEquals(expectedGameData, actualGameData);
     }
 
     @Test
-    public void createFile_OverwriteItWithNewData() {
-        FileReaderHelper fileReaderHelper = new FileReaderHelper();
+    public void writeAndExtractMoves_afterOverwrite() {
         GameDataWriter gameDataWriter = new GameDataWriter();
-        List<String> expectedGameData = new ArrayList<>(
-                asList("0","1"));
+        List<Integer> expectedGameData = new ArrayList<>(
+                asList(8,6));
 
-        gameDataWriter.createFile("src/test/resources/dummyData2.txt");
-        gameDataWriter.writeGameValue("Incorrect data.");
-        gameDataWriter.createFile("src/test/resources/dummyData2.txt");
-        gameDataWriter.writeGameValue("0");
-        gameDataWriter.writeGameValue("1");
+        gameDataWriter.createFile("src/test/resources/dummyData.txt");
+        gameDataWriter.writeGameValue("Incorrect Values");
+        gameDataWriter.createFile("src/test/resources/dummyData.txt");
+        gameDataWriter.writeGameValue("9");
+        gameDataWriter.writeGameValue("8");
+        gameDataWriter.writeGameValue("7");
+        gameDataWriter.writeGameValue("6");
 
-        List<String> actualGameData = fileReaderHelper.extractData(gameDataWriter.getGameData());
+        List<Integer> actualGameData = gameDataWriter.generateMoves(1);
 
         assertEquals(expectedGameData, actualGameData);
     }

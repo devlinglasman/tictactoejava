@@ -10,7 +10,6 @@ public class RecordableGame implements Game {
     public RecordableGame(Game primaryGame, GameDataWriter gameDataWriter) {
         this.primaryGame = primaryGame;
         this.gameDataWriter = gameDataWriter;
-        gameDataWriter.createFile("src/main/resources/gameData.txt");
     }
 
     @Override

@@ -17,10 +17,9 @@ public class GameFactory {
     private GameFileAnalyser gameFileAnalyser;
     private GameDataWriter gameDataWriter;
 
-    public GameFactory(Communicator communicator, PlayerFactory playerFactory, GameFileAnalyser gameFileAnalyser, GameDataWriter gameDataWriter) {
+    public GameFactory(Communicator communicator, PlayerFactory playerFactory, GameDataWriter gameDataWriter) {
         this.communicator = communicator;
         this.playerFactory = playerFactory;
-        this.gameFileAnalyser = gameFileAnalyser;
         this.gameDataWriter = gameDataWriter;
     }
 
@@ -46,7 +45,7 @@ public class GameFactory {
     }
 
     private List<Integer> generateMoves(int playerPosition) {
-        return gameFileAnalyser.generateMovesFromFile(gameDataWriter.getGameData(),playerPosition);
+        return gameDataWriter.generateMoves(playerPosition);
     }
 
     private List<Player> buildPrimaryPlayers(GameMode gameMode) {

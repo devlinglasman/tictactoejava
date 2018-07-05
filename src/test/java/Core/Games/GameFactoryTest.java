@@ -19,9 +19,8 @@ public class GameFactoryTest {
         UI ui = new ConsoleUI(System.in, System.out, 1);
         Communicator communicator = new Communicator(ui);
         PlayerFactory playerFactory = new PlayerFactory(communicator);
-        GameFileAnalyser gameFileAnalyser = new GameFileAnalyser();
         GameDataWriter gameDataWriter = new GameDataWriter();
-        GameFactory gameFactory = new GameFactory(communicator, playerFactory, gameFileAnalyser, gameDataWriter);
+        GameFactory gameFactory = new GameFactory(communicator, playerFactory, gameDataWriter);
 
         Game game = gameFactory.buildGame(GameMode.HUMANVSCOMP);
 

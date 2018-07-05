@@ -16,9 +16,9 @@ public class MainConsole {
         UI ui = new ConsoleUI(System.in, System.out, 1000);
         Communicator communicator = new Communicator(ui);
         PlayerFactory playerFactory = new PlayerFactory(communicator);
-        GameFileAnalyser gameFileAnalyser = new GameFileAnalyser();
         GameDataWriter gameDataWriter = new GameDataWriter();
-        GameFactory gameFactory = new GameFactory(communicator, playerFactory, gameFileAnalyser, gameDataWriter);
+        gameDataWriter.createFile("src/main/resources/gameData.txt");
+        GameFactory gameFactory = new GameFactory(communicator, playerFactory, gameDataWriter);
         GameRunner gameRunner = new GameRunner();
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
         TicTacToe ticTacToe = new TicTacToe(communicator, gameRunner, gameFactory, gameModeSelector);
