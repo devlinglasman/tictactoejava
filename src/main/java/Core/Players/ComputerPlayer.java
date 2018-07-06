@@ -51,7 +51,7 @@ public class ComputerPlayer extends Player {
 
     private int minimax(Grid grid, Mark optimisingPlayer, Integer depth, Integer alpha, Integer beta) {
 
-        return grid.isFull() || grid.winningLineExistsInGrid() ?
+        return grid.isFull() || grid.winningLineExists() ?
                 scoreForTerminalGameState(grid, depth) :
                 findBestScore(grid, optimisingPlayer, depth, alpha, beta);
     }
@@ -89,7 +89,7 @@ public class ComputerPlayer extends Player {
     }
 
     private int scoreForTerminalGameState(Grid grid, Integer depth) {
-        if (grid.winningLineExistsInGrid()) {
+        if (grid.winningLineExists()) {
             return grid.reportWinningMark() == getMark() ?
                     grid.getSquares().size() - depth :
                     depth - grid.getSquares().size();

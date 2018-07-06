@@ -11,15 +11,6 @@ import static java.util.stream.Collectors.toList;
 public class Grid {
 
     private List<Mark> squares;
-
-    public Integer getGridSize() {
-        return gridSize;
-    }
-
-    public Integer getGridMaxSquares() {
-        return gridMaxSquares;
-    }
-
     private Integer gridSize;
     private Integer gridMaxSquares;
 
@@ -27,6 +18,10 @@ public class Grid {
         this.gridSize = gridSize;
         gridMaxSquares = gridSize * gridSize;
         squares = createGrid();
+    }
+
+    public Integer getGridSize() {
+        return gridSize;
     }
 
     public void markSquare(int squareNumber, Mark mark) {
@@ -49,7 +44,7 @@ public class Grid {
         return Mark.EMPTY;
     }
 
-    public boolean winningLineExistsInGrid() {
+    public boolean winningLineExists() {
         return possibleWinLines().stream().anyMatch(this::lineIsWinner);
     }
 
@@ -99,8 +94,7 @@ public class Grid {
     private List<Mark> topRightDiag() {
         List<Mark> result = new ArrayList<>();
         for (int i = 0; i < gridSize; i++) {
-            i++;
-            Integer winSquare = (i * gridSize) - i;
+            Integer winSquare = ((gridSize * i) + gridSize) - i;
             result.add(squares.get(winSquare));
         }
         return result;
@@ -122,7 +116,8 @@ public class Grid {
     }
 
     private List<Mark> buildRow(int position) {
-        return IntStream.range(position, gridSize * (position + 1))
+        int value = position * gridSize;
+        return IntStream.range(value, value + gridSize)
                 .mapToObj(i -> squares.get(i))
                 .collect(Collectors.toList());
     }
@@ -132,7 +127,7 @@ public class Grid {
     }
 
     private List<Mark> createGrid() {
-        return IntStream.range(0, (gridMaxSquares))
+        return IntStream.range(0, gridMaxSquares)
                 .mapToObj(i -> Mark.EMPTY)
                 .collect(toList());
     }

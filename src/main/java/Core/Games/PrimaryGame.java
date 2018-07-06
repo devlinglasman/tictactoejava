@@ -34,7 +34,7 @@ public class PrimaryGame implements Game {
 
     @Override
     public boolean gameOngoing() {
-        return !grid.isFull() && !grid.winningLineExistsInGrid();
+        return !grid.isFull() && !grid.winningLineExists();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class PrimaryGame implements Game {
     @Override
     public void announceResult() {
         displayGrid();
-        if (grid.winningLineExistsInGrid()) {
+        if (grid.winningLineExists()) {
             announceWinner();
         } else {
             communicator.announceTie();

@@ -21,21 +21,12 @@ public class TicTacToe {
     }
 
     public void run() {
-        GameMode gameMode = getMode();
-        startGame(gameMode);
+        startGame(getMode());
         if (findIfPlayAnotherGame()) {
             run();
         } else {
             communicator.announceProgramOver();
         }
-    }
-
-    private boolean findIfPlayAnotherGame() {
-        return communicator.findPlayAgainResponse();
-    }
-
-    private GameMode getMode() {
-        return gameModeSelector.getMode();
     }
 
     private void startGame(GameMode gameMode) {
@@ -45,6 +36,14 @@ public class TicTacToe {
             Game rewatchGame = gameFactory.buildGame(GameMode.SIMULATEDPLAY);
             gameRunner.runGame(rewatchGame);
         }
+    }
+
+    private boolean findIfPlayAnotherGame() {
+        return communicator.findPlayAgainResponse();
+    }
+
+    private GameMode getMode() {
+        return gameModeSelector.getMode();
     }
 
     private boolean rewatch() {
