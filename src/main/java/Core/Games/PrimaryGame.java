@@ -53,7 +53,7 @@ public class PrimaryGame implements Game {
     }
 
     private void displayGrid() {
-        communicator.displayGrid(grid.getSquares());
+        communicator.displayGrid(grid);
     }
 
 

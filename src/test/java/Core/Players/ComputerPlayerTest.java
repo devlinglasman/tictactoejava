@@ -13,7 +13,7 @@ public class ComputerPlayerTest {
 
     @Before
     public void setUp() {
-        grid = new Grid();
+        grid = new Grid(3);
     }
 
     @Test

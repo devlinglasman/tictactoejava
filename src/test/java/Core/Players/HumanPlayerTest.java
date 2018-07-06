@@ -16,7 +16,7 @@ public class HumanPlayerTest {
     private Grid grid;
 
     private void setUpWithInput(String input) {
-        grid = new Grid();
+        grid = new Grid(3);
         IOHelper ioHelper = new IOHelper(input);
         UI ui = new ConsoleUI(ioHelper.in, ioHelper.print, 0);
         Communicator communicator = new Communicator(ui);

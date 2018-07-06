@@ -17,7 +17,7 @@ public class SimulatedPlayerTest {
 
     @Before
     public void setUp() {
-        grid = new Grid();
+        grid = new Grid(3);
         ArrayList<Integer> moves = new ArrayList<>(asList(0,1));
         simulatedPlayer = new SimulatedPlayer(Mark.PLAYER_ONE, moves);
     }

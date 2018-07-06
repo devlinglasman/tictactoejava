@@ -22,7 +22,7 @@ public class PrimaryGameTest {
         GameRunner gameRunner = new GameRunner();
         UI ui = new ConsoleUI(System.in, System.out, 0);
         Communicator communicator = new Communicator(ui);
-        Grid grid = new Grid();
+        Grid grid = new Grid(3);
         Player playerOne = new ComputerPlayer(Mark.PLAYER_ONE);
         Player playerTwo = new ComputerPlayer(Mark.PLAYER_TWO);
         PrimaryGame primaryGame = new PrimaryGame(grid, playerOne, playerTwo, communicator);

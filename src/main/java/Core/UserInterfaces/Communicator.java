@@ -1,5 +1,6 @@
 package Core.UserInterfaces;
 
+import Core.Board.Grid;
 import Core.Board.Mark;
 import Core.Players.Player;
 
@@ -37,8 +38,8 @@ public class Communicator {
         ui.presentMessage(Message.announceGameModeChoiceInvalid);
     }
 
-    public void displayGrid(List<Mark> gridSquares) {
-        ui.displayGrid(gridSquares);
+    public void displayGrid(Grid grid) {
+        ui.displayGrid(grid);
     }
 
     public void presentMove(Player player) {

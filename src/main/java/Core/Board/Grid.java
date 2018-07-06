@@ -11,11 +11,20 @@ import static java.util.stream.Collectors.toList;
 public class Grid {
 
     private List<Mark> squares;
+
+    public Integer getGridSize() {
+        return gridSize;
+    }
+
+    public Integer getGridMaxSquares() {
+        return gridMaxSquares;
+    }
+
     private Integer gridSize;
     private Integer gridMaxSquares;
 
-    public Grid() {
-        gridSize = 3;
+    public Grid(Integer gridSize) {
+        this.gridSize = gridSize;
         gridMaxSquares = gridSize * gridSize;
         squares = createGrid();
     }
@@ -45,14 +54,15 @@ public class Grid {
     }
 
     public Grid duplicate() {
-        Grid gridDuplicate = new Grid();
+        Grid gridDuplicate = new Grid(gridSize);
         List<Mark> copiedSquares = new ArrayList<>(squares);
         gridDuplicate.setSquares(copiedSquares);
         return gridDuplicate;
     }
 
     public List<Integer> emptySquareIndices() {
-        return IntStream.range(0, squares.size()).filter(i -> squares.get(i) == Mark.EMPTY)
+        return IntStream.range(0, squares.size())
+                .filter(i -> squares.get(i) == Mark.EMPTY)
                 .boxed()
                 .collect(toCollection(ArrayList::new));
     }
@@ -62,7 +72,8 @@ public class Grid {
     }
 
     private boolean lineIsWinner(List<Mark> line) {
-        return lineDoesNotContainUnmarkedSquare(line) && lineContainsAllIdenticalMarks(line);
+        return lineDoesNotContainUnmarkedSquare(line)
+                && lineContainsAllIdenticalMarks(line);
     }
 
     private boolean lineDoesNotContainUnmarkedSquare(List<Mark> line) {

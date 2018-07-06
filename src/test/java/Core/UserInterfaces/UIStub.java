@@ -1,10 +1,12 @@
 package Core.UserInterfaces;
 
+import Core.Board.Grid;
 import Core.Board.Mark;
 
 import java.util.List;
 
 public class UIStub implements UI {
+
     @Override
     public String getInput() {
         return null;
@@ -15,7 +17,7 @@ public class UIStub implements UI {
     }
 
     @Override
-    public void displayGrid(List<Mark> gridSquares) {
+    public void displayGrid(Grid grid) {
     }
 
     @Override

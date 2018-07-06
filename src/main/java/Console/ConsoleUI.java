@@ -1,5 +1,6 @@
 package Console;
 
+import Core.Board.Grid;
 import Core.Board.Mark;
 import Core.UserInterfaces.UI;
 
@@ -40,55 +41,22 @@ public class ConsoleUI implements UI {
     }
 
     @Override
-    public void displayGrid(List<Mark> squares) {
+    public void displayGrid(Grid grid) {
+        List<Mark> squares = grid.getSquares();
+        StringBuilder displayedGrid = new StringBuilder();
+
         out.println();
         for (int i = 0; i < squares.size(); i++) {
-            String colour;
-            Mark mark = squares.get(i);
-            String tile;
-            boolean addNewLine = false;
-
-            switch (i) {
-                case 0:
-                    colour = ANSI_BRIGHTYELLOW;
-                    break;
-                case 1:
-                    colour = ANSI_BRIGHTRED;
-                    break;
-                case 2:
-                    colour = ANSI_BRIGHTPURPLE;
-                    addNewLine = true;
-                    break;
-                case 3:
-                    colour = ANSI_BRIGHTRED;
-                    break;
-                case 4:
-                    colour = ANSI_BRIGHTPURPLE;
-                    break;
-                case 5:
-                    colour = ANSI_BRIGHTBLUE;
-                    addNewLine = true;
-                    break;
-                case 6:
-                    colour = ANSI_BRIGHTPURPLE;
-                    break;
-                case 7:
-                    colour = ANSI_BRIGHTBLUE;
-                    break;
-                case 8:
-                    colour = ANSI_BRIGHTGREEN;
-                    addNewLine = true;
-                    break;
-                default:
-                    colour = ANSI_BRIGHTBLACK;
+            StringBuilder tile = makeTile(squares.get(i), i);
+            displayedGrid.append(tile);
+            if (i < 9) {
+                displayedGrid.append(" ");
             }
-
-            tile = makeTile(mark, i, colour);
-            out.print(tile);
-            if (addNewLine) {
-                out.print("\n");
+            if ((i + 1) % grid.getGridSize() == 0) {
+                displayedGrid.append("\n");
             }
         }
+        out.print(displayedGrid);
     }
 
     @Override
@@ -106,24 +74,28 @@ public class ConsoleUI implements UI {
         out.flush();
     }
 
-    private String makeTile(Mark mark, int index, String colour) {
-        String finalColour = findColour(mark, colour);
-        String symbol = findSymbol(mark, index);
-        return finalColour + "[" + symbol + "]" + ANSI_RESET;
+    private StringBuilder makeTile(Mark mark, int index) {
+        StringBuilder finalColour = findColour(mark);
+        StringBuilder symbol = findSymbol(mark, index);
+        return new StringBuilder(finalColour + "[" + symbol + "]" + ANSI_RESET);
     }
 
-    private String findColour(Mark mark, String colour) {
+    private StringBuilder findColour(Mark mark) {
         if (mark == Mark.EMPTY) {
-            return colour;
+            return new StringBuilder(ANSI_BRIGHTPURPLE);
         } else if (mark == Mark.PLAYER_ONE) {
-            return ANSI_BRIGHTBLACK;
+            return new StringBuilder(ANSI_BRIGHTBLACK);
         } else {
-            return ANSI_BRIGHTWHITE;
+            return new StringBuilder(ANSI_BRIGHTWHITE);
         }
     }
 
-    private String findSymbol(Mark mark, int index) {
-        return mark == Mark.EMPTY ? Integer.toString(index + 1) :
-                mark.getStringRepresentation();
+    private StringBuilder findSymbol(Mark mark, int index) {
+        if (mark == Mark.EMPTY) {
+            index++;
+            return new StringBuilder(Integer.toString(index));
+        } else {
+            return new StringBuilder(mark.getStringRepresentation());
+        }
     }
 }

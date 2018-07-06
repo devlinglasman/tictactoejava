@@ -16,12 +16,14 @@ public class GameFactory {
     private PlayerFactory playerFactory;
     private FileAccessor fileAccessor;
     private String pathName;
+    private Integer gridSize;
 
-    public GameFactory(Communicator communicator, PlayerFactory playerFactory, FileAccessor fileAccessor, String pathName) {
+    public GameFactory(Communicator communicator, PlayerFactory playerFactory, FileAccessor fileAccessor, String pathName, Integer gridSize) {
         this.communicator = communicator;
         this.playerFactory = playerFactory;
         this.fileAccessor = fileAccessor;
         this.pathName = pathName;
+        this.gridSize = gridSize;
     }
 
     public Game buildGame(GameMode gameMode) {
@@ -32,7 +34,7 @@ public class GameFactory {
             fileAccessor.overwriteFile(pathName);
             players = buildPrimaryPlayers(gameMode);
         }
-        Grid grid = new Grid();
+        Grid grid = new Grid(gridSize);
         Game primaryGame = new PrimaryGame(grid, players.get(0), players.get(1), communicator);
         return new RecordableGame(primaryGame, fileAccessor);
     }
