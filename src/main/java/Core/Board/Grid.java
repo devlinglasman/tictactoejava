@@ -95,7 +95,7 @@ public class Grid {
         List<Mark> result = new ArrayList<>();
         for (int i = 0; i < gridSize; i++) {
             Integer winSquare = ((gridSize * i) + gridSize) - i;
-            result.add(squares.get(winSquare));
+            result.add(squares.get(winSquare - 1));
         }
         return result;
     }

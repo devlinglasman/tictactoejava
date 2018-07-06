@@ -19,7 +19,7 @@ public class MainConsole {
         PlayerFactory playerFactory = new PlayerFactory(communicator, movesGenerator);
         String filePathName = "src/main/resources/gameData.txt";
         FileAccessor fileAccessor = new FileAccessor(filePathName);
-        GameFactory gameFactory = new GameFactory(communicator, playerFactory, fileAccessor, filePathName, 3);
+        GameFactory gameFactory = new GameFactory(communicator, playerFactory, fileAccessor, filePathName, 4);
         GameRunner gameRunner = new GameRunner();
         GameModeSelector gameModeSelector = new GameModeSelector(communicator);
         TicTacToe ticTacToe = new TicTacToe(communicator, gameRunner, gameFactory, gameModeSelector);

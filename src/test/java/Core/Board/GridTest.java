@@ -120,11 +120,31 @@ public class GridTest {
     }
 
     @Test
+    public void winningLineExists_firstCol () {
+        setUp_withGridSize(3);
+        grid.markSquare(0, Mark.PLAYER_ONE);
+        grid.markSquare(3, Mark.PLAYER_ONE);
+        grid.markSquare(6, Mark.PLAYER_ONE);
+
+        assertTrue(grid.winningLineExists());
+    }
+
+    @Test
     public void winningLineExists_lastCol () {
         setUp_withGridSize(3);
         grid.markSquare(2, Mark.PLAYER_ONE);
         grid.markSquare(5, Mark.PLAYER_ONE);
         grid.markSquare(8, Mark.PLAYER_ONE);
+
+        assertTrue(grid.winningLineExists());
+    }
+
+    @Test
+    public void winningLineExists_midCol () {
+        setUp_withGridSize(3);
+        grid.markSquare(1, Mark.PLAYER_ONE);
+        grid.markSquare(4, Mark.PLAYER_ONE);
+        grid.markSquare(7, Mark.PLAYER_ONE);
 
         assertTrue(grid.winningLineExists());
     }
@@ -140,11 +160,22 @@ public class GridTest {
     }
 
     @Test
-    public void winningLineExists_topRightDiag () {
+    public void winningLineExists_topRightDiag_for3 () {
         setUp_withGridSize(3);
         grid.markSquare(2, Mark.PLAYER_ONE);
         grid.markSquare(4, Mark.PLAYER_ONE);
         grid.markSquare(6, Mark.PLAYER_ONE);
+
+        assertTrue(grid.winningLineExists());
+    }
+
+    @Test
+    public void winningLineExists_topRightDiag_for4 () {
+        setUp_withGridSize(4);
+        grid.markSquare(3, Mark.PLAYER_ONE);
+        grid.markSquare(6, Mark.PLAYER_ONE);
+        grid.markSquare(9, Mark.PLAYER_ONE);
+        grid.markSquare(12, Mark.PLAYER_ONE);
 
         assertTrue(grid.winningLineExists());
     }
